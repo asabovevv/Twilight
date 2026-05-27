@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjimxf6gubrm1"]
+
+[ext_resource type="Shader" uid="uid://cp58g36waai65" path="res://CHARACTERS/sprite_mood.gdshader" id="1_p6uf7"]
+[ext_resource type="Texture2D" uid="uid://d2yscbrydw26t" path="res://CHARACTERS/Mari/Sprites/Mari_L.png" id="2_eg68e"]
+[ext_resource type="Texture2D" uid="uid://nqckpd1j76hq" path="res://CHARACTERS/Mari/Sprites/Mari_B.png" id="3_eg68e"]
+[ext_resource type="Texture2D" uid="uid://b2w25vmlvclh0" path="res://CHARACTERS/Mari/Sprites/Mari_R.png" id="4_eg68e"]
+[ext_resource type="Texture2D" uid="uid://d1oi0bje1gc1w" path="res://CHARACTERS/Mari/Sprites/Mari_F.png" id="5_wxpau"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4g4f"]
+shader = ExtResource("1_p6uf7")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fykjo"]
+shader = ExtResource("1_p6uf7")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxuvv"]
+shader = ExtResource("1_p6uf7")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50mgb"]
+shader = ExtResource("1_p6uf7")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[node name="Mari_OW_sprites_dark" type="Node2D"]
+
+[node name="Walk_L" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_u4g4f")
+position = Vector2(1, -6)
+texture = ExtResource("2_eg68e")
+hframes = 3
+
+[node name="Walk_B" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_fykjo")
+position = Vector2(0, -6)
+texture = ExtResource("3_eg68e")
+hframes = 3
+
+[node name="Walk_R" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_wxuvv")
+position = Vector2(-1, -6)
+texture = ExtResource("4_eg68e")
+hframes = 3
+
+[node name="Walk_F" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_50mgb")
+position = Vector2(0, -6)
+texture = ExtResource("5_wxpau")
+hframes = 3

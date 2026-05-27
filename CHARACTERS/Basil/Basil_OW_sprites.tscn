@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://lexkleqxus45"]
+
+[ext_resource type="Shader" uid="uid://cp58g36waai65" path="res://CHARACTERS/sprite_mood.gdshader" id="1_1j5dt"]
+[ext_resource type="Texture2D" uid="uid://bf7jbamyxxxl8" path="res://CHARACTERS/Basil/Sprites/Basil_L.png" id="2_t5m00"]
+[ext_resource type="Texture2D" uid="uid://d0snesv1cnv6r" path="res://CHARACTERS/Basil/Sprites/Basil_B.png" id="3_t5m00"]
+[ext_resource type="Texture2D" uid="uid://dvyisvtcm8ucg" path="res://CHARACTERS/Basil/Sprites/Basil_R.png" id="4_t5m00"]
+[ext_resource type="Texture2D" uid="uid://cb07gvfsy2t8b" path="res://CHARACTERS/Basil/Sprites/Basil_F.png" id="5_t5m00"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1nt7k"]
+shader = ExtResource("1_1j5dt")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5alsi"]
+shader = ExtResource("1_1j5dt")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gnh0p"]
+shader = ExtResource("1_1j5dt")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xo7y"]
+shader = ExtResource("1_1j5dt")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[node name="Basil_OW_sprites" type="Node2D"]
+
+[node name="Player_L" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_1nt7k")
+position = Vector2(-1, -7)
+texture = ExtResource("2_t5m00")
+hframes = 3
+
+[node name="Player_B" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_5alsi")
+position = Vector2(0, -7)
+texture = ExtResource("3_t5m00")
+hframes = 3
+
+[node name="Player_R" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_gnh0p")
+position = Vector2(0, -7)
+texture = ExtResource("4_t5m00")
+hframes = 3
+
+[node name="Player_F" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6xo7y")
+position = Vector2(0, -7)
+texture = ExtResource("5_t5m00")
+hframes = 3

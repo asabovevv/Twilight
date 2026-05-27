@@ -1,0 +1,289 @@
+[gd_scene load_steps=14 format=3 uid="uid://dbb57mul8uor2"]
+
+[ext_resource type="Script" uid="uid://djdt84y1sin0b" path="res://UI/Tag/tag_menu.gd" id="1_78b44"]
+[ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="1_ioxsg"]
+[ext_resource type="Texture2D" uid="uid://cem7upx4k783i" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Angry.png" id="2_4uwn2"]
+[ext_resource type="Shader" uid="uid://dbox3mxussmio" path="res://UI/OverworldMenu/overworld_menu_blur.gdshader" id="2_fcgyc"]
+[ext_resource type="Texture2D" uid="uid://ybpau3axcnlo" path="res://CHARACTERS/Minty/Portraits/Portrait0.png" id="3_4uwn2"]
+[ext_resource type="Texture2D" uid="uid://b7bkkt4sr16t7" path="res://UI/Tag/Tag_AO.png" id="3_iwy61"]
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="4_qdm8o"]
+[ext_resource type="Texture2D" uid="uid://1imj7yupx0ds" path="res://UI/Tag/Tag_BG1.png" id="4_v87kt"]
+[ext_resource type="Texture2D" uid="uid://ncgh6es754gf" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Happy.png" id="5_ed1ef"]
+[ext_resource type="Texture2D" uid="uid://dtn5wfcygi73i" path="res://UI/UiArrowLarge.png" id="6_fcgyc"]
+[ext_resource type="Texture2D" uid="uid://dwwsrbi73fi6g" path="res://ENCOUNTER/Sprites/EmotionSprites/T_Neutral.png" id="7_01x8o"]
+[ext_resource type="Texture2D" uid="uid://cbhjcahkrlf8w" path="res://CHARACTERS/Sunny/Portraits/Portrait0.png" id="7_78b44"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_01x8o"]
+shader = ExtResource("2_fcgyc")
+shader_parameter/strength = 1
+shader_parameter/fade = 0.0
+
+[node name="tag_menu" type="Node2D"]
+z_index = 800
+script = ExtResource("1_78b44")
+
+[node name="Blur" type="ColorRect" parent="."]
+z_index = -50
+material = SubResource("ShaderMaterial_01x8o")
+offset_right = 640.0
+offset_bottom = 480.0
+
+[node name="TagImage" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(320, -233)
+texture = ExtResource("3_iwy61")
+
+[node name="TagBg" type="Sprite2D" parent="TagImage"]
+z_index = -1
+position = Vector2(1, -33)
+texture = ExtResource("4_v87kt")
+
+[node name="SpinPortraits" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(320, 232)
+
+[node name="CenterPortrait" type="NinePatchRect" parent="SpinPortraits"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -57.0
+offset_right = 57.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(57, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_ioxsg")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Portrait" type="Sprite2D" parent="SpinPortraits/CenterPortrait"]
+position = Vector2(58, 57)
+texture = ExtResource("3_4uwn2")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(2, 74, 324, 102)
+
+[node name="TagWho" type="NinePatchRect" parent="SpinPortraits/CenterPortrait"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = 57.0
+offset_right = 57.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(57, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_ioxsg")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Label" type="Label" parent="SpinPortraits/CenterPortrait/TagWho"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 2.0
+offset_right = 318.0
+offset_bottom = 402.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("4_qdm8o")
+theme_override_font_sizes/font_size = 24
+text = "TAG WHO?"
+
+[node name="EmotionSelect" type="NinePatchRect" parent="SpinPortraits"]
+visible = false
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -103.0
+offset_right = 57.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(57, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_ioxsg")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="UiArrowLarge" type="Sprite2D" parent="SpinPortraits/EmotionSelect"]
+position = Vector2(15, 13)
+rotation = -1.5707964
+texture = ExtResource("6_fcgyc")
+
+[node name="UiArrowLarge2" type="Sprite2D" parent="SpinPortraits/EmotionSelect/UiArrowLarge"]
+position = Vector2(-13, 1)
+rotation = -3.1415925
+texture = ExtResource("6_fcgyc")
+
+[node name="Emotion" type="Sprite2D" parent="SpinPortraits/EmotionSelect"]
+position = Vector2(64, 20)
+texture = ExtResource("7_01x8o")
+vframes = 3
+
+[node name="SpinPortrait1" type="NinePatchRect" parent="SpinPortraits"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 103.0
+offset_top = -57.0
+offset_right = 217.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(57, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_ioxsg")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="GAngry" type="Sprite2D" parent="SpinPortraits/SpinPortrait1"]
+position = Vector2(57, 57)
+texture = ExtResource("2_4uwn2")
+vframes = 3
+
+[node name="Portrait" type="Sprite2D" parent="SpinPortraits/SpinPortrait1"]
+position = Vector2(58, 57)
+texture = ExtResource("3_4uwn2")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(2, 74, 324, 102)
+
+[node name="SpinPortrait2" type="NinePatchRect" parent="SpinPortraits"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -57.0
+offset_right = -103.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(57, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_ioxsg")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="GAngry" type="Sprite2D" parent="SpinPortraits/SpinPortrait2"]
+position = Vector2(57, 57)
+texture = ExtResource("5_ed1ef")
+vframes = 3
+
+[node name="Portrait" type="Sprite2D" parent="SpinPortraits/SpinPortrait2"]
+position = Vector2(58, 57)
+texture = ExtResource("7_78b44")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(0, 2, 327, 102)
+
+[node name="SpinPortrait3" type="NinePatchRect" parent="SpinPortraits"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -217.0
+offset_right = 57.0
+offset_bottom = -103.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(57, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_ioxsg")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="GAngry" type="Sprite2D" parent="SpinPortraits/SpinPortrait3"]
+position = Vector2(57, 57)
+texture = ExtResource("5_ed1ef")
+vframes = 3
+
+[node name="Portrait" type="Sprite2D" parent="SpinPortraits/SpinPortrait3"]
+position = Vector2(58, 57)
+texture = ExtResource("7_78b44")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(0, 2, 327, 102)
+
+[node name="SpinPortrait4" type="NinePatchRect" parent="SpinPortraits"]
+layout_direction = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = 103.0
+offset_right = 57.0
+offset_bottom = 217.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(57, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_ioxsg")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="GAngry" type="Sprite2D" parent="SpinPortraits/SpinPortrait4"]
+position = Vector2(57, 57)
+texture = ExtResource("5_ed1ef")
+vframes = 3
+
+[node name="Portrait" type="Sprite2D" parent="SpinPortraits/SpinPortrait4"]
+position = Vector2(58, 57)
+texture = ExtResource("7_78b44")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(0, 2, 327, 102)

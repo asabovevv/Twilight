@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://ht31140d1sis"]
+
+[ext_resource type="Texture2D" uid="uid://b202dkx8yulld" path="res://UI/OverworldMenu/OverworldStatus/OverworldStatus.png" id="1_jc2dc"]
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_tqdux"]
+[ext_resource type="Shader" uid="uid://c4c3rxypestma" path="res://gradient.gdshader" id="3_t48r1"]
+[ext_resource type="Texture2D" uid="uid://brk0etqpnmvwh" path="res://UI/StatusBar.png" id="4_co3hv"]
+[ext_resource type="Texture2D" uid="uid://ybpau3axcnlo" path="res://CHARACTERS/Minty/Portraits/Portrait0.png" id="5_pdgcq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3mje1"]
+shader = ExtResource("3_t48r1")
+shader_parameter/color1 = Vector4(0.199, 0, 0.768, 1)
+shader_parameter/color2 = Vector4(0.937, 0.615, 0.898, 1)
+
+[node name="OverworldStatus_Root" type="Node2D"]
+
+[node name="OverworldStatus" type="Sprite2D" parent="."]
+position = Vector2(0, -55)
+texture = ExtResource("1_jc2dc")
+
+[node name="Name" type="Label" parent="."]
+offset_left = -65.0
+offset_top = -107.0
+offset_right = -14.0
+offset_bottom = -81.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_tqdux")
+theme_override_font_sizes/font_size = 24
+text = "OMORI"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3mje1")
+offset_left = -75.0
+offset_top = -64.0
+offset_right = -60.0
+offset_bottom = 87.0
+rotation = -1.5707964
+
+[node name="Level" type="Label" parent="."]
+offset_left = -66.0
+offset_top = -82.0
+offset_right = -14.0
+offset_bottom = -56.0
+theme_override_constants/line_spacing = 2
+theme_override_fonts/font = ExtResource("2_tqdux")
+theme_override_font_sizes/font_size = 21
+text = "LVL. 50"
+
+[node name="Health_StatusBar" type="Sprite2D" parent="."]
+position = Vector2(-48, -53)
+texture = ExtResource("4_co3hv")
+centered = false
+vframes = 5
+region_enabled = true
+region_rect = Rect2(0, 0, 116, 70)
+
+[node name="Health" type="Label" parent="."]
+offset_left = 9.0
+offset_top = -57.0
+offset_right = 64.0
+offset_bottom = -31.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.14509805)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("2_tqdux")
+theme_override_font_sizes/font_size = 20
+text = "466/466"
+horizontal_alignment = 2
+
+[node name="Juice_StatusBar" type="Sprite2D" parent="."]
+position = Vector2(-48, -25)
+texture = ExtResource("4_co3hv")
+centered = false
+vframes = 5
+frame = 1
+region_enabled = true
+region_rect = Rect2(0, 0, 116, 70)
+
+[node name="Juice" type="Label" parent="."]
+offset_left = 9.0
+offset_top = -29.0
+offset_right = 64.0
+offset_bottom = 13.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.14509805)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("2_tqdux")
+theme_override_font_sizes/font_size = 20
+text = "290/290
+"
+horizontal_alignment = 2
+autowrap_trim_flags = 128
+
+[node name="Portrait" type="Sprite2D" parent="."]
+position = Vector2(-2, -109)
+texture = ExtResource("5_pdgcq")
+hframes = 3

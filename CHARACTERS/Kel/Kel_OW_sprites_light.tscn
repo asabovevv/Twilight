@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://b3pur1e5fpwu8"]
+
+[ext_resource type="Shader" uid="uid://cp58g36waai65" path="res://CHARACTERS/sprite_mood.gdshader" id="1_vgymh"]
+[ext_resource type="Texture2D" uid="uid://rb4d7k0jj7ym" path="res://CHARACTERS/Kel/Sprites/Kel_L_Light.png" id="2_sseff"]
+[ext_resource type="Texture2D" uid="uid://ce0tp76mjn50i" path="res://CHARACTERS/Kel/Sprites/Kel_B_Light.png" id="3_sseff"]
+[ext_resource type="Texture2D" uid="uid://ml0c1p5jcgp5" path="res://CHARACTERS/Kel/Sprites/Kel_R_Light.png" id="4_sseff"]
+[ext_resource type="Texture2D" uid="uid://cg7x0alnr7j7t" path="res://CHARACTERS/Kel/Sprites/Kel_F_Light.png" id="5_sseff"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4g4f"]
+shader = ExtResource("1_vgymh")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fykjo"]
+shader = ExtResource("1_vgymh")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxuvv"]
+shader = ExtResource("1_vgymh")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50mgb"]
+shader = ExtResource("1_vgymh")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[node name="Kel_OW_sprites_light" type="Node2D"]
+
+[node name="Walk_L" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_u4g4f")
+position = Vector2(-2, -6)
+texture = ExtResource("2_sseff")
+hframes = 3
+
+[node name="Walk_B" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_fykjo")
+position = Vector2(1, -6)
+texture = ExtResource("3_sseff")
+hframes = 3
+
+[node name="Walk_R" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_wxuvv")
+position = Vector2(2, -6)
+texture = ExtResource("4_sseff")
+hframes = 3
+
+[node name="Walk_F" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_50mgb")
+position = Vector2(-2, -6)
+texture = ExtResource("5_sseff")
+hframes = 3

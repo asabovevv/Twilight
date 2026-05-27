@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdniamv5ykuvn"]
+
+[ext_resource type="Texture2D" uid="uid://bao1a2odje1fu" path="res://ENCOUNTER/Sprites/UI/BattleStatus.png" id="1_ds5ew"]
+[ext_resource type="Texture2D" uid="uid://dad1k2xobyhg" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Neutral.png" id="2_663ic"]
+[ext_resource type="Texture2D" uid="uid://dwwsrbi73fi6g" path="res://ENCOUNTER/Sprites/EmotionSprites/T_Neutral.png" id="4_42fwj"]
+[ext_resource type="Texture2D" uid="uid://d0s1k6bmwegs2" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Bar.png" id="5_acudk"]
+[ext_resource type="Texture2D" uid="uid://brk0etqpnmvwh" path="res://UI/StatusBar.png" id="6_e0tep"]
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="7_amba5"]
+[ext_resource type="Texture2D" uid="uid://cyle5r3edd4yc" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Frost.png" id="8_n1pig"]
+[ext_resource type="Texture2D" uid="uid://4vqrv5ap6u4f" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Select.png" id="9_ar1dj"]
+
+[node name="BattleStatus" type="NinePatchRect"]
+offset_left = 11.0
+offset_top = 5.0
+offset_right = 131.0
+offset_bottom = 130.0
+texture = ExtResource("1_ds5ew")
+patch_margin_left = 10
+patch_margin_top = 27
+patch_margin_right = 10
+patch_margin_bottom = 8
+
+[node name="Emotion" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(60, 66)
+texture = ExtResource("2_663ic")
+vframes = 3
+
+[node name="Profile" type="Sprite2D" parent="."]
+position = Vector2(60, 117)
+hframes = 3
+region_enabled = true
+region_rect = Rect2(0, 0, 327, 176)
+
+[node name="EmotionLabel" type="Sprite2D" parent="."]
+position = Vector2(60, 14)
+texture = ExtResource("4_42fwj")
+vframes = 3
+
+[node name="BattleStatusBars" type="Sprite2D" parent="."]
+position = Vector2(60, 143)
+texture = ExtResource("5_acudk")
+
+[node name="Health_StatusBar" type="Sprite2D" parent="BattleStatusBars"]
+position = Vector2(-29, -17)
+texture = ExtResource("6_e0tep")
+centered = false
+vframes = 5
+frame = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 81, 70)
+
+[node name="Juice_StatusBar" type="Sprite2D" parent="BattleStatusBars"]
+position = Vector2(-29, 2)
+texture = ExtResource("6_e0tep")
+centered = false
+vframes = 5
+frame = 3
+region_enabled = true
+region_rect = Rect2(0, 0, 81, 70)
+
+[node name="Health" type="Label" parent="BattleStatusBars"]
+offset_left = -6.0
+offset_top = -21.0
+offset_right = 49.0
+offset_bottom = 5.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.14509805)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("7_amba5")
+theme_override_font_sizes/font_size = 20
+text = "466/466"
+horizontal_alignment = 2
+
+[node name="Juice" type="Label" parent="BattleStatusBars"]
+offset_left = -6.0
+offset_top = -2.0
+offset_right = 49.0
+offset_bottom = 40.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.14509805)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = -1
+theme_override_constants/shadow_outline_size = 1
+theme_override_fonts/font = ExtResource("7_amba5")
+theme_override_font_sizes/font_size = 20
+text = "290/290
+"
+horizontal_alignment = 2
+autowrap_trim_flags = 128
+
+[node name="BattleStatusFrost" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(60, 71)
+texture = ExtResource("8_n1pig")
+
+[node name="BattleStatusSelect" type="Sprite2D" parent="BattleStatusFrost"]
+position = Vector2(0, 15)
+texture = ExtResource("9_ar1dj")

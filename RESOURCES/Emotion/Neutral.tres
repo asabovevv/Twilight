@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Emotions" load_steps=4 format=3 uid="uid://cx7qwk020mlr4"]
+
+[ext_resource type="Texture2D" uid="uid://dad1k2xobyhg" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Neutral.png" id="1_7wvg8"]
+[ext_resource type="Texture2D" uid="uid://dwwsrbi73fi6g" path="res://ENCOUNTER/Sprites/EmotionSprites/T_Neutral.png" id="2_av1c6"]
+[ext_resource type="Script" uid="uid://7w6s62ylncqk" path="res://RESOURCES/AllInherit/emotions.gd" id="3_7wvg8"]
+
+[resource]
+script = ExtResource("3_7wvg8")
+name = "Neutral"
+label_texture = ExtResource("2_av1c6")
+gradient_texture = ExtResource("1_7wvg8")
+color = Color(0, 0, 0, 0)
+sound = "res://SOUNDS/SoundEffect/SE_chirp.ogg"
+metadata/_custom_type_script = "uid://7w6s62ylncqk"

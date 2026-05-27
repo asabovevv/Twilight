@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://7r4jmav1q8y7"]
+
+[ext_resource type="Shader" uid="uid://cp58g36waai65" path="res://CHARACTERS/sprite_mood.gdshader" id="1_k0ths"]
+[ext_resource type="Texture2D" uid="uid://63mslk145pmq" path="res://CHARACTERS/Hero/Sprites/Hero_L.png" id="2_x4xf7"]
+[ext_resource type="Texture2D" uid="uid://b5nuiqjgapdl7" path="res://CHARACTERS/Hero/Sprites/Hero_B.png" id="3_x4xf7"]
+[ext_resource type="Texture2D" uid="uid://cx3oje1vbfjly" path="res://CHARACTERS/Hero/Sprites/Hero_R.png" id="4_x4xf7"]
+[ext_resource type="Texture2D" uid="uid://ckx5acckipahx" path="res://CHARACTERS/Hero/Sprites/Hero_F.png" id="5_x4xf7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4g4f"]
+shader = ExtResource("1_k0ths")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fykjo"]
+shader = ExtResource("1_k0ths")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxuvv"]
+shader = ExtResource("1_k0ths")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50mgb"]
+shader = ExtResource("1_k0ths")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[node name="Hero_OW_sprites_dark" type="Node2D"]
+
+[node name="Walk_L" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_u4g4f")
+position = Vector2(-1, -6)
+texture = ExtResource("2_x4xf7")
+hframes = 3
+
+[node name="Walk_B" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_fykjo")
+position = Vector2(0, -6)
+texture = ExtResource("3_x4xf7")
+hframes = 3
+
+[node name="Walk_R" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_wxuvv")
+position = Vector2(0, -6)
+texture = ExtResource("4_x4xf7")
+hframes = 3
+
+[node name="Walk_F" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_50mgb")
+position = Vector2(0, -6)
+texture = ExtResource("5_x4xf7")
+hframes = 3

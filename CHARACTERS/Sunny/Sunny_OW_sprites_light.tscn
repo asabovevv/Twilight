@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://b7khvn2leueuf"]
+
+[ext_resource type="Shader" uid="uid://cp58g36waai65" path="res://CHARACTERS/sprite_mood.gdshader" id="1_bqofv"]
+[ext_resource type="Texture2D" uid="uid://dbajcr5tttgp5" path="res://CHARACTERS/Sunny/Sprites/Sunny_L_Light.png" id="2_bqofv"]
+[ext_resource type="Texture2D" uid="uid://dkl6m75ab0sa0" path="res://CHARACTERS/Sunny/Sprites/Sunny_B_Light.png" id="3_4kliv"]
+[ext_resource type="Texture2D" uid="uid://bktlm3vds87f3" path="res://CHARACTERS/Sunny/Sprites/Sunny_R_Light.png" id="4_udlto"]
+[ext_resource type="Texture2D" uid="uid://bpo00tbume7u5" path="res://CHARACTERS/Sunny/Sprites/Sunny_F_Light.png" id="5_apbog"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u4g4f"]
+shader = ExtResource("1_bqofv")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fykjo"]
+shader = ExtResource("1_bqofv")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxuvv"]
+shader = ExtResource("1_bqofv")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50mgb"]
+shader = ExtResource("1_bqofv")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[node name="Sunny_OW_sprites_light" type="Node2D"]
+
+[node name="Walk_L" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_u4g4f")
+position = Vector2(-1, -6)
+texture = ExtResource("2_bqofv")
+hframes = 3
+
+[node name="Walk_B" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_fykjo")
+position = Vector2(-1, -6)
+texture = ExtResource("3_4kliv")
+hframes = 3
+
+[node name="Walk_R" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_wxuvv")
+position = Vector2(0, -6)
+texture = ExtResource("4_udlto")
+hframes = 3
+
+[node name="Walk_F" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_50mgb")
+position = Vector2(-1, -6)
+texture = ExtResource("5_apbog")
+hframes = 3

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://cefovxpdujsu4"]
+
+[ext_resource type="Script" uid="uid://d34msguyfssa1" path="res://RESOURCES/AllInherit/skill.gd" id="1_fci34"]
+
+[resource]
+script = ExtResource("1_fci34")
+name = "KNIFEGUY"
+description = "Ohh Ow Stop"
+juice_cost = 3
+overworld_use = true
+metadata/_custom_type_script = "uid://d34msguyfssa1"

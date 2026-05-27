@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dfhjagdpmojqr"]
+
+[ext_resource type="Shader" uid="uid://bh1nlakexbdy2" path="res://repeat.gdshader" id="1_kkmy0"]
+[ext_resource type="Texture2D" uid="uid://idufhbimn14o" path="res://TILES/twilight_clouds_BG.png" id="2_m5rqp"]
+[ext_resource type="Script" uid="uid://dmbbxh0qmnj5d" path="res://ENTITIES/Scroll/scroll.gd" id="3_m5rqp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5iduv"]
+shader = ExtResource("1_kkmy0")
+shader_parameter/repeat_amount = Vector2(3, 1)
+
+[node name="Scroll_Background" type="Sprite2D"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_5iduv")
+scale = Vector2(3, 1)
+texture = ExtResource("2_m5rqp")
+centered = false
+script = ExtResource("3_m5rqp")

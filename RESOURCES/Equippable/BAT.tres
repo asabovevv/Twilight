@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Equipable" load_steps=3 format=3 uid="uid://b0r78rruu7lhc"]
+
+[ext_resource type="Texture2D" uid="uid://b2ocad4ndctjj" path="res://RESOURCES/Hector.png" id="1_kslls"]
+[ext_resource type="Script" uid="uid://1cjwfrn6g3d7" path="res://RESOURCES/AllInherit/equipable.gd" id="2_kslls"]
+
+[resource]
+script = ExtResource("2_kslls")
+name = "BAT"
+description = "It's big and hard and will make you cream.
+Scream"
+is_weapon = true
+owner = "AUBREY"
+icon = ExtResource("1_kslls")
+heart = 6
+juice = 6
+attack = 6
+defense = 6
+speed = 6
+luck = 6
+hit = 106
+metadata/_custom_type_script = "uid://1cjwfrn6g3d7"

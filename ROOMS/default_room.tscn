@@ -1,0 +1,57 @@
+[gd_scene format=4 uid="uid://cinn1d3ie4wog"]
+
+[ext_resource type="Texture2D" uid="uid://bh50pmfrxit70" path="res://TILES/collision_tileset.png" id="1_t4x6k"]
+[ext_resource type="PackedScene" uid="uid://c11bjm2fu8gr7" path="res://CHARACTERS/party_member.tscn" id="2_axkr4"]
+[ext_resource type="PackedScene" uid="uid://bpibuioq42opr" path="res://CHARACTERS/player.tscn" id="2_egv3w"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ni6wa"]
+texture = ExtResource("1_t4x6k")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3t5sg"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_ni6wa")
+
+[sub_resource type="TileSet" id="TileSet_4ikea"]
+tile_size = Vector2i(32, 32)
+
+[node name="Default_Room" type="Node2D" unique_id=1609172265]
+z_index = 500
+y_sort_enabled = true
+
+[node name="Tiles" type="Node2D" parent="." unique_id=1849191698]
+
+[node name="TileCollideLayer" type="TileMapLayer" parent="Tiles" unique_id=1668237543]
+tile_map_data = PackedByteArray("AAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAAEAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAP//AAAAAAAAAAAIAP//AAAAAAAAAAAJAP//AAAAAAAAAAAKAP//AAAAAAAAAAALAP//AAAAAAAAAAAMAP//AAAAAAAAAAANAP//AAAAAAAAAAAOAP//AAAAAAAAAAAPAP//AAAAAAAAAAAQAP//AAAAAAAAAAARAP//AAAAAAAAAAASAP//AAAAAAAAAAATAP//AAAAAAAAAAAUAP//AAAAAAAAAAAUAAAAAAAAAAAAAAAUAAEAAAAAAAAAAAAUAAIAAAAAAAAAAAAUAAMAAAAAAAAAAAAUAAQAAAAAAAAAAAAUAAUAAAAAAAAAAAAUAAYAAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAUAAkAAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAsAAAAAAAAAAAAUAAwAAAAAAAAAAAAUAA0AAAAAAAAAAAAUAA4AAAAAAAAAAAD//w4AAAAAAAAAAAD//w0AAAAAAAAAAAD//wwAAAAAAAAAAAD//wsAAAAAAAAAAAD//woAAAAAAAAAAAD//wkAAAAAAAAAAAD//wgAAAAAAAAAAAD//wcAAAAAAAAAAAD//wYAAAAAAAAAAAD//wUAAAAAAAAAAAD//wQAAAAAAAAAAAD//wMAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAD//wAAAAAAAAAAAAD//w8AAAAAAAAAAAAAAA8AAAAAAAAAAAABAA8AAAAAAAAAAAACAA8AAAAAAAAAAAADAA8AAAAAAAAAAAAEAA8AAAAAAAAAAAAFAA8AAAAAAAAAAAAGAA8AAAAAAAAAAAAHAA8AAAAAAAAAAAAIAA8AAAAAAAAAAAAJAA8AAAAAAAAAAAAKAA8AAAAAAAAAAAALAA8AAAAAAAAAAAAMAA8AAAAAAAAAAAANAA8AAAAAAAAAAAAOAA8AAAAAAAAAAAAPAA8AAAAAAAAAAAAQAA8AAAAAAAAAAAARAA8AAAAAAAAAAAASAA8AAAAAAAAAAAATAA8AAAAAAAAAAAAUAA8AAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_3t5sg")
+collision_enabled = false
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Tiles" unique_id=1167364379]
+tile_set = SubResource("TileSet_4ikea")
+collision_enabled = false
+
+[node name="Entrances" type="Node2D" parent="." unique_id=1801674613]
+
+[node name="Player" parent="." unique_id=1341471259 node_paths=PackedStringArray("tile_node", "collision_tile_layer", "entrances") instance=ExtResource("2_egv3w")]
+z_index = 1
+position = Vector2(320, 240)
+tile_node = NodePath("../Tiles")
+collision_tile_layer = NodePath("../Tiles/TileCollideLayer")
+entrances = NodePath("../Entrances")
+
+[node name="PartyMembers" type="Node2D" parent="." unique_id=653478321]
+
+[node name="PartyMember" parent="PartyMembers" unique_id=1999551103 node_paths=PackedStringArray("player") instance=ExtResource("2_axkr4")]
+position = Vector2(298, 269)
+player = NodePath("../../Player")
+
+[node name="PartyMember2" parent="PartyMembers" unique_id=579454930 node_paths=PackedStringArray("player") instance=ExtResource("2_axkr4")]
+position = Vector2(273, 298)
+player = NodePath("../../Player")
+line_position = 1
+
+[node name="PartyMember3" parent="PartyMembers" unique_id=474587598 node_paths=PackedStringArray("player") instance=ExtResource("2_axkr4")]
+position = Vector2(250, 325)
+player = NodePath("../../Player")
+line_position = 2

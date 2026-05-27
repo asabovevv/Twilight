@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://c11bjm2fu8gr7"]
+
+[ext_resource type="Script" uid="uid://brbqjvt7jsb3" path="res://CHARACTERS/party_member.gd" id="1_f6edj"]
+[ext_resource type="PackedScene" uid="uid://c6aa364bpycd7" path="res://CHARACTERS/Sunny/Sunny_OW_sprites_dark.tscn" id="2_v17yc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6edj"]
+size = Vector2(31, 31)
+
+[node name="PartyMember" type="Node2D"]
+script = ExtResource("1_f6edj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_f6edj")
+
+[node name="Sunny_OW_sprites" parent="." instance=ExtResource("2_v17yc")]

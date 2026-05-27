@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://o8vxnhnm00ss"]
+
+[ext_resource type="Texture2D" uid="uid://dpktmsmfs0c1d" path="res://somekindoftileset.png" id="1_1b8mc"]
+[ext_resource type="Script" uid="uid://dn632uqk44wya" path="res://RESOURCES/AllInherit/item.gd" id="1_obtmd"]
+
+[resource]
+script = ExtResource("1_obtmd")
+name = "ORANGE"
+description = "Yuck Yuck"
+can_trash = false
+icon = ExtResource("1_1b8mc")
+metadata/_custom_type_script = "uid://dn632uqk44wya"

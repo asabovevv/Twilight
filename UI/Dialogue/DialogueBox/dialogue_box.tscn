@@ -1,0 +1,184 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbfegqwp13jbn"]
+
+[ext_resource type="Script" uid="uid://ydsjo5o2dg8o" path="res://UI/Dialogue/DialogueBox/dialogue_box.gd" id="1_3qndn"]
+[ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="1_if77y"]
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_351bv"]
+[ext_resource type="Texture2D" uid="uid://coaqxylbxsmxi" path="res://UI/Bunny_Point.png" id="3_85jfh"]
+[ext_resource type="Texture2D" uid="uid://cy2p82f7rk4gy" path="res://CHARACTERS/Mari/Portraits/Portrait0.png" id="5_ydy5r"]
+
+[node name="DialogueBox" type="Node2D"]
+z_index = 800
+script = ExtResource("1_3qndn")
+
+[node name="DialogueMain" type="NinePatchRect" parent="."]
+offset_left = 16.0
+offset_top = 360.0
+offset_right = 625.0
+offset_bottom = 472.0
+texture = ExtResource("1_if77y")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Dialogue" type="RichTextLabel" parent="DialogueMain"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 11.0
+offset_right = 595.0
+offset_bottom = 411.0
+theme_override_constants/paragraph_separation = 2
+theme_override_fonts/normal_font = ExtResource("2_351bv")
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "Yes, yes! Hello, valued customer...
+Welcome to my shop! Shit happens ere and stuff and it's kinda crazy actually how good this shit is wowwww wowie wow"
+scroll_active = false
+autowrap_mode = 2
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+
+[node name="Pointer" type="Sprite2D" parent="DialogueMain"]
+visible = false
+position = Vector2(544, 86)
+texture = ExtResource("3_85jfh")
+hframes = 2
+
+[node name="DialogueName" type="NinePatchRect" parent="."]
+visible = false
+offset_left = 16.0
+offset_top = 312.0
+offset_right = 121.0
+offset_bottom = 356.0
+texture = ExtResource("1_if77y")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Name" type="Label" parent="DialogueName"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 315.0
+offset_bottom = 405.0
+theme_override_constants/line_spacing = 2
+theme_override_fonts/font = ExtResource("2_351bv")
+theme_override_font_sizes/font_size = 28
+text = "MAILBOX"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(400, 400)
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 622.0
+offset_top = -44.0
+offset_right = 1022.0
+offset_bottom = 356.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(-1, 1)
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="Dialogue_PCont" type="NinePatchRect" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(114, 114)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_if77y")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="DialoguePortrait" type="NinePatchRect" parent="HBoxContainer/Dialogue_PCont"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -57.0
+offset_right = 57.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 57)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_if77y")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="Portrait" type="Sprite2D" parent="HBoxContainer/Dialogue_PCont"]
+position = Vector2(58, 109)
+rotation = -3.1415927
+scale = Vector2(1, -1)
+texture = ExtResource("5_ydy5r")
+hframes = 3
+region_enabled = true
+region_rect = Rect2(0, 0, 363, 121)
+
+[node name="Dialogue_CCont" type="NinePatchRect" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(117, 55)
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("1_if77y")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="DialogueChoice" type="NinePatchRect" parent="HBoxContainer/Dialogue_CCont"]
+custom_minimum_size = Vector2(117, 55)
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -58.5
+offset_top = -27.5
+offset_right = 58.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 27)
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("1_if77y")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+
+[node name="Pointer" type="Sprite2D" parent="HBoxContainer/Dialogue_CCont/DialogueChoice"]
+position = Vector2(94, 25)
+scale = Vector2(-1, 1)
+texture = ExtResource("3_85jfh")
+hframes = 2
+
+[node name="Animator" type="Node2D" parent="."]
