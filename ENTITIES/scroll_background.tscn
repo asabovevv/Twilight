@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfhjagdpmojqr"]
 
-[ext_resource type="Shader" uid="uid://bh1nlakexbdy2" path="res://repeat.gdshader" id="1_kkmy0"]
+[ext_resource type="Shader" uid="uid://bh1nlakexbdy2" path="res://MISC/repeat.gdshader" id="1_kkmy0"]
 [ext_resource type="Texture2D" uid="uid://idufhbimn14o" path="res://TILES/twilight_clouds_BG.png" id="2_m5rqp"]
 [ext_resource type="Script" uid="uid://dmbbxh0qmnj5d" path="res://ENTITIES/Scroll/scroll.gd" id="3_m5rqp"]
 
