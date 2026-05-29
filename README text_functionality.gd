@@ -1,5 +1,5 @@
-# EXAMPLE SYNTAX - |br:@:1|
-# ~ denotes optional variable (Example |dbox| == |dbox:1|)
+## EXAMPLE USE - (This line will|br:@:1|break.)
+## ~ denotes a variable has a default parameter (So |dbox| == |dbox:1|)
 
 # "dbox": # ~Visible = 1
 # "name": # Text
