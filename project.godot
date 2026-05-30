@@ -35,6 +35,10 @@ window/stretch/aspect="keep_width"
 window/vsync/vsync_mode=0
 window/updates_per_second=30
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/addons/YATI/plugin.cfg")
+
 [input]
 
 Up={
