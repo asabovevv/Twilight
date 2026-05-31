@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var party_cont : HBoxContainer = $Stats/ScrollContainer/PartyMemberContainer
 @onready var partymember_cont = load("res://ROOMS/a_Menus/InitRoom/Unique/party_member_stats.tscn")
+
 var rooms_misc : Array
 var rooms_twilight : Array
 
@@ -13,7 +14,7 @@ func _ready() -> void:
 
 func _debug_start() -> void:
 	# Debug
-	TWILIGHT.load_from_slot(0)
+	TWILIGHT.load_from_slot(-1)
 	display_stats()
 	_load_all_rooms()
 	
@@ -29,10 +30,15 @@ func _on_save_stats_button_down() -> void:
 
 func _on_load_stats_button_down() -> void:
 	TWILIGHT.load_from_slot( int($Stats/LoadStats/LoadStatInt.text) )
+	display_stats()
+
+func _on_default_stats_pressed() -> void:
+	TWILIGHT.load_from_slot( -1 )
+	display_stats()
 
 func display_stats() -> void:
-	for i in party_cont.get_children():
-		i.queue_free()
+	for i in party_cont.get_child_count():
+		party_cont.get_child(i).queue_free()
 	
 	for i in range(TWILIGHT.All_Characters.size()):
 		var pmc = partymember_cont.instantiate()
@@ -44,9 +50,11 @@ func display_stats() -> void:
 		v[0].text = TWILIGHT.All_Characters[i].Name
 		
 		# In party? + Pos
+		pmc.modulate.a = 0.7
 		for j in (TWILIGHT.Party_Order.size()):
 			if TWILIGHT.Party_Order[j] == TWILIGHT.All_Characters[i]:
 				v[1].text = "In Party (%d)" % [ float(TWILIGHT.All_Characters[i].TurnPriority) / 2.0 ]
+				pmc.modulate.a = 1
 		
 		# Leveling
 		v[2].get_child(0).text = str( TWILIGHT.All_Characters[i].Level )

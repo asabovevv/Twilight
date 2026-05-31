@@ -29,7 +29,6 @@ theme_override_fonts/font = ExtResource("2_3od6b")
 text = "Party Stats"
 
 [node name="Stats" type="Node2D" parent="." unique_id=39444808]
-visible = false
 
 [node name="DefaultStats" type="Button" parent="Stats" unique_id=1388978085]
 offset_left = 9.0
@@ -97,7 +96,7 @@ max_length = 3
 custom_minimum_size = Vector2(400, 355)
 offset_left = 13.0
 offset_top = 118.0
-offset_right = 413.0
+offset_right = 628.0
 offset_bottom = 473.0
 
 [node name="PartyMemberContainer" type="HBoxContainer" parent="Stats/ScrollContainer" unique_id=1450758441]
@@ -215,6 +214,7 @@ theme_override_fonts/font = ExtResource("2_3od6b")
 text = "Encounters"
 
 [connection signal="pressed" from="PartyStats" to="." method="_on_party_stats_pressed"]
+[connection signal="pressed" from="Stats/DefaultStats" to="." method="_on_default_stats_pressed"]
 [connection signal="button_down" from="Stats/SaveStats" to="." method="_on_save_stats_button_down"]
 [connection signal="button_down" from="Stats/LoadStats" to="." method="_on_load_stats_button_down"]
 [connection signal="pressed" from="Inventory" to="." method="_on_inventory_pressed"]

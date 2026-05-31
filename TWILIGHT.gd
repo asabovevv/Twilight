@@ -1,6 +1,10 @@
+# I recommend you close up all the functions and only open them as you need them.
 extends Node
 
+var Version : float = 0.001 # Used in save-files
+
 ## --- --- --- --- --- --- --- --- General Global Variables --- --- --- --- --- --- --- ---
+
 var entrance : int = 0 # Tracks which way a room was entered from a previous room.
 var encounter : Encounter # Determines encounter setup on encounter room entered
 
@@ -20,6 +24,7 @@ func load_sound(_path : String, _volumetype : Volumes, _parent : Node) -> Node:
 var text_scroll_speed = 60
 
 ## --- --- --- --- --- --- --- --- Player Info --- --- --- --- --- --- --- --- --- ---
+
 const LvlUp_Threshold = [0, 20, 40, 60, 80, 100, 200, 400, 600, 800] #lv 0-9
 
 # PartyMember_Const values are all intialized independent of save files and passed into PartyMember on load.
@@ -205,7 +210,7 @@ class PartyMember:
 		Luck_LV = member_stats.Luck
 		TurnPriority = member_stats.TurnPriority
 	
-	func load_stats(member_stats : PartyMember_Const, _lvl : int, _exp : int, _sklsSpc : Array, _sklsActv : Array, _wpn : Resource, _chr : Resource, _emot : Resource) -> void:
+	func load_stats(member_stats : PartyMember_Const, _lvl : int, _exp : int, _sklsSpc : Array[String], _sklsActv : Array[Resource], _wpn : Resource, _chr : Resource, _emot : Resource) -> void:
 		Skill_Names = member_stats.SkillNames
 		Skill_LV = member_stats.SkillLv
 		
@@ -321,10 +326,29 @@ func get_char_party_order(name : String): # Position in Party_Order
 	return -1
 func add_char_to_party( name : String ) -> void:
 	Party_Order.append( get_char_data(name) )
+	Party_Size += 1
+func remove_char_from_party( name : String ) -> void:
+	for i in range(Party_Order.size()):
+		if Party_Order[i].Name == name:
+			Party_Order.remove_at(i)
+			Party_Size -= 1
+			return
+func does_char_own_equippable(equppable_name : String, char_name : String) -> bool: # Tests whether a character can equip an equippable.
+	for i in range(equppable_name.length()):
+		if equppable_name[i] == " ":
+			equppable_name[i] = "_"
+	
+	var equip = load("res://RESOURCES/Equippable/"+equppable_name+".tres")
+	
+	if equip != null:
+		if equip.owner == char_name.to_upper():
+			return true
+	return false
 func get_required_exp(target_level : int) -> int: # Exp required to get to the next level
 	return -0.19*pow(target_level, 3) + 18.54*pow(target_level, 2) - 8.8*target_level + 41.76
 
 ## --- --- --- --- --- --- --- --- Inventory --- --- --- --- --- --- --- --- ---
+
 class Inv:
 	var Weapons : Array[String] = []
 	var Charms : Array[String] = []
@@ -363,11 +387,25 @@ class Inv:
 
 var Inventory : Inv
 
-func equippable(_name : String) -> Resource:
+# Ignores is_weapon if there is a "w_" or "c_" prefix
+func equippable(_name : String, is_weapon : bool = false) -> Resource: 
 	for i in range(_name.length()):
 		if _name[i] == " ":
 			_name[i] = "_"
-	return load("res://RESOURCES/Equippable/"+_name+".tres")
+	
+	var prefix : String = _name.substr(0, 2)
+	match prefix:
+		"w_":
+			pass
+		"c_":
+			pass
+		_:
+			if is_weapon:
+				prefix = "w_"
+			else:
+				prefix = "c_"
+	
+	return load("res://RESOURCES/Equippable/"+prefix+_name+".tres")
 func item(_name : String) -> Resource:
 	for i in range(_name.length()):
 		if _name[i] == " ":
@@ -382,9 +420,10 @@ func emotion(_name : String) -> Resource:
 	return load("res://RESOURCES/Emotion/"+_name+".tres")
 
 ## --- --- --- --- --- --- --- --- Story Flags --- --- --- --- --- --- --- --- --- --- --- --- ---
+
 # Flags are stored as bits within story_flags, meaning 64 flags per array entry.
 # Inputting a number >63 in set_flag/get_flag will automatically increase the array index.
-var story_flags : Array[int] # [0, 0, 0, 0, 0, 0, 0, 0]
+var story_flags : Array[int] # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 enum Flag_Name {
 	Pinkspace_Intro_Finished
 }
@@ -404,8 +443,9 @@ func get_flag(flag_number : int) -> bool:
 	return story_flags[array_entry] & (1 << flag_value ) != 0
 
 ## --- --- --- --- --- --- --- --- --- --- Save / Load --- --- --- --- --- --- --- --- --- ---
+
 func save_to_slot(slot : int) -> void:
-	var file = FileAccess.open("user://Save%d.dat" % [slot], FileAccess.WRITE)
+	var file = FileAccess.open("user://Save%d_%f.dat" % [slot, Version], FileAccess.WRITE)
 	#Volume Levels
 	for i in volume_levels:
 		file.store_float(i)
@@ -433,33 +473,31 @@ func load_from_slot(slot : int) -> void:
 	var Party_Constants : Array = get_party_constants()
 	
 	# SAVE FILE EXISTS
-	if FileAccess.file_exists("user://Save%d.dat" % [slot]):
-		var file = FileAccess.open("user://Save%d.dat" % [slot], FileAccess.READ)
+	if FileAccess.file_exists("user://Save%d_%f.dat" % [slot, Version]) && (slot != -1):
+		var file = FileAccess.open("user://Save%d_%f.dat" % [slot, Version], FileAccess.READ)
 		
 		#Volume Levels
-		for i in volume_levels:
-			i = file.get_float()
+		for i in range(4):
+			volume_levels[i] = file.get_float()
 		#Flags
-		for i in story_flags:
-			i = file.get_64()
+		for i in range(12):
+			story_flags[i] = file.get_64()
 		#Inventory
 		load_get_inv(file)
 		#PartyMember
-		All_Characters.clear()
+		All_Characters = []
 		var char_amt = file.get_16()
 		for i in char_amt:
 			var id : int = file.get_64()
 			load_get_partymember(file, id, Party_Constants[id])
 		#Party Order + Size
 		Party_Size = file.get_16()
-		Party_Order.clear()
+		Party_Order = []
 		var id_array = file.get_var()
 		for i in range(Party_Size):
 			for j in All_Characters:
 				if j.Const_ID == id_array[i]:
 					Party_Order.append(j)
-		print(All_Characters)
-		print(Party_Order)
 		# Party Quick Emotions
 		var pfe = file.get_var()
 		if pfe != null:
@@ -471,18 +509,19 @@ func load_from_slot(slot : int) -> void:
 		#Volume Levels
 		volume_levels = [0.8, 0.8, 0.8, 0.8]
 		#Flags
-		story_flags = [0, 0, 0, 0, 0, 0, 0, 0]
+		story_flags = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 		#Inventory
 		var s_array : Array[String] = [] 
 		Inventory = Inv.new(s_array, s_array, s_array, s_array, s_array, s_array, [[0], [0]])
 		#PartyMember
+		All_Characters = []
 		for i in range(Party_Constants.size()):
 			All_Characters.append(PartyMember.new(i, Party_Constants[i]) )
-			All_Characters[i].load_stats(Party_Constants[i], 1, 0, [] as Array[Resource], [] as Array[Resource], null, null, emotion("Neutral"))
+			All_Characters[i].load_stats(Party_Constants[i], 1, 0, [] as Array[String], [] as Array[Resource], null, null, emotion("Neutral"))
 		
 		#Party Order + Size
-		Party_Size = 6
-		Party_Order = [All_Characters[0], All_Characters[1], All_Characters[2], All_Characters[3], All_Characters[4], All_Characters[5]]
+		Party_Order = [All_Characters[0]]
+		Party_Size = Party_Order.size()
 		
 		# Party Quick Emotions
 		Party_Fast_Emotion = ["Neutral"]
@@ -517,26 +556,43 @@ func _save_store_partymember(file, member : PartyMember) -> void:
 	file.store_var(skill_list)
 	
 	if member.Weapon != null:
-		file.store_pascal_string(member.Weapon.name)
+		print(member.Weapon.name)
+		file.store_pascal_string("w_"+member.Weapon.name)
 	else:
-		""
+		file.store_pascal_string("")
+		
 	if member.Charm != null:
-		file.store_pascal_string(member.Charm.name)
+		file.store_pascal_string("c_"+member.Charm.name)
 	else:
-		""
+		file.store_pascal_string("")
+		
 	if member.Emotion != null:
 		file.store_pascal_string(member.Emotion.name)
 	else:
-		""
+		file.store_pascal_string("")
 func load_get_partymember(file, const_id, const_member) -> void:
 	All_Characters.append(PartyMember.new(const_id, const_member))
-	
 	var _char = All_Characters[All_Characters.size()-1]
-	_char.load_stats(const_member,
-					file.get_64(),
-					file.get_64(),
-					file.get_var(),
-					file.get_var(),
-					equippable(file.get_pascal_string()),
-					equippable(file.get_pascal_string()),
-					emotion(file.get_pascal_string()) )
+	
+	var lvl = file.get_64()
+	var exp_pts = file.get_64()
+	var skls_spc = file.get_var()
+	
+	# Convert variant array from file back into an Array[Resource]
+	var saved_skill_names = file.get_var()
+	var skls_actv : Array[Resource] = []
+	if saved_skill_names != null:
+		for s_name in saved_skill_names:
+			skls_actv.append(skill(s_name))
+	
+	# Safely read strings and assign resources only if string is valid
+	var wpn_str = file.get_pascal_string()
+	var wpn_res = equippable(wpn_str) if wpn_str != "" else null
+	
+	var chm_str = file.get_pascal_string()
+	var chm_res = equippable(chm_str) if chm_str != "" else null
+	
+	var emot_str = file.get_pascal_string()
+	var emot_res = emotion(emot_str) if emot_str != "" else emotion("Neutral")
+
+	_char.load_stats(const_member, lvl, exp_pts, skls_spc, skls_actv, wpn_res, chm_res, emot_res)
