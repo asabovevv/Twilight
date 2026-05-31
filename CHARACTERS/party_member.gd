@@ -61,9 +61,9 @@ func _process(delta: float) -> void:
 func new_sprites() -> void:
 	get_child(1).queue_free()
 	
-	var path1 : String = TWILIGHT.Party_Order[line_position+1].Path + TWILIGHT.Party_Order[line_position+1].Name
+	var path1 : String = TWILIGHT.Party_Order[line_position+1].Path
 	
-	var sprites = load(path1 + "_OW_sprites.tscn")
+	var sprites = load(path1 + "OW_sprites.tscn")
 	sprites = sprites.instantiate()
 	add_child(sprites)
 	

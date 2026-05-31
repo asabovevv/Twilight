@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c11bjm2fu8gr7"]
 
 [ext_resource type="Script" uid="uid://brbqjvt7jsb3" path="res://CHARACTERS/party_member.gd" id="1_f6edj"]
-[ext_resource type="PackedScene" uid="uid://c6aa364bpycd7" path="res://CHARACTERS/Sunny/SUNNY_OW_sprites.tscn" id="2_v17yc"]
+[ext_resource type="PackedScene" uid="uid://c6aa364bpycd7" path="res://CHARACTERS/Sunny/OW_sprites.tscn" id="2_v17yc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6edj"]
 size = Vector2(31, 31)
