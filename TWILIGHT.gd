@@ -25,8 +25,6 @@ var text_scroll_speed = 60
 
 ## --- --- --- --- --- --- --- --- Player Info --- --- --- --- --- --- --- --- --- ---
 
-const LvlUp_Threshold = [0, 20, 40, 60, 80, 100, 200, 400, 600, 800] #lv 0-9
-
 # PartyMember_Const values are all intialized independent of save files and passed into PartyMember on load.
 # Used to set up PartyMember
 class PartyMember_Const:
@@ -309,21 +307,26 @@ var All_Characters : Array = []
 # Position in the array determines position in line in the overworld, with the player controlling id 0.
 var Party_Order : Array = []
 
-func get_char_data(name : String) -> PartyMember: # Return pointer to character data
+# Return pointer to character data
+func get_char_data(name : String) -> PartyMember:
 	for i in range(All_Characters.size()):
 		if All_Characters[i].Name == name:
 			return All_Characters[i]
 	return null
-func get_char_id(name : String) -> int: # Position in All_Characters
+# Return character's position in All_Characters[]
+func get_char_id(name : String) -> int:
 	for i in range(All_Characters.size()):
 		if All_Characters[i].Name == name:
 			return i
 	return -1
-func get_char_party_order(name : String): # Position in Party_Order
+# Return character's position in Party_Order[]
+func get_char_party_order(name : String): 
 	for i in range(Party_Order.size()):
 		if Party_Order[i].Name == name:
 			return i
 	return -1
+
+# Add/Remove from party
 func add_char_to_party( name : String ) -> void:
 	Party_Order.append( get_char_data(name) )
 	Party_Size += 1
@@ -333,7 +336,9 @@ func remove_char_from_party( name : String ) -> void:
 			Party_Order.remove_at(i)
 			Party_Size -= 1
 			return
-func does_char_own_equippable(equppable_name : String, char_name : String) -> bool: # Tests whether a character can equip an equippable.
+
+# Returns whether a character can equip an equippable (Weapon/Charm)
+func does_char_own_equippable(equppable_name : String, char_name : String) -> bool:
 	for i in range(equppable_name.length()):
 		if equppable_name[i] == " ":
 			equppable_name[i] = "_"
@@ -344,11 +349,14 @@ func does_char_own_equippable(equppable_name : String, char_name : String) -> bo
 		if equip.owner == char_name.to_upper():
 			return true
 	return false
-func get_required_exp(target_level : int) -> int: # Exp required to get to the next level
-	return -0.19*pow(target_level, 3) + 18.54*pow(target_level, 2) - 8.8*target_level + 41.76
+
+# Returns xp required to get to specified level from level 1.
+func get_required_exp(level : int) -> int: 
+	return -0.19*pow(level, 3) + 18.54*pow(level, 2) - 8.8*level + 41.76
 
 ## --- --- --- --- --- --- --- --- Inventory --- --- --- --- --- --- --- --- ---
 
+# Has everything characters aren't currently using. (Weapons, Charms, Snacks, Toys, Important, Key_Items)
 class Inv:
 	var Weapons : Array[String] = []
 	var Charms : Array[String] = []
@@ -384,10 +392,9 @@ class Inv:
 			if i == name:
 				return true
 		return false
-
 var Inventory : Inv
 
-# Ignores is_weapon if there is a "w_" or "c_" prefix
+# Ignores is_weapon if there is a "w_" or "c_" prefix. Converts spaces to underscores. Loads the resource.
 func equippable(_name : String, is_weapon : bool = false) -> Resource: 
 	for i in range(_name.length()):
 		if _name[i] == " ":
@@ -406,16 +413,19 @@ func equippable(_name : String, is_weapon : bool = false) -> Resource:
 				prefix = "c_"
 	
 	return load("res://RESOURCES/Equippable/"+prefix+_name+".tres")
+# Converts spaces to underscores. Loads the resource.
 func item(_name : String) -> Resource:
 	for i in range(_name.length()):
 		if _name[i] == " ":
 			_name[i] = "_"
 	return load("res://RESOURCES/Items/"+_name+".tres")
+# Converts spaces to underscores. Loads the resource.
 func skill(_name : String) -> Resource:
 	for i in range(_name.length()):
 		if _name[i] == " ":
 			_name[i] = "_"
 	return load("res://RESOURCES/Skills/"+_name+".tres")
+# Loads the resource.
 func emotion(_name : String) -> Resource:
 	return load("res://RESOURCES/Emotion/"+_name+".tres")
 
@@ -427,6 +437,7 @@ var story_flags : Array[int] # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 enum Flag_Name {
 	Pinkspace_Intro_Finished
 }
+
 func set_flag(flag_number : int, value : bool) -> void:
 	var flag_entry : int = flag_number % 64
 	var array_entry : int = floor( (flag_number - flag_entry)/64 )
@@ -526,7 +537,7 @@ func load_from_slot(slot : int) -> void:
 		# Party Quick Emotions
 		Party_Fast_Emotion = ["Neutral"]
 
-# Functions that assist in saving/loading. Don't bother touching.
+# Functions that assist in saving/loading. Don't bother touching they're scaryyy
 func save_store_inv(file) -> void:
 	file.store_var(Inventory.Weapons)
 	file.store_var(Inventory.Charms)
