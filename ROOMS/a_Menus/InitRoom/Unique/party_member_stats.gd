@@ -7,13 +7,15 @@ func _on_add_remove_party_member_button_down() -> void:
 	# If in party already
 	for i in range(TWILIGHT.Party_Order.size()):
 		if TWILIGHT.Party_Order[i] == mychar:
-			TWILIGHT.Party_Order.remove_at(i)
+			TWILIGHT.remove_char_from_party(mychar.Name)
 			$IsInParty.text = "Not In Party"
+			modulate.a = 0.7
 			return
 	
 	# Else
-	TWILIGHT.add_char_to_party(mychar)
+	TWILIGHT.add_char_to_party(mychar.Name)
 	$IsInParty.text = "In Party (%d)" % [ float(mychar.TurnPriority) / 2.0 ]
+	modulate.a = 1
 
 func _on_level_edit_text_changed(new_text: String) -> void:
 	if int($Level/LevelEdit.text) > 50 || int($Level/LevelEdit.text) < 0:
@@ -34,7 +36,10 @@ func update_lvstats() -> void:
 
 func _on_weapon_edit_text_changed(new_text: String) -> void:
 	if FileAccess.file_exists("res://RESOURCES/Equippable/"+new_text+".tres"):
-		update_weaponstats(load("res://RESOURCES/Equippable/"+new_text+".tres"))
+		if TWILIGHT.does_char_own_equippable(new_text, mychar.Name):
+			update_weaponstats(load("res://RESOURCES/Equippable/"+new_text+".tres"))
+		else:
+			$Weapon/WeaponDesc.text = "Weapon does not belong to character."
 	else:
 		$Weapon/HptxtW.text = "0"
 		$Weapon/JuicetxtW.text = "0"
@@ -44,6 +49,7 @@ func _on_weapon_edit_text_changed(new_text: String) -> void:
 		$Weapon/LcktxtW.text = "0"
 		$Weapon/HittxtW.text = "0"
 		$Weapon/WeaponDesc.text = "No Description."
+		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Weapon = null
 
 func update_weaponstats(weapon : Equipable) -> void:
 	if weapon.is_weapon:
@@ -59,18 +65,14 @@ func update_weaponstats(weapon : Equipable) -> void:
 		#TWILIGHT.equippable(TWILIGHT.Inventory.Weapons[0])
 		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Weapon = weapon
 	else:
-		$Weapon/HptxtW.text = "0"
-		$Weapon/JuicetxtW.text = "0"
-		$Weapon/AtktxtW.text = "0"
-		$Weapon/DeftxtW.text = "0"
-		$Weapon/SpdtxtW.text = "0"
-		$Weapon/LcktxtW.text = "0"
-		$Weapon/HittxtW.text = "0"
 		$Weapon/WeaponDesc.text = "Resource isn't a Weapon."
 
 func _on_charm_edit_text_changed(new_text: String) -> void:
 	if FileAccess.file_exists("res://RESOURCES/Equippable/"+new_text+".tres"):
-		update_charmstats(load("res://RESOURCES/Equippable/"+new_text+".tres"))
+		if TWILIGHT.does_char_own_equippable(new_text, mychar.Name):
+			update_charmstats(load("res://RESOURCES/Equippable/"+new_text+".tres"))
+		else:
+			$Charm/CharmDesc.text = "Charm does not belong to character."
 	else:
 		$Charm/HptxtC.text = "0"
 		$Charm/JuicetxtC.text = "0"
@@ -80,6 +82,7 @@ func _on_charm_edit_text_changed(new_text: String) -> void:
 		$Charm/LcktxtC.text = "0"
 		$Charm/HittxtC.text = "0"
 		$Charm/CharmDesc.text = "No Description."
+		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Charm = null
 
 func update_charmstats(charm : Equipable) -> void:
 	if !charm.is_weapon:
@@ -95,13 +98,6 @@ func update_charmstats(charm : Equipable) -> void:
 		#TWILIGHT.equippable(TWILIGHT.Inventory.Charms[0])
 		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Charm = charm
 	else:
-		$Charm/HptxtC.text = "0"
-		$Charm/JuicetxtC.text = "0"
-		$Charm/AtktxtC.text = "0"
-		$Charm/DeftxtC.text = "0"
-		$Charm/SpdtxtC.text = "0"
-		$Charm/LcktxtC.text = "0"
-		$Charm/HittxtC.text = "0"
 		$Charm/CharmDesc.text = "Resource isn't a Charm."
 
 func update_skills() -> void:
