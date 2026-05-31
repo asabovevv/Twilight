@@ -271,7 +271,7 @@ func new_sprites() -> void:
 	for i in sprites.get_children():
 		i.queue_free()
 	
-	var sprite_set = load(TWILIGHT.Party_Order[0].Path + TWILIGHT.Party_Order[0].Name + "_Ow_sprites.tscn")
+	var sprite_set = load(TWILIGHT.Party_Order[0].Path + "OW_sprites.tscn")
 	
 	sprite_set = sprite_set.instantiate()
 	sprites.add_child(sprite_set)
