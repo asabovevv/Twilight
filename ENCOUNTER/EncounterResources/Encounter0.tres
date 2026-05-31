@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Encounter" format=3 uid="uid://beypktfxia8u6"]
+
+[ext_resource type="Texture2D" uid="uid://yr5shcio8phc" path="res://ENCOUNTER/Sprites/Backgrounds/Afterglow_Beach.png" id="1_1slyp"]
+[ext_resource type="Script" uid="uid://dtpd54d8vakar" path="res://RESOURCES/AllInherit/enemy.gd" id="1_35gno"]
+[ext_resource type="Script" uid="uid://mh8wby7arx0n" path="res://ENCOUNTER/EncounterResources/encounter.gd" id="1_ootjr"]
+[ext_resource type="Resource" uid="uid://orneo8geqfwj" path="res://RESOURCES/Enemy/Moles.tres" id="2_6egwq"]
+
+[resource]
+script = ExtResource("1_ootjr")
+enemies = Array[ExtResource("1_35gno")]([ExtResource("2_6egwq")])
+background = ExtResource("1_1slyp")
+metadata/_custom_type_script = "uid://mh8wby7arx0n"

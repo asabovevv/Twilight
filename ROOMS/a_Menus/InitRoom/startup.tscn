@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://ci07wf554wchl"]
+
+[ext_resource type="Script" uid="uid://c2nggl1ra22mt" path="res://ROOMS/a_Menus/InitRoom/startup.gd" id="1_3tds7"]
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_3od6b"]
+[ext_resource type="Texture2D" uid="uid://bvcl1qv7wmwhf" path="res://ROOMS/a_Menus/MainMenu/Title.png" id="3_1825l"]
+[ext_resource type="Script" uid="uid://ncbof14tnp68" path="res://ROOMS/a_Menus/InitRoom/room_0.gd" id="4_hqidj"]
+
+[node name="startup" type="Node2D" unique_id=795438040]
+script = ExtResource("1_3tds7")
+
+[node name="Title" type="Label" parent="." unique_id=1665335143]
+offset_left = 347.0
+offset_top = 24.0
+offset_right = 456.0
+offset_bottom = 47.0
+scale = Vector2(0.8, 0.8)
+text = "Helo welcome"
+
+[node name="Title2" type="Sprite2D" parent="Title" unique_id=365490785]
+position = Vector2(188, 38)
+texture = ExtResource("3_1825l")
+
+[node name="PartyStats" type="Button" parent="." unique_id=461864966]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 75.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Party Stats"
+
+[node name="Stats" type="Node2D" parent="." unique_id=39444808]
+visible = false
+
+[node name="DefaultStats" type="Button" parent="Stats" unique_id=1388978085]
+offset_left = 9.0
+offset_top = 89.0
+offset_right = 90.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Default Stats"
+
+[node name="SaveStats" type="Button" parent="Stats" unique_id=564659020]
+offset_left = 94.0
+offset_top = 89.0
+offset_right = 164.45161
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Save Stats"
+
+[node name="SaveStatInt" type="LineEdit" parent="Stats/SaveStats" unique_id=214440829]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.225807
+offset_top = -40.0
+offset_right = 10.899193
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "0"
+max_length = 3
+
+[node name="LoadStats" type="Button" parent="Stats" unique_id=1055787900]
+offset_left = 169.0
+offset_top = 89.0
+offset_right = 257.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Load File Stats"
+
+[node name="LoadStatInt" type="LineEdit" parent="Stats/LoadStats" unique_id=439895597]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -39.0
+offset_right = 3.125
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "0"
+max_length = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Stats" unique_id=911671284]
+custom_minimum_size = Vector2(400, 355)
+offset_left = 13.0
+offset_top = 118.0
+offset_right = 413.0
+offset_bottom = 473.0
+
+[node name="PartyMemberContainer" type="HBoxContainer" parent="Stats/ScrollContainer" unique_id=1450758441]
+layout_mode = 2
+
+[node name="Inventory" type="Button" parent="." unique_id=1082638441]
+offset_left = 78.0
+offset_top = -32.0
+offset_right = 138.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Inventory"
+
+[node name="Inv" type="Node2D" parent="." unique_id=1175631145]
+visible = false
+
+[node name="Flags" type="Button" parent="." unique_id=728608912]
+offset_left = 141.0
+offset_top = -32.0
+offset_right = 175.0
+offset_bottom = -8.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Flags"
+
+[node name="StoryFlags" type="Node2D" parent="." unique_id=1126745595]
+visible = false
+
+[node name="Rooms" type="Button" parent="." unique_id=47084836]
+offset_left = 178.0
+offset_top = 3.0
+offset_right = 220.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Rooms"
+
+[node name="RoomSelect" type="Node2D" parent="." unique_id=1602500403]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="RoomSelect" unique_id=1820287643]
+offset_left = 7.0
+offset_top = 109.0
+offset_right = 632.0
+offset_bottom = 473.0
+color = Color(0.09985284, 0.09985284, 0.09985284, 0.6)
+
+[node name="G_Misc" type="Button" parent="RoomSelect" unique_id=925760710]
+offset_left = 15.0
+offset_top = 83.0
+offset_right = 52.0
+offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "MISC"
+
+[node name="G_Twilight" type="Button" parent="RoomSelect" unique_id=932029845]
+offset_left = 55.0
+offset_top = 83.0
+offset_right = 117.0
+offset_bottom = 107.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "TWILIGHT"
+
+[node name="room0" type="Button" parent="RoomSelect" unique_id=1245973906]
+z_index = 20
+custom_minimum_size = Vector2(20, 20)
+offset_left = 14.0
+offset_top = 116.0
+offset_right = 45.0
+offset_bottom = 140.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "text"
+script = ExtResource("4_hqidj")
+
+[node name="HBoxContainer0" type="HBoxContainer" parent="RoomSelect" unique_id=1566548827]
+offset_left = 15.0
+offset_top = 116.0
+offset_right = 615.0
+offset_bottom = 140.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MISC" type="ScrollContainer" parent="RoomSelect" unique_id=941453494]
+custom_minimum_size = Vector2(620, 360)
+offset_left = 9.0
+offset_top = 111.0
+offset_right = 629.0
+offset_bottom = 471.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RoomSelect/MISC" unique_id=256723510]
+custom_minimum_size = Vector2(600, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TWILIGHT" type="ScrollContainer" parent="RoomSelect" unique_id=898130342]
+custom_minimum_size = Vector2(620, 0)
+offset_left = 9.0
+offset_top = 111.0
+offset_right = 629.0
+offset_bottom = 471.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RoomSelect/TWILIGHT" unique_id=577230196]
+custom_minimum_size = Vector2(600, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Encounters" type="Button" parent="." unique_id=61483097]
+offset_left = 224.0
+offset_top = -31.0
+offset_right = 289.0
+offset_bottom = -7.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Encounters"
+
+[connection signal="pressed" from="PartyStats" to="." method="_on_party_stats_pressed"]
+[connection signal="button_down" from="Stats/SaveStats" to="." method="_on_save_stats_button_down"]
+[connection signal="button_down" from="Stats/LoadStats" to="." method="_on_load_stats_button_down"]
+[connection signal="pressed" from="Inventory" to="." method="_on_inventory_pressed"]
+[connection signal="pressed" from="Flags" to="." method="_on_flags_pressed"]
+[connection signal="pressed" from="Rooms" to="." method="_on_rooms_pressed"]
+[connection signal="pressed" from="RoomSelect/G_Misc" to="." method="_on_g_misc_pressed"]
+[connection signal="pressed" from="RoomSelect/G_Twilight" to="." method="_on_g_twilight_pressed"]
+[connection signal="pressed" from="RoomSelect/room0" to="RoomSelect/room0" method="_on_pressed"]
+[connection signal="pressed" from="Encounters" to="." method="_on_encounters_pressed"]

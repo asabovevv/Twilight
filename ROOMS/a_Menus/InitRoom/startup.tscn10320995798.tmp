@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://ci07wf554wchl"]
+
+[ext_resource type="Script" uid="uid://c2nggl1ra22mt" path="res://ROOMS/a_Menus/Init Room/startup.gd" id="1_3tds7"]
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_3od6b"]
+[ext_resource type="Texture2D" uid="uid://bvcl1qv7wmwhf" path="res://ROOMS/a_Menus/Main Menu/Title.png" id="3_1825l"]
+
+[node name="startup" type="Node2D" unique_id=795438040]
+script = ExtResource("1_3tds7")
+
+[node name="Title" type="Label" parent="." unique_id=1665335143]
+offset_left = 133.0
+offset_top = 47.0
+offset_right = 242.0
+offset_bottom = 70.0
+text = "Helo welcome"
+
+[node name="Title2" type="Sprite2D" parent="Title" unique_id=365490785]
+position = Vector2(268, -5)
+texture = ExtResource("3_1825l")
+
+[node name="Stats" type="Node2D" parent="." unique_id=39444808]
+
+[node name="SaveStats" type="Button" parent="Stats" unique_id=564659020]
+offset_left = 5.0
+offset_top = 155.0
+offset_right = 75.451614
+offset_bottom = 179.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Save Stats"
+
+[node name="ResetStats" type="Button" parent="Stats" unique_id=1388978085]
+offset_left = 5.0
+offset_top = 125.0
+offset_right = 75.0
+offset_bottom = 149.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Reset Save"
+
+[node name="LoadStats" type="Button" parent="Stats" unique_id=1055787900]
+offset_left = 5.0
+offset_top = 187.0
+offset_right = 93.0
+offset_bottom = 211.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Load File Stats"
+
+[node name="LoadStatInt" type="LineEdit" parent="Stats" unique_id=439895597]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 97.0
+offset_top = 187.0
+offset_right = 143.125
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "0"
+max_length = 3
+
+[node name="PartyMember" type="Button" parent="Stats" unique_id=1451395631]
+offset_left = 9.0
+offset_top = 216.0
+offset_right = 163.0
+offset_bottom = 470.0
+theme_override_fonts/font = ExtResource("2_3od6b")

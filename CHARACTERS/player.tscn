@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://nlfr6qk2ndiv" path="res://CHARACTERS/player.gd" id="1_sweqy"]
 [ext_resource type="PackedScene" uid="uid://dgpnlaeya4xi6" path="res://UI/ui.tscn" id="2_2hs0m"]
 [ext_resource type="Shader" uid="uid://t1sl6paxlj7o" path="res://CHARACTERS/screen_viginette.gdshader" id="2_brhu4"]
-[ext_resource type="PackedScene" uid="uid://bg3bc58aie7cj" path="res://CHARACTERS/Minty/Minty_OW_sprites.tscn" id="3_jtyh7"]
+[ext_resource type="PackedScene" uid="uid://bg3bc58aie7cj" path="res://CHARACTERS/Aubrey/AUBREY_OW_sprites.tscn" id="3_jtyh7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_peybc"]
 shader = ExtResource("2_brhu4")

@@ -35,7 +35,7 @@ const p_base_off = Vector2(-16, 12)
 var p_choice_base_off = Vector2.ZERO
 
 var tsound : AudioStreamPlayer
-const portrait_shorthand = ["Minty", "Sunny"]
+const portrait_shorthand = ["Aubrey", "Sunny"]
 const portrait_locations = ["res://CHARACTERS/Minty/Portraits/Portrait_M",
 							"res://CHARACTERS/Sunny/Portraits/Portrait_S"]
 const font_path : String = "res://UI/Dialogue/"
@@ -147,7 +147,7 @@ func _text_escape() -> void:
 			
 			"face": # Character Name, Portrait #
 				if escape_var.size() < 3:
-					escape_var.append("null")
+					escape_var.append(0)
 				var tex = load( _get_portrait(escape_var[1]) + escape_var[2] + ".png")
 				if tex != null:
 					ico_portrait.texture = tex
@@ -159,18 +159,18 @@ func _text_escape() -> void:
 				else:
 					d_portrait_cont.visible = false
 			
-			"br": # Marker Char, Amount = 1
+			"p": # Marker Char, Amount = 1
 				var amt = 1
 				if escape_var.size() > 2:
 					amt = int(escape_var[2])
 				for j in range(amt):
 					event_locations.append( _find_position_marker(escape_var[1], substring_end) )
-					event_names.append("br")
+					event_names.append("p")
 			
 			"wait": # Marker Char, Duration, Amount = 1
-				var amt = 1
+				var amt : float = 0.1
 				if escape_var.size() > 3:
-					amt = int(escape_var[3])
+					amt = float(escape_var[3])
 				for j in range(amt):
 					event_locations.append( _find_position_marker(escape_var[1], substring_end) )
 					event_names.append( "wait:" + escape_var[2] )
@@ -181,6 +181,9 @@ func _text_escape() -> void:
 			
 			"speed": # Marker Char, Speed
 				event_locations.append( _find_position_marker(escape_var[1], substring_end) )
+				var amt = "default"
+				if escape_var.size() > 2:
+					amt = int(escape_var[2])
 				event_names.append( "speed:" + escape_var[2] )
 			
 			"choice": # Option 1, Option 2, etc.
@@ -197,16 +200,16 @@ func _text_escape() -> void:
 			"sound": # Marker Char, # Sound Path, #Volume Type (SE, ME, AS, AM)
 				var volume
 				match escape_var[3]:
-					"SE":
-						volume = Global.Volumes.SoundEffect
 					"ME":
-						volume = Global.Volumes.MusicEffect
+						volume = TWILIGHT.Volumes.MusicEffect
 					"AS":
-						volume = Global.Volumes.AmbientSound
+						volume = TWILIGHT.Volumes.AmbientSound
 					"AM":
-						volume = Global.Volumes.AmbientMusic
+						volume = TWILIGHT.Volumes.AmbientMusic
+					_:
+						volume = TWILIGHT.Volumes.SoundEffect
 				
-				sounds.append(Global.load_sound(escape_var[2], volume, self)) 
+				sounds.append(TWILIGHT.load_sound(escape_var[2], volume, self)) 
 				event_locations.append( _find_position_marker(escape_var[1], substring_end) )
 				event_names.append( "sound:%d" % [sounds.size()-1] )
 			
@@ -219,7 +222,9 @@ func _text_escape() -> void:
 			
 			"size_gradual": # Marker Char, Start Size, Target Size, Step Size
 				var start_index : int = _find_position_marker(escape_var[1], substring_end)
-				var start_size : int = int(escape_var[2])
+				var start_size : int = 28
+				if escape_var[2] != "d" || escape_var[2] != "default":
+					start_size = int(escape_var[2])
 				var target_size : int = int(escape_var[3])
 				var step : int = int(escape_var[4])
 				var end : int = ceil(start_index + float(target_size-start_size)/step)
@@ -269,13 +274,13 @@ func _text_event(_event) -> void:
 	var event_var : Array = _parse_substring(_event)
 	
 	match event_var[0]:
-		"br":
+		"p":
 			dialogue_paused = true
 		"wait":
 			wait_time = float(event_var[1])
 		"speed":
-			if event_var[1] == "default":
-				dialogue_speed = Global.text_scroll_speed
+			if event_var[1] == "default" || event_var[1] == "d":
+				dialogue_speed = TWILIGHT.text_scroll_speed
 			else:
 				dialogue_speed = float(event_var[1])
 		"end":

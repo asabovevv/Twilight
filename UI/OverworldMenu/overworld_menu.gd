@@ -71,37 +71,37 @@ enum i_sound { Move1, Select, Selectbad, Cancel, Equip, Tag, Wah }
 @onready var sounds = $Sounds
 
 func _ready() -> void:
-	lists = [Global.Inventory.Weapons, Global.Inventory.Charms, Global.Inventory.Snacks,
-			Global.Inventory.Toys, Global.Inventory.Important,
+	lists = [TWILIGHT.Inventory.Weapons, TWILIGHT.Inventory.Charms, TWILIGHT.Inventory.Snacks,
+			TWILIGHT.Inventory.Toys, TWILIGHT.Inventory.Important,
 			5, 6, 7, 8, #Skills
 			9, 10, 11, #WCA
 			12, 13, 14, #WCA
 			15, 16, 17, #WCA
 			18, 19, 20] #WCA
 	var j = 0
-	for i in Global.Party_Order:
-		lists[5+j] = Global.Party_Order[j].Skills
-		lists[9+j*3] = Global.Party_Order[j].Weapon
-		lists[10+j*3] = Global.Party_Order[j].Charm
-		lists[11+j*3] = Global.Party_Order[j].Skills_Active
+	for i in TWILIGHT.Party_Order:
+		lists[5+j] = TWILIGHT.Party_Order[j].Skills
+		lists[9+j*3] = TWILIGHT.Party_Order[j].Weapon
+		lists[10+j*3] = TWILIGHT.Party_Order[j].Charm
+		lists[11+j*3] = TWILIGHT.Party_Order[j].Skills_Active
 		j+=1
 	
-	for i in range(4-Global.Party_Size):
+	for i in range(4-TWILIGHT.Party_Size):
 		ow_status.get_child(3-i).visible = false
-	for i in range(Global.Party_Size):
+	for i in range(TWILIGHT.Party_Size):
 		var stat = ow_status.get_child(i)
-		stat.get_child(1).text = Global.Party_Order[i].Name
-		stat.get_child(2).scale.y = (1/ float(Global.LvlUp_Threshold[Global.Party_Order[i].Level])) * Global.Party_Order[i].Exp
-		stat.get_child(3).text = "LVL. %d" % [Global.Party_Order[i].Level]
-		stat.get_child(4).region_rect = Rect2(0, 0, (116/ float(Global.Party_Order[i].Heart_Max)) * Global.Party_Order[i].Heart, 70)
-		stat.get_child(5).text = "%d/%d" % [Global.Party_Order[i].Heart, Global.Party_Order[i].Heart_Max]
-		stat.get_child(6).region_rect = Rect2(0, 0, (116/ float(Global.Party_Order[i].Juice_Max)) * Global.Party_Order[i].Juice, 70)
-		stat.get_child(7).text = "%d/%d" % [Global.Party_Order[i].Juice, Global.Party_Order[i].Juice_Max]
+		stat.get_child(1).text = TWILIGHT.Party_Order[i].Name
+		stat.get_child(2).scale.y = (1/ float(TWILIGHT.LvlUp_Threshold[TWILIGHT.Party_Order[i].Level])) * TWILIGHT.Party_Order[i].Exp
+		stat.get_child(3).text = "LVL. %d" % [TWILIGHT.Party_Order[i].Level]
+		stat.get_child(4).region_rect = Rect2(0, 0, (116/ float(TWILIGHT.Party_Order[i].Heart_Max)) * TWILIGHT.Party_Order[i].Heart, 70)
+		stat.get_child(5).text = "%d/%d" % [TWILIGHT.Party_Order[i].Heart, TWILIGHT.Party_Order[i].Heart_Max]
+		stat.get_child(6).region_rect = Rect2(0, 0, (116/ float(TWILIGHT.Party_Order[i].Juice_Max)) * TWILIGHT.Party_Order[i].Juice, 70)
+		stat.get_child(7).text = "%d/%d" % [TWILIGHT.Party_Order[i].Juice, TWILIGHT.Party_Order[i].Juice_Max]
 		var portrait = stat.get_child(8)
-		portrait.texture = load(Global.Party_Order[i].Path + "Portraits/Portrait0.png")
+		portrait.texture = load(TWILIGHT.Party_Order[i].Path + "Portraits/Portrait0.png")
 		portrait.position.y = -109 - portrait.texture.get_height()*0.5
 	
-	if !Global.Inventory.has_item(Global.Inventory.Key_Items, "TAG"):
+	if !TWILIGHT.Inventory.has_item(TWILIGHT.Inventory.Key_Items, "TAG"):
 		_set_text("???", Color.WHITE, menu_main.get_child(0))
 	if (lists[2].size() == 0) && (lists[3].size() == 0) && (lists[4].size() == 0):
 		_set_text("POCKET", grey, menu_main.get_child(2))
@@ -112,13 +112,13 @@ func _ready() -> void:
 	if (lists[4].size() == 0):
 		_set_text("IMPORTANT", grey, menu_pocket.get_child(2))
 	
-	sounds_list.append( Global.load_sound("res://SOUNDS/SoundEffect/SE_move1.ogg", Global.Volumes.SoundEffect, sounds) )
-	sounds_list.append( Global.load_sound("res://SOUNDS/SoundEffect/SE_select.ogg", Global.Volumes.SoundEffect, sounds) )
-	sounds_list.append( Global.load_sound("res://SOUNDS/SoundEffect/SE_select_bad.ogg", Global.Volumes.SoundEffect, sounds) )
-	sounds_list.append( Global.load_sound("res://SOUNDS/SoundEffect/SE_cancel.ogg", Global.Volumes.SoundEffect, sounds) )
-	sounds_list.append( Global.load_sound("res://SOUNDS/SoundEffect/SE_equip.ogg", Global.Volumes.SoundEffect, sounds) )
-	sounds_list.append( Global.load_sound("res://SOUNDS/SoundEffect/SE_tag.ogg", Global.Volumes.SoundEffect, sounds) )
-	sounds_list.append( Global.load_sound("res://SOUNDS/SoundEffect/SE_wah.ogg", Global.Volumes.SoundEffect, sounds) )
+	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_move1.ogg", TWILIGHT.Volumes.SoundEffect, sounds) )
+	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_select.ogg", TWILIGHT.Volumes.SoundEffect, sounds) )
+	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_select_bad.ogg", TWILIGHT.Volumes.SoundEffect, sounds) )
+	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_cancel.ogg", TWILIGHT.Volumes.SoundEffect, sounds) )
+	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_equip.ogg", TWILIGHT.Volumes.SoundEffect, sounds) )
+	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_tag.ogg", TWILIGHT.Volumes.SoundEffect, sounds) )
+	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_wah.ogg", TWILIGHT.Volumes.SoundEffect, sounds) )
 	
 	sounds_list[i_sound.Select].play()
 
@@ -163,7 +163,7 @@ func _menu_logic(delta: float) -> void:
 					anim_t = 0
 					return
 				if Input.is_action_just_pressed("Confirm"):
-					if (place[0] == 1) && (!Global.Inventory.has_item(Global.Inventory.Key_Items, "TAG") ):
+					if (place[0] == 1) && (!TWILIGHT.Inventory.has_item(TWILIGHT.Inventory.Key_Items, "TAG") ):
 						sounds_list[i_sound.Selectbad].play()
 						return
 					
@@ -231,7 +231,7 @@ func _menu_logic(delta: float) -> void:
 				who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[1]]).global_position + who_off
 			
 			if Input.is_action_just_pressed("Right") || Input.is_action_just_pressed("Left"):
-				place[1] = _wrap(place[1]+hinput, 1, Global.Party_Size)
+				place[1] = _wrap(place[1]+hinput, 1, TWILIGHT.Party_Size)
 				var who : Node = _child_by_name(category_parent, "SelectWho")
 				who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[1]]).global_position + who_off
 			
@@ -256,11 +256,11 @@ func _menu_logic(delta: float) -> void:
 				animator.start("Tag", [0, 1, 0]) # variants = leader, tagged, background
 				sounds_list[i_sound.Tag].play()
 				
-				var new_order : Array = [ Global.Party_Order[place[1]-1] ]
-				for i in range(Global.Party_Order.size()):
-					if Global.Party_Order[i] != new_order[0]:
-						new_order.append(Global.Party_Order[i])
-				Global.Party_Order = new_order
+				var new_order : Array = [ TWILIGHT.Party_Order[place[1]-1] ]
+				for i in range(TWILIGHT.Party_Order.size()):
+					if TWILIGHT.Party_Order[i] != new_order[0]:
+						new_order.append(TWILIGHT.Party_Order[i])
+				TWILIGHT.Party_Order = new_order
 				
 				stage = 3
 			
@@ -293,11 +293,11 @@ func _menu_logic(delta: float) -> void:
 					await_animation = true
 					
 					if place[1] < 3:
-						_update_options(menu_pocket_list, lists[ place[1]+1 ], Global.Inventory.Item_Count[place[1]-1])
+						_update_options(menu_pocket_list, lists[ place[1]+1 ], TWILIGHT.Inventory.Item_Count[place[1]-1])
 					if place[1] == 3:
-						_update_options(menu_pocket_list, Global.Inventory.Important)
+						_update_options(menu_pocket_list, TWILIGHT.Inventory.Important)
 					
-					var item = Global.item( lists[ place[1]+1 ][ place[2]-1 ] )
+					var item = TWILIGHT.item( lists[ place[1]+1 ][ place[2]-1 ] )
 					if item != null:
 						_set_text(item.name, Color.WHITE, text_pocket_disp_name)
 						_set_text(item.description, Color.WHITE, text_pocket_disp_desc)
@@ -319,11 +319,11 @@ func _menu_logic(delta: float) -> void:
 						arrow_pocket_list_d.visible = false
 					
 					if place[1] < 3:
-						_update_options(menu_pocket_list, lists[ place[1]+1 ], Global.Inventory.Item_Count[place[1]-1])
+						_update_options(menu_pocket_list, lists[ place[1]+1 ], TWILIGHT.Inventory.Item_Count[place[1]-1])
 					if place[1] == 3:
-						_update_options(menu_pocket_list, Global.Inventory.Important)
+						_update_options(menu_pocket_list, TWILIGHT.Inventory.Important)
 					
-					var item = Global.item( lists[ place[1]+1 ][ place[2]-1 ] )
+					var item = TWILIGHT.item( lists[ place[1]+1 ][ place[2]-1 ] )
 					if item != null:
 						_set_text(item.name, Color.WHITE, text_pocket_disp_name)
 						_set_text(item.description, Color.WHITE, text_pocket_disp_desc)
@@ -368,9 +368,9 @@ func _menu_logic(delta: float) -> void:
 					
 					var equip
 					if place[3] == 1:
-						equip = Global.Party_Order[ place[1]-1 ].Weapon
+						equip = TWILIGHT.Party_Order[ place[1]-1 ].Weapon
 					else:
-						equip = Global.Party_Order[ place[1]-1 ].Charm
+						equip = TWILIGHT.Party_Order[ place[1]-1 ].Charm
 					if equip != null:
 						_set_text(equip.name, Color.WHITE, text_equip_disp_name)
 						_set_text(equip.description, Color.WHITE, text_equip_disp_desc)
@@ -403,8 +403,8 @@ func _menu_logic(delta: float) -> void:
 					return
 				if Input.is_action_just_pressed("Confirm"):
 					var b1 : bool = lists[place[3]-1].size() > 1
-					var b2 : bool = (Global.Party_Order[place[1]-1].Weapon != null) && (place[3] == 1)
-					var b3 : bool = (Global.Party_Order[place[1]-1].Charm != null) && (place[3] == 2)
+					var b2 : bool = (TWILIGHT.Party_Order[place[1]-1].Weapon != null) && (place[3] == 1)
+					var b3 : bool = (TWILIGHT.Party_Order[place[1]-1].Charm != null) && (place[3] == 2)
 					
 					if b1 || b2 || b3:
 						_advance()
@@ -418,11 +418,11 @@ func _menu_logic(delta: float) -> void:
 				var item
 				match place[1]:
 					1:
-						item = Global.Inventory.Snacks
+						item = TWILIGHT.Inventory.Snacks
 					2:
-						item = Global.Inventory.Toys
+						item = TWILIGHT.Inventory.Toys
 					3:
-						item = Global.Inventory.Important
+						item = TWILIGHT.Inventory.Important
 				
 				if !set_up:
 					set_up = true
@@ -430,11 +430,11 @@ func _menu_logic(delta: float) -> void:
 					p_pocket_confirm.frame = 0
 					await_animation = true
 					
-					if Global.item(item[place[2]-1]).can_trash:
+					if TWILIGHT.item(item[place[2]-1]).can_trash:
 						_child_by_name(menu_pocket_confirm, "Option1").self_modulate = Color.WHITE
 					else:
 						_child_by_name(menu_pocket_confirm, "Option1").self_modulate = grey
-					if Global.item(item[place[2]-1]).overworld_use:
+					if TWILIGHT.item(item[place[2]-1]).overworld_use:
 						_child_by_name(menu_pocket_confirm, "Option2").self_modulate = Color.WHITE
 					else:
 						_child_by_name(menu_pocket_confirm, "Option2").self_modulate = grey
@@ -454,7 +454,7 @@ func _menu_logic(delta: float) -> void:
 					return
 				if Input.is_action_just_pressed("Confirm"):
 					if (place[3] == 1):
-						if Global.item(item[place[2]-1]).overworld_use:
+						if TWILIGHT.item(item[place[2]-1]).overworld_use:
 							_advance()
 							animator.start("Pocket Confirm", [0])
 							p_pocket_confirm.global_position = _child_by_name(menu_pocket_confirm, "Option%d"%[place[3]]).global_position + p_base_off
@@ -462,7 +462,7 @@ func _menu_logic(delta: float) -> void:
 						else:
 							sounds_list[i_sound.Selectbad].play()
 					else:
-						if Global.item(item[place[2]-1]).can_trash:
+						if TWILIGHT.item(item[place[2]-1]).can_trash:
 							sounds_list[i_sound.Select].play()
 							set_up = false
 							stage += 2
@@ -513,7 +513,7 @@ func _menu_logic(delta: float) -> void:
 					sounds_list[i_sound.Cancel].play()
 					return
 				if Input.is_action_just_pressed("Confirm"):
-					if (lists[place[1]+4].size() > 1) || (Global.Party_Order[place[1]-1].Skills_Active.size() > 0):
+					if (lists[place[1]+4].size() > 1) || (TWILIGHT.Party_Order[place[1]-1].Skills_Active.size() > 0):
 						_advance()
 						p_skill_s.frame = 1
 						p_skill_s.position = Vector2(-option.size.x*0.5, option.position.y) + p_base_off
@@ -554,7 +554,7 @@ func _menu_logic(delta: float) -> void:
 					_update_options(menu_equip_replace, lists[ place[3]-1 ])
 					
 					if lists[ place[3]-1 ] != null:
-						var item = Global.equippable( lists[ place[3]-1 ][ place[4]-1 ] )
+						var item = TWILIGHT.equippable( lists[ place[3]-1 ][ place[4]-1 ] )
 						if item != null:
 							_set_text(item.name, Color.WHITE, text_equip_disp_name)
 							_set_text(item.description, Color.WHITE, text_equip_disp_desc)
@@ -589,7 +589,7 @@ func _menu_logic(delta: float) -> void:
 				
 				if place[4] != last_place:
 					if lists[ place[3]-1 ] != null:
-						var item = Global.equippable( lists[ place[3]-1 ][ place[4]-1 ] )
+						var item = TWILIGHT.equippable( lists[ place[3]-1 ][ place[4]-1 ] )
 						if item != null:
 							_set_text(item.name, Color.WHITE, text_equip_disp_name)
 							_set_text(item.description, Color.WHITE, text_equip_disp_desc)
@@ -606,15 +606,15 @@ func _menu_logic(delta: float) -> void:
 					return
 				if Input.is_action_just_pressed("Confirm"):
 					if place[3] == 1:
-						Global.Party_Order[ place[1]-1 ].swap_weapon(place[4]-1, Global.Inventory)
-						var weapon = Global.Party_Order[ place[1]-1 ].Weapon
+						TWILIGHT.Party_Order[ place[1]-1 ].swap_weapon(place[4]-1, TWILIGHT.Inventory)
+						var weapon = TWILIGHT.Party_Order[ place[1]-1 ].Weapon
 						if weapon != null:
 							_set_text(weapon.name, Color.WHITE, _child_by_name(menu_equip_wc, "Option1"))
 						else:
 							_set_text("------------", Color.WHITE, _child_by_name(menu_equip_wc, "Option1"))
 					else:
-						Global.Party_Order[ place[1]-1 ].swap_charm(place[4]-1, Global.Inventory)
-						var charm = Global.Party_Order[ place[1]-1 ].Charm
+						TWILIGHT.Party_Order[ place[1]-1 ].swap_charm(place[4]-1, TWILIGHT.Inventory)
+						var charm = TWILIGHT.Party_Order[ place[1]-1 ].Charm
 						if charm != null:
 							_set_text(charm.name, Color.WHITE, _child_by_name(menu_equip_wc, "Option2"))
 						else:
@@ -640,7 +640,7 @@ func _menu_logic(delta: float) -> void:
 					who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[4]]).global_position + who_off
 				
 				if Input.is_action_just_pressed("Right") || Input.is_action_just_pressed("Left"):
-					place[4] = _wrap(place[4]+hinput, 1, Global.Party_Size)
+					place[4] = _wrap(place[4]+hinput, 1, TWILIGHT.Party_Size)
 					who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[4]]).global_position + who_off
 				
 				if (place[4] != last_place):
@@ -679,7 +679,7 @@ func _menu_logic(delta: float) -> void:
 					animator.start("Skill Menu Replace", [1, 3, -1])
 					await_animation = true
 					
-					var skill = Global.skill( lists[ place[1]+4 ][ place[4]-1 ] )
+					var skill = TWILIGHT.skill( lists[ place[1]+4 ][ place[4]-1 ] )
 					if skill != null:
 						_set_text(skill.name, Color.WHITE, text_skill_disp_name)
 						_set_text(skill.description, Color.WHITE, text_skill_disp_desc)
@@ -708,7 +708,7 @@ func _menu_logic(delta: float) -> void:
 				p_skill_replace.global_position = _child_by_name(menu_skill_replace, "Option%d"%[ place[4]-place_scroll ]).global_position + p_off
 				
 				if place[4] != last_place:
-					var skill = Global.skill( lists[ place[1]+4 ][ place[4]-1 ] )
+					var skill = TWILIGHT.skill( lists[ place[1]+4 ][ place[4]-1 ] )
 					if skill != null:
 						_set_text(skill.name, Color.WHITE, text_skill_disp_name)
 						_set_text(skill.description, Color.WHITE, text_skill_disp_desc)
@@ -721,8 +721,8 @@ func _menu_logic(delta: float) -> void:
 					_back()
 					return
 				if Input.is_action_just_pressed("Confirm"):
-					Global.Party_Order[ place[1]-1 ].swap_skill(place[3]-1, place[4]-1)
-					_update_options_res(menu_skill_s, Global.Party_Order[place[1]-1].Skills_Active)
+					TWILIGHT.Party_Order[ place[1]-1 ].swap_skill(place[3]-1, place[4]-1)
+					_update_options_res(menu_skill_s, TWILIGHT.Party_Order[place[1]-1].Skills_Active)
 					
 					animator.start("Skill Menu Replace", [0, 3, -1])
 					await_animation = true
@@ -766,18 +766,18 @@ func _menu_logic(delta: float) -> void:
 					await_animation = true
 					
 					if place[1] < 3:
-						var ic = Global.Inventory.Item_Count[ place[1]-1 ]
+						var ic = TWILIGHT.Inventory.Item_Count[ place[1]-1 ]
 						var item
 						if place[1] == 1:
-							item = Global.Inventory.Snacks
+							item = TWILIGHT.Inventory.Snacks
 						else:
-							item = Global.Inventory.Toys
+							item = TWILIGHT.Inventory.Toys
 						ic[place[2]-1] -= 1
 						
 						if ic[place[2]-1] <= 0:
 							ic.remove_at( place[2]-1 )
 							item.remove_at( place[2]-1 )
-						_update_options(menu_pocket_list, lists[ place[1]+1 ], Global.Inventory.Item_Count[place[1]-1])
+						_update_options(menu_pocket_list, lists[ place[1]+1 ], TWILIGHT.Inventory.Item_Count[place[1]-1])
 					return
 			
 			# ----- SKILL DO WHAT -----
@@ -833,7 +833,7 @@ func _menu_logic(delta: float) -> void:
 					return
 				
 				if Input.is_action_just_pressed("Right") || Input.is_action_just_pressed("Left"):
-					place[6] = _wrap(place[6]+hinput, 1, Global.Party_Size)
+					place[6] = _wrap(place[6]+hinput, 1, TWILIGHT.Party_Size)
 					var who : Node = _child_by_name(category_parent, "SelectWho")
 					who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[6]]).global_position + who_off
 				
@@ -923,9 +923,9 @@ func _color_compare(item_stat : int, now_item_stat : int) -> Color:
 func _update_stat_menu(item) -> void:
 	var now_item
 	if place[3] == 1:
-		now_item = Global.Party_Order[ place[1]-1 ].Weapon
+		now_item = TWILIGHT.Party_Order[ place[1]-1 ].Weapon
 	else:
-		now_item = Global.Party_Order[ place[1]-1 ].Charm
+		now_item = TWILIGHT.Party_Order[ place[1]-1 ].Charm
 	if now_item == null:
 		now_item = load("res://RESOURCES/Equippable/ZERO.tres")
 	
