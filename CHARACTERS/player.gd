@@ -57,7 +57,7 @@ func _ready() -> void:
 	
 	# Set Sprites + Emotion
 	new_sprites()
-	set_emotion_string(Global.Party_Order[0].Emotion.name)
+	set_emotion_string(TWILIGHT.Party_Order[0].Emotion.name)
 	
 	# Set + Snap position and party member positions
 	global_position = _grid_snap(global_position)
@@ -129,7 +129,7 @@ func set_emotion_string(_mood_name : String) -> void:
 		"Happy":
 			mood = 3
 	
-	if Global.Party_Order[0].Name == "AUBREY":
+	if TWILIGHT.Party_Order[0].Name == "AUBREY":
 		for i in walk_sprites:
 			i.material.set_shader_parameter("emotion", mood_colors[mood])
 	else:
@@ -139,7 +139,7 @@ func set_emotion_string(_mood_name : String) -> void:
 			i.material.set_shader_parameter("emotion", mood_colors[mood])
 	
 	# Adjust stats
-	speed = base_speed * Global.emotion( _mood_name ).walkspeed[0]
+	speed = base_speed * TWILIGHT.emotion( _mood_name ).walkspeed[0]
 	running = (speed > base_speed)
 
 func _move_and_animate(delta) -> void:
@@ -271,16 +271,7 @@ func new_sprites() -> void:
 	for i in sprites.get_children():
 		i.queue_free()
 	
-	var path : String
-	if !Global.Party_Order[0].Light_Mode:
-		path = "_Ow_sprites.tscn"
-	else:
-		if party_lightmode && mood == 0:
-			path = "_Ow_sprites_light.tscn"
-		else:
-			path = "_Ow_sprites_dark.tscn"
-	
-	var sprite_set = load(Global.Party_Order[0].Path + Global.Party_Order[0].Name + path)
+	var sprite_set = load(TWILIGHT.Party_Order[0].Path + TWILIGHT.Party_Order[0].Name + "_Ow_sprites.tscn")
 	
 	sprite_set = sprite_set.instantiate()
 	sprites.add_child(sprite_set)
@@ -292,7 +283,7 @@ func _grid_snap(_position : Vector2) -> Vector2:
 func _enter_room() -> void:
 	if entrances != null:
 		for i in entrances.get_children():
-			if i.ID == Global.entrance:
+			if i.ID == TWILIGHT.entrance:
 				global_position = i.global_position
 				if i.fader != null:
 					i.fader.target_fade = i.set_fader

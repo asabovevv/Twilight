@@ -1,0 +1,583 @@
+[gd_scene format=3 uid="uid://bharo834tt5ty"]
+
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="1_iw264"]
+[ext_resource type="Script" uid="uid://bw5ephxpklmk8" path="res://ROOMS/a_Menus/InitRoom/Unique/party_member_stats.gd" id="2_v1mfm"]
+[ext_resource type="Texture2D" uid="uid://dg2nmhjv3567r" path="res://ROOMS/a_Menus/InitRoom/Unique/icon_PartyMember.png" id="3_ys6ak"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pttfc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iw264"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="PartyMember" type="Button" unique_id=2044465222]
+custom_minimum_size = Vector2(155, 345)
+offset_right = 155.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_styles/normal = SubResource("StyleBoxFlat_pttfc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iw264")
+button_mask = 0
+script = ExtResource("2_v1mfm")
+
+[node name="Name" type="Label" parent="." unique_id=1450575925]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -3.0
+offset_right = 112.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 20
+text = "Aubrey"
+
+[node name="IsInParty" type="Label" parent="." unique_id=1893508392]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 1.0
+offset_right = 135.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("1_iw264")
+text = "Not In Party"
+horizontal_alignment = 2
+
+[node name="AddRemovePartyMember" type="Button" parent="IsInParty" unique_id=821537276]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 2.000001
+offset_right = 149.0
+offset_bottom = 40.0
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 53
+icon = ExtResource("3_ys6ak")
+clip_text = true
+
+[node name="Level" type="Label" parent="." unique_id=205654518]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 24.0
+offset_right = 114.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 20
+text = "LV"
+
+[node name="LevelEdit" type="LineEdit" parent="Level" unique_id=2071996405]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -13.5
+offset_right = 12.625
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_iw264")
+text = "50"
+max_length = 2
+
+[node name="Hp" type="Label" parent="Level" unique_id=271113348]
+layout_mode = 0
+offset_top = 22.0
+offset_right = 12.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "HP"
+
+[node name="Juice" type="Label" parent="Level" unique_id=983291691]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 22.0
+offset_right = 69.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "JUICE"
+
+[node name="Atk" type="Label" parent="Level" unique_id=1701223175]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 22.0
+offset_right = 125.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "ATK"
+
+[node name="Def" type="Label" parent="Level" unique_id=1063770394]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "DEF"
+
+[node name="Spd" type="Label" parent="Level" unique_id=200247244]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 31.0
+offset_right = 89.0
+offset_bottom = 46.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "SPD"
+
+[node name="Hptxt" type="Label" parent="Level" unique_id=1719186872]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 22.0
+offset_right = 26.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Juicetxt" type="Label" parent="Level" unique_id=1308666773]
+layout_mode = 0
+offset_left = 73.0
+offset_top = 22.0
+offset_right = 105.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Atktxt" type="Label" parent="Level" unique_id=336501860]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 22.0
+offset_right = 147.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Deftxt" type="Label" parent="Level" unique_id=1551023878]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 32.0
+offset_right = 52.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Spdtxt" type="Label" parent="Level" unique_id=1722989229]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 31.0
+offset_right = 110.0
+offset_bottom = 46.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="Weapon" type="Label" parent="." unique_id=1415713105]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 79.0
+offset_right = 114.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 20
+text = "Weapon"
+
+[node name="WeaponEdit" type="LineEdit" parent="Weapon" unique_id=1574815018]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -13.5
+offset_right = 92.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 15
+max_length = 90
+
+[node name="HpW" type="Label" parent="Weapon" unique_id=1745757388]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 23.0
+offset_right = 19.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "HP"
+
+[node name="JuiceW" type="Label" parent="Weapon" unique_id=578595348]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 23.0
+offset_right = 68.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "JUICE"
+
+[node name="AtkW" type="Label" parent="Weapon" unique_id=588443574]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 23.0
+offset_right = 117.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "ATK"
+
+[node name="DefW" type="Label" parent="Weapon" unique_id=1727475265]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 32.0
+offset_right = 13.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "DEF"
+
+[node name="SpdW" type="Label" parent="Weapon" unique_id=1226052922]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 32.0
+offset_right = 54.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "SPD"
+
+[node name="LckW" type="Label" parent="Weapon" unique_id=562497883]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 32.0
+offset_right = 93.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "LCK"
+
+[node name="HitW" type="Label" parent="Weapon" unique_id=189077414]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 32.0
+offset_right = 130.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "HIT"
+
+[node name="HptxtW" type="Label" parent="Weapon" unique_id=1352339194]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 23.0
+offset_right = 33.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="JuicetxtW" type="Label" parent="Weapon" unique_id=1222960994]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 23.0
+offset_right = 104.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="AtktxtW" type="Label" parent="Weapon" unique_id=1197178561]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 23.0
+offset_right = 139.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="DeftxtW" type="Label" parent="Weapon" unique_id=449145600]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 32.0
+offset_right = 33.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="SpdtxtW" type="Label" parent="Weapon" unique_id=2136618115]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 32.0
+offset_right = 75.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="LcktxtW" type="Label" parent="Weapon" unique_id=1702671142]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 32.0
+offset_right = 114.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="HittxtW" type="Label" parent="Weapon" unique_id=1451291285]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 32.0
+offset_right = 151.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="WeaponDesc" type="Label" parent="Weapon" unique_id=1728007112]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 46.0
+offset_right = 147.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "No Description."
+autowrap_mode = 2
+
+[node name="Charm" type="Label" parent="." unique_id=1939017528]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 166.0
+offset_right = 114.0
+offset_bottom = 189.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 20
+text = "Charm"
+
+[node name="CharmEdit" type="LineEdit" parent="Charm" unique_id=563620441]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -13.5
+offset_right = 92.5
+offset_bottom = 10.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 15
+max_length = 90
+
+[node name="HpC" type="Label" parent="Charm" unique_id=1886079823]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 23.0
+offset_right = 19.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "HP"
+
+[node name="JuiceC" type="Label" parent="Charm" unique_id=1375571583]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 23.0
+offset_right = 68.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "JUICE"
+
+[node name="AtkC" type="Label" parent="Charm" unique_id=2099659930]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 23.0
+offset_right = 117.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "ATK"
+
+[node name="DefC" type="Label" parent="Charm" unique_id=337329831]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 32.0
+offset_right = 13.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "DEF"
+
+[node name="SpdC" type="Label" parent="Charm" unique_id=1268196722]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 32.0
+offset_right = 54.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "SPD"
+
+[node name="LckC" type="Label" parent="Charm" unique_id=156272393]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 32.0
+offset_right = 93.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "LCK"
+
+[node name="HitC" type="Label" parent="Charm" unique_id=2023251494]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 32.0
+offset_right = 130.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "HIT"
+
+[node name="HptxtC" type="Label" parent="Charm" unique_id=708895114]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 23.0
+offset_right = 33.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="JuicetxtC" type="Label" parent="Charm" unique_id=1034885609]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 23.0
+offset_right = 104.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="AtktxtC" type="Label" parent="Charm" unique_id=1567967522]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 23.0
+offset_right = 139.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="DeftxtC" type="Label" parent="Charm" unique_id=1101864851]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 32.0
+offset_right = 33.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="SpdtxtC" type="Label" parent="Charm" unique_id=1455578659]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 32.0
+offset_right = 75.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="LcktxtC" type="Label" parent="Charm" unique_id=1658675759]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 32.0
+offset_right = 114.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="HittxtC" type="Label" parent="Charm" unique_id=260883215]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 32.0
+offset_right = 151.0
+offset_bottom = 47.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "0"
+
+[node name="CharmDesc" type="Label" parent="Charm" unique_id=2114931609]
+layout_mode = 0
+offset_left = -3.0
+offset_top = 46.0
+offset_right = 147.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+text = "No Description."
+autowrap_mode = 2
+
+[node name="Skills" type="Label" parent="." unique_id=2096440152]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 248.0
+offset_right = 116.0
+offset_bottom = 271.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 20
+text = "SKILLS"
+
+[node name="Skill0" type="Label" parent="Skills" unique_id=1396898650]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 19.0
+offset_right = 108.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("1_iw264")
+theme_override_font_sizes/font_size = 14
+
+[connection signal="button_down" from="IsInParty/AddRemovePartyMember" to="." method="_on_add_remove_party_member_button_down"]
+[connection signal="text_changed" from="Level/LevelEdit" to="." method="_on_level_edit_text_changed"]
+[connection signal="text_changed" from="Weapon/WeaponEdit" to="." method="_on_weapon_edit_text_changed"]
+[connection signal="text_changed" from="Charm/CharmEdit" to="." method="_on_charm_edit_text_changed"]

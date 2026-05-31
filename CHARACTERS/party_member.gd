@@ -22,7 +22,7 @@ var last_sprite : Node = null
 var freeing : bool = false
 
 func _ready() -> void:
-	if (auto_delete) && (Global.Party_Size < (line_position+2)):
+	if (auto_delete) && (TWILIGHT.Party_Size < (line_position+2)):
 		queue_free()
 		freeing = true
 	
@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 				walk_sprites[i].frame = 0
 		
 		for i in range(walk_sprites.size()):
-			walk_sprites[i].material.set_shader_parameter("emotion", Global.Party_Order[line_position+1].Emotion.color)
+			walk_sprites[i].material.set_shader_parameter("emotion", TWILIGHT.Party_Order[line_position+1].Emotion.color)
 		if (player.walk_sprites[0] != last_sprite) && order_swap:
 			new_sprites()
 		last_sprite = player.walk_sprites[0]
@@ -61,20 +61,12 @@ func _process(delta: float) -> void:
 func new_sprites() -> void:
 	get_child(1).queue_free()
 	
-	var path1 : String = Global.Party_Order[line_position+1].Path + Global.Party_Order[line_position+1].Name
-	var path2 : String
-	if !Global.Party_Order[line_position+1].Light_Mode:
-		path2 = "_OW_sprites.tscn"
-	else:
-		if player.party_lightmode && Global.Party_Order[line_position+1].Emotion.name == "Neutral":
-			path2 = "_OW_sprites_light.tscn"
-		else:
-			path2 = "_OW_sprites_dark.tscn"
+	var path1 : String = TWILIGHT.Party_Order[line_position+1].Path + TWILIGHT.Party_Order[line_position+1].Name
 	
-	var sprites = load(path1 + path2)
+	var sprites = load(path1 + "_OW_sprites.tscn")
 	sprites = sprites.instantiate()
 	add_child(sprites)
 	
 	walk_sprites = [sprites.get_child(0), sprites.get_child(1), sprites.get_child(2), sprites.get_child(3)]
 	for i in range(walk_sprites.size()):
-			walk_sprites[i].material.set_shader_parameter("emotion", Global.Party_Order[line_position+1].Emotion.color)
+			walk_sprites[i].material.set_shader_parameter("emotion", TWILIGHT.Party_Order[line_position+1].Emotion.color)

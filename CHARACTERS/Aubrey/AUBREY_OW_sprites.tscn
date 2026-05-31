@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bg3bc58aie7cj"]
+
+[ext_resource type="Shader" uid="uid://cp58g36waai65" path="res://CHARACTERS/sprite_mood.gdshader" id="1_6jr0y"]
+[ext_resource type="Texture2D" uid="uid://v6cqjitk0gl3" path="res://CHARACTERS/Aubrey/Sprites/Minty_L.png" id="2_w2fhe"]
+[ext_resource type="Texture2D" uid="uid://k06liqriegc5" path="res://CHARACTERS/Aubrey/Sprites/Minty_B.png" id="3_j3ohe"]
+[ext_resource type="Texture2D" uid="uid://cm7f7hewop5td" path="res://CHARACTERS/Aubrey/Sprites/Minty_R.png" id="4_jh4v3"]
+[ext_resource type="Texture2D" uid="uid://ttnv6bh8s52t" path="res://CHARACTERS/Aubrey/Sprites/Minty_F.png" id="5_57j4j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1nt7k"]
+shader = ExtResource("1_6jr0y")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5alsi"]
+shader = ExtResource("1_6jr0y")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gnh0p"]
+shader = ExtResource("1_6jr0y")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6xo7y"]
+shader = ExtResource("1_6jr0y")
+shader_parameter/emotion = Vector4(0, 0, 0, 0)
+
+[node name="Aubrey_OW_sprites" type="Node2D" unique_id=1861413223]
+
+[node name="Player_L" type="Sprite2D" parent="." unique_id=11205817]
+visible = false
+material = SubResource("ShaderMaterial_1nt7k")
+position = Vector2(0, -9)
+texture = ExtResource("2_w2fhe")
+hframes = 3
+
+[node name="Player_B" type="Sprite2D" parent="." unique_id=232629270]
+visible = false
+material = SubResource("ShaderMaterial_5alsi")
+position = Vector2(0, -9)
+texture = ExtResource("3_j3ohe")
+hframes = 3
+
+[node name="Player_R" type="Sprite2D" parent="." unique_id=847703510]
+visible = false
+material = SubResource("ShaderMaterial_gnh0p")
+position = Vector2(-1, -9)
+texture = ExtResource("4_jh4v3")
+hframes = 3
+
+[node name="Player_F" type="Sprite2D" parent="." unique_id=1250715257]
+material = SubResource("ShaderMaterial_6xo7y")
+position = Vector2(0, -9)
+texture = ExtResource("5_57j4j")
+hframes = 3

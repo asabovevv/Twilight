@@ -1,3 +1,5 @@
+# INT does nothing
+
 extends Node
 
 func run( myInt:int, player:CharacterBody2D ) -> void:
