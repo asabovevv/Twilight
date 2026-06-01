@@ -19,10 +19,12 @@ var active_sounds: Dictionary[String, AudioStreamPlayer] = {}
 
 func _ready() -> void:
 	bgm = AudioStreamPlayer.new()
+	bgm.bus = "BGM"
 	add_child(bgm)
 	
 	for i in range(sfx_players):
 		var new_sfx = AudioStreamPlayer.new()
+		new_sfx.bus = "SFX"
 		new_sfx.finished.connect(_on_sfx_finished.bind(new_sfx))
 		sfx.append(new_sfx)
 		add_child(new_sfx)
