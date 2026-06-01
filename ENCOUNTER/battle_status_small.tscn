@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7pmk3rtv2yr6"]
+[gd_scene format=3 uid="uid://b7pmk3rtv2yr6"]
 
 [ext_resource type="Texture2D" uid="uid://bao1a2odje1fu" path="res://ENCOUNTER/Sprites/UI/BattleStatus.png" id="1_vd8mh"]
 [ext_resource type="Texture2D" uid="uid://dad1k2xobyhg" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Neutral.png" id="2_kwfgk"]
 [ext_resource type="Texture2D" uid="uid://dwwsrbi73fi6g" path="res://ENCOUNTER/Sprites/EmotionSprites/T_Neutral.png" id="4_p1qml"]
 
-[node name="BattleStatusSmall" type="NinePatchRect"]
+[node name="BattleStatusSmall" type="NinePatchRect" unique_id=252667285]
 offset_left = 19.0
 offset_top = 182.0
 offset_right = 123.0
@@ -16,19 +16,19 @@ patch_margin_top = 27
 patch_margin_right = 10
 patch_margin_bottom = 8
 
-[node name="Emotion" type="Sprite2D" parent="."]
+[node name="Emotion" type="Sprite2D" parent="." unique_id=1504849416]
 z_index = -1
 position = Vector2(52, 60)
 texture = ExtResource("2_kwfgk")
 vframes = 3
 
-[node name="Profile" type="Sprite2D" parent="."]
+[node name="Profile" type="Sprite2D" parent="." unique_id=1918623305]
 position = Vector2(52, 103)
 hframes = 3
 region_enabled = true
 region_rect = Rect2(0, 0, 363, 110)
 
-[node name="EmotionLabel" type="Sprite2D" parent="."]
+[node name="EmotionLabel" type="Sprite2D" parent="." unique_id=382948622]
 position = Vector2(52, 14)
 texture = ExtResource("4_p1qml")
 vframes = 3

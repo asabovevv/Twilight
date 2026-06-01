@@ -213,6 +213,14 @@ offset_bottom = -7.0
 theme_override_fonts/font = ExtResource("2_3od6b")
 text = "Encounters"
 
+[node name="EncounterMockup" type="Button" parent="." unique_id=9005112]
+offset_left = 225.0
+offset_top = 3.0
+offset_right = 325.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Encounter Mockup"
+
 [connection signal="pressed" from="PartyStats" to="." method="_on_party_stats_pressed"]
 [connection signal="pressed" from="Stats/DefaultStats" to="." method="_on_default_stats_pressed"]
 [connection signal="button_down" from="Stats/SaveStats" to="." method="_on_save_stats_button_down"]
@@ -224,3 +232,4 @@ text = "Encounters"
 [connection signal="pressed" from="RoomSelect/G_Twilight" to="." method="_on_g_twilight_pressed"]
 [connection signal="pressed" from="RoomSelect/room0" to="RoomSelect/room0" method="_on_pressed"]
 [connection signal="pressed" from="Encounters" to="." method="_on_encounters_pressed"]
+[connection signal="pressed" from="EncounterMockup" to="." method="_on_encounter_mockup_pressed"]

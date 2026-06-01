@@ -106,6 +106,9 @@ func _on_rooms_pressed() -> void:
 func _on_encounters_pressed() -> void:
 	pass # Replace with function body.
 
+func _on_encounter_mockup_pressed() -> void:
+	get_tree().change_scene_to_file("res://ENCOUNTER/encounter.tscn")
+
 func _load_all_rooms() -> void:
 	get_groups_rooms("res://ROOMS/a_Menus/", rooms_misc)
 	get_groups_rooms("res://ROOMS/c_Interludes/", rooms_misc)
