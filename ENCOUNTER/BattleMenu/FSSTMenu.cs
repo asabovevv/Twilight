@@ -31,12 +31,12 @@ public sealed partial class FSSTMenu : Menu
                 CursorIndex += 2;
         }
         UpdateCursor();
-        // if (old != CursorIndex)
-            // play sound
+        if (old != CursorIndex)
+            AudioBridge.PlaySFX("SE_move1", 0.9f);
     }
 
     protected override void OnSelect()
     {
-        
+        AudioBridge.PlaySFX("SE_select", 0.9f);
     }
 }

@@ -15,13 +15,14 @@ public sealed partial class FightRunMenu : Menu
 		int old = CursorIndex;
 		CursorIndex = (CursorIndex + direction.Y + Options.Count) % Options.Count;
 		UpdateCursor();
-		// if (old != CursorIndex)
-			// TODO: play sound
+		if (old != CursorIndex)
+			AudioBridge.PlaySFX("SE_move1", 0.9f);
 	}
 
 	protected override void OnSelect()
 	{
 		CursorSprite.Call("stop_bounce");
+		AudioBridge.PlaySFX("SE_select", 0.9f);
 		if (CursorIndex == 0)
 		{
 			EncounterManager.Instance.OnSelectFight();

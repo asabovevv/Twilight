@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://br8xc4hcdemex" path="res://ENCOUNTER/EncounterManager.cs" id="1_7ltex"]
 [ext_resource type="Texture2D" uid="uid://cfui0nosp4wut" path="res://ENCOUNTER/Sprites/Backgrounds/Afterglow_Church.png" id="2_7ltex"]
+[ext_resource type="Script" uid="uid://crg6uivm5mbgv" path="res://ENCOUNTER/AudioBridge.cs" id="3_u8jav"]
 [ext_resource type="Texture2D" uid="uid://roo21jh6gmux" path="res://ENCOUNTER/Sprites/UI/BossHealth.png" id="3_vxuot"]
 [ext_resource type="Texture2D" uid="uid://brk0etqpnmvwh" path="res://UI/StatusBar.png" id="4_wutpw"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="5_ntido"]
@@ -23,7 +24,7 @@
 shader = ExtResource("13_2jno8")
 shader_parameter/off = 0.245
 
-[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("PowerNum", "PowerBar", "PowerBarDots", "PartyRoot", "MenuManager", "BGM", "SFX")]
+[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("PowerNum", "PowerBar", "PowerBarDots", "PartyRoot", "MenuManager")]
 script = ExtResource("1_7ltex")
 PowerNum = NodePath("Bars/PowerBar/PowerNum")
 PowerBar = NodePath("Bars/PowerBar")
@@ -31,8 +32,9 @@ PowerBarDots = NodePath("Bars/PowerBar/PowerBarDots")
 BattleStatus = ExtResource("8_l6np0")
 PartyRoot = NodePath("BattleStatus_Root")
 MenuManager = NodePath("Bars")
-BGM = NodePath("Sounds/BGM")
-SFX = NodePath("Sounds/SFX1")
+
+[node name="AudioBridge" type="Node" parent="." unique_id=2021207133]
+script = ExtResource("3_u8jav")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=816832610]
 z_index = -8
@@ -195,38 +197,3 @@ texture = ExtResource("14_u8n1i")
 vframes = 11
 region_enabled = true
 region_rect = Rect2(0, 0, 291, 308)
-
-[node name="Sounds" type="Node" parent="." unique_id=967851935]
-
-[node name="BGM" type="AudioStreamPlayer" parent="Sounds" unique_id=910336617]
-bus = &"BGM"
-
-[node name="SFX1" type="AudioStreamPlayer" parent="Sounds" unique_id=1219503507]
-bus = &"SFX"
-
-[node name="SFX2" type="AudioStreamPlayer" parent="Sounds" unique_id=1188715446]
-bus = &"SFX"
-
-[node name="SFX3" type="AudioStreamPlayer" parent="Sounds" unique_id=1073733972]
-bus = &"SFX"
-
-[node name="SFX4" type="AudioStreamPlayer" parent="Sounds" unique_id=549747797]
-bus = &"SFX"
-
-[node name="SFX5" type="AudioStreamPlayer" parent="Sounds" unique_id=295733573]
-bus = &"SFX"
-
-[node name="SFX6" type="AudioStreamPlayer" parent="Sounds" unique_id=1041471327]
-bus = &"SFX"
-
-[node name="SFX7" type="AudioStreamPlayer" parent="Sounds" unique_id=1573210457]
-bus = &"SFX"
-
-[node name="SFX8" type="AudioStreamPlayer" parent="Sounds" unique_id=1088778396]
-bus = &"SFX"
-
-[node name="SFX9" type="AudioStreamPlayer" parent="Sounds" unique_id=1644931483]
-bus = &"SFX"
-
-[node name="SFX10" type="AudioStreamPlayer" parent="Sounds" unique_id=297903163]
-bus = &"SFX"

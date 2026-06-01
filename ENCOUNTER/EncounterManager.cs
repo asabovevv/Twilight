@@ -14,14 +14,6 @@ public partial class EncounterManager : Node
 	[Export] private Node2D PartyRoot;
 	[Export] private MenuManager MenuManager;
 
-	// TODO: move these to their own audio manager
-	[Export] private AudioStreamPlayer BGM;
-	/* TODO: utilize all ten (or more) preallocated SFX players
-	 * preallocation prevents constantly creating/destroying nodes
-	 * whenever we need to play sfx, which is expensive
-	 */
-	[Export] private AudioStreamPlayer SFX;
-
 	[Export] public int StartingPower = 3;
 	
 	public static EncounterManager Instance { get; private set; }
@@ -64,10 +56,12 @@ public partial class EncounterManager : Node
 	{
 		if (Input.IsActionJustPressed("Cancel"))
 		{
+			AudioBridge.PlaySFX("SE_cancel", 0.9f);
 			if (MenuManager.CurrentState is MenuState.Fsst)
 			{
 				MenuManager.ShowMenu(MenuState.FightRun);
-				CurrentParty[0].GetChild(4).Call("stop_pulse");
+				// temporary
+				CurrentParty[0].GetChild<BattleStatusSelectPulse>(4).StopPulse();
 			}
 		}
 	}
@@ -75,7 +69,8 @@ public partial class EncounterManager : Node
 	public void OnSelectFight()
 	{
 		MenuManager.ShowMenu(MenuState.Fsst);
-		CurrentParty[0].GetChild(4).Call("start_pulse");
+		// temporary
+		CurrentParty[0].GetChild<BattleStatusSelectPulse>(4).StartPulse();
 	}
 
 	private void SpawnPartyMember(int position)

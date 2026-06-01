@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://vvltirxprbe6" path="res://ENCOUNTER/Sprites/UI/Bar_Juice.png" id="6_4aai6"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="7_amba5"]
 [ext_resource type="Texture2D" uid="uid://cyle5r3edd4yc" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Frost.png" id="8_n1pig"]
-[ext_resource type="Script" uid="uid://baesw0ren5elb" path="res://ENCOUNTER/battle_status_select_pulse.gd" id="9_4aai6"]
+[ext_resource type="Script" uid="uid://cyd320oxu60gk" path="res://ENCOUNTER/BattleStatusSelectPulse.cs" id="9_4aai6"]
 [ext_resource type="Texture2D" uid="uid://4vqrv5ap6u4f" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Select.png" id="9_ar1dj"]
 
 [node name="BattleStatus" type="NinePatchRect" unique_id=525477418]
