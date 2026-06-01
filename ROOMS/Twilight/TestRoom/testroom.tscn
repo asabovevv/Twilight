@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://d4bd1pons231i"]
+
+[ext_resource type="Script" uid="uid://b2ba16w8ot6y5" path="res://ROOMS/overworld_ui.gd" id="1_5e14x"]
+[ext_resource type="PackedScene" uid="uid://b4i30hfe42hgm" path="res://ROOMS/Twilight/TestRoom/Contents/testroom_contents.tscn" id="1_8aqot"]
+[ext_resource type="Script" uid="uid://dtvec2cvuvgm2" path="res://ROOMS/camera_root.gd" id="2_djry6"]
+[ext_resource type="Shader" uid="uid://t1sl6paxlj7o" path="res://CHARACTERS/screen_viginette.gdshader" id="3_5e14x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6qsma"]
+viewport_path = NodePath("ViewportRender/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_peybc"]
+shader = ExtResource("3_5e14x")
+shader_parameter/radius = 0.22
+shader_parameter/softness = 1.0
+shader_parameter/intensity = 0.30000001425
+shader_parameter/contrast = 2.2
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[node name="Default_Room" type="Node2D" unique_id=1609172265]
+z_index = 500
+y_sort_enabled = true
+
+[node name="UI" type="Node2D" parent="." unique_id=658786465]
+z_index = 10
+script = ExtResource("1_5e14x")
+
+[node name="ViewportRender" type="Sprite2D" parent="." unique_id=1816761070]
+texture = SubResource("ViewportTexture_6qsma")
+centered = false
+
+[node name="SubViewport" type="SubViewport" parent="ViewportRender" unique_id=841173011]
+canvas_item_default_texture_filter = 0
+size = Vector2i(640, 480)
+
+[node name="CameraRoot" type="Node2D" parent="ViewportRender/SubViewport" unique_id=1079647711 node_paths=PackedStringArray("my_camera")]
+script = ExtResource("2_djry6")
+my_camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="ViewportRender/SubViewport/CameraRoot" unique_id=765913461]
+position = Vector2(320, 240)
+limit_enabled = false
+
+[node name="Vignette" type="ColorRect" parent="ViewportRender/SubViewport/CameraRoot/Camera2D" unique_id=254227727]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 1000
+material = SubResource("ShaderMaterial_peybc")
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 1)
+
+[node name="Fade" type="ColorRect" parent="ViewportRender/SubViewport/CameraRoot/Camera2D" unique_id=610508106]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 4000
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
+color = Color(0, 0, 0, 1)
+
+[node name="RoomContents" parent="ViewportRender/SubViewport" unique_id=1819179948 instance=ExtResource("1_8aqot")]

@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var party_cont : HBoxContainer = $Stats/ScrollContainer/PartyMemberContainer
-@onready var partymember_cont = load("res://ROOMS/a_Menus/InitRoom/Unique/party_member_stats.tscn")
+@onready var partymember_cont = load("res://ROOMS/a_Menus/InitRoom/Contents/party_member_stats.tscn")
 
 var rooms_misc : Array
 var rooms_twilight : Array
