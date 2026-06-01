@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://ci07wf554wchl"]
 
-[ext_resource type="Script" uid="uid://c2nggl1ra22mt" path="res://ROOMS/a_Menus/InitRoom/startup.gd" id="1_3tds7"]
+[ext_resource type="Script" uid="uid://c2nggl1ra22mt" path="res://ROOMS/a_Menus/InitRoom/Contents/startup.gd" id="1_3tds7"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_3od6b"]
-[ext_resource type="Texture2D" uid="uid://bvcl1qv7wmwhf" path="res://ROOMS/a_Menus/MainMenu/Title.png" id="3_1825l"]
-[ext_resource type="Script" uid="uid://ncbof14tnp68" path="res://ROOMS/a_Menus/InitRoom/room_0.gd" id="4_hqidj"]
+[ext_resource type="Texture2D" uid="uid://bvcl1qv7wmwhf" path="res://ROOMS/a_Menus/MainMenu/Contents/Title.png" id="3_1825l"]
+[ext_resource type="Script" uid="uid://ncbof14tnp68" path="res://ROOMS/a_Menus/InitRoom/Contents/room_0.gd" id="4_hqidj"]
 
 [node name="startup" type="Node2D" unique_id=795438040]
 script = ExtResource("1_3tds7")
@@ -104,9 +104,9 @@ layout_mode = 2
 
 [node name="Inventory" type="Button" parent="." unique_id=1082638441]
 offset_left = 78.0
-offset_top = -32.0
+offset_top = 3.0
 offset_right = 138.0
-offset_bottom = -8.0
+offset_bottom = 27.0
 theme_override_fonts/font = ExtResource("2_3od6b")
 text = "Inventory"
 

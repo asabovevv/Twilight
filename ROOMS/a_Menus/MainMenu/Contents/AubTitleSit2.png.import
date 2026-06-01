@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://grw2bj0mxa1c"
-path="res://.godot/imported/twilight_tileset.png-dee15f710a895ae1c1687473417b4642.ctex"
+uid="uid://ckp71lc2iyb8f"
+path="res://.godot/imported/AubTitleSit2.png-817b9737ae9bfa03dd645d62fa3f3dbc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TILES/twilight_tileset.png"
-dest_files=["res://.godot/imported/twilight_tileset.png-dee15f710a895ae1c1687473417b4642.ctex"]
+source_file="res://ROOMS/a_Menus/MainMenu/Contents/AubTitleSit2.png"
+dest_files=["res://.godot/imported/AubTitleSit2.png-817b9737ae9bfa03dd645d62fa3f3dbc.ctex"]
 
 [params]
 
