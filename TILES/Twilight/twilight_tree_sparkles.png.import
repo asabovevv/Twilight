@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cymyxdjegbmmf"
-path="res://.godot/imported/Background1.png-dd4842ede72a29575ea9d5959cd9c510.ctex"
+uid="uid://cp72wi7xrr6q0"
+path="res://.godot/imported/twilight_tree_sparkles.png-25e7bdb609785e52273b122321641dd3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ROOMS/a_Menus/MainMenu/Background1.png"
-dest_files=["res://.godot/imported/Background1.png-dd4842ede72a29575ea9d5959cd9c510.ctex"]
+source_file="res://TILES/Twilight/twilight_tree_sparkles.png"
+dest_files=["res://.godot/imported/twilight_tree_sparkles.png-25e7bdb609785e52273b122321641dd3.ctex"]
 
 [params]
 

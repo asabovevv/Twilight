@@ -5,10 +5,30 @@ var Version : float = 0.001 # Used in save-files
 
 ## --- --- --- --- --- --- --- --- General Global Variables --- --- --- --- --- --- --- ---
 
+var ui : Node2D # Whatever node is the current UI root.
+var camera : Node2D # Whatever node is the currently used cameras root.
 var entrance : int = 0 # Tracks which way a room was entered from a previous room.
 var encounter : Encounter # Determines encounter setup on encounter room entered
 
 ## --- --- --- --- --- --- --- --- Options --- --- --- --- --- --- --- --- 
+
+# Visual
+var is_fullscreen : bool = false
+
+func set_fullscreen(full : bool) -> void:
+	if full:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		is_fullscreen = true
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		is_fullscreen = false
+func toggle_fullscreen() -> void:
+	if !is_fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		is_fullscreen = true
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		is_fullscreen = false
 
 # Audio
 enum Volumes { SoundEffect, MusicEffect, AmbientSound, AmbientMusic }

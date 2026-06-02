@@ -1,0 +1,14 @@
+{ "columns":11,
+ "image":"water overlay.png",
+ "imageheight":384,
+ "imagewidth":381,
+ "margin":0,
+ "name":"water overlay",
+ "spacing":0,
+ "tilecount":132,
+ "tiledversion":"1.10.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":"1.10"
+}

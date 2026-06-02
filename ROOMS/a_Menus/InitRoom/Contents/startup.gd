@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var party_cont : HBoxContainer = $Stats/ScrollContainer/PartyMemberContainer
-@onready var partymember_cont = load("res://ROOMS/a_Menus/InitRoom/Unique/party_member_stats.tscn")
+@onready var partymember_cont = load("res://ROOMS/a_Menus/InitRoom/Contents/party_member_stats.tscn")
 
 @onready var master_slider : HSlider = $VolumeControl/VBoxContainer/Master/MasterSlider
 @onready var bgm_slider : HSlider = $VolumeControl/VBoxContainer/BGM/BGMSlider

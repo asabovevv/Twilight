@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp72wi7xrr6q0"
-path="res://.godot/imported/twilight_tree_sparkles.png-555908de6830446a2f4ed593101ebe34.ctex"
+uid="uid://bbo23444rnosp"
+path="res://.godot/imported/water overlay.png-b19c5982c0d1311fe989dd6b56143c1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TILES/twilight_tree_sparkles.png"
-dest_files=["res://.godot/imported/twilight_tree_sparkles.png-555908de6830446a2f4ed593101ebe34.ctex"]
+source_file="res://water overlay.png"
+dest_files=["res://.godot/imported/water overlay.png-b19c5982c0d1311fe989dd6b56143c1c.ctex"]
 
 [params]
 

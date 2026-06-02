@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxr0coo30k1fj"
-path="res://.godot/imported/twilight_tree_shader_tileset.png-23b22e80da2346d8177f1395cee9e17a.ctex"
+uid="uid://dbc68wa3wivcv"
+path="res://.godot/imported/twi_test.png-752ef2335861a2b27ce35e8e8b810abc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TILES/twilight_tree_shader_tileset.png"
-dest_files=["res://.godot/imported/twilight_tree_shader_tileset.png-23b22e80da2346d8177f1395cee9e17a.ctex"]
+source_file="res://twi_test.png"
+dest_files=["res://.godot/imported/twi_test.png-752ef2335861a2b27ce35e8e8b810abc.ctex"]
 
 [params]
 
