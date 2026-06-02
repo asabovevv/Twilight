@@ -3,22 +3,20 @@ using Godot;
 namespace Twilight;
 
 // since we can't directly access GDScript autoloads from C#, neatly wrap the calls in a bridge class
-public partial class AudioBridge : Node
+public static class AudioBridge
 {
-    private static Node Audio;
-
-    public override void _Ready()
-    {
-        Audio = GetNode<Node>("/root/Audio");
-    }
+    private static Node _audio;
+    private static Node Audio => _audio ??= Engine.GetMainLoop() is SceneTree tree ? tree.Root.GetNode("Audio") : null;
+    private static readonly StringName PlaySFXMethod = new("play_sfx");
+    private static readonly StringName PlayBGMMethod = new("play_bgm");
 
     public static void PlaySFX(string name, float volume = 1f, float pitch = 1f)
     {
-        Audio.Call("play_sfx", name, volume, pitch);
+        Audio.Call(PlaySFXMethod, name, volume, pitch);
     }
 
     public static void PlayBGM(string name, float volume = 1f, float pitch = 1f)
     {
-        Audio.Call("play_bgm", name, volume, pitch);
+        Audio.Call(PlayBGMMethod, name, volume, pitch);
     }
 }

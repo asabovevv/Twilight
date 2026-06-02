@@ -4,6 +4,9 @@ namespace Twilight.Menu;
 
 public sealed partial class FightRunMenu : Menu
 {
+	protected override Vector2 OpenPosition => Vector2.Zero;
+	protected override Vector2 ClosedPosition => new(0f, 95f);
+	
 	public override void _Ready()
 	{
 		Options = ["Fight", "Run"];
@@ -24,12 +27,8 @@ public sealed partial class FightRunMenu : Menu
 		CursorSprite.Call("stop_bounce");
 		AudioBridge.PlaySFX("SE_select", 0.9f);
 		if (CursorIndex == 0)
-		{
-			EncounterManager.Instance.OnSelectFight();
-		}
+			Context.Turn.OnSelectFight();
 		else
-		{
-			GetTree().ChangeSceneToFile("res://ROOMS/a_Menus/InitRoom/startup.tscn");
-		}
+			Context.Turn.OnSelectRun();
 	}
 }
