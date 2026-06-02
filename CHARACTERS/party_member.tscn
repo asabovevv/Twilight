@@ -6,14 +6,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6edj"]
 size = Vector2(31, 31)
 
-[node name="PartyMember" type="Node2D"]
+[node name="PartyMember" type="Node2D" unique_id=1230435]
 script = ExtResource("1_f6edj")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=234941831]
 collision_layer = 2
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1206837708]
 shape = SubResource("RectangleShape2D_f6edj")
 
-[node name="Sunny_OW_sprites" parent="." instance=ExtResource("2_v17yc")]
+[node name="Sunny_OW_sprites" parent="." unique_id=72915898 instance=ExtResource("2_v17yc")]

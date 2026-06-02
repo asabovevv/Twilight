@@ -23,7 +23,7 @@ var dialogue : Array
 var dialogue_stage : int = 0
 var dialogue_place : int = 0
 var dialogue_scroll : float = 0
-var dialogue_speed : float = Global.text_scroll_speed
+var dialogue_speed : float = TWILIGHT.text_scroll_speed
 var dialogue_paused : bool = false
 var dialogue_sound_cooldown : float = 0
 
@@ -45,7 +45,7 @@ var sounds : Array
 func _ready() -> void:
 	ico_portrait.position.y = 109 - ico_portrait.texture.get_height()*0.5
 	
-	tsound = Global.load_sound("res://SOUNDS/SoundEffect/SE_text_basic.ogg", Global.Volumes.SoundEffect, self)
+	tsound = TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_text_basic.ogg", TWILIGHT.Volumes.SoundEffect, self)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -117,7 +117,7 @@ func _text_escape() -> void:
 	event_names.clear()
 	dialogue_scroll = 0.99
 	text_main.visible_characters = 0
-	dialogue_speed = Global.text_scroll_speed
+	dialogue_speed = TWILIGHT.text_scroll_speed
 	sounds.clear()
 	
 	var i = 0
@@ -382,7 +382,7 @@ func _end_dialogue() -> void:
 	if dialogue_place >= dialogue.size():
 		queue_free()
 		if end_cutscene:
-			player.cutscene = false
+			player.in_cutscene = false
 		player.dialogue_active = false
-		if player.i_entity != null:
-			player.i_entity.interacted = false
+		if player.interactable_node != null:
+			player.interactable_node.interacted = false

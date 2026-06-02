@@ -12,7 +12,7 @@ func _ready() -> void:
 func execute() -> void:
 	if horizontal:
 		player.global_position.x = target.global_position.x
-		player.target = player.global_position
+		player.target_position = player.global_position
 	if vertical:
 		player.global_position.y = target.global_position.y
-		player.target = player.global_position
+		player.target_position = player.global_position

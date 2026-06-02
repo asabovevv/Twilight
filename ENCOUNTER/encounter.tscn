@@ -1,58 +1,58 @@
-[gd_scene load_steps=16 format=3 uid="uid://cw6wo3nf4wox"]
+[gd_scene format=3 uid="uid://cw6wo3nf4wox"]
 
-[ext_resource type="Script" uid="uid://kt3o88ycie2e" path="res://ENCOUNTER/encounter_main.gd" id="1_dr4yk"]
+[ext_resource type="Script" uid="uid://br8xc4hcdemex" path="res://ENCOUNTER/EncounterManager.cs" id="1_7ltex"]
 [ext_resource type="Texture2D" uid="uid://cfui0nosp4wut" path="res://ENCOUNTER/Sprites/Backgrounds/Afterglow_Church.png" id="2_7ltex"]
 [ext_resource type="Texture2D" uid="uid://roo21jh6gmux" path="res://ENCOUNTER/Sprites/UI/BossHealth.png" id="3_vxuot"]
+[ext_resource type="Script" uid="uid://b651aeaixfvix" path="res://ENCOUNTER/BattleLog/BattleLogManager.cs" id="4_l6np0"]
 [ext_resource type="Texture2D" uid="uid://brk0etqpnmvwh" path="res://UI/StatusBar.png" id="4_wutpw"]
+[ext_resource type="PackedScene" uid="uid://df2mrwxipvp04" path="res://ENCOUNTER/BattleLog/log_line.tscn" id="5_7mqee"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="5_ntido"]
 [ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="6_u8jav"]
 [ext_resource type="PackedScene" uid="uid://b7pmk3rtv2yr6" path="res://ENCOUNTER/battle_status_small.tscn" id="7_y2hrj"]
 [ext_resource type="PackedScene" uid="uid://bdniamv5ykuvn" path="res://ENCOUNTER/battle_status.tscn" id="8_l6np0"]
 [ext_resource type="Texture2D" uid="uid://coaqxylbxsmxi" path="res://UI/Bunny_Point.png" id="9_7mqee"]
+[ext_resource type="Script" uid="uid://c7cgfnul0pc72" path="res://ENCOUNTER/BattleMenu/MenuManager.cs" id="9_ntido"]
 [ext_resource type="Texture2D" uid="uid://ctllws4nm0c14" path="res://ENCOUNTER/Sprites/UI/Buttons_Large.png" id="10_0ylf6"]
+[ext_resource type="Script" uid="uid://djhpg1p84ghg" path="res://UI/cursor_bounce.gd" id="10_7ltex"]
+[ext_resource type="Script" uid="uid://dq0s3pxau13jp" path="res://ENCOUNTER/BattleMenu/FightRunMenu.cs" id="10_u8jav"]
 [ext_resource type="Texture2D" uid="uid://c6h0vtuad8oai" path="res://ENCOUNTER/Sprites/UI/Buttons_Small.png" id="11_28wf1"]
+[ext_resource type="Script" uid="uid://rmbdeqjiktsn" path="res://ENCOUNTER/Party/PartyView.cs" id="12_2jno8"]
 [ext_resource type="Texture2D" uid="uid://bge8juob8xmuk" path="res://ENCOUNTER/Sprites/UI/PowerBar.png" id="12_vtcnl"]
 [ext_resource type="Shader" uid="uid://cmll2rkwnnt4w" path="res://ENCOUNTER/powerbar.gdshader" id="13_2jno8"]
 [ext_resource type="Texture2D" uid="uid://c5gdqd4bqq0g7" path="res://ENCOUNTER/Sprites/UI/PowerBarDots.png" id="14_u8n1i"]
+[ext_resource type="Script" uid="uid://dub7oqrosielk" path="res://ENCOUNTER/BattleMenu/FSSTMenu.cs" id="14_y2hrj"]
+[ext_resource type="Script" uid="uid://crpao4dyiq7rd" path="res://ENCOUNTER/BattleMenu/SkillMenu.cs" id="19_0ylf6"]
+[ext_resource type="Script" uid="uid://do6ls3jiyjtsv" path="res://ENCOUNTER/BattleMenu/ItemMenu.cs" id="20_28wf1"]
+[ext_resource type="Script" uid="uid://ct8bqcdg2bagr" path="res://ENCOUNTER/PowerBarView.cs" id="22_u8n1i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5p3vj"]
 shader = ExtResource("13_2jno8")
 shader_parameter/off = 0.245
 
-[node name="Encounter" type="Node2D" node_paths=PackedStringArray("bg", "enemy_root", "menu_enemyhealth", "bar_enemyhealth", "text_enemyhealth", "menu_updatebox", "text_updatebox", "root_updates", "small_status_root", "big_status_root", "bars_root", "fightrun_bar_root", "p_fightrun_bar", "fsst_bar_root", "p_fsst_bar", "power_bar", "text_power_bar", "dots_power_bar")]
-script = ExtResource("1_dr4yk")
-bg = NodePath("Background")
-enemy_root = NodePath("Enemies")
-menu_enemyhealth = NodePath("EnemyHealth")
-bar_enemyhealth = NodePath("EnemyHealth/StatusBar")
-text_enemyhealth = NodePath("EnemyHealth/Name")
-menu_updatebox = NodePath("UpdateBox")
-text_updatebox = NodePath("UpdateBox/Update")
-root_updates = NodePath("UpdateBox/Updates")
-small_status_root = NodePath("BattleStatusSmall_Root")
-big_status_root = NodePath("BattleStatus_Root")
-bars_root = NodePath("Bars")
-fightrun_bar_root = NodePath("Bars/FightRun_Bar")
-p_fightrun_bar = NodePath("Bars/FightRun_Bar/Pointer")
-fsst_bar_root = NodePath("Bars/FSST_Bar")
-p_fsst_bar = NodePath("Bars/FSST_Bar/Pointer")
-power_bar = NodePath("Bars/PowerBar")
-text_power_bar = NodePath("Bars/PowerBar/PowerNum")
-dots_power_bar = NodePath("Bars/PowerBar/PowerBarDots")
+[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("MenuManager", "BattleLogManager", "PartyView", "PowerBar")]
+script = ExtResource("1_7ltex")
+MenuManager = NodePath("Bars")
+BattleLogManager = NodePath("BattleLogManager")
+PartyView = NodePath("BattleStatus_Root")
+PowerBar = NodePath("PowerBar_Root")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="BattleLogManager" type="Node" parent="." unique_id=1689532942 node_paths=PackedStringArray("ImmediateLabel")]
+script = ExtResource("4_l6np0")
+LogLine = ExtResource("5_7mqee")
+ImmediateLabel = NodePath("../UpdateBox/Immediate")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1581445242]
 z_index = -8
 texture = ExtResource("2_7ltex")
-centered = false
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Enemies" type="Node2D" parent="." unique_id=53288487]
 
-[node name="EnemyHealth" type="Sprite2D" parent="."]
+[node name="EnemyHealth" type="Sprite2D" parent="." unique_id=1359900625]
 visible = false
 position = Vector2(320, 126)
 texture = ExtResource("3_vxuot")
 
-[node name="StatusBar" type="Sprite2D" parent="EnemyHealth"]
+[node name="StatusBar" type="Sprite2D" parent="EnemyHealth" unique_id=296910474]
 position = Vector2(-38, 1)
 texture = ExtResource("4_wutpw")
 centered = false
@@ -61,7 +61,7 @@ frame = 4
 region_enabled = true
 region_rect = Rect2(0, 0, 91, 70)
 
-[node name="Name" type="Label" parent="EnemyHealth"]
+[node name="Name" type="Label" parent="EnemyHealth" unique_id=888106916]
 offset_left = -90.0
 offset_top = -31.0
 offset_right = 90.0
@@ -72,119 +72,254 @@ theme_override_font_sizes/font_size = 26
 text = "Test"
 horizontal_alignment = 1
 
-[node name="UpdateBox" type="NinePatchRect" parent="."]
+[node name="UpdateBox" type="NinePatchRect" parent="." unique_id=2136328949]
 offset_left = 140.0
 offset_top = -5.0
 offset_right = 500.0
 offset_bottom = 89.0
 texture = ExtResource("6_u8jav")
+region_rect = Rect2(0, 0, 7, 9)
 patch_margin_left = 3
 patch_margin_top = 4
 patch_margin_right = 3
 patch_margin_bottom = 4
 
-[node name="Update" type="Label" parent="UpdateBox"]
+[node name="Immediate" type="RichTextLabel" parent="UpdateBox" unique_id=1992009763]
 layout_mode = 0
-offset_left = 13.0
+offset_left = 7.0
 offset_top = 5.0
-offset_right = 349.0
-offset_bottom = 32.0
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("5_ntido")
-theme_override_font_sizes/font_size = 24
-text = "What will OMORI and friends do?"
+offset_right = 352.0
+offset_bottom = 87.0
+theme_override_fonts/normal_font = ExtResource("5_ntido")
+theme_override_font_sizes/normal_font_size = 24
 
-[node name="Updates" type="Node2D" parent="UpdateBox"]
+[node name="Updates" type="Node2D" parent="UpdateBox" unique_id=422148679]
 
-[node name="BattleStatusSmall_Root" type="Node2D" parent="."]
+[node name="BattleStatusSmall_Root" type="Node2D" parent="." unique_id=1186153215]
+visible = false
 position = Vector2(0, -1)
 
-[node name="BattleStatusSmall1" parent="BattleStatusSmall_Root" instance=ExtResource("7_y2hrj")]
+[node name="BattleStatusSmall1" parent="BattleStatusSmall_Root" unique_id=1037475910 instance=ExtResource("7_y2hrj")]
 offset_top = 183.0
 offset_bottom = 294.0
 
-[node name="BattleStatusSmall2" parent="BattleStatusSmall_Root" instance=ExtResource("7_y2hrj")]
+[node name="BattleStatusSmall2" parent="BattleStatusSmall_Root" unique_id=338228365 instance=ExtResource("7_y2hrj")]
 offset_left = 517.0
 offset_top = 183.0
 offset_right = 621.0
 offset_bottom = 294.0
 
-[node name="BattleStatus_Root" type="Node2D" parent="."]
+[node name="BattleStatus_Root" type="Node2D" parent="." unique_id=1499985737]
+script = ExtResource("12_2jno8")
+BattleStatus = ExtResource("8_l6np0")
 
-[node name="BattleStatus1" parent="BattleStatus_Root" instance=ExtResource("8_l6np0")]
-offset_top = 305.0
-offset_bottom = 430.0
+[node name="Bars" type="Control" parent="." unique_id=557055657 node_paths=PackedStringArray("FightRunMenu", "FsstMenu", "SkillMenu", "SnackMenu", "ToyMenu")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("9_ntido")
+FightRunMenu = NodePath("FightRun_Bar")
+FsstMenu = NodePath("FSST_Bar")
+SkillMenu = NodePath("Skill_Menu")
+SnackMenu = NodePath("Snack_Menu")
+ToyMenu = NodePath("Toy_Menu")
 
-[node name="BattleStatus2" parent="BattleStatus_Root" instance=ExtResource("8_l6np0")]
-offset_left = 509.0
-offset_top = 305.0
-offset_right = 629.0
-offset_bottom = 430.0
+[node name="FightRun_Bar" type="Control" parent="Bars" unique_id=1186938519 node_paths=PackedStringArray("CursorSprite")]
+visible = false
+anchors_preset = 0
+offset_top = 95.0
+offset_bottom = 95.0
+script = ExtResource("10_u8jav")
+CursorSprite = NodePath("Pointer")
 
-[node name="BattleStatus3" parent="BattleStatus_Root" instance=ExtResource("8_l6np0")]
-
-[node name="BattleStatus4" parent="BattleStatus_Root" instance=ExtResource("8_l6np0")]
-offset_left = 509.0
-offset_right = 629.0
-
-[node name="Bars" type="Node2D" parent="."]
-
-[node name="FightRun_Bar" type="Node2D" parent="Bars"]
-
-[node name="Pointer" type="Sprite2D" parent="Bars/FightRun_Bar"]
+[node name="Pointer" type="Sprite2D" parent="Bars/FightRun_Bar" unique_id=1024799006]
+z_index = 1
 position = Vector2(253, 407)
 texture = ExtResource("9_7mqee")
 hframes = 2
+script = ExtResource("10_7ltex")
 
-[node name="Option1" type="Sprite2D" parent="Bars/FightRun_Bar"]
+[node name="Option1" type="Sprite2D" parent="Bars/FightRun_Bar" unique_id=354305595]
 position = Vector2(320, 407)
 texture = ExtResource("10_0ylf6")
 vframes = 2
 
-[node name="Option2" type="Sprite2D" parent="Bars/FightRun_Bar"]
+[node name="Option2" type="Sprite2D" parent="Bars/FightRun_Bar" unique_id=1313377012]
 position = Vector2(320, 451)
 texture = ExtResource("10_0ylf6")
 vframes = 2
 frame = 1
 
-[node name="FSST_Bar" type="Node2D" parent="Bars"]
+[node name="FSST_Bar" type="Control" parent="Bars" unique_id=1213814216 node_paths=PackedStringArray("CursorSprite")]
 visible = false
+anchors_preset = 0
+offset_top = 95.0
+offset_bottom = 95.0
+script = ExtResource("14_y2hrj")
+CursorSprite = NodePath("Pointer")
 
-[node name="Pointer" type="Sprite2D" parent="Bars/FSST_Bar"]
+[node name="Pointer" type="Sprite2D" parent="Bars/FSST_Bar" unique_id=1733347418]
+z_index = 1
 position = Vector2(170, 405)
 texture = ExtResource("9_7mqee")
 hframes = 2
+script = ExtResource("10_7ltex")
 
-[node name="Option1" type="Sprite2D" parent="Bars/FSST_Bar"]
+[node name="Option1" type="Sprite2D" parent="Bars/FSST_Bar" unique_id=1029989932]
 position = Vector2(229, 407)
 texture = ExtResource("11_28wf1")
 vframes = 4
 
-[node name="Option2" type="Sprite2D" parent="Bars/FSST_Bar"]
+[node name="Option2" type="Sprite2D" parent="Bars/FSST_Bar" unique_id=1828888287]
 position = Vector2(409, 407)
 texture = ExtResource("11_28wf1")
 vframes = 4
 frame = 1
 
-[node name="Option3" type="Sprite2D" parent="Bars/FSST_Bar"]
+[node name="Option3" type="Sprite2D" parent="Bars/FSST_Bar" unique_id=192366628]
 position = Vector2(229, 451)
 texture = ExtResource("11_28wf1")
 vframes = 4
 frame = 2
 
-[node name="Option4" type="Sprite2D" parent="Bars/FSST_Bar"]
+[node name="Option4" type="Sprite2D" parent="Bars/FSST_Bar" unique_id=726076509]
 position = Vector2(409, 451)
 texture = ExtResource("11_28wf1")
 vframes = 4
 frame = 3
 
-[node name="PowerBar" type="Sprite2D" parent="Bars"]
+[node name="Skill_Menu" type="NinePatchRect" parent="Bars" unique_id=260288979 node_paths=PackedStringArray("CursorSprite")]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 142.0
+offset_top = 482.0
+offset_right = 498.0
+offset_bottom = 590.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+texture = ExtResource("6_u8jav")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+script = ExtResource("19_0ylf6")
+CursorSprite = NodePath("Pointer")
+
+[node name="Line2D" type="Line2D" parent="Bars/Skill_Menu" unique_id=1638900434]
+position = Vector2(2, 28)
+scale = Vector2(0.9916434, 1)
+points = PackedVector2Array(0, 0, 355, 0)
+width = 2.0
+
+[node name="Pointer" type="Sprite2D" parent="Bars/Skill_Menu" unique_id=1040975913]
+z_index = 1
+position = Vector2(20, 43)
+texture = ExtResource("9_7mqee")
+hframes = 2
+script = ExtResource("10_7ltex")
+
+[node name="Snack_Menu" type="NinePatchRect" parent="Bars" unique_id=1534911065 node_paths=PackedStringArray("CursorSprite")]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 142.0
+offset_top = 482.0
+offset_right = 498.0
+offset_bottom = 590.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+texture = ExtResource("6_u8jav")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+script = ExtResource("20_28wf1")
+CursorSprite = NodePath("Pointer")
+
+[node name="Line2D" type="Line2D" parent="Bars/Snack_Menu" unique_id=1581917227]
+position = Vector2(2, 28)
+scale = Vector2(0.9916434, 1)
+points = PackedVector2Array(0, 0, 355, 0)
+width = 2.0
+
+[node name="Pointer" type="Sprite2D" parent="Bars/Snack_Menu" unique_id=804943617]
+z_index = 1
+position = Vector2(20, 43)
+texture = ExtResource("9_7mqee")
+hframes = 2
+script = ExtResource("10_7ltex")
+
+[node name="Toy_Menu" type="NinePatchRect" parent="Bars" unique_id=1775321445 node_paths=PackedStringArray("CursorSprite")]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 142.0
+offset_top = 482.0
+offset_right = 498.0
+offset_bottom = 590.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+texture = ExtResource("6_u8jav")
+region_rect = Rect2(0, 0, 7, 9)
+patch_margin_left = 3
+patch_margin_top = 4
+patch_margin_right = 3
+patch_margin_bottom = 4
+script = ExtResource("20_28wf1")
+CursorSprite = NodePath("Pointer")
+
+[node name="Line2D" type="Line2D" parent="Bars/Toy_Menu" unique_id=638815644]
+position = Vector2(2, 28)
+scale = Vector2(0.9916434, 1)
+points = PackedVector2Array(0, 0, 355, 0)
+width = 2.0
+
+[node name="Pointer" type="Sprite2D" parent="Bars/Toy_Menu" unique_id=897663175]
+z_index = 1
+position = Vector2(20, 43)
+texture = ExtResource("9_7mqee")
+hframes = 2
+script = ExtResource("10_7ltex")
+
+[node name="PowerBar_Root" type="Node2D" parent="." unique_id=343024446 node_paths=PackedStringArray("PowerNum", "PowerBar", "PowerBarDots")]
+script = ExtResource("22_u8n1i")
+PowerNum = NodePath("PowerBar/PowerNum")
+PowerBar = NodePath("PowerBar")
+PowerBarDots = NodePath("PowerBar/PowerBarDots")
+
+[node name="PowerBar" type="Sprite2D" parent="PowerBar_Root" unique_id=1468674129]
 position = Vector2(320, 354)
 texture = ExtResource("12_vtcnl")
-vframes = 4
-frame = 1
+region_enabled = true
+region_rect = Rect2(0, 0, 360, 45)
 
-[node name="PowerNum" type="Label" parent="Bars/PowerBar"]
+[node name="PowerNum" type="Label" parent="PowerBar_Root/PowerBar" unique_id=651455976]
 offset_left = 142.0
 offset_top = -15.0
 offset_right = 172.0
@@ -197,11 +332,10 @@ theme_override_font_sizes/font_size = 28
 text = "00"
 horizontal_alignment = 1
 
-[node name="PowerBarDots" type="Sprite2D" parent="Bars/PowerBar"]
+[node name="PowerBarDots" type="Sprite2D" parent="PowerBar_Root/PowerBar" unique_id=1152995982]
 material = SubResource("ShaderMaterial_5p3vj")
 position = Vector2(-16, 0)
 texture = ExtResource("14_u8n1i")
 vframes = 11
-frame = 6
-
-[node name="Sounds" type="Node" parent="."]
+region_enabled = true
+region_rect = Rect2(0, 0, 291, 308)

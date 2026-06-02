@@ -1,3 +1,5 @@
+# This is the worst code you will see in this entire game
+
 extends Node2D
 
 var stage : int = 0
@@ -23,6 +25,7 @@ var lists : Array
 var sounds_list : Array
 enum i_sound { Move1, Select, Selectbad, Cancel, Equip, Tag, Wah }
 
+#region Connections
 @onready var animator = $Animator
 @onready var blur = $Blur
 @onready var ow_status = $OverworldStatus
@@ -69,6 +72,7 @@ enum i_sound { Move1, Select, Selectbad, Cancel, Equip, Tag, Wah }
 @onready var p_skill_dowhat = $Option4/DoWhat/Pointer
 @onready var menu_skill_thinkballs = $Option4/Thinkballs
 @onready var sounds = $Sounds
+#endregion
 
 func _ready() -> void:
 	lists = [TWILIGHT.Inventory.Weapons, TWILIGHT.Inventory.Charms, TWILIGHT.Inventory.Snacks,
@@ -91,7 +95,7 @@ func _ready() -> void:
 	for i in range(TWILIGHT.Party_Size):
 		var stat = ow_status.get_child(i)
 		stat.get_child(1).text = TWILIGHT.Party_Order[i].Name
-		stat.get_child(2).scale.y = (1/ float(TWILIGHT.LvlUp_Threshold[TWILIGHT.Party_Order[i].Level])) * TWILIGHT.Party_Order[i].Exp
+		stat.get_child(2).scale.y = (1/ float(TWILIGHT.get_required_exp(TWILIGHT.Party_Order[i].Level))) * TWILIGHT.Party_Order[i].Exp
 		stat.get_child(3).text = "LVL. %d" % [TWILIGHT.Party_Order[i].Level]
 		stat.get_child(4).region_rect = Rect2(0, 0, (116/ float(TWILIGHT.Party_Order[i].Heart_Max)) * TWILIGHT.Party_Order[i].Heart, 70)
 		stat.get_child(5).text = "%d/%d" % [TWILIGHT.Party_Order[i].Heart, TWILIGHT.Party_Order[i].Heart_Max]
@@ -178,7 +182,7 @@ func _menu_logic(delta: float) -> void:
 				blur.material.set_shader_parameter("fade", blur_strength)
 				
 				if !sounds_list[i_sound.Cancel].playing:
-					player.cutscene = false
+					player.in_cutscene = false
 					queue_free()
 		
 		1:
