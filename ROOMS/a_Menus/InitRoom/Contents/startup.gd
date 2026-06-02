@@ -3,12 +3,20 @@ extends Node2D
 @onready var party_cont : HBoxContainer = $Stats/ScrollContainer/PartyMemberContainer
 @onready var partymember_cont = load("res://ROOMS/a_Menus/InitRoom/Contents/party_member_stats.tscn")
 
+@onready var master_slider : HSlider = $VolumeControl/VBoxContainer/Master/MasterSlider
+@onready var bgm_slider : HSlider = $VolumeControl/VBoxContainer/BGM/BGMSlider
+@onready var sfx_slider : HSlider = $VolumeControl/VBoxContainer/SFX/SFXSlider
+
 var rooms_misc : Array
 var rooms_twilight : Array
 
 func _ready() -> void:
 	DisplayServer.window_set_size(Vector2i(640*2, 480*2))
 	DisplayServer.window_set_position(Vector2i(320, 60))
+	
+	master_slider.value = get_bus_volume("Master")
+	bgm_slider.value = get_bus_volume("BGM")
+	sfx_slider.value = get_bus_volume("SFX")
 	
 	_debug_start()
 
@@ -106,6 +114,9 @@ func _on_rooms_pressed() -> void:
 func _on_encounters_pressed() -> void:
 	pass # Replace with function body.
 
+func _on_encounter_mockup_pressed() -> void:
+	get_tree().change_scene_to_file("res://ENCOUNTER/encounter.tscn")
+
 func _load_all_rooms() -> void:
 	get_groups_rooms("res://ROOMS/a_Menus/", rooms_misc)
 	get_groups_rooms("res://ROOMS/c_Interludes/", rooms_misc)
@@ -152,3 +163,26 @@ func _on_g_misc_pressed() -> void:
 func _on_g_twilight_pressed() -> void:
 	$RoomSelect/MISC.position.x = 9999
 	$RoomSelect/TWILIGHT.position.x = 0
+
+func set_bus_volume(bus: String, volume: float) -> void:
+	var index = AudioServer.get_bus_index(bus)
+	if index == -1:
+		printerr("Unknown bus: %s" % bus)
+		return
+	AudioServer.set_bus_volume_linear(index, volume)
+
+func get_bus_volume(bus: String) -> float:
+	var index = AudioServer.get_bus_index(bus)
+	if index == -1:
+		printerr("Unknown bus: %s" % bus)
+		return 0
+	return AudioServer.get_bus_volume_linear(index)
+
+func _on_master_value_changed(value: float) -> void:
+	set_bus_volume("Master", value)
+
+func _on_bgm_value_changed(value: float) -> void:
+	set_bus_volume("BGM", value)
+
+func _on_sfx_value_changed(value: float) -> void:
+	set_bus_volume("SFX", value)

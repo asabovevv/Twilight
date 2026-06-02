@@ -20,11 +20,18 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Pinkspace"
 run/main_scene="uid://ci07wf554wchl"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
+boot_splash/stretch_mode=0
+boot_splash/image="uid://bvcl1qv7wmwhf"
+
+[audio]
+
+buses/default_bus_layout="uid://bb1v1ob13tx53"
 
 [autoload]
 
 TWILIGHT="*res://TWILIGHT.gd"
+Audio="*uid://dxkbh3et5d33j"
 
 [display]
 
@@ -33,7 +40,10 @@ window/size/viewport_height=480
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 window/vsync/vsync_mode=0
-window/updates_per_second=30
+
+[dotnet]
+
+project/assembly_name="Pinkspace"
 
 [editor_plugins]
 
