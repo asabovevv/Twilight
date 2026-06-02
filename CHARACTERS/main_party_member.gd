@@ -14,6 +14,7 @@ const hbox_offset = 16
 
 # INTERACTION + CUTSCENES
 var in_cutscene : bool = false
+var in_cutscene_last : bool = false
 
 var interactable_node : Node
 var dialogue_active : bool = false
@@ -28,8 +29,13 @@ var character_sprites : Array
 var sprite : int
 
 const mood_colors = [Color8(0, 0, 0, 0), Color8(74, 97, 213, 255), Color8(255, 60, 56, 255), Color8(254, 225, 56, 255)]
+const bow_mood_colors = [Color8(255, 255, 255, 255), Color8(242, 203, 255, 255),
+						 Color8(142, 193, 255, 255), Color8(141, 106, 181, 255),
+						 Color8(235, 76, 71, 255), Color8(137, 85, 105, 255),
+						 Color8(225, 184, 48, 255), Color8(211, 86, 86, 255)]
 enum Moods { Neutral, Sad, Angry, Happy }
 var mood : int = 0
+signal mood_changed()
 
 # Exports
 @export var vignette_color : Color = Color(0, 0, 0, 1)
@@ -50,8 +56,8 @@ func _ready() -> void:
 	_enter_room()
 	
 	# Set Sprites + Emotion
-	_new_sprites()
-	_set_emotion_by_name(TWILIGHT.Party_Order[0].Emotion.name)
+	new_sprites()
+	set_emotion_by_name(TWILIGHT.Party_Order[0].Emotion.name)
 	
 	# Set + Snap position
 	global_position = _grid_snap(global_position)
@@ -86,6 +92,8 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Fullscreen"):
 		TWILIGHT.toggle_fullscreen()
+	
+	in_cutscene_last = in_cutscene
 
 func _set_walksprite(_sprite : int) -> void:
 	for i in character_sprites:
@@ -95,7 +103,7 @@ func _set_walksprite(_sprite : int) -> void:
 	sprite = _sprite
 	character_sprites[sprite].visible = true
 
-func _set_emotion_by_name(_mood_name : String) -> void:
+func set_emotion_by_name(_mood_name : String) -> void:
 	match _mood_name:
 		"Neutral":
 			mood = 0
@@ -109,15 +117,17 @@ func _set_emotion_by_name(_mood_name : String) -> void:
 	if TWILIGHT.Party_Order[0].Name == "AUBREY":
 		for i in character_sprites:
 			i.material.set_shader_parameter("emotion", mood_colors[mood])
+			i.material.set_shader_parameter("bow_emotion_highlight", bow_mood_colors[mood*2])
+			i.material.set_shader_parameter("bow_emotion_shadow", bow_mood_colors[mood*2+1])
 	else:
-		_new_sprites()
-		
 		for i in character_sprites:
 			i.material.set_shader_parameter("emotion", mood_colors[mood])
 	
 	# Adjust stats
 	speed = base_speed * TWILIGHT.emotion( _mood_name ).walkspeed[0]
 	running = (speed > base_speed)
+	
+	mood_changed.emit()
 
 func _move_and_animate(delta) -> void:
 # MOVEMENT
@@ -214,7 +224,7 @@ func _get_inputs(delta):
 			frame = 0.9
 		
 		# overworld menu
-		if Input.is_action_just_pressed("Cancel"): 
+		if Input.is_action_just_pressed("Cancel"):
 			in_cutscene = true
 			TWILIGHT.ui.activate_ui(0, self)
 			return
@@ -229,7 +239,7 @@ func _get_inputs(delta):
 					interactable_node = interactcast.get_collider().get_parent()
 					
 					# If interactable node has dialogue
-					if interactable_node.interactable == true:
+					if interactable_node.interactable == true && !in_cutscene_last:
 						interactable_node.interacted = true
 						
 						TWILIGHT.ui.activate_ui_textbox(1, self, interactable_node.dialogue)
@@ -247,7 +257,7 @@ func _get_inputs(delta):
 			TWILIGHT.ui.activate_ui(2, self)
 			return
 
-func _new_sprites() -> void:
+func new_sprites() -> void:
 	for i in sprites.get_children():
 		i.queue_free()
 	

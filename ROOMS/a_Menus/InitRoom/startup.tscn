@@ -102,6 +102,14 @@ offset_bottom = 473.0
 [node name="PartyMemberContainer" type="HBoxContainer" parent="Stats/ScrollContainer" unique_id=1450758441]
 layout_mode = 2
 
+[node name="EmotionUnlock" type="Button" parent="Stats" unique_id=1983941346]
+offset_left = 477.0
+offset_top = 89.0
+offset_right = 632.0
+offset_bottom = 113.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Unlock All Emotion Hotswaps"
+
 [node name="Inventory" type="Button" parent="." unique_id=1082638441]
 offset_left = 78.0
 offset_top = 3.0
@@ -294,6 +302,7 @@ value = 1.0
 [connection signal="pressed" from="Stats/DefaultStats" to="." method="_on_default_stats_pressed"]
 [connection signal="button_down" from="Stats/SaveStats" to="." method="_on_save_stats_button_down"]
 [connection signal="button_down" from="Stats/LoadStats" to="." method="_on_load_stats_button_down"]
+[connection signal="pressed" from="Stats/EmotionUnlock" to="." method="_on_emotion_unlock_pressed"]
 [connection signal="pressed" from="Inventory" to="." method="_on_inventory_pressed"]
 [connection signal="pressed" from="Flags" to="." method="_on_flags_pressed"]
 [connection signal="pressed" from="Rooms" to="." method="_on_rooms_pressed"]

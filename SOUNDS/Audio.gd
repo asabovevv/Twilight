@@ -38,15 +38,15 @@ func _on_sfx_finished(player: AudioStreamPlayer) -> void:
 ## Plays the given SFX [param name].
 ##
 ## Also accepts optional [param volume] and [param pitch] values, both of which default to 1.
-func play_sfx(name : String, volume : float = 1, pitch : float = 1) -> void:
+func play_sfx(_name : String, volume : float = 1, pitch : float = 1) -> void:
 	var stream = loaded_sfx.get(name)
 	if !stream:
 		# TODO: change this path if necessary
-		stream = load("res://SOUNDS/SoundEffect/%s.ogg" % name)
+		stream = load("res://SOUNDS/SoundEffect/%s.ogg" % _name)
 		if !stream:
-			printerr("Unknown SFX: %s" % name)
+			printerr("Unknown SFX: %s" % _name)
 			return
-		loaded_sfx[name] = stream
+		loaded_sfx[_name] = stream
 	
 	if !allow_duplicate_sounds:
 		var existing = active_sounds.get(stream.resource_path)
@@ -72,15 +72,15 @@ func play_sfx(name : String, volume : float = 1, pitch : float = 1) -> void:
 ## Plays the given BGM [param name].
 ##
 ## Also accepts optional [param volume] and [param pitch] values, both of which default to 1.
-func play_bgm(name : String, volume : float = 1, pitch : float = 1) -> void:
-	var stream = loaded_bgm.get(name)
+func play_bgm(_name : String, volume : float = 1, pitch : float = 1) -> void:
+	var stream = loaded_bgm.get(_name)
 	if !stream:
 		# TODO: change this path if necessary
-		stream = load("res://SOUNDS/AmbientMusic/%s.ogg" % name)
+		stream = load("res://SOUNDS/AmbientMusic/%s.ogg" % _name)
 		if !stream:
-			printerr("Unknown BGM: %s" % name)
+			printerr("Unknown BGM: %s" % _name)
 			return
-		loaded_bgm[name] = stream
+		loaded_bgm[_name] = stream
 
 	bgm.stream = stream
 	bgm.pitch_scale = pitch

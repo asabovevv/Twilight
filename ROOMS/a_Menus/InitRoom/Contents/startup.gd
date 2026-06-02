@@ -44,6 +44,9 @@ func _on_default_stats_pressed() -> void:
 	TWILIGHT.load_from_slot( -1 )
 	display_stats()
 
+func _on_emotion_unlock_pressed() -> void:
+	TWILIGHT.Party_Fast_Emotion = ["Neutral", "Happy", "Angry", "Sad"]
+
 func display_stats() -> void:
 	for i in party_cont.get_child_count():
 		party_cont.get_child(i).queue_free()
@@ -143,7 +146,7 @@ func add_rooms_to_list(array : Array, vbox_container : VBoxContainer) -> void:
 	var j : int = 0
 	vbox_container.add_child($RoomSelect/HBoxContainer0.duplicate())
 	
-	for i in range(array.size()/2):
+	for i in range(array.size()*0.5):
 		var button = $RoomSelect/room0.duplicate()
 		button.text = array[i*2]
 		button.dir = array[i*2+1]
@@ -154,7 +157,6 @@ func add_rooms_to_list(array : Array, vbox_container : VBoxContainer) -> void:
 		if j == 5:
 			hbox_row+=1
 			vbox_container.add_child($RoomSelect/HBoxContainer0.duplicate())
-
 
 func _on_g_misc_pressed() -> void:
 	$RoomSelect/MISC.position.x = 0

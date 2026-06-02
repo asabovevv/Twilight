@@ -1,72 +1,160 @@
 extends Node2D
 
+# MOVEMENT
+
+var moving : bool = false
+var target_position : Vector2 = Vector2.ZERO
+
+var last_pos : Vector2 = Vector2.ZERO
+var last_sprite : Node = null
+var dir : float
+
+var normal_movement : bool = true
+
+# ANIMATION
+
+var frame : float = 0
+var frame_sequence : Array = [0, 1, 0, 2]
+var character_sprites : Array
+var sprite : int
+
+const mood_colors = [Color8(0, 0, 0, 0), Color8(109, 74, 230, 255), Color8(255, 60, 56, 255), Color8(254, 225, 56, 255)]
+const bow_mood_colors = [Color8(255, 255, 255, 255), Color8(242, 203, 255, 255),
+						 Color8(142, 193, 255, 255), Color8(141, 106, 181, 255),
+						 Color8(235, 76, 71, 255), Color8(137, 85, 105, 255),
+						 Color8(225, 184, 48, 255), Color8(211, 86, 86, 255)]
+const mood_strings = ["Neutral", "Sad", "Angry", "Happy"]
+
+# Exports
 @export var player : CharacterBody2D
 @export var line_position : int = 0
 @export var auto_delete : bool = true
 @export var order_swap : bool = true
 
-var frame : float = 0
-var frame_sequence : Array = [  [0, 1, 0, 2],
-								[0, 1, 0, 2],
-								[0, 1, 0, 2],
-								[0, 1, 0, 2] ]
-var walk_sprites : Array
-var sprite : int
-const mood_colors = [Color8(0, 0, 0, 0), Color8(109, 74, 230, 255), Color8(255, 60, 56, 255), Color8(254, 225, 56, 255)]
-const mood_strings = ["Neutral", "Sad", "Angry", "Happy"]
-
-var last_pos : Vector2 = Vector2.ZERO
-var can_move : int = 2
-var last_sprite : Node = null
-
-var freeing : bool = false
+var init : bool = false
 
 func _ready() -> void:
 	if (auto_delete) && (TWILIGHT.Party_Size < (line_position+2)):
 		queue_free()
-		freeing = true
+		return
 	
-	await get_tree().create_timer(0.03).timeout
 	global_position = player.global_position
 	last_pos = global_position
+	init = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !freeing:
-		can_move -= 1
-		if (player.moving) || (last_pos != global_position):
-			can_move = 3
-		
-		if can_move > 0:
-			frame = player.frame
+	
+	if normal_movement:
+		if !_move_to_target(delta):
 			
-			global_position = Vector2(move_toward(global_position.x, player.last_places[19-line_position].x, delta*player.speed),
-									  move_toward(global_position.y, player.last_places[19-line_position].y, delta*player.speed))
-			
-			for i in range(walk_sprites.size()):
-				walk_sprites[i].visible = (player.last_sprites[19-line_position] == i)
-				walk_sprites[i].frame = frame_sequence[sprite][frame]
-		else:
-			for i in range(walk_sprites.size()):
-				walk_sprites[i].frame = 0
+			if last_pos == global_position:
+				for i in range(character_sprites.size()):
+					character_sprites[i].frame = 0
+	
+	if (player.character_sprites[0] != last_sprite) && order_swap:
+		new_sprites()
+	last_sprite = player.character_sprites[0]
+	
+	last_pos = global_position
+
+func _move_to_target(delta : float) -> bool:
+	# If not in correct grid tile, go to grid tile
+	if _grid_snap(global_position) != _grid_snap(player.last_positions[19-line_position]):
 		
-		for i in range(walk_sprites.size()):
-			walk_sprites[i].material.set_shader_parameter("emotion", TWILIGHT.Party_Order[line_position+1].Emotion.color)
-		if (player.walk_sprites[0] != last_sprite) && order_swap:
-			new_sprites()
-		last_sprite = player.walk_sprites[0]
+		var distance : Vector2 = player.last_positions[19-line_position] - global_position 
+		var moved_delta : float = delta*player.speed
 		
-		last_pos = global_position
+		# Move in whichever direction has the greater distance
+		if !moving:
+			moving = true
+			if abs(distance.x) > abs(distance.y):
+				target_position = _grid_snap(global_position) + Vector2( sign(distance.x)*32, 0)
+				dir = lerp(0, 2, int( sign(distance.x) == 1 ))
+			else:
+				target_position = _grid_snap(global_position) + Vector2( 0, sign(distance.y)*32)
+				dir = lerp(1, 3, int( sign(distance.y) == 1 ))
+		
+		# If next tile reached, switch to fine movement
+		if abs(target_position.x-global_position.x) <= moved_delta*2 && abs(target_position.y-global_position.y) <= moved_delta*2:
+			moving = false
+			return true
+		
+		# If not near target, move toward it
+		global_position = Vector2(move_toward(global_position.x, target_position.x, moved_delta),
+								  move_toward(global_position.y, target_position.y, moved_delta))
+		
+		# Animate
+		frame += delta * 6
+		if frame >= 4:
+			frame -= 4
+		
+		for i in range(character_sprites.size()):
+			if i == dir:
+				character_sprites[i].frame = frame_sequence[floor(frame) ]
+				character_sprites[i].visible = true
+			else:
+				character_sprites[i].visible = false
+		
+		return true
+		
+	# If in correct grid tile but not the exact right location
+	elif global_position != player.last_positions[19-line_position]:
+		
+		target_position = player.last_positions[19-line_position]
+		
+		# Move toward target
+		global_position = Vector2(move_toward(global_position.x, player.last_positions[19-line_position].x, delta*player.speed),
+								   move_toward(global_position.y, player.last_positions[19-line_position].y, delta*player.speed))
+		
+		# If done, be done
+		if round(target_position) == round(global_position):
+			return true
+		
+		# Animate
+		frame = player.frame
+		
+		for i in range(character_sprites.size()):
+			if i == dir:
+				character_sprites[i].frame = frame_sequence[floor(frame) ]
+				character_sprites[i].visible = true
+			else:
+				character_sprites[i].visible = false
+		
+		return true
+	
+	moving = false
+	return false
+
+func _grid_snap(_position : Vector2) -> Vector2:
+	return (_position + Vector2(16, 16)).snapped(Vector2(32, 32)) - Vector2(16, 16)
 
 func new_sprites() -> void:
 	get_child(1).queue_free()
 	
-	var path1 : String = TWILIGHT.Party_Order[line_position+1].Path
-	
-	var sprites = load(path1 + "OW_sprites.tscn")
+	var sprites = load(TWILIGHT.Party_Order[line_position+1].Path + "OW_sprites.tscn")
 	sprites = sprites.instantiate()
 	add_child(sprites)
 	
-	walk_sprites = [sprites.get_child(0), sprites.get_child(1), sprites.get_child(2), sprites.get_child(3)]
-	for i in range(walk_sprites.size()):
-			walk_sprites[i].material.set_shader_parameter("emotion", TWILIGHT.Party_Order[line_position+1].Emotion.color)
+	character_sprites = [sprites.get_child(0), sprites.get_child(1), sprites.get_child(2), sprites.get_child(3)]
+
+func _on_main_party_member_mood_changed() -> void:
+	if init:
+		var mood : int
+		match TWILIGHT.Party_Order[line_position-1].Emotion.name:
+			"Neutral":
+				mood = 0
+			"Sad":
+				mood = 1
+			"Angry":
+				mood = 2
+			"Happy":
+				mood = 3
+		
+		if TWILIGHT.Party_Order[line_position-1].Name == "AUBREY":
+			for i in character_sprites:
+				i.material.set_shader_parameter("emotion", mood_colors[mood])
+				i.material.set_shader_parameter("bow_emotion_highlight", bow_mood_colors[mood*2])
+				i.material.set_shader_parameter("bow_emotion_shadow", bow_mood_colors[mood*2+1])
+		else:
+			for i in character_sprites:
+				i.material.set_shader_parameter("emotion", mood_colors[mood])

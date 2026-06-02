@@ -328,31 +328,31 @@ var All_Characters : Array = []
 var Party_Order : Array = []
 
 # Return pointer to character data
-func get_char_data(name : String) -> PartyMember:
+func get_char_data(_name : String) -> PartyMember:
 	for i in range(All_Characters.size()):
-		if All_Characters[i].Name == name:
+		if All_Characters[i].Name == _name:
 			return All_Characters[i]
 	return null
 # Return character's position in All_Characters[]
-func get_char_id(name : String) -> int:
+func get_char_id(_name : String) -> int:
 	for i in range(All_Characters.size()):
-		if All_Characters[i].Name == name:
+		if All_Characters[i].Name == _name:
 			return i
 	return -1
 # Return character's position in Party_Order[]
-func get_char_party_order(name : String): 
+func get_char_party_order(_name : String): 
 	for i in range(Party_Order.size()):
-		if Party_Order[i].Name == name:
+		if Party_Order[i].Name == _name:
 			return i
 	return -1
 
 # Add/Remove from party
-func add_char_to_party( name : String ) -> void:
-	Party_Order.append( get_char_data(name) )
+func add_char_to_party( _name : String ) -> void:
+	Party_Order.append( get_char_data(_name) )
 	Party_Size += 1
-func remove_char_from_party( name : String ) -> void:
+func remove_char_from_party( _name : String ) -> void:
 	for i in range(Party_Order.size()):
-		if Party_Order[i].Name == name:
+		if Party_Order[i].Name == _name:
 			Party_Order.remove_at(i)
 			Party_Size -= 1
 			return
@@ -372,6 +372,7 @@ func does_char_own_equippable(equppable_name : String, char_name : String) -> bo
 
 # Returns xp required to get to specified level from level 1.
 func get_required_exp(level : int) -> int: 
+	@warning_ignore("narrowing_conversion")
 	return -0.19*pow(level, 3) + 18.54*pow(level, 2) - 8.8*level + 41.76
 
 ## --- --- --- --- --- --- --- --- Inventory --- --- --- --- --- --- --- --- ---
@@ -460,6 +461,7 @@ enum Flag_Name {
 
 func set_flag(flag_number : int, value : bool) -> void:
 	var flag_entry : int = flag_number % 64
+	@warning_ignore("integer_division")
 	var array_entry : int = floor( (flag_number - flag_entry)/64 )
 	var flag_value : int = int( pow(2, flag_entry) )
 	# Clear flag
@@ -469,6 +471,7 @@ func set_flag(flag_number : int, value : bool) -> void:
 		story_flags[array_entry] |= 1 << flag_value
 func get_flag(flag_number : int) -> bool:
 	var flag_entry = flag_number % 64
+	@warning_ignore("integer_division")
 	var array_entry = floor( (flag_number - flag_entry)/64 )
 	var flag_value : int = int( pow(2, flag_entry) )
 	return story_flags[array_entry] & (1 << flag_value ) != 0

@@ -5,7 +5,6 @@ extends NPCBasic
 @export var frame_freq : float = 7
 var roll_time = 0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _move(delta: float):
 	roll_time += delta
 	global_position = origin + Vector2( sin(roll_time*roll_speed)*roll_dist, 0)
