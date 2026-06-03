@@ -13,10 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cyaxdi2xdevbg" path="res://ENTITIES/npc.tscn" id="11_d17ug"]
 [ext_resource type="Script" uid="uid://bfbviasbg7nnh" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_PinkDoor.gd" id="12_8vm70"]
 [ext_resource type="Texture2D" uid="uid://bnhwrma6hjcjd" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_Cumber.png" id="12_v2jh2"]
-[ext_resource type="Texture2D" uid="uid://dukfkk45sqmhx" path="res://ENTITIES/Npc/Mobile/Twilight/NPC_Bunny_Idle.png" id="12_ynx7i"]
-[ext_resource type="Texture2D" uid="uid://dxm3u6wd73a0t" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_PinkDoor.png" id="13_1l2ua"]
 [ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://RESOURCES/Npc/npcaction.gd" id="13_d17ug"]
-[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://RESOURCES/Dialogue/dialogue_sequence.gd" id="15_1l2ua"]
+[ext_resource type="Script" uid="uid://cw0kjtarbgavk" path="res://ENTITIES/Npc/Mobile/Twilight/NPC_Bunny_Roll.gd" id="13_ynx7i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dq3mf"]
 texture = ExtResource("2_u4srh")
@@ -630,44 +628,6 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_cpdto")
 
-[sub_resource type="Resource" id="Resource_1l2ua"]
-script = ExtResource("13_d17ug")
-repeat_count = 2
-move_to = Vector2i(0, -1)
-metadata/_custom_type_script = "uid://dpi62ybd3sa1l"
-
-[sub_resource type="Resource" id="Resource_awnop"]
-script = ExtResource("13_d17ug")
-repeat_count = 4
-move_to = Vector2i(1, 0)
-metadata/_custom_type_script = "uid://dpi62ybd3sa1l"
-
-[sub_resource type="Resource" id="Resource_evjyx"]
-script = ExtResource("13_d17ug")
-repeat_count = 2
-move_to = Vector2i(0, 1)
-metadata/_custom_type_script = "uid://dpi62ybd3sa1l"
-
-[sub_resource type="Resource" id="Resource_2l6tf"]
-script = ExtResource("13_d17ug")
-repeat_count = 4
-move_to = Vector2i(-1, 0)
-metadata/_custom_type_script = "uid://dpi62ybd3sa1l"
-
-[sub_resource type="Resource" id="Resource_ynx7i"]
-script = ExtResource("13_d17ug")
-action = 1
-metadata/_custom_type_script = "uid://dpi62ybd3sa1l"
-
-[sub_resource type="Resource" id="Resource_ihekr"]
-script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_1"])
-
-[sub_resource type="Resource" id="Resource_8r2v7"]
-script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_2"])
-metadata/_custom_type_script = "uid://dopbn3w65cjm3"
-
 [node name="RoomContents" type="Node2D" unique_id=1819179948]
 
 [node name="Tiles" type="Node2D" parent="." unique_id=1674791083]
@@ -735,36 +695,48 @@ player = NodePath("../Party/Main_Party_Member")
 [node name="TELEPORT_1b" type="Node2D" parent="TELEPORT_1a" unique_id=692720818]
 position = Vector2(-63, 132)
 
-[node name="NPC_runbunny" parent="." unique_id=279611580 instance=ExtResource("11_d17ug")]
-position = Vector2(560, 368)
-sprite_offset = Vector2(0, -4)
-sprite_img = ExtResource("12_ynx7i")
-sprite_hvframes = Vector2i(2, 1)
+[node name="NPC_door" parent="." unique_id=279611580 node_paths=PackedStringArray("glow") instance=ExtResource("11_d17ug")]
+position = Vector2(1596, 715)
+script = ExtResource("12_8vm70")
+glow = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="NPC_door" unique_id=956984308]
+offset_left = -2.0
+offset_top = 11.0
+offset_right = 38.0
+offset_bottom = 51.0
+scale = Vector2(0.51213723, 1.7740899)
+color = Color(1, 0.5573358, 1, 1)
+
+[node name="NPC_bunnyroll" parent="." unique_id=86155890 instance=ExtResource("11_d17ug")]
+position = Vector2(1597, 859)
+script = ExtResource("13_ynx7i")
+sprite_offset = null
+has_collision = null
 interactable = false
-dialogue = Array[ExtResource("15_1l2ua")]([])
-moves = true
-action_loop = Array[ExtResource("13_d17ug")]([SubResource("Resource_1l2ua"), SubResource("Resource_awnop"), SubResource("Resource_evjyx"), SubResource("Resource_2l6tf"), SubResource("Resource_ynx7i")])
-anim_default = false
+dialogue = null
+moves = null
+action_loop = null
+anim_default = null
+anim_speed = null
+speed = null
+hbox_scale = null
+grid_snap_on_ready = null
+roll_speed = null
+roll_dist = null
+frame_freq = null
+
+[node name="NPC_sidewalk" parent="." unique_id=1361342976 instance=ExtResource("11_d17ug")]
+position = Vector2(1744, 816)
 
 [node name="NPC_cumber" parent="." unique_id=761226622 instance=ExtResource("11_d17ug")]
 position = Vector2(1168, 432)
-sprite_offset = Vector2(0, -24)
 sprite_img = ExtResource("12_v2jh2")
 sprite_hvframes = Vector2i(3, 2)
-has_talkframes = true
-dialogue = Array[ExtResource("15_1l2ua")]([SubResource("Resource_ihekr"), SubResource("Resource_8r2v7")])
-action_loop = Array[ExtResource("15_1l2ua")]([])
-anim_default = false
-
-[node name="NPC_door" parent="." unique_id=270951796 instance=ExtResource("11_d17ug")]
-position = Vector2(400, 272)
-script = ExtResource("12_8vm70")
 sprite_offset = Vector2(0, -24)
-sprite_img = ExtResource("13_1l2ua")
-sprite_hvframes = Vector2i(4, 1)
-dialogue = Array[ExtResource("15_1l2ua")]([])
-action_loop = Array[ExtResource("15_1l2ua")]([])
-anim_speed = 15.0
+has_talk_frames = true
+action_loop = Array[ExtResource("13_d17ug")]([])
+anim_default = false
 
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember" method="_on_main_party_member_mood_changed"]
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember2" method="_on_main_party_member_mood_changed"]

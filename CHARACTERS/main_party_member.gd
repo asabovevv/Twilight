@@ -173,14 +173,14 @@ func _check_special_collision(caster : RayCast2D, offset : Vector2, executable :
 	caster.position = offset
 	caster.force_raycast_update()
 	if caster.is_colliding():
-		var collider = caster.get_collider()
+		var _collider = caster.get_collider()
 		
 		if executable:
-			collider.execute()
-			if collider.collidable:
+			_collider.execute()
+			if _collider.has_collision:
 				return true
 		else:
-			if collider.get_parent().collidable:
+			if _collider.get_parent().has_collision:
 				return true
 	return false
 
@@ -242,7 +242,10 @@ func _get_inputs(delta):
 					if interactable_node.interactable == true && !in_cutscene_last:
 						interactable_node.interacted = true
 						
-						TWILIGHT.ui.activate_ui_textbox(1, self, interactable_node.dialogue)
+						# Set npc's dialogue tree to their current interaction and make ui
+						TWILIGHT.ui.activate_ui_textbox(1, self, interactable_node.set_dialogue_tree_new_interaction())
+						interactable_node.interacted_count += 1
+						
 						dialogue_active = true
 						in_cutscene = true
 						

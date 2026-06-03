@@ -18,8 +18,10 @@ var end_cutscene : bool = true
 var time : float = 0.0
 var wait_time : float = 0
 var player : CharacterBody2D
+var npc : Node2D
 
-var dialogue : Array
+var dialogue : DialogueSequence
+var dialogue_branch : int = 0
 var dialogue_stage : int = 0
 var dialogue_place : int = 0
 var dialogue_scroll : float = 0
@@ -35,9 +37,10 @@ const p_base_off = Vector2(-16, 12)
 var p_choice_base_off = Vector2.ZERO
 
 var tsound : AudioStreamPlayer
-const portrait_shorthand = ["Aubrey", "Sunny"]
-const portrait_locations = ["res://CHARACTERS/Minty/Portraits/Portrait_M",
-							"res://CHARACTERS/Sunny/Portraits/Portrait_S"]
+const portrait_shorthand = ["Misc", "Aubrey", "Sunny"]
+const portrait_locations = ["res://CHARACTERS/z_Misc_Portraits/Portrait",
+							"res://CHARACTERS/Minty/Portraits/Portrait",
+							"res://CHARACTERS/Sunny/Portraits/Portrait"]
 const font_path : String = "res://UI/Dialogue/"
 
 var sounds : Array
@@ -122,14 +125,14 @@ func _text_escape() -> void:
 	
 	var i = 0
 	
-	if dialogue == []:
+	if dialogue.dialogue_tree.is_empty():
 		print("Failed to set dialogue")
 		return
 	
-	while (dialogue[dialogue_place][i] == "|"):
+	while (dialogue.dialogue_tree[dialogue_branch][dialogue_place][i] == "|"):
 		# Get this escape sequence
-		var substring_end : int = _get_char_next_position(dialogue[dialogue_place], "|", i)
-		var substring : String = dialogue[dialogue_place].substr(i+1, substring_end-i-1)
+		var substring_end : int = _get_char_next_position(dialogue.dialogue_tree[dialogue_branch][dialogue_place], "|", i)
+		var substring : String = dialogue.dialogue_tree[dialogue_branch][dialogue_place].substr(i+1, substring_end-i-1)
 		# Always returns [name, x, y, ...]
 		var escape_var : Array = _parse_substring(substring)
 		
@@ -177,7 +180,7 @@ func _text_escape() -> void:
 			
 			"font": # Marker Char, Font Name
 				var start_index : int = _find_position_marker(escape_var[1], substring_end)
-				dialogue[dialogue_place] = dialogue[dialogue_place].insert(start_index, "[font="+font_path+escape_var[2]+"]")
+				dialogue.dialogue_tree[dialogue_branch][dialogue_place] = dialogue.dialogue_tree[dialogue_branch][dialogue_place].insert(start_index, "[font="+font_path+escape_var[2]+"]")
 			
 			"speed": # Marker Char, Speed
 				event_locations.append( _find_position_marker(escape_var[1], substring_end) )
@@ -223,14 +226,14 @@ func _text_escape() -> void:
 			"size_gradual": # Marker Char, Start Size, Target Size, Step Size
 				var start_index : int = _find_position_marker(escape_var[1], substring_end)
 				var start_size : int = 28
-				if escape_var[2] != "d" || escape_var[2] != "default":
+				if escape_var[2] != "d" && escape_var[2] != "default":
 					start_size = int(escape_var[2])
 				var target_size : int = int(escape_var[3])
 				var step : int = int(escape_var[4])
 				var end : int = ceil(start_index + float(target_size-start_size)/step)
 				for j in range(end, start_index, -1):
-					if j < dialogue[dialogue_place].length():
-						dialogue[dialogue_place] = dialogue[dialogue_place].insert(j, "[font_size=%d]" % [ (j-start_index)*step + start_size ])
+					if j < dialogue.dialogue_tree[dialogue_branch][dialogue_place].length():
+						dialogue.dialogue_tree[dialogue_branch][dialogue_place] = dialogue.dialogue_tree[dialogue_branch][dialogue_place].insert(j, "[font_size=%d]" % [ (j-start_index)*step + start_size ])
 			
 			"wave": # Marker Char, Amp, Frequency = 5.0
 				var freq : float = 5
@@ -238,25 +241,25 @@ func _text_escape() -> void:
 					freq = float(escape_var[3])
 				
 				if escape_var[2] == "0":
-					dialogue[dialogue_place] = dialogue[dialogue_place].insert(_find_position_marker(escape_var[1], substring_end), "[/wave]")
+					dialogue.dialogue_tree[dialogue_branch][dialogue_place] = dialogue.dialogue_tree[dialogue_branch][dialogue_place].insert(_find_position_marker(escape_var[1], substring_end), "[/wave]")
 				else:
 					var _s : String = "[wave amp=%f freq=%f connected=1]" % [float(escape_var[2]), freq]
-					dialogue[dialogue_place] = dialogue[dialogue_place].insert(_find_position_marker(escape_var[1], substring_end), _s )
+					dialogue.dialogue_tree[dialogue_branch][dialogue_place] = dialogue.dialogue_tree[dialogue_branch][dialogue_place].insert(_find_position_marker(escape_var[1], substring_end), _s )
 		
 		# Look for start of next escape sequence
-		i = _get_char_next_position(dialogue[dialogue_place], "|", substring_end)
+		i = _get_char_next_position(dialogue.dialogue_tree[dialogue_branch][dialogue_place], "|", substring_end)
 		# Attempt to end loop if no more
 		if i == substring_end:
 			break
 	
 	# Remove escapes from string
-	var last_length : int = dialogue[dialogue_place].length()
-	var plain_string = dialogue[dialogue_place].substr(i+1-float(i == 0), -1)
+	var last_length : int = dialogue.dialogue_tree[dialogue_branch][dialogue_place].length()
+	var plain_string = dialogue.dialogue_tree[dialogue_branch][dialogue_place].substr(i+1-float(i == 0), -1)
 	
-	dialogue[dialogue_place] = plain_string
+	dialogue.dialogue_tree[dialogue_branch][dialogue_place] = plain_string
 	
 	# Set richlabel
-	text_main.text = dialogue[dialogue_place]
+	text_main.text = dialogue.dialogue_tree[dialogue_branch][dialogue_place]
 	
 	# Move back events because the string is way shorter now
 	var dif = last_length - text_main.get_parsed_text().length()
@@ -264,7 +267,7 @@ func _text_escape() -> void:
 		event_locations[j] = clamp(event_locations[j] - dif, 1, last_length-1)
 	
 	# If string is functions only, do funcs and skip to next
-	if dialogue[dialogue_place].length() < 1:
+	if dialogue.dialogue_tree[dialogue_branch][dialogue_place].length() < 1:
 		for j in range(event_names.size()):
 			_text_event(event_names[j])
 		
@@ -362,9 +365,9 @@ func _make_choice_options(_array : Array) -> void:
 	p_choice_base_off = Vector2(longest + 37, 24)
 
 func _find_position_marker(_char : String, _start_index : int) -> int:
-	for i in range(_start_index, dialogue[dialogue_place].length()):
-		if dialogue[dialogue_place][i] == _char:
-			dialogue[dialogue_place] = dialogue[dialogue_place].substr(0, i) + dialogue[dialogue_place].substr(i+1, -1)
+	for i in range(_start_index, dialogue.dialogue_tree[dialogue_branch][dialogue_place].length()):
+		if dialogue.dialogue_tree[dialogue_branch][dialogue_place][i] == _char:
+			dialogue.dialogue_tree[dialogue_branch][dialogue_place] = dialogue.dialogue_tree[dialogue_branch][dialogue_place].substr(0, i) + dialogue.dialogue_tree[dialogue_branch][dialogue_place].substr(i+1, -1)
 			return i
 	
 	return -1
@@ -379,10 +382,12 @@ func _end_dialogue() -> void:
 	dialogue_stage = 0
 	dialogue_place += 1
 	
-	if dialogue_place >= dialogue.size():
+	if dialogue_place >= dialogue.dialogue_tree[dialogue_branch].size():
 		queue_free()
+		
 		if end_cutscene:
 			player.in_cutscene = false
 		player.dialogue_active = false
-		if player.interactable_node != null:
-			player.interactable_node.interacted = false
+		
+		if npc != null:
+			npc.interacted = false

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Equipable" load_steps=2 format=3 uid="uid://b5ugc3i6nucai"]
+[gd_resource type="Resource" script_class="Equipable" format=3 uid="uid://b5ugc3i6nucai"]
 
-[ext_resource type="Script" uid="uid://1cjwfrn6g3d7" path="res://RESOURCES/AllInherit/equipable.gd" id="2_uoqtl"]
+[ext_resource type="Script" uid="uid://1cjwfrn6g3d7" path="res://RESOURCES/Equippable/equipable.gd" id="2_uoqtl"]
 
 [resource]
 script = ExtResource("2_uoqtl")

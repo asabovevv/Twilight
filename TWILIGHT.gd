@@ -1,4 +1,4 @@
-# I recommend you close up all the functions and only open them as you need them.
+# I recommend you close up all the functions and only open them as you need them. (sorry)
 extends Node
 
 var Version : float = 0.001 # Used in save-files
@@ -9,6 +9,7 @@ var ui : Node2D # Whatever node is the current UI root.
 var camera : Node2D # Whatever node is the currently used cameras root.
 var entrance : int = 0 # Tracks which way a room was entered from a previous room.
 var encounter : Encounter # Determines encounter setup on encounter room entered
+var d : Dictionary[String, Array] # Contains all loaded branches of dialogue, accessed via name
 
 ## --- --- --- --- --- --- --- --- Options --- --- --- --- --- --- --- --- 
 
@@ -41,6 +42,9 @@ func load_sound(_path : String, _volumetype : Volumes, _parent : Node) -> Node:
 	return sound
 
 # Text
+var Languages = { English = "English" }
+var language : String = Languages.English
+
 var text_scroll_speed = 60
 
 ## --- --- --- --- --- --- --- --- Player Info --- --- --- --- --- --- --- --- --- ---
@@ -504,6 +508,9 @@ func save_to_slot(slot : int) -> void:
 	file.close()
 func load_from_slot(slot : int) -> void:
 	
+	## TEMP!!!!
+	load_dialogue_file(language, "Dream1.txt")
+	
 	var Party_Constants : Array = get_party_constants()
 	
 	# SAVE FILE EXISTS
@@ -630,3 +637,34 @@ func load_get_partymember(file, const_id, const_member) -> void:
 	var emot_res = emotion(emot_str) if emot_str != "" else emotion("Neutral")
 
 	_char.load_stats(const_member, lvl, exp_pts, skls_spc, skls_actv, wpn_res, chm_res, emot_res)
+
+# Iterates through a text file, breaking lines into dialogue branch headers and dialogue branch contents
+func load_dialogue_file(_language : String, file_name : String) -> void:
+	if FileAccess.file_exists("res://LANGUAGE/" + _language + "/" + file_name):
+		var langfile = FileAccess.open( "res://LANGUAGE/" + _language + "/" + file_name, FileAccess.READ)
+		
+		var read_line : String = langfile.get_line()
+		while read_line != "EOF":
+			
+			# Store first string as branch name
+			var branch_name : String = read_line
+			# If branch name has an indent, remove it
+			branch_name = branch_name.remove_chars("\t")
+			
+			# Get the rest of the chunk for branch dialogue (Stop at empty line)
+			var branch_dialogue : Array[String]
+			var branch_line : String = langfile.get_line()
+			while branch_line != "":
+				branch_dialogue.append(branch_line)
+				branch_line = langfile.get_line()
+			
+			# Append branch to main dialogue
+			d[branch_name] = branch_dialogue
+			
+			# Advance, next we will check if the below line is EOF or another header
+			read_line = langfile.get_line()
+		
+		langfile.close()
+		
+	else:
+		print("Lang file: " + "res://LANGUAGE/" + language + "/" + file_name + " doesn't exist.")

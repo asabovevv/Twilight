@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="Emotions" load_steps=4 format=3 uid="uid://dp5doksgihftj"]
+[gd_resource type="Resource" script_class="Emotions" format=3 uid="uid://dp5doksgihftj"]
 
 [ext_resource type="Texture2D" uid="uid://cdr71qvpg3vix" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Sad.png" id="1_gmpnv"]
 [ext_resource type="Texture2D" uid="uid://dw84u1gfo5kcy" path="res://ENCOUNTER/Sprites/EmotionSprites/T_Sad.png" id="2_bfv7e"]
-[ext_resource type="Script" uid="uid://7w6s62ylncqk" path="res://RESOURCES/AllInherit/emotions.gd" id="3_gmpnv"]
+[ext_resource type="Script" uid="uid://7w6s62ylncqk" path="res://RESOURCES/Emotion/emotions.gd" id="3_gmpnv"]
 
 [resource]
 script = ExtResource("3_gmpnv")
