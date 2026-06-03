@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dukfkk45sqmhx"
-path="res://.godot/imported/NPC_Bunny_Idle.png-ce1b7b515525e50f0b08d917a009f113.ctex"
+uid="uid://bnhwrma6hjcjd"
+path="res://.godot/imported/IMM_Cumber.png-43306708d8d10bdef8753b9fbf078a60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ENTITIES/Npc/Mobile/Pinkspace/NPC_Bunny_Idle.png"
-dest_files=["res://.godot/imported/NPC_Bunny_Idle.png-ce1b7b515525e50f0b08d917a009f113.ctex"]
+source_file="res://ENTITIES/Npc/Immobile/Twilight/IMM_Cumber.png"
+dest_files=["res://.godot/imported/IMM_Cumber.png-43306708d8d10bdef8753b9fbf078a60.ctex"]
 
 [params]
 

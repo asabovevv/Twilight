@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://beid52f2jt073"]
+[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://beid52f2jt073"]
 
-[ext_resource type="Script" uid="uid://d34msguyfssa1" path="res://RESOURCES/AllInherit/skill.gd" id="1_nd0vg"]
+[ext_resource type="Script" uid="uid://d34msguyfssa1" path="res://RESOURCES/Skills/skill.gd" id="1_nd0vg"]
 
 [resource]
 script = ExtResource("1_nd0vg")

@@ -16,12 +16,13 @@ func activate_ui(ui_index : int, player : Node) -> void:
 	
 	add_child(uiinstance)
 
-func activate_ui_textbox(ui_index : int, input_node : Node, dialogue_array : Array) -> void:
+func activate_ui_textbox(ui_index : int, input_node : Node, dialogue_sequence : DialogueSequence) -> void:
 	var uiscene = load( my_uis[ui_index] )
 	var uiinstance = uiscene.instantiate()
 	
 	uiinstance.visible = false
 	uiinstance.player = input_node
-	uiinstance.dialogue.append_array( dialogue_array )
+	uiinstance.dialogue = dialogue_sequence
+	uiinstance.npc = input_node.interactable_node
 	
 	add_child(uiinstance)

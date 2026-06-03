@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Equipable" load_steps=3 format=3 uid="uid://2kq5fvp8jyoj"]
+[gd_resource type="Resource" script_class="Equipable" format=3 uid="uid://2kq5fvp8jyoj"]
 
-[ext_resource type="Texture2D" uid="uid://dpktmsmfs0c1d" path="res://somekindoftileset.png" id="1_ihajm"]
-[ext_resource type="Script" uid="uid://1cjwfrn6g3d7" path="res://RESOURCES/AllInherit/equipable.gd" id="2_ihajm"]
+[ext_resource type="Texture2D" path="res://somekindoftileset.png" id="1_ihajm"]
+[ext_resource type="Script" uid="uid://1cjwfrn6g3d7" path="res://RESOURCES/Equippable/equipable.gd" id="2_ihajm"]
 
 [resource]
 script = ExtResource("2_ihajm")

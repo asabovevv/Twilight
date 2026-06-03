@@ -15,65 +15,69 @@
 
 ## ------------- ------------- Custom Escape Functions ------------- -------------
 
-## "dbox": (int) ~Visible = 1
+## |dbox : (int) ~Visible = 1|
 #	- Sets the dialogue box and all its contents' visibility. True by default.
 
-## "name": (str) Text
+## |name : (str) Text |
 #	- Sets the name that displays in the dialogue box.
 #	- An empty string makes the name-box disappear.
 
-## "face": (str) Character Name, (int) ~Portrait#
+## |face : (str) Character Name : (int) ~Portrait# |
 #	- Sets the dialogue portrait. (May be reworked to change multiple dialogue portraits.)
 #	- Portrait is 0 by default.
 #	- If Character Name isn't "Sunny", "Aubrey", etc, the portrait-box disappears.
 #	- Character portraits are found at: res://CHARACTERS/(character name)/Portraits
+#	- "Misc" is also an option, located at: res://CHARACTERS/z_Misc_Portraits/
 
-## "p": (MC) Marker Char, (int) ~Amount = 1
+## |p : (MC) Marker Char : (int) ~Amount = 1 |
 #	- Text pauses at all marker chars. Requires a Z press to continue text crawl.
 
-## "wait": (MC) Marker Char, (float) ~Duration = 0.1, (int) ~Amount = 1
+## |wait : (MC) Marker Char : (float) ~Duration = 0.1 : (int) ~Amount = 1 |
 #	- Text pauses at all marker chars; Waits a set duration (default 0.1 seconds) before text continues.
 
-## "font": (MC) Marker Char, (str) Font Name
+## |font : (MC) Marker Char : (str) Font Name |
 #	- Sets text font at marker char. Font Names are "Default", "Disturbed".
 #	- Fonts are found in: res://UI/Dialogue
 
-## "speed": (MC) Marker Char, (float) ~Speed = "default"
+## |speed : (MC) Marker Char : (float) ~Speed = "default" |
 #	- Causes text to scroll at X characters a second after marker char.
 #	- Speed is 60 by default. (Speed can be set to "d" or "default" as well.)
 
-## "choice": (str) ~Option 1, (str) ~Option 2, ~...
+## |choice : (str) ~Option 1 : (str) ~Option 2 : ~... |
 #	- (Incomplete)
 
-## "end": (MC) Marker Char
+## |end : (MC) Marker Char |
 #	- Instantly ends text when crawl reaches marker char.
 
-## "sound": (MC) Marker Char, (path) Sound Path, (str) ~Volume Type = "SE"
+## |sound : (MC) Marker Char : (path) Sound Path : (str) ~Volume Type = "SE" |
 #	- Plays a sound when marker char is reached, assigning the volume to one of four channels (like in Omori).
 #	- Sounds are found at res://SOUNDS/
 # 	- Volume Types: SE, ME, AS, AM (Sound Effect, Music Effect, Ambient Sound, Ambient Music)
 
-## "func": (MC) Marker Char, (str) Dialogue Function Name, (int) ~Integer = 0
+## |func : (MC) Marker Char : (str) Dialogue Function Name : (int) ~Integer = 0 |
 #	- Runs a "Dialogue Function" with one parameter. (Cannot run ANY function - this is to future proof.)
 #	- Dialogue Functions can be found here: res://UI/Dialogue/Dialogue Functions/
 #	- Dialogue Function Name Example: encounter.gd would be written as: "encounter"
 #	- Only one integer is passed into these functions! All Dialogue Functions state what it does at the top.
 
-## "size_gradual": (MC) Marker Char, ~Start Size = "default", Target Size, Step Size
-#	- After marker char, changes text size gradually by (Step Size) every character. Starts at
+## |size_gradual : (MC) Marker Char : ~Start Size = "default" : Target Size : Step Size |
+#	- After marker char, changes text size gradually by (Step Size) every character. Starts at-
 #	  (Start Size) and goes until (Target Size) is reached.
 #	- Font size is 28 by default. (Start Size can be set to "d" or "default")
 
-## "wave": (MC) Marker Char, (int) Amplitude, (float) ~Frequency = 5.0
+## |wave : (MC) Marker Char : (int) Amplitude : (float) ~Frequency = 5.0 |
 #	- Makes text characters display slightly offset as a wave animation.
 #	- Amplitude is how far characters offset. An Amplitude of 0 causes the wave to stop.
-#			Note: Test Amplitude to find a decent default setting.
+#			Note: Amplitude works best between 10 and 50
 #	- Frequency is how fast the waves move. Doesn't ever really require messing with.
 
 ## ------------------- Rich Text Stuff (built into Godot, doesn't require custom syntax.) ------------------
 
 # Text shaking
 # [shake rate=30.0 level=10 connected=1]
+
+# Set size
+# [font_size=28]
 
 # OMORI text colors:
 # [color=#51C059]

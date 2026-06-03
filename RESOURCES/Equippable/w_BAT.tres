@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Equipable" format=3 uid="uid://b0r78rruu7lhc"]
 
 [ext_resource type="Texture2D" uid="uid://b2ocad4ndctjj" path="res://RESOURCES/Hector.png" id="1_kslls"]
-[ext_resource type="Script" uid="uid://1cjwfrn6g3d7" path="res://RESOURCES/AllInherit/equipable.gd" id="2_kslls"]
+[ext_resource type="Script" uid="uid://1cjwfrn6g3d7" path="res://RESOURCES/Equippable/equipable.gd" id="2_kslls"]
 
 [resource]
 script = ExtResource("2_kslls")
