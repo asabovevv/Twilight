@@ -8,7 +8,6 @@ var Version : float = 0.001 # Used in save-files
 var ui : Node2D # Whatever node is the current UI root.
 var camera : Node2D # Whatever node is the currently used cameras root.
 var entrance : int = 0 # Tracks which way a room was entered from a previous room.
-var encounter : Encounter # Determines encounter setup on encounter room entered
 
 ## --- --- --- --- --- --- --- --- Options --- --- --- --- --- --- --- --- 
 

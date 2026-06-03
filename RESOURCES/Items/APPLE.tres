@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dx7d883dkom43"]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dx7d883dkom43"]
 
 [ext_resource type="Texture2D" uid="uid://b2ocad4ndctjj" path="res://RESOURCES/Hector.png" id="1_e1gu1"]
 [ext_resource type="Script" uid="uid://dn632uqk44wya" path="res://RESOURCES/AllInherit/item.gd" id="1_l1wnu"]
