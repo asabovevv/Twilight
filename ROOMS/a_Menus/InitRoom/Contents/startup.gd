@@ -62,24 +62,23 @@ func display_stats() -> void:
 		
 		# In party? + Pos
 		pmc.modulate.a = 0.7
-		for j in (TWILIGHT.Party.current_party.size()):
-			if TWILIGHT.Party.current_party.has(pmc.mychar):
-				v[1].text = "In Party (%d)" % [ float(TWILIGHT.Party.all_members[member].round_priority) / 2.0 ]
-				pmc.modulate.a = 1
+		if TWILIGHT.Party.current_party.has(TWILIGHT.Party.all_members[member]):
+			v[1].text = "In Party (%d)" % [ float(TWILIGHT.Party.all_members[member].round_priority) / 2.0 ]
+			pmc.modulate.a = 1
 		
 		# Leveling
 		v[2].get_child(0).text = str( TWILIGHT.Party.all_members[member].level )
 		pmc.update_lvstats()
 		
 		# Weapon
-		if TWILIGHT.Party.all_members[member].weapon == "":
+		if TWILIGHT.Party.all_members[member].weapon == Equippable.NONE:
 			v[3].get_child(0).text = "None"
 		else:
 			v[3].get_child(0).text = Registry.get_equipment( TWILIGHT.Party.all_members[member].weapon ).name
 			pmc.update_weaponstats( TWILIGHT.Party.all_members[member].weapon )
 		
 		# Charm
-		if TWILIGHT.Party.all_members[member].charm == "":
+		if TWILIGHT.Party.all_members[member].charm == Equippable.NONE:
 			v[4].get_child(0).text = "None"
 		else:
 			v[4].get_child(0).text = Registry.get_equipment( TWILIGHT.Party.all_members[member].charm ).name

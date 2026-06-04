@@ -7,7 +7,8 @@ var owner : String
 var icon : Texture2D
 var stats : Dictionary[String, int]
 
-enum EquipType { Weapon, Charm }
+enum EquipType { WEAPON, CHARM }
+const NONE = "none"
 var equip_type
 
 func _init(

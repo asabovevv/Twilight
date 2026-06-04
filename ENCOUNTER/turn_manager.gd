@@ -19,6 +19,7 @@ func on_select_run():
 	context.menu.get_tree().change_scene_to_file("res://ROOMS/a_Menus/InitRoom/startup.tscn")
 
 func on_select_action(index : int):
+	context.menu.save_last_selected(context.party.current_selected().data.key)
 	match index:
 		0:
 			# temporary, always just cycle to the next member

@@ -6,8 +6,8 @@ var members : Array[PartyMember]
 
 var current_selected_index : int = -1
 
-func _init(members : Array[PartyMember]):
-	self.members = members
+func _init(_members : Array[PartyMember]):
+	members = _members
 
 func current_selected() -> PartyMember:
 	return members[current_selected_index] if current_selected_index >= 0 else null

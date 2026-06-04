@@ -12,7 +12,7 @@ var _current_menu : Menu
 var _menus : Dictionary[MenuState.State, Menu]
 var context : EncounterContext
 
-## TODO: selection memory
+var _last_selected : Dictionary[String, SelectionMemory] = {}
 
 func _enter_tree() -> void:
 	_menus = {
@@ -57,8 +57,21 @@ func show_menu(state : MenuState.State, immediate : bool = false, ignore_memory 
 	if _current_menu:
 		_current_menu.move_down(state, immediate)
 	_current_menu = _menus[current_state]
+	var current : PartyMember = context.party.current_selected()
 	if ignore_memory:
 		_current_menu.on_open(SelectionMemory.new(current_state, _current_menu.cursor_index))
+	elif current:
+		var selection : SelectionMemory = _last_selected.get(current.data.key)
+		if selection:
+			_current_menu.on_open(selection)
 	else:
 		_current_menu.on_open(SelectionMemory.new(current_state, 0))
 	_current_menu.move_up(immediate)
+
+## Adds a party member's menu selection to the memory
+func save_last_selected(member_id : String) -> void:
+	_last_selected[member_id] = SelectionMemory.new(current_state, _current_menu.cursor_index)
+
+## Clears ALL menu selection entries
+func clear_last_selected() -> void:
+	_last_selected.clear()

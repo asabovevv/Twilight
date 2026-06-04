@@ -8,52 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://vvltirxprbe6" path="res://ENCOUNTER/Sprites/UI/Bar_Juice.png" id="6_4aai6"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="7_amba5"]
 [ext_resource type="Texture2D" uid="uid://cyle5r3edd4yc" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Frost.png" id="8_n1pig"]
+[ext_resource type="Script" uid="uid://l0mnvwmx7sp7" path="res://ENCOUNTER/battlestatus_select_pulse.gd" id="9_4aai6"]
 [ext_resource type="Texture2D" uid="uid://4vqrv5ap6u4f" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Select.png" id="9_ar1dj"]
-
-[sub_resource type="CSharpScript" id="CSharpScript_ndcia"]
-script/source = "using Godot;
-
-namespace Twilight;
-
-/// <summary>
-/// Handles the pulse effect whenever a party member is selecting their action
-/// </summary>
-public partial class BattleStatusSelectPulse : Sprite2D
-{
-    [Export] private float Duration = 0.5f;
-    [Export] private float Delay = 0.5f;
-    
-    private Tween Tween;
-
-    public override void _Ready()
-    {
-        Tween = CreateTween();
-        Tween.Pause();
-        Tween.SetTrans(Tween.TransitionType.Sine);
-        Tween.TweenProperty(this, \"modulate:a\", 1f, Duration);
-        Tween.TweenProperty(this, \"modulate:a\", 0f, Duration);
-        Tween.TweenInterval(Delay);
-        Tween.SetLoops();
-    }
-
-    /// <summary>
-    /// Starts the pulse effect and shows the node
-    /// </summary>
-    public void StartPulse()
-    {
-        Tween.Play();
-        Show();
-    }
-
-    /// <summary>
-    /// Stops the pulse effect and hides the node
-    /// </summary>
-    public void StopPulse()
-    {
-        Tween.Stop();
-        Hide();
-    }
-}"
 
 [node name="BattleStatus" type="NinePatchRect" unique_id=525477418]
 offset_left = 11.0
@@ -137,7 +93,7 @@ autowrap_trim_flags = 128
 modulate = Color(1, 1, 1, 0)
 position = Vector2(60, 71)
 texture = ExtResource("8_n1pig")
-script = SubResource("CSharpScript_ndcia")
+script = ExtResource("9_4aai6")
 
 [node name="BattleStatusSelect" type="Sprite2D" parent="BattleStatusFrost" unique_id=984351021]
 position = Vector2(0, 15)

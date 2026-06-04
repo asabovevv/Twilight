@@ -28,17 +28,10 @@ func _spawn(party : PartyState):
 				status.position = Vector2(512, 5)
 			_:
 				status.position = Vector2.ZERO
-
-# temporary for mockup
-func _apply_portrait(status : Control, name : String):
-	var tex : Texture2D = load("res://CHARACTERS/%s/Portraits/Portrait0.png" % name)
-	var atlas = AtlasTexture.new()
-	atlas.atlas = tex
-	atlas.region = Rect2(0, 0, tex.get_width() / 3, tex.height())
-	var frames = SpriteFrames.new()
-	frames.add_frame("default", atlas)
-	var animation : AnimatedSprite2D = status.get_child(1)
-	animation.sprite_frames = frames
+		# TODO: expose this better instead of by child 
+		var animation : AnimatedSprite2D = status.get_child(1)
+		animation.sprite_frames = party.members[i].battle_portrait
+		statuses.append(status)
 
 func _on_selection_changed(old_index : int, new_index : int):
 	if old_index >= 0:

@@ -4,16 +4,18 @@ var mychar
 var myparent
 
 func _on_add_remove_party_member_button_down() -> void:
+	var member : PartyMember = TWILIGHT.Party.all_members[mychar]
+	
 	# If in party already
-	if TWILIGHT.Party.current_party.has(mychar):
-		TWILIGHT.Party.current_party.erase(mychar)
+	if TWILIGHT.Party.current_party.has(member):
+		TWILIGHT.Party.current_party.erase(member)
 		$IsInParty.text = "Not In Party"
 		modulate.a = 0.7
 		return
 	
 	# Else
-	TWILIGHT.Party.current_party.append(mychar)
-	$IsInParty.text = "In Party (%d)" % [ float(TWILIGHT.Party.all_members[mychar].round_priority) / 2.0 ]
+	TWILIGHT.Party.current_party.append(member)
+	$IsInParty.text = "In Party (%d)" % [ float(member.round_priority) / 2.0 ]
 	modulate.a = 1
 
 func _on_level_edit_text_changed(new_text: String) -> void:
@@ -25,13 +27,13 @@ func _on_level_edit_text_changed(new_text: String) -> void:
 	update_skills()
 
 func update_lvstats() -> void:
-	var id : TWILIGHT.PartyMemberData = TWILIGHT.Party.all_members[mychar]
+	var member : PartyMember = TWILIGHT.Party.all_members[mychar]
 	
-	$Level/Hptxt.text = str( id.base_stats[StatType.HEART] )
-	$Level/Juicetxt.text = str( id.base_stats[StatType.JUICE] )
-	$Level/Atktxt.text = str( id.base_stats[StatType.ATTACK] )
-	$Level/Deftxt.text = str( id.base_stats[StatType.DEFENSE] )
-	$Level/Spdtxt.text = str( id.base_stats[StatType.SPEED] )
+	$Level/Hptxt.text = str( member.base_stats[StatType.HEART] )
+	$Level/Juicetxt.text = str( member.base_stats[StatType.JUICE] )
+	$Level/Atktxt.text = str( member.base_stats[StatType.ATTACK] )
+	$Level/Deftxt.text = str( member.base_stats[StatType.DEFENSE] )
+	$Level/Spdtxt.text = str( member.base_stats[StatType.SPEED] )
 
 func _on_weapon_edit_text_changed(new_text: String) -> void:
 	var equip = Registry.get_equipment(new_text)
@@ -54,7 +56,7 @@ func _on_weapon_edit_text_changed(new_text: String) -> void:
 func update_weaponstats(_name : String) -> void:
 	var _weapon = Registry.get_equipment(_name)
 	
-	if _weapon.equip_type == Equippable.EquipType.Weapon:
+	if _weapon.equip_type == Equippable.EquipType.WEAPON:
 		$Weapon/HptxtW.text = str( _weapon.get_stat(StatType.HEART) )
 		$Weapon/JuicetxtW.text = str( _weapon.get_stat(StatType.JUICE) )
 		$Weapon/AtktxtW.text = str( _weapon.get_stat(StatType.ATTACK) )
@@ -89,7 +91,7 @@ func _on_charm_edit_text_changed(new_text: String) -> void:
 func update_charmstats(_name : String) -> void:
 	var _weapon = Registry.get_equipment(_name)
 	
-	if _weapon.equip_type == Equippable.EquipType.Charm:
+	if _weapon.equip_type == Equippable.EquipType.CHARM:
 		$Charm/HptxtC.text = str( _weapon.get_stat(StatType.HEART) )
 		$Charm/JuicetxtC.text = str( _weapon.get_stat(StatType.JUICE) )
 		$Charm/AtktxtC.text = str( _weapon.get_stat(StatType.ATTACK) )

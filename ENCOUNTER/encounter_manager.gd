@@ -9,13 +9,7 @@ class_name EncounterManager extends Node
 
 func _ready() -> void:
 	var state = EncounterState.new(starting_power)
-	# temporary for mockup, this would pull data from the registry or an existing party from the overworld
-	var party = PartyState.new([
-		PartyMember.new("Aubrey"),
-		PartyMember.new("Sunny"),
-		PartyMember.new("Kel"),
-		PartyMember.new("Hero"),
-	])
+	var party = PartyState.new(TWILIGHT.Party.current_party)
 	var turn_manager = TurnManager.new();
 	var ctx = EncounterContext.new(menu_manager, battlelog_manager, turn_manager, party, state)
 

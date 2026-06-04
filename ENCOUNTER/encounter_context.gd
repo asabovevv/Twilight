@@ -8,14 +8,14 @@ var party : PartyState
 var state : EncounterState
 
 func _init(
-	menu : MenuManager,
-	battlelog : BattleLogManager,
-	turn : TurnManager,
-	party : PartyState,
-	state : EncounterState
+	_menu : MenuManager,
+	_battlelog : BattleLogManager,
+	_turn : TurnManager,
+	_party : PartyState,
+	_state : EncounterState
 ):
-	self.menu = menu
-	self.battlelog = battlelog
-	self.turn = turn
-	self.party = party
-	self.state = state
+	menu = _menu
+	battlelog = _battlelog
+	turn = _turn
+	party = _party
+	state = _state

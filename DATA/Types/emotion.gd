@@ -1,5 +1,7 @@
 class_name Emotion
 
+## An emotion. Each tier of an emotion is a separate object.
+
 var name : String
 var label_texture : Texture2D
 var label_index : int
@@ -8,8 +10,6 @@ var gradient_index : int
 var color : Color
 var sound : String
 var modifiers : Array[StatModifier]
-
-var stage : int # Stages 0, 1, 2. This system is implied when Portrait.gd inits
 
 func _init(
 	_name : String,
@@ -29,4 +29,3 @@ func _init(
 	self.color = _color
 	self.sound = _sound
 	self.modifiers = _modifiers
-	self.stage = 0
