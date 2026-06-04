@@ -45,45 +45,45 @@ func _on_default_stats_pressed() -> void:
 	display_stats()
 
 func _on_emotion_unlock_pressed() -> void:
-	TWILIGHT.Party_Fast_Emotion = ["Neutral", "Happy", "Angry", "Sad"]
+	TWILIGHT.Party.fast_emotion = ["neutral", "happy", "angry", "sad"]
 
 func display_stats() -> void:
 	for i in party_cont.get_child_count():
 		party_cont.get_child(i).queue_free()
 	
-	for i in range(TWILIGHT.All_Characters.size()):
+	for member in TWILIGHT.Party.all_members:
 		var pmc = partymember_cont.instantiate()
 		var v : Array = pmc.get_children()
-		pmc.mychar = TWILIGHT.All_Characters[i]
+		pmc.mychar = member
 		pmc.myparent = self
 		
 		# Name
-		v[0].text = TWILIGHT.All_Characters[i].Name
+		v[0].text = TWILIGHT.Party.all_members[member].name
 		
 		# In party? + Pos
 		pmc.modulate.a = 0.7
-		for j in (TWILIGHT.Party_Order.size()):
-			if TWILIGHT.Party_Order[j] == TWILIGHT.All_Characters[i]:
-				v[1].text = "In Party (%d)" % [ float(TWILIGHT.All_Characters[i].TurnPriority) / 2.0 ]
+		for j in (TWILIGHT.Party.current_party.size()):
+			if TWILIGHT.Party.current_party.has(pmc.mychar):
+				v[1].text = "In Party (%d)" % [ float(TWILIGHT.Party.all_members[member].round_priority) / 2.0 ]
 				pmc.modulate.a = 1
 		
 		# Leveling
-		v[2].get_child(0).text = str( TWILIGHT.All_Characters[i].Level )
+		v[2].get_child(0).text = str( TWILIGHT.Party.all_members[member].level )
 		pmc.update_lvstats()
 		
 		# Weapon
-		if TWILIGHT.All_Characters[i].Weapon == null:
+		if TWILIGHT.Party.all_members[member].weapon == "":
 			v[3].get_child(0).text = "None"
 		else:
-			v[3].get_child(0).text =  TWILIGHT.All_Characters[i].Weapon.name
-			pmc.update_weaponstats(TWILIGHT.All_Characters[i].Weapon)
+			v[3].get_child(0).text = Registry.get_equipment( TWILIGHT.Party.all_members[member].weapon ).name
+			pmc.update_weaponstats( TWILIGHT.Party.all_members[member].weapon )
 		
 		# Charm
-		if TWILIGHT.All_Characters[i].Charm == null:
+		if TWILIGHT.Party.all_members[member].charm == "":
 			v[4].get_child(0).text = "None"
 		else:
-			v[4].get_child(0).text =  TWILIGHT.All_Characters[i].Charm.name
-			pmc.update_charmstats(TWILIGHT.All_Characters[i].Charm)
+			v[4].get_child(0).text = Registry.get_equipment( TWILIGHT.Party.all_members[member].charm ).name
+			pmc.update_charmstats( TWILIGHT.Party.all_members[member].charm )
 		
 		# Skills
 		pmc.update_skills()

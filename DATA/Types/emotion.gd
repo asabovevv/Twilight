@@ -9,21 +9,24 @@ var color : Color
 var sound : String
 var modifiers : Array[StatModifier]
 
+var stage : int # Stages 0, 1, 2. This system is implied when Portrait.gd inits
+
 func _init(
-	name : String,
-	label_texture : Texture2D,
-	label_index : int,
-	gradient_texture : Texture2D,
-	gradient_index : int,
-	color : Color,
-	sound : String,
-	modifiers : Array[StatModifier]
+	_name : String,
+	_label_texture : Texture2D,
+	_label_index : int,
+	_gradient_texture : Texture2D,
+	_gradient_index : int,
+	_color : Color,
+	_sound : String,
+	_modifiers : Array[StatModifier]
 ):
-	self.name = name
-	self.label_texture = label_texture
-	self.label_index = label_index
-	self.gradient_texture = gradient_texture
-	self.gradient_index = gradient_index
-	self.color = color
-	self.sound = sound
-	self.modifiers = modifiers
+	self.name = _name
+	self.label_texture = _label_texture
+	self.label_index = _label_index
+	self.gradient_texture = _gradient_texture
+	self.gradient_index = _gradient_index
+	self.color = _color
+	self.sound = _sound
+	self.modifiers = _modifiers
+	self.stage = 0

@@ -1,7 +1,7 @@
 class_name StatType
 
-const MAX_HEART : String = "max_heart"
-const MAX_JUICE : String = "max_juice"
+const HEART : String = "heart"
+const JUICE : String = "juice"
 const ATTACK : String = "attack"
 const DEFENSE : String = "defense"
 const SPEED : String = "speed"

@@ -7,17 +7,27 @@ var owner : String
 var icon : Texture2D
 var stats : Dictionary[String, int]
 
+enum EquipType { Weapon, Charm }
+var equip_type
+
 func _init(
-	name : String,
-	description : String,
-	owner : String,
-	icon : Texture2D,
-	stats : Dictionary[String, int],
-	can_unequip : bool = true,
+	_name : String,
+	_description : String,
+	_owner : String,
+	_icon : Texture2D,
+	_stats : Dictionary[String, int],
+	_equip_type : EquipType,
+	_can_unequip : bool = true,
 ):
-	self.name = name
-	self.description = description
-	self.owner = owner
-	self.icon = icon
-	self.stats = stats
-	self.can_unequip = can_unequip
+	self.name = _name
+	self.description = _description
+	self.owner = _owner
+	self.icon = _icon
+	self.stats = _stats
+	self.equip_type = _equip_type
+	self.can_unequip = _can_unequip
+
+func get_stat(stat_type : String) -> int:
+	if stats.has(stat_type):
+		return stats[stat_type]
+	return 0

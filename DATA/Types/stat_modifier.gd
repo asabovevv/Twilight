@@ -4,7 +4,7 @@ var type : String
 var multiplier : float
 var flat_bonus : int
 
-func _init(type : String, multiplier : float = 1, flat_bonus : int = 0):
-	self.type = type
-	self.multiplier = multiplier
-	self.flat_bonus = flat_bonus
+func _init(_type : String, _multiplier : float = 1, _flat_bonus : int = 0):
+	self.type = _type
+	self.multiplier = _multiplier
+	self.flat_bonus = _flat_bonus
