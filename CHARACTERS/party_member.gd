@@ -34,7 +34,7 @@ const mood_strings = ["Neutral", "Sad", "Angry", "Happy"]
 var init : bool = false
 
 func _ready() -> void:
-	if (auto_delete) && (TWILIGHT.Party_Size < (line_position+2)):
+	if (auto_delete) && (TWILIGHT.Party.current_party.size() < (line_position+2)):
 		queue_free()
 		return
 	
@@ -131,7 +131,7 @@ func _grid_snap(_position : Vector2) -> Vector2:
 func new_sprites() -> void:
 	get_child(1).queue_free()
 	
-	var sprites = load(TWILIGHT.Party_Order[line_position+1].Path + "OW_sprites.tscn")
+	var sprites = load(TWILIGHT.Party.current_party[line_position+1].data.asset_path + "OW_sprites.tscn")
 	sprites = sprites.instantiate()
 	add_child(sprites)
 	
@@ -140,7 +140,7 @@ func new_sprites() -> void:
 func _on_main_party_member_mood_changed() -> void:
 	if init:
 		var mood : int
-		match TWILIGHT.Party_Order[line_position-1].Emotion.name:
+		match TWILIGHT.Party.current_party[line_position-1].current_emotion.name:
 			"Neutral":
 				mood = 0
 			"Sad":
@@ -150,7 +150,7 @@ func _on_main_party_member_mood_changed() -> void:
 			"Happy":
 				mood = 3
 		
-		if TWILIGHT.Party_Order[line_position-1].Name == "AUBREY":
+		if TWILIGHT.Party.current_party[line_position-1].data.key == "aubrey":
 			for i in character_sprites:
 				i.material.set_shader_parameter("emotion", mood_colors[mood])
 				i.material.set_shader_parameter("bow_emotion_highlight", bow_mood_colors[mood*2])

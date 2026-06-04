@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_tqdux"]
 [ext_resource type="Shader" uid="uid://c4c3rxypestma" path="res://MISC/gradient.gdshader" id="3_t48r1"]
 [ext_resource type="Texture2D" uid="uid://brk0etqpnmvwh" path="res://UI/StatusBar.png" id="4_co3hv"]
-[ext_resource type="Texture2D" uid="uid://ybpau3axcnlo" path="res://CHARACTERS/Aubrey/Portraits/Portrait0.png" id="5_pdgcq"]
+[ext_resource type="Texture2D" uid="uid://ybpau3axcnlo" path="res://UI/Portraits/AubreyBattle/Neutral.png" id="5_pdgcq"]
 
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3mje1"]

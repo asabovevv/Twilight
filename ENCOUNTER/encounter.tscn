@@ -1,45 +1,45 @@
 [gd_scene format=3 uid="uid://cw6wo3nf4wox"]
 
-[ext_resource type="Script" uid="uid://br8xc4hcdemex" path="res://ENCOUNTER/EncounterManager.cs" id="1_7ltex"]
+[ext_resource type="Script" uid="uid://dnv68vbuvf13k" path="res://ENCOUNTER/encounter_manager.gd" id="1_7mqee"]
+[ext_resource type="Script" uid="uid://njnw7vy4fac5" path="res://ENCOUNTER/BattleLog/battlelog_manager.gd" id="2_0ylf6"]
 [ext_resource type="Texture2D" uid="uid://cfui0nosp4wut" path="res://ENCOUNTER/Sprites/Backgrounds/Afterglow_Church.png" id="2_7ltex"]
+[ext_resource type="PackedScene" uid="uid://df2mrwxipvp04" path="res://ENCOUNTER/BattleLog/log_line.tscn" id="3_0ylf6"]
 [ext_resource type="Texture2D" uid="uid://roo21jh6gmux" path="res://ENCOUNTER/Sprites/UI/BossHealth.png" id="3_vxuot"]
-[ext_resource type="Script" uid="uid://b651aeaixfvix" path="res://ENCOUNTER/BattleLog/BattleLogManager.cs" id="4_l6np0"]
 [ext_resource type="Texture2D" uid="uid://brk0etqpnmvwh" path="res://UI/StatusBar.png" id="4_wutpw"]
-[ext_resource type="PackedScene" uid="uid://df2mrwxipvp04" path="res://ENCOUNTER/BattleLog/log_line.tscn" id="5_7mqee"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="5_ntido"]
 [ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="6_u8jav"]
 [ext_resource type="PackedScene" uid="uid://b7pmk3rtv2yr6" path="res://ENCOUNTER/battle_status_small.tscn" id="7_y2hrj"]
-[ext_resource type="PackedScene" uid="uid://bdniamv5ykuvn" path="res://ENCOUNTER/battle_status.tscn" id="8_l6np0"]
+[ext_resource type="Script" uid="uid://dwj5rwqic1nyb" path="res://ENCOUNTER/Party/party_view.gd" id="9_0ylf6"]
 [ext_resource type="Texture2D" uid="uid://coaqxylbxsmxi" path="res://UI/Bunny_Point.png" id="9_7mqee"]
-[ext_resource type="Script" uid="uid://c7cgfnul0pc72" path="res://ENCOUNTER/BattleMenu/MenuManager.cs" id="9_ntido"]
 [ext_resource type="Texture2D" uid="uid://ctllws4nm0c14" path="res://ENCOUNTER/Sprites/UI/Buttons_Large.png" id="10_0ylf6"]
 [ext_resource type="Script" uid="uid://djhpg1p84ghg" path="res://UI/cursor_bounce.gd" id="10_7ltex"]
-[ext_resource type="Script" uid="uid://dq0s3pxau13jp" path="res://ENCOUNTER/BattleMenu/FightRunMenu.cs" id="10_u8jav"]
+[ext_resource type="Script" uid="uid://dsloh7s5cdrft" path="res://ENCOUNTER/BattleMenu/menu_manager.gd" id="10_7mqee"]
+[ext_resource type="Script" uid="uid://by1si2r1bvp7s" path="res://ENCOUNTER/BattleMenu/fight_run_menu.gd" id="11_0ylf6"]
 [ext_resource type="Texture2D" uid="uid://c6h0vtuad8oai" path="res://ENCOUNTER/Sprites/UI/Buttons_Small.png" id="11_28wf1"]
-[ext_resource type="Script" uid="uid://rmbdeqjiktsn" path="res://ENCOUNTER/Party/PartyView.cs" id="12_2jno8"]
+[ext_resource type="PackedScene" uid="uid://bdniamv5ykuvn" path="res://ENCOUNTER/battle_status.tscn" id="11_vtcnl"]
 [ext_resource type="Texture2D" uid="uid://bge8juob8xmuk" path="res://ENCOUNTER/Sprites/UI/PowerBar.png" id="12_vtcnl"]
 [ext_resource type="Shader" uid="uid://cmll2rkwnnt4w" path="res://ENCOUNTER/powerbar.gdshader" id="13_2jno8"]
 [ext_resource type="Texture2D" uid="uid://c5gdqd4bqq0g7" path="res://ENCOUNTER/Sprites/UI/PowerBarDots.png" id="14_u8n1i"]
-[ext_resource type="Script" uid="uid://dub7oqrosielk" path="res://ENCOUNTER/BattleMenu/FSSTMenu.cs" id="14_y2hrj"]
-[ext_resource type="Script" uid="uid://crpao4dyiq7rd" path="res://ENCOUNTER/BattleMenu/SkillMenu.cs" id="19_0ylf6"]
-[ext_resource type="Script" uid="uid://do6ls3jiyjtsv" path="res://ENCOUNTER/BattleMenu/ItemMenu.cs" id="20_28wf1"]
-[ext_resource type="Script" uid="uid://ct8bqcdg2bagr" path="res://ENCOUNTER/PowerBarView.cs" id="22_u8n1i"]
+[ext_resource type="Script" uid="uid://dde000c7oqth" path="res://ENCOUNTER/BattleMenu/fsst_menu.gd" id="15_28wf1"]
+[ext_resource type="Script" uid="uid://qrybaq6fjfkb" path="res://ENCOUNTER/BattleMenu/skill_menu.gd" id="17_vtcnl"]
+[ext_resource type="Script" uid="uid://cjflg77clnn3p" path="res://ENCOUNTER/BattleMenu/item_menu.gd" id="18_2jno8"]
+[ext_resource type="Script" uid="uid://c6ve5ls1s2vdc" path="res://ENCOUNTER/power_bar.gd" id="19_u8n1i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5p3vj"]
 shader = ExtResource("13_2jno8")
 shader_parameter/off = 0.245
 
-[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("MenuManager", "BattleLogManager", "PartyView", "PowerBar")]
-script = ExtResource("1_7ltex")
-MenuManager = NodePath("Bars")
-BattleLogManager = NodePath("BattleLogManager")
-PartyView = NodePath("BattleStatus_Root")
-PowerBar = NodePath("PowerBar_Root")
+[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("menu_manager", "battlelog_manager", "party_view", "power_bar")]
+script = ExtResource("1_7mqee")
+menu_manager = NodePath("Bars")
+battlelog_manager = NodePath("BattleLogManager")
+party_view = NodePath("BattleStatus_Root")
+power_bar = NodePath("PowerBar_Root")
 
-[node name="BattleLogManager" type="Node" parent="." unique_id=1689532942 node_paths=PackedStringArray("ImmediateLabel")]
-script = ExtResource("4_l6np0")
-LogLine = ExtResource("5_7mqee")
-ImmediateLabel = NodePath("../UpdateBox/Immediate")
+[node name="BattleLogManager" type="Node" parent="." unique_id=1689532942 node_paths=PackedStringArray("immediate_label")]
+script = ExtResource("2_0ylf6")
+log_line = ExtResource("3_0ylf6")
+immediate_label = NodePath("../UpdateBox/Immediate")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1581445242]
 z_index = -8
@@ -110,10 +110,10 @@ offset_right = 621.0
 offset_bottom = 294.0
 
 [node name="BattleStatus_Root" type="Node2D" parent="." unique_id=1499985737]
-script = ExtResource("12_2jno8")
-BattleStatus = ExtResource("8_l6np0")
+script = ExtResource("9_0ylf6")
+battle_status = ExtResource("11_vtcnl")
 
-[node name="Bars" type="Control" parent="." unique_id=557055657 node_paths=PackedStringArray("FightRunMenu", "FsstMenu", "SkillMenu", "SnackMenu", "ToyMenu")]
+[node name="Bars" type="Control" parent="." unique_id=557055657 node_paths=PackedStringArray("fight_run_menu", "fsst_menu", "skill_menu", "snack_menu", "toy_menu")]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -122,20 +122,20 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("9_ntido")
-FightRunMenu = NodePath("FightRun_Bar")
-FsstMenu = NodePath("FSST_Bar")
-SkillMenu = NodePath("Skill_Menu")
-SnackMenu = NodePath("Snack_Menu")
-ToyMenu = NodePath("Toy_Menu")
+script = ExtResource("10_7mqee")
+fight_run_menu = NodePath("FightRun_Bar")
+fsst_menu = NodePath("FSST_Bar")
+skill_menu = NodePath("Skill_Menu")
+snack_menu = NodePath("Snack_Menu")
+toy_menu = NodePath("Toy_Menu")
 
-[node name="FightRun_Bar" type="Control" parent="Bars" unique_id=1186938519 node_paths=PackedStringArray("CursorSprite")]
+[node name="FightRun_Bar" type="Control" parent="Bars" unique_id=1186938519 node_paths=PackedStringArray("cursor_sprite")]
 visible = false
 anchors_preset = 0
 offset_top = 95.0
 offset_bottom = 95.0
-script = ExtResource("10_u8jav")
-CursorSprite = NodePath("Pointer")
+script = ExtResource("11_0ylf6")
+cursor_sprite = NodePath("Pointer")
 
 [node name="Pointer" type="Sprite2D" parent="Bars/FightRun_Bar" unique_id=1024799006]
 z_index = 1
@@ -155,13 +155,13 @@ texture = ExtResource("10_0ylf6")
 vframes = 2
 frame = 1
 
-[node name="FSST_Bar" type="Control" parent="Bars" unique_id=1213814216 node_paths=PackedStringArray("CursorSprite")]
+[node name="FSST_Bar" type="Control" parent="Bars" unique_id=1213814216 node_paths=PackedStringArray("cursor_sprite")]
 visible = false
 anchors_preset = 0
 offset_top = 95.0
 offset_bottom = 95.0
-script = ExtResource("14_y2hrj")
-CursorSprite = NodePath("Pointer")
+script = ExtResource("15_28wf1")
+cursor_sprite = NodePath("Pointer")
 
 [node name="Pointer" type="Sprite2D" parent="Bars/FSST_Bar" unique_id=1733347418]
 z_index = 1
@@ -193,7 +193,7 @@ texture = ExtResource("11_28wf1")
 vframes = 4
 frame = 3
 
-[node name="Skill_Menu" type="NinePatchRect" parent="Bars" unique_id=260288979 node_paths=PackedStringArray("CursorSprite")]
+[node name="Skill_Menu" type="NinePatchRect" parent="Bars" unique_id=260288979 node_paths=PackedStringArray("cursor_sprite")]
 visible = false
 z_index = 1
 layout_mode = 1
@@ -215,8 +215,8 @@ patch_margin_left = 3
 patch_margin_top = 4
 patch_margin_right = 3
 patch_margin_bottom = 4
-script = ExtResource("19_0ylf6")
-CursorSprite = NodePath("Pointer")
+script = ExtResource("17_vtcnl")
+cursor_sprite = NodePath("Pointer")
 
 [node name="Line2D" type="Line2D" parent="Bars/Skill_Menu" unique_id=1638900434]
 position = Vector2(2, 28)
@@ -231,7 +231,7 @@ texture = ExtResource("9_7mqee")
 hframes = 2
 script = ExtResource("10_7ltex")
 
-[node name="Snack_Menu" type="NinePatchRect" parent="Bars" unique_id=1534911065 node_paths=PackedStringArray("CursorSprite")]
+[node name="Snack_Menu" type="NinePatchRect" parent="Bars" unique_id=1534911065 node_paths=PackedStringArray("cursor_sprite")]
 visible = false
 z_index = 1
 layout_mode = 1
@@ -253,8 +253,8 @@ patch_margin_left = 3
 patch_margin_top = 4
 patch_margin_right = 3
 patch_margin_bottom = 4
-script = ExtResource("20_28wf1")
-CursorSprite = NodePath("Pointer")
+script = ExtResource("18_2jno8")
+cursor_sprite = NodePath("Pointer")
 
 [node name="Line2D" type="Line2D" parent="Bars/Snack_Menu" unique_id=1581917227]
 position = Vector2(2, 28)
@@ -269,7 +269,7 @@ texture = ExtResource("9_7mqee")
 hframes = 2
 script = ExtResource("10_7ltex")
 
-[node name="Toy_Menu" type="NinePatchRect" parent="Bars" unique_id=1775321445 node_paths=PackedStringArray("CursorSprite")]
+[node name="Toy_Menu" type="NinePatchRect" parent="Bars" unique_id=1775321445 node_paths=PackedStringArray("cursor_sprite")]
 visible = false
 z_index = 1
 layout_mode = 1
@@ -291,8 +291,8 @@ patch_margin_left = 3
 patch_margin_top = 4
 patch_margin_right = 3
 patch_margin_bottom = 4
-script = ExtResource("20_28wf1")
-CursorSprite = NodePath("Pointer")
+script = ExtResource("18_2jno8")
+cursor_sprite = NodePath("Pointer")
 
 [node name="Line2D" type="Line2D" parent="Bars/Toy_Menu" unique_id=638815644]
 position = Vector2(2, 28)
@@ -307,11 +307,11 @@ texture = ExtResource("9_7mqee")
 hframes = 2
 script = ExtResource("10_7ltex")
 
-[node name="PowerBar_Root" type="Node2D" parent="." unique_id=343024446 node_paths=PackedStringArray("PowerNum", "PowerBar", "PowerBarDots")]
-script = ExtResource("22_u8n1i")
-PowerNum = NodePath("PowerBar/PowerNum")
-PowerBar = NodePath("PowerBar")
-PowerBarDots = NodePath("PowerBar/PowerBarDots")
+[node name="PowerBar_Root" type="Node2D" parent="." unique_id=343024446 node_paths=PackedStringArray("power_num", "power_bar", "power_bar_dots")]
+script = ExtResource("19_u8n1i")
+power_num = NodePath("PowerBar/PowerNum")
+power_bar = NodePath("PowerBar")
+power_bar_dots = NodePath("PowerBar/PowerBarDots")
 
 [node name="PowerBar" type="Sprite2D" parent="PowerBar_Root" unique_id=1468674129]
 position = Vector2(320, 354)

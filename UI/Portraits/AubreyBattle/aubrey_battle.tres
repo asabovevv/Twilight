@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://ojimmqfh3cpe"]
+
+[ext_resource type="Texture2D" uid="uid://ybpau3axcnlo" path="res://UI/Portraits/AubreyBattle/Neutral.png" id="1_vxine"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxine"]
+atlas = ExtResource("1_vxine")
+region = Rect2(0, 51, 121, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65m00"]
+atlas = ExtResource("1_vxine")
+region = Rect2(121, 51, 121, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gy7dr"]
+atlas = ExtResource("1_vxine")
+region = Rect2(242, 51, 121, 121)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxine")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65m00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gy7dr")
+}],
+"loop": true,
+"name": &"Neutral",
+"speed": 5.0
+}]

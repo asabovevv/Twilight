@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Skill" format=3 uid="uid://fmes4xm0s8b4"]
-
-[ext_resource type="Script" uid="uid://d34msguyfssa1" path="res://RESOURCES/Skills/skill.gd" id="1_d7tus"]
-
-[resource]
-script = ExtResource("1_d7tus")
-name = "ANOTHER SKILL"
-description = "I am out of ideas"
-metadata/_custom_type_script = "uid://d34msguyfssa1"

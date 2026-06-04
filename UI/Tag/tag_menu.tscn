@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="1_ioxsg"]
 [ext_resource type="Texture2D" uid="uid://cem7upx4k783i" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Angry.png" id="2_4uwn2"]
 [ext_resource type="Shader" uid="uid://dbox3mxussmio" path="res://UI/OverworldMenu/overworld_menu_blur.gdshader" id="2_fcgyc"]
-[ext_resource type="Texture2D" uid="uid://ybpau3axcnlo" path="res://CHARACTERS/Aubrey/Portraits/Portrait0.png" id="3_4uwn2"]
+[ext_resource type="Texture2D" uid="uid://ybpau3axcnlo" path="res://UI/Portraits/AubreyBattle/Neutral.png" id="3_4uwn2"]
 [ext_resource type="Texture2D" uid="uid://b7bkkt4sr16t7" path="res://UI/Tag/Tag_AO.png" id="3_iwy61"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="4_qdm8o"]
 [ext_resource type="Texture2D" uid="uid://1imj7yupx0ds" path="res://UI/Tag/Tag_BG1.png" id="4_v87kt"]

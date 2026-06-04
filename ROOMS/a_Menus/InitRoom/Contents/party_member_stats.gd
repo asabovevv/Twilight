@@ -4,40 +4,42 @@ var mychar
 var myparent
 
 func _on_add_remove_party_member_button_down() -> void:
+	var member : PartyMember = TWILIGHT.Party.all_members[mychar]
+	
 	# If in party already
-	for i in range(TWILIGHT.Party_Order.size()):
-		if TWILIGHT.Party_Order[i] == mychar:
-			TWILIGHT.remove_char_from_party(mychar.Name)
-			$IsInParty.text = "Not In Party"
-			modulate.a = 0.7
-			return
+	if TWILIGHT.Party.current_party.has(member):
+		TWILIGHT.Party.current_party.erase(member)
+		$IsInParty.text = "Not In Party"
+		modulate.a = 0.7
+		return
 	
 	# Else
-	TWILIGHT.add_char_to_party(mychar.Name)
-	$IsInParty.text = "In Party (%d)" % [ float(mychar.TurnPriority) / 2.0 ]
+	TWILIGHT.Party.current_party.append(member)
+	$IsInParty.text = "In Party (%d)" % [ float(member.round_priority) / 2.0 ]
 	modulate.a = 1
 
 func _on_level_edit_text_changed(new_text: String) -> void:
 	if int($Level/LevelEdit.text) > 50 || int($Level/LevelEdit.text) < 0:
 		return
 		
-	TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].set_level(int(new_text), 0)
+	TWILIGHT.Party.all_members[ mychar ].set_level(int(new_text), 0)
 	update_lvstats()
 	update_skills()
 
 func update_lvstats() -> void:
-	var id : int = TWILIGHT.get_char_id(mychar.Name)
+	var member : PartyMember = TWILIGHT.Party.all_members[mychar]
 	
-	$Level/Hptxt.text = str( TWILIGHT.All_Characters[id].Heart_Max )
-	$Level/Juicetxt.text = str( TWILIGHT.All_Characters[id].Juice_Max )
-	$Level/Atktxt.text = str( TWILIGHT.All_Characters[id].Attack_Base )
-	$Level/Deftxt.text = str( TWILIGHT.All_Characters[id].Defense_Base )
-	$Level/Spdtxt.text = str( TWILIGHT.All_Characters[id].Speed_Base )
+	$Level/Hptxt.text = str( member.base_stats[StatType.HEART] )
+	$Level/Juicetxt.text = str( member.base_stats[StatType.JUICE] )
+	$Level/Atktxt.text = str( member.base_stats[StatType.ATTACK] )
+	$Level/Deftxt.text = str( member.base_stats[StatType.DEFENSE] )
+	$Level/Spdtxt.text = str( member.base_stats[StatType.SPEED] )
 
 func _on_weapon_edit_text_changed(new_text: String) -> void:
-	if FileAccess.file_exists("res://RESOURCES/Equippable/"+new_text+".tres"):
-		if TWILIGHT.does_char_own_equippable(new_text, mychar.Name):
-			update_weaponstats(load("res://RESOURCES/Equippable/"+new_text+".tres"))
+	var equip = Registry.get_equipment(new_text)
+	if equip != null:
+		if equip.owner == mychar || equip.owner == "":
+			update_weaponstats( new_text )
 		else:
 			$Weapon/WeaponDesc.text = "Weapon does not belong to character."
 	else:
@@ -49,28 +51,30 @@ func _on_weapon_edit_text_changed(new_text: String) -> void:
 		$Weapon/LcktxtW.text = "0"
 		$Weapon/HittxtW.text = "0"
 		$Weapon/WeaponDesc.text = "No Description."
-		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Weapon = null
+		TWILIGHT.Party.all_members[ mychar ].weapon = ""
 
-func update_weaponstats(weapon : Equipable) -> void:
-	if weapon.is_weapon:
-		$Weapon/HptxtW.text = str( weapon.heart )
-		$Weapon/JuicetxtW.text = str( weapon.juice )
-		$Weapon/AtktxtW.text = str( weapon.attack )
-		$Weapon/DeftxtW.text = str( weapon.defense )
-		$Weapon/SpdtxtW.text = str( weapon.speed )
-		$Weapon/LcktxtW.text = str( weapon.luck )
-		$Weapon/HittxtW.text = str( weapon.hit )
-		$Weapon/WeaponDesc.text = weapon.description
+func update_weaponstats(_name : String) -> void:
+	var _weapon = Registry.get_equipment(_name)
+	
+	if _weapon.equip_type == Equippable.EquipType.WEAPON:
+		$Weapon/HptxtW.text = str( _weapon.get_stat(StatType.HEART) )
+		$Weapon/JuicetxtW.text = str( _weapon.get_stat(StatType.JUICE) )
+		$Weapon/AtktxtW.text = str( _weapon.get_stat(StatType.ATTACK) )
+		$Weapon/DeftxtW.text = str( _weapon.get_stat(StatType.DEFENSE) )
+		$Weapon/SpdtxtW.text = str( _weapon.get_stat(StatType.SPEED) )
+		$Weapon/LcktxtW.text = str( _weapon.get_stat(StatType.LUCK) )
+		$Weapon/HittxtW.text = str( _weapon.get_stat(StatType.HIT) )
+		$Weapon/WeaponDesc.text = _weapon.description
 		
-		#TWILIGHT.equippable(TWILIGHT.Inventory.Weapons[0])
-		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Weapon = weapon
+		TWILIGHT.Party.all_members[ mychar ].weapon = _name
 	else:
 		$Weapon/WeaponDesc.text = "Resource isn't a Weapon."
 
 func _on_charm_edit_text_changed(new_text: String) -> void:
-	if FileAccess.file_exists("res://RESOURCES/Equippable/"+new_text+".tres"):
-		if TWILIGHT.does_char_own_equippable(new_text, mychar.Name):
-			update_charmstats(load("res://RESOURCES/Equippable/"+new_text+".tres"))
+	var equip = Registry.get_equipment(new_text)
+	if equip != null:
+		if equip.owner == mychar || equip.owner == "":
+			update_charmstats( new_text )
 		else:
 			$Charm/CharmDesc.text = "Charm does not belong to character."
 	else:
@@ -82,21 +86,23 @@ func _on_charm_edit_text_changed(new_text: String) -> void:
 		$Charm/LcktxtC.text = "0"
 		$Charm/HittxtC.text = "0"
 		$Charm/CharmDesc.text = "No Description."
-		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Charm = null
+		TWILIGHT.Party.all_members[ mychar ].charm = ""
 
-func update_charmstats(charm : Equipable) -> void:
-	if !charm.is_weapon:
-		$Charm/HptxtC.text = str( charm.heart )
-		$Charm/JuicetxtC.text = str( charm.juice )
-		$Charm/AtktxtC.text = str( charm.attack )
-		$Charm/DeftxtC.text = str( charm.defense )
-		$Charm/SpdtxtC.text = str( charm.speed )
-		$Charm/LcktxtC.text = str( charm.luck )
-		$Charm/HittxtC.text = str( charm.hit )
-		$Charm/CharmDesc.text = charm.description
+func update_charmstats(_name : String) -> void:
+	var _weapon = Registry.get_equipment(_name)
+	
+	if _weapon.equip_type == Equippable.EquipType.CHARM:
+		$Charm/HptxtC.text = str( _weapon.get_stat(StatType.HEART) )
+		$Charm/JuicetxtC.text = str( _weapon.get_stat(StatType.JUICE) )
+		$Charm/AtktxtC.text = str( _weapon.get_stat(StatType.ATTACK) )
+		$Charm/DeftxtC.text = str( _weapon.get_stat(StatType.DEFENSE) )
+		$Charm/SpdtxtC.text = str( _weapon.get_stat(StatType.SPEED) )
+		$Charm/LcktxtC.text = str( _weapon.get_stat(StatType.LUCK) )
+		$Charm/HittxtC.text = str( _weapon.get_stat(StatType.HIT) )
+		$Charm/CharmDesc.text = _weapon.description
 		
 		#TWILIGHT.equippable(TWILIGHT.Inventory.Charms[0])
-		TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Charm = charm
+		TWILIGHT.Party.all_members[ mychar ].charm = _name
 	else:
 		$Charm/CharmDesc.text = "Resource isn't a Charm."
 
@@ -105,7 +111,7 @@ func update_skills() -> void:
 		if i != 0:
 			$Skills.get_child(i).queue_free()
 	
-	var skillsArray : Array = TWILIGHT.All_Characters[ TWILIGHT.get_char_id(mychar.Name) ].Skills
+	var skillsArray : Array = TWILIGHT.Party.all_members[ mychar ].unlocked_skills
 	for i in range(skillsArray.size()):
 		var sLabel : Label = $Skills/Skill0.duplicate()
 		sLabel.text = skillsArray[i]

@@ -25,7 +25,7 @@ var dialogue_branch : int = 0
 var dialogue_stage : int = 0
 var dialogue_place : int = 0
 var dialogue_scroll : float = 0
-var dialogue_speed : float = TWILIGHT.text_scroll_speed
+var dialogue_speed : float = TWILIGHT.Settings.text_scroll_speed
 var dialogue_paused : bool = false
 var dialogue_sound_cooldown : float = 0
 
@@ -48,7 +48,7 @@ var sounds : Array
 func _ready() -> void:
 	ico_portrait.position.y = 109 - ico_portrait.texture.get_height()*0.5
 	
-	tsound = TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_text_basic.ogg", TWILIGHT.Volumes.SoundEffect, self)
+	tsound = TWILIGHT.Settings.load_sound("res://SOUNDS/SoundEffect/SE_text_basic.ogg", TWILIGHT.Settings.Volumes.SoundEffect, self)
 
 func _process(delta: float) -> void:
 	time += delta
@@ -120,7 +120,7 @@ func _text_escape() -> void:
 	event_names.clear()
 	dialogue_scroll = 0.99
 	text_main.visible_characters = 0
-	dialogue_speed = TWILIGHT.text_scroll_speed
+	dialogue_speed = TWILIGHT.Settings.text_scroll_speed
 	sounds.clear()
 	
 	var i = 0
@@ -204,15 +204,15 @@ func _text_escape() -> void:
 				var volume
 				match escape_var[3]:
 					"ME":
-						volume = TWILIGHT.Volumes.MusicEffect
+						volume = TWILIGHT.Settings.Volumes.MusicEffect
 					"AS":
-						volume = TWILIGHT.Volumes.AmbientSound
+						volume = TWILIGHT.Settings.Volumes.AmbientSound
 					"AM":
-						volume = TWILIGHT.Volumes.AmbientMusic
+						volume = TWILIGHT.Settings.Volumes.AmbientMusic
 					_:
-						volume = TWILIGHT.Volumes.SoundEffect
+						volume = TWILIGHT.Settings.Volumes.SoundEffect
 				
-				sounds.append(TWILIGHT.load_sound(escape_var[2], volume, self)) 
+				sounds.append(TWILIGHT.Settings.load_sound(escape_var[2], volume, self)) 
 				event_locations.append( _find_position_marker(escape_var[1], substring_end) )
 				event_names.append( "sound:%d" % [sounds.size()-1] )
 			
@@ -283,7 +283,7 @@ func _text_event(_event) -> void:
 			wait_time = float(event_var[1])
 		"speed":
 			if event_var[1] == "default" || event_var[1] == "d":
-				dialogue_speed = TWILIGHT.text_scroll_speed
+				dialogue_speed = TWILIGHT.Settings.text_scroll_speed
 			else:
 				dialogue_speed = float(event_var[1])
 		"end":
