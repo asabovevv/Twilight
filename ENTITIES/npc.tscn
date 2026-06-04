@@ -1,24 +1,39 @@
 [gd_scene format=3 uid="uid://cyaxdi2xdevbg"]
 
-[ext_resource type="Texture2D" uid="uid://dukfkk45sqmhx" path="res://ENTITIES/Npc/Mobile/Pinkspace/NPC_Bunny_Idle.png" id="1_ideak"]
+[ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://RESOURCES/Npc/npcaction.gd" id="2_vf6d8"]
 [ext_resource type="Script" uid="uid://dw5of7ejmdcb5" path="res://ENTITIES/Npc/AllInherit/npc.gd" id="2_xxcha"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
-size = Vector2(31, 31)
+[sub_resource type="Resource" id="Resource_vf6d8"]
+script = ExtResource("2_vf6d8")
+metadata/_custom_type_script = "uid://dpi62ybd3sa1l"
 
-[node name="NPC" type="Sprite2D" unique_id=761226622]
-y_sort_enabled = true
-texture = ExtResource("1_ideak")
-hframes = 2
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
+size = Vector2(31.5, 31.5)
+
+[node name="NPC" type="Node2D" unique_id=279611580]
+position = Vector2(16, 16)
 script = ExtResource("2_xxcha")
-moves = true
-action_loop = [0.0]
+dialogue = Array[String](["|dbox|Default dialogue."])
+action_loop = Array[ExtResource("2_vf6d8")]([SubResource("Resource_vf6d8")])
+talk_anim_speed = null
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=761226622]
+y_sort_enabled = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=399509262]
 collision_layer = 9
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1736696218]
+position = Vector2(-0.25, -0.25)
+shape = SubResource("RectangleShape2D_xxcha")
+
+[node name="StaticBody2D_2" type="StaticBody2D" parent="." unique_id=1710039197]
+collision_layer = 9
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D_2" unique_id=1191720385]
+position = Vector2(-0.25, -0.25)
 shape = SubResource("RectangleShape2D_xxcha")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=1091422845]

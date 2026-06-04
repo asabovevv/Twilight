@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d4bd1pons231i"]
 
-[ext_resource type="Script" uid="uid://b2ba16w8ot6y5" path="res://ROOMS/overworld_ui.gd" id="1_5e14x"]
+[ext_resource type="Script" uid="uid://b2ba16w8ot6y5" path="res://UI/overworld_ui.gd" id="1_5e14x"]
 [ext_resource type="PackedScene" uid="uid://b4i30hfe42hgm" path="res://ROOMS/Twilight/TestRoom/Contents/testroom_contents.tscn" id="1_8aqot"]
 [ext_resource type="Script" uid="uid://dtvec2cvuvgm2" path="res://ROOMS/camera_root.gd" id="2_djry6"]
 [ext_resource type="Shader" uid="uid://t1sl6paxlj7o" path="res://CHARACTERS/screen_viginette.gdshader" id="3_5e14x"]

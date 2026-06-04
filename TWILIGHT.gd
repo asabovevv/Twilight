@@ -10,7 +10,11 @@ var camera : Node2D # Whatever node is the currently used cameras root.
 var entrance : int = 0 # Stores which way a room was entered from a previous room.
 var room : String # Stores last loaded overworld room's path.
 
-## --- --- --- --- --- --- --- --- Options --- --- --- --- --- --- --- --- 
+var d : Dictionary[String, Array] # Contains all loaded branches of dialogue, accessed via name
+var Languages = { English = "English" }
+var language : String = Languages.English
+
+## --- --- --- --- --- --- --- --- Options --- --- --- --- --- --- --- ---
 
 class Set:
 	# Visual
@@ -43,8 +47,8 @@ class Set:
 	
 	# Text
 	var text_scroll_speed = 60
-	
-var Settings : Set
+
+var Settings : Set = Set.new()
 
 ## --- --- --- --- --- --- --- --- Party Info --- --- --- --- --- --- --- --- --- ---
 
@@ -126,6 +130,9 @@ func save_to_slot(slot : int) -> void:
 
 func load_from_slot(slot : int) -> void:
 
+	## TEMP!!!!
+	load_dialogue_file(language, "Dream1.txt")
+
 	# SAVE FILE EXISTS
 	if FileAccess.file_exists("user://Save%d_%f.dat" % [slot, Version]) && (slot != -1):
 		var file = FileAccess.open("user://Save%d_%f.dat" % [slot, Version], FileAccess.READ)
@@ -198,3 +205,36 @@ func load_from_slot(slot : int) -> void:
 		
 		# Party Quick Emotions
 		Party.fast_emotion = ["neutral"]
+
+## --- --- --- --- --- --- --- --- Dialogue --- --- --- --- --- --- --- --- --- --- --- --- ---
+
+# Iterates through a text file, breaking lines into dialogue branch headers and dialogue branch contents
+func load_dialogue_file(_language : String, file_name : String) -> void:
+	if FileAccess.file_exists("res://LANGUAGE/" + _language + "/" + file_name):
+		var langfile = FileAccess.open( "res://LANGUAGE/" + _language + "/" + file_name, FileAccess.READ)
+
+		var read_line : String = langfile.get_line()
+		while read_line != "EOF":
+
+			# Store first string as branch name
+			var branch_name : String = read_line
+			# If branch name has an indent, remove it
+			branch_name = branch_name.remove_chars("\t")
+
+			# Get the rest of the chunk for branch dialogue (Stop at empty line)
+			var branch_dialogue : Array[String]
+			var branch_line : String = langfile.get_line()
+			while branch_line != "":
+				branch_dialogue.append(branch_line)
+				branch_line = langfile.get_line()
+
+			# Append branch to main dialogue
+			d[branch_name] = branch_dialogue
+
+			# Advance, next we will check if the below line is EOF or another header
+			read_line = langfile.get_line()
+
+		langfile.close()
+
+	else:
+		print("Lang file: " + "res://LANGUAGE/" + language + "/" + file_name + " doesn't exist.")
