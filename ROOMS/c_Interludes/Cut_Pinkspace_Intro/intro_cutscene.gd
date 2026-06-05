@@ -4,7 +4,7 @@ extends AnimationPlayer
 @export var next_image : Texture2D
 
 func _ready() -> void:
-	sound.volume_linear = TWILIGHT.volume_levels[TWILIGHT.Volumes.AmbientMusic]
+	sound.volume_linear = Twilight.volume_levels[Twilight.Volumes.AmbientMusic]
 	play("Pinkspace_Intro")
 
 func _set_image() -> void:

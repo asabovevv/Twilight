@@ -28,33 +28,33 @@ var spin_count : int = 4
 
 func _ready() -> void:
 	spin_portraits = [$SpinPortraits/SpinPortrait1, $SpinPortraits/SpinPortrait2, $SpinPortraits/SpinPortrait3, $SpinPortraits/SpinPortrait4]
-	max_pos = TWILIGHT.Party_Order.size()
+	max_pos = Twilight.Party_Order.size()
 	
 	for i in range(4):
 		if i < max_pos:
-			spin_portraits[i].get_child(0).texture = TWILIGHT.Party_Order[i].Emotion.gradient_texture
+			spin_portraits[i].get_child(0).texture = Twilight.Party_Order[i].Emotion.gradient_texture
 			
-			spin_portraits[i].get_child(1).texture = load(TWILIGHT.Party_Order[i].Path + "Portraits/Portrait0.png")
-			spin_portraits[i].get_child(1).region_rect = TWILIGHT.Party_Order[i].Portrait_Crop_Rect
+			spin_portraits[i].get_child(1).texture = load(Twilight.Party_Order[i].Path + "Portraits/Portrait0.png")
+			spin_portraits[i].get_child(1).region_rect = Twilight.Party_Order[i].Portrait_Crop_Rect
 			
-			for j in range( TWILIGHT.Party_Fast_Emotion.size() ):
-				if TWILIGHT.Party_Order[i].Emotion.name == TWILIGHT.Party_Fast_Emotion[j]:
+			for j in range( Twilight.Party_Fast_Emotion.size() ):
+				if Twilight.Party_Order[i].Emotion.name == Twilight.Party_Fast_Emotion[j]:
 					emotion_pos.append(j)
 		else:
 			spin_portraits[i].queue_free()
 			spin_count -= 1
 	
-	center_portrait.texture = load(TWILIGHT.Party_Order[0].Path + "Portraits/Portrait0.png")
-	center_portrait.region_rect = TWILIGHT.Party_Order[0].Portrait_Crop_Rect
+	center_portrait.texture = load(Twilight.Party_Order[0].Path + "Portraits/Portrait0.png")
+	center_portrait.region_rect = Twilight.Party_Order[0].Portrait_Crop_Rect
 	
 	spin_step /= spin_count
 	
-	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_move1.ogg", TWILIGHT.Volumes.SoundEffect, self) )
-	sounds_list.append( TWILIGHT.load_sound("res://SOUNDS/SoundEffect/SE_tag.ogg", TWILIGHT.Volumes.SoundEffect, self) )
-	for i in TWILIGHT.Party_Fast_Emotion.size():
-		sounds_list.append( TWILIGHT.load_sound( TWILIGHT.emotion(TWILIGHT.Party_Fast_Emotion[i]).sound, TWILIGHT.Volumes.SoundEffect, self) )
+	sounds_list.append( Twilight.load_sound("res://SOUNDS/SoundEffect/SE_move1.ogg", Twilight.Volumes.SoundEffect, self) )
+	sounds_list.append( Twilight.load_sound("res://SOUNDS/SoundEffect/SE_tag.ogg", Twilight.Volumes.SoundEffect, self) )
+	for i in Twilight.Party_Fast_Emotion.size():
+		sounds_list.append( Twilight.load_sound( Twilight.emotion(Twilight.Party_Fast_Emotion[i]).sound, Twilight.Volumes.SoundEffect, self) )
 	
-	if TWILIGHT.Party_Fast_Emotion.size() == 1:
+	if Twilight.Party_Fast_Emotion.size() == 1:
 		arrows.visible = false
 
 func _process(delta: float) -> void:
@@ -93,13 +93,13 @@ func _process(delta: float) -> void:
 			# Emotion Select
 			menu_emotion.visible = spin_target_pos == spin_pos
 			if menu_emotion.visible:
-				text_emotion.texture = TWILIGHT.Party_Order[actual_pos].Emotion.label_texture
+				text_emotion.texture = Twilight.Party_Order[actual_pos].Emotion.label_texture
 				
 				if Input.is_action_just_pressed("Down"):
-					emotion_pos[actual_pos] = wrap( (emotion_pos[actual_pos] - 1), 0, TWILIGHT.Party_Fast_Emotion.size())
+					emotion_pos[actual_pos] = wrap( (emotion_pos[actual_pos] - 1), 0, Twilight.Party_Fast_Emotion.size())
 					_update_emotion_pos(actual_pos)
 				if Input.is_action_just_pressed("Up"):
-					emotion_pos[actual_pos] = wrap( (emotion_pos[actual_pos] + 1), 0, TWILIGHT.Party_Fast_Emotion.size())
+					emotion_pos[actual_pos] = wrap( (emotion_pos[actual_pos] + 1), 0, Twilight.Party_Fast_Emotion.size())
 					_update_emotion_pos(actual_pos)
 			
 			# Anim
@@ -114,7 +114,7 @@ func _process(delta: float) -> void:
 			
 			if actual_pos == 0:
 				if anim_t == 0:
-					player.set_emotion_by_name(TWILIGHT.Party_Order[actual_pos].Emotion.name)
+					player.set_emotion_by_name(Twilight.Party_Order[actual_pos].Emotion.name)
 					menu_emotion.visible = false
 				
 				anim_t += delta
@@ -137,11 +137,11 @@ func _process(delta: float) -> void:
 					sounds_list[1].play()
 					spin_root.visible = false
 					
-					var new_order : Array = [ TWILIGHT.Party_Order[actual_pos] ]
+					var new_order : Array = [ Twilight.Party_Order[actual_pos] ]
 					for i in range(max_pos):
-						if TWILIGHT.Party_Order[i] != new_order[0]:
-							new_order.append(TWILIGHT.Party_Order[i])
-					TWILIGHT.Party_Order = new_order
+						if Twilight.Party_Order[i] != new_order[0]:
+							new_order.append(Twilight.Party_Order[i])
+					Twilight.Party_Order = new_order
 					
 					tagImage.visible = true
 					tagImage.position.y = -240
@@ -153,7 +153,7 @@ func _process(delta: float) -> void:
 				else:
 					# player order set
 					player.new_sprites()
-					player.set_emotion_by_name(TWILIGHT.Party_Order[0].Emotion.name)
+					player.set_emotion_by_name(Twilight.Party_Order[0].Emotion.name)
 					
 					tagImage.position.y = lerpf(240, 700, (anim_t-1.1) * 3)
 					blur.material.set_shader_parameter("fade", 1 - (anim_t-1.1)*3 )
@@ -163,7 +163,7 @@ func _process(delta: float) -> void:
 						queue_free()
 
 func _update_emotion_pos(pos : int) -> void:
-	if TWILIGHT.Party_Fast_Emotion.size() > 1:
+	if Twilight.Party_Fast_Emotion.size() > 1:
 		sounds_list[emotion_pos[pos]+2].play()
-		TWILIGHT.Party_Order[pos].Emotion = TWILIGHT.emotion( TWILIGHT.Party_Fast_Emotion[ emotion_pos[pos] ])
-		spin_portraits[pos].get_child(0).texture = TWILIGHT.Party_Order[pos].Emotion.gradient_texture
+		Twilight.Party_Order[pos].Emotion = Twilight.emotion( Twilight.Party_Fast_Emotion[ emotion_pos[pos] ])
+		spin_portraits[pos].get_child(0).texture = Twilight.Party_Order[pos].Emotion.gradient_texture

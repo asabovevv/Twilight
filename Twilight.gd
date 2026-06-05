@@ -111,6 +111,8 @@ func save_to_slot(slot : int) -> void:
 	# Party Member Data
 	for id in Party.all_members:
 		var member : PartyMember = Party.all_members[id]
+		file.store_16(member.current_health)
+		file.store_16(member.current_juice)
 		file.store_16(member.level)
 		file.store_16(member.experience)
 		file.store_pascal_string(member.weapon)
@@ -156,6 +158,8 @@ func load_from_slot(slot : int) -> void:
 		Party.all_members.clear()
 		for data in Registry.party_members.all():
 			var member := PartyMember.new(data)
+			member.current_health = file.get_16() # current health
+			member.current_juice = file.get_16() # current juice
 			member.load_stats(
 				file.get_16(), 					# level
 				file.get_16(), 					# experience
@@ -198,6 +202,8 @@ func load_from_slot(slot : int) -> void:
 		for data in Registry.party_members.all():
 			var member := PartyMember.new(data)
 			member.load_stats(1, 0, Equippable.NONE, Equippable.NONE, 0, [""])
+			member.current_health = member.base_stats[StatType.HEART]
+			member.current_juice = member.base_stats[StatType.JUICE]
 			Party.all_members[data.key] = member
 		
 		# Party Order + Size

@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cg717l3kx8bse"]
+
+[ext_resource type="Texture2D" uid="uid://cnxxp10hceu64" path="res://UI/Portraits/Battle_Portraits/Kel_Neutral.png" id="1_6r8ji"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa1q3"]
+atlas = ExtResource("1_6r8ji")
+region = Rect2(0, 0, 140, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21crk"]
+atlas = ExtResource("1_6r8ji")
+region = Rect2(140, 0, 140, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft1uu"]
+atlas = ExtResource("1_6r8ji")
+region = Rect2(280, 0, 140, 121)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa1q3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21crk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ft1uu")
+}],
+"loop": true,
+"name": &"Neutral",
+"speed": 5.0
+}]

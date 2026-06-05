@@ -30,7 +30,7 @@ func load_stats(
 		_charm : String,
 		_line_position : int,
 		_active_skills : Array[String]
-) -> void:
+) -> void: 
 	current_emotion = Registry.get_emotion("neutral")
 	weapon = _weapon
 	charm = _charm
@@ -38,13 +38,29 @@ func load_stats(
 	active_skills = _active_skills
 	set_level(_level, _exp)
 
+func get_current_stats() -> Dictionary[String, int]:
+	var result : Dictionary[String, int] = base_stats.duplicate()
+	# apply weapon and charm
+	var cur_weapon : Equippable = Registry.get_equipment(weapon)
+	if cur_weapon:
+		for key in cur_weapon.stats.keys():
+			result[key] += cur_weapon.stats[key]
+	var cur_charm : Equippable = Registry.get_equipment(charm)
+	if cur_charm:
+		for key in cur_charm.stats.keys():
+			result[key] += cur_charm.stats[key]
+	# apply emotion modifiers
+	for modifier in current_emotion.modifiers:
+		result[modifier.type] = modifier.apply(result[modifier.type])
+	# TODO: apply status effects
+	return result
+
 ## Sets level/exp and recomputes base + current stats and unlocked skills
 func set_level(_level : int, _exp : int) -> void:
 	level = _level
 	experience = _exp
 	for stat in data.level_up_stats:
 		base_stats[stat] = data.get_level_stat(_level, stat)
-		current_stats[stat] = base_stats[stat]
 	_refresh_unlocked_skills()
 
 func _refresh_unlocked_skills() -> void:
