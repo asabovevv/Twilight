@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://c34f8hvjj0jtx"]
 
 [ext_resource type="Script" uid="uid://dtvec2cvuvgm2" path="res://ROOMS/camera_root.gd" id="1_18iqd"]
-[ext_resource type="Shader" uid="uid://t1sl6paxlj7o" path="res://CHARACTERS/screen_viginette.gdshader" id="2_14knk"]
+[ext_resource type="Shader" uid="uid://t1sl6paxlj7o" path="res://MISC/screen_viginette.gdshader" id="2_14knk"]
 [ext_resource type="Script" uid="uid://b2ba16w8ot6y5" path="res://UI/overworld_ui.gd" id="3_14knk"]
+
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6qsma"]
 viewport_path = NodePath("ViewportRender/SubViewport")

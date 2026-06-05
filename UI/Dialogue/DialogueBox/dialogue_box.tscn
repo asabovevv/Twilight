@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="1_if77y"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_351bv"]
 [ext_resource type="Texture2D" uid="uid://coaqxylbxsmxi" path="res://UI/Bunny_Point.png" id="3_85jfh"]
-[ext_resource type="Texture2D" uid="uid://cy2p82f7rk4gy" path="res://CHARACTERS/Mari/Portraits/Portrait0.png" id="5_ydy5r"]
+[ext_resource type="Texture2D" uid="uid://cy2p82f7rk4gy" path="res://UI/Portraits/Battle_Portraits/Mar_Neutral.png" id="5_ydy5r"]
 
 [node name="DialogueBox" type="Node2D" unique_id=265251790]
 z_index = 800

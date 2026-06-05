@@ -1,4 +1,4 @@
-extends Sprite2D
+class_name CursorBounce extends Sprite2D
 
 ## Handles cursor bouncing in both directions
 

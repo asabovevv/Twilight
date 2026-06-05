@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://drlwxsp3aytv"]
+[gd_scene format=3 uid="uid://drlwxsp3aytv"]
 
 [ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="1_7bkp1"]
 [ext_resource type="Script" uid="uid://crb6ntlcamg47" path="res://UI/OverworldMenu/overworld_menu.gd" id="1_rw8xq"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b7bkkt4sr16t7" path="res://UI/Tag/Tag_AO.png" id="4_7ymrr"]
 [ext_resource type="Texture2D" uid="uid://cras7yd6gvruw" path="res://UI/OverworldMenu/Clam_Icon.png" id="5_7f11u"]
 [ext_resource type="Texture2D" uid="uid://1imj7yupx0ds" path="res://UI/Tag/Tag_BG1.png" id="5_7umex"]
-[ext_resource type="Texture2D" uid="uid://b2ocad4ndctjj" path="res://RESOURCES/Hector.png" id="6_7f11u"]
+[ext_resource type="Texture2D" uid="uid://b2ocad4ndctjj" path="res://UI/ItemIcons/Hector.png" id="6_7f11u"]
 [ext_resource type="Texture2D" uid="uid://dtn5wfcygi73i" path="res://UI/UiArrowLarge.png" id="7_opjd5"]
 [ext_resource type="Texture2D" uid="uid://bsjxgm3ydl6ki" path="res://UI/UiArrowSmall.png" id="8_ghvvu"]
 [ext_resource type="Texture2D" uid="uid://drgrupmbevjhn" path="res://UI/OverworldMenu/EquipUI.png" id="9_dli0x"]

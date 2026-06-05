@@ -15,8 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bnhwrma6hjcjd" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_Cumber.png" id="12_v2jh2"]
 [ext_resource type="Texture2D" uid="uid://dukfkk45sqmhx" path="res://ENTITIES/Npc/Mobile/Twilight/NPC_Bunny_Idle.png" id="12_ynx7i"]
 [ext_resource type="Texture2D" uid="uid://dxm3u6wd73a0t" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_PinkDoor.png" id="13_1l2ua"]
-[ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://RESOURCES/Npc/npcaction.gd" id="13_d17ug"]
-[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://RESOURCES/Dialogue/dialogue_sequence.gd" id="15_1l2ua"]
+[ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://DATA/Resources/Npc/npcaction.gd" id="13_d17ug"]
+[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://DATA/Resources/Dialogue/dialogue_sequence.gd" id="15_1l2ua"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dq3mf"]
 texture = ExtResource("2_u4srh")
@@ -745,6 +745,7 @@ dialogue = Array[ExtResource("15_1l2ua")]([])
 moves = true
 action_loop = Array[ExtResource("13_d17ug")]([SubResource("Resource_1l2ua"), SubResource("Resource_awnop"), SubResource("Resource_evjyx"), SubResource("Resource_2l6tf"), SubResource("Resource_ynx7i")])
 anim_default = false
+talk_anim_speed = 15.0
 
 [node name="NPC_cumber" parent="." unique_id=761226622 instance=ExtResource("11_d17ug")]
 position = Vector2(1168, 432)
@@ -755,6 +756,7 @@ has_talkframes = true
 dialogue = Array[ExtResource("15_1l2ua")]([SubResource("Resource_ihekr"), SubResource("Resource_8r2v7")])
 action_loop = Array[ExtResource("15_1l2ua")]([])
 anim_default = false
+talk_anim_speed = 15.0
 
 [node name="NPC_door" parent="." unique_id=270951796 instance=ExtResource("11_d17ug")]
 position = Vector2(400, 272)
@@ -765,6 +767,7 @@ sprite_hvframes = Vector2i(4, 1)
 dialogue = Array[ExtResource("15_1l2ua")]([])
 action_loop = Array[ExtResource("15_1l2ua")]([])
 anim_speed = 15.0
+talk_anim_speed = 15.0
 
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember" method="_on_main_party_member_mood_changed"]
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember2" method="_on_main_party_member_mood_changed"]

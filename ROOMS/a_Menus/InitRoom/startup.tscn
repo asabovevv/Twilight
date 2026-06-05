@@ -2,11 +2,18 @@
 
 [ext_resource type="Script" uid="uid://c2nggl1ra22mt" path="res://ROOMS/a_Menus/InitRoom/Contents/startup.gd" id="1_3tds7"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_3od6b"]
+[ext_resource type="Texture2D" uid="uid://dgfuiax5nsqds" path="res://UI/Portraits/Cumb0.png" id="2_vyoso"]
 [ext_resource type="Texture2D" uid="uid://bvcl1qv7wmwhf" path="res://ROOMS/a_Menus/MainMenu/Contents/Title.png" id="3_1825l"]
 [ext_resource type="Script" uid="uid://ncbof14tnp68" path="res://ROOMS/a_Menus/InitRoom/Contents/room_0.gd" id="4_hqidj"]
+[ext_resource type="Texture2D" uid="uid://ckyo3qcgp3t04" path="res://ROOMS/a_Menus/InitRoom/Contents/icon_Arrow.png" id="5_tj1xd"]
 
 [node name="startup" type="Node2D" unique_id=795438040]
 script = ExtResource("1_3tds7")
+
+[node name="Cumb0" type="Sprite2D" parent="." unique_id=260088244]
+position = Vector2(431.1974, 26.387726)
+scale = Vector2(0.3782292, 0.36807624)
+texture = ExtResource("2_vyoso")
 
 [node name="Title" type="Label" parent="." unique_id=1665335143]
 offset_left = 259.0
@@ -121,16 +128,258 @@ text = "Inventory"
 [node name="Inv" type="Node2D" parent="." unique_id=1175631145]
 visible = false
 
+[node name="browser_item0" type="Button" parent="Inv" unique_id=566459627]
+z_index = 20
+custom_minimum_size = Vector2(292, 36)
+offset_left = 179.0
+offset_top = 486.0
+offset_right = 471.0
+offset_bottom = 522.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+text = "Really Long Item Name"
+
+[node name="Quantity" type="LineEdit" parent="Inv/browser_item0" unique_id=1235680262]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.99998
+offset_top = -12.0
+offset_right = -93.874985
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.83999515, 1)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+max_length = 3
+
+[node name="icon" type="Sprite2D" parent="Inv/browser_item0" unique_id=1723310949]
+position = Vector2(269, 19)
+scale = Vector2(0.5, 0.5)
+
+[node name="ColorRect" type="ColorRect" parent="Inv" unique_id=677799427]
+offset_left = 168.0
+offset_top = 107.0
+offset_right = 473.0
+offset_bottom = 471.0
+color = Color(0.09985284, 0.09985284, 0.09985284, 0.6)
+
+[node name="Cat_Weapon" type="Button" parent="Inv/ColorRect" unique_id=763033063]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -25.0
+offset_right = 44.0
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 14
+text = "Weapon"
+
+[node name="Cat_Charm" type="Button" parent="Inv/ColorRect" unique_id=1499491595]
+layout_mode = 0
+offset_left = 46.0
+offset_top = -25.0
+offset_right = 84.0
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 14
+text = "Charm"
+
+[node name="Cat_Snack" type="Button" parent="Inv/ColorRect" unique_id=426153943]
+layout_mode = 0
+offset_left = 86.0
+offset_top = -25.0
+offset_right = 124.0
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 14
+text = "Snack"
+
+[node name="Cat_Toy" type="Button" parent="Inv/ColorRect" unique_id=521475679]
+layout_mode = 0
+offset_left = 126.0
+offset_top = -25.0
+offset_right = 164.0
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 14
+text = "Toy"
+
+[node name="Cat_Important" type="Button" parent="Inv/ColorRect" unique_id=219323892]
+layout_mode = 0
+offset_left = 166.0
+offset_top = -25.0
+offset_right = 219.0
+offset_bottom = -2.0
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 14
+text = "Important"
+
+[node name="Weapon" type="ScrollContainer" parent="Inv/ColorRect" unique_id=2142574200]
+custom_minimum_size = Vector2(300, 360)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 302.0
+offset_bottom = 362.0
+mouse_filter = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inv/ColorRect/Weapon" unique_id=264958155]
+custom_minimum_size = Vector2(305, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Charm" type="ScrollContainer" parent="Inv/ColorRect" unique_id=847803198]
+custom_minimum_size = Vector2(300, 360)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 302.0
+offset_bottom = 362.0
+mouse_filter = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inv/ColorRect/Charm" unique_id=1226408943]
+custom_minimum_size = Vector2(305, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Snack" type="ScrollContainer" parent="Inv/ColorRect" unique_id=784798585]
+custom_minimum_size = Vector2(300, 360)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 302.0
+offset_bottom = 362.0
+mouse_filter = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inv/ColorRect/Snack" unique_id=1930668715]
+custom_minimum_size = Vector2(305, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Toy" type="ScrollContainer" parent="Inv/ColorRect" unique_id=393452680]
+custom_minimum_size = Vector2(300, 360)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 302.0
+offset_bottom = 362.0
+mouse_filter = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inv/ColorRect/Toy" unique_id=1425795320]
+custom_minimum_size = Vector2(305, 20)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Important" type="ScrollContainer" parent="Inv/ColorRect" unique_id=955838816]
+custom_minimum_size = Vector2(305, 360)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 302.0
+offset_bottom = 362.0
+mouse_filter = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inv/ColorRect/Important" unique_id=1291193283]
+custom_minimum_size = Vector2(600, 20)
+layout_mode = 2
+mouse_filter = 2
+
 [node name="Flags" type="Button" parent="." unique_id=728608912]
 offset_left = 141.0
-offset_top = -32.0
+offset_top = 3.0
 offset_right = 175.0
-offset_bottom = -8.0
+offset_bottom = 27.0
 theme_override_fonts/font = ExtResource("2_3od6b")
 text = "Flags"
 
 [node name="StoryFlags" type="Node2D" parent="." unique_id=1126745595]
 visible = false
+
+[node name="Flag0" type="Button" parent="StoryFlags" unique_id=2015883104]
+z_index = 20
+custom_minimum_size = Vector2(292, 0)
+offset_left = 174.0
+offset_top = 485.0
+offset_right = 320.0
+offset_bottom = 509.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 14
+text = "0 - Really Long Flag Name I Mean"
+text_overrun_behavior = 3
+
+[node name="NextPage" type="Button" parent="StoryFlags" unique_id=1310863410]
+z_index = 20
+offset_left = 272.0
+offset_top = 85.0
+offset_right = 310.0
+offset_bottom = 123.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 12
+icon = ExtResource("5_tj1xd")
+text_overrun_behavior = 3
+
+[node name="Range" type="Label" parent="StoryFlags" unique_id=52574308]
+offset_left = 195.99998
+offset_top = 85.0
+offset_right = 305.0
+offset_bottom = 113.0
+scale = Vector2(0.6499347, 0.6499347)
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 30
+text = "0 - 63"
+horizontal_alignment = 1
+
+[node name="LastPage" type="Button" parent="StoryFlags" unique_id=1207083133]
+z_index = 20
+offset_left = 190.0
+offset_top = 85.0
+offset_right = 228.0
+offset_bottom = 123.0
+scale = Vector2(-0.5, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_3od6b")
+theme_override_font_sizes/font_size = 12
+icon = ExtResource("5_tj1xd")
+text_overrun_behavior = 3
+
+[node name="ColorRect" type="ColorRect" parent="StoryFlags" unique_id=1559240538]
+offset_left = 168.0
+offset_top = 107.0
+offset_right = 473.0
+offset_bottom = 471.0
+color = Color(0.09985284, 0.09985284, 0.09985284, 0.6)
+
+[node name="Flags" type="ScrollContainer" parent="StoryFlags/ColorRect" unique_id=554405921]
+custom_minimum_size = Vector2(300, 360)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 302.0
+offset_bottom = 362.0
+mouse_filter = 2
+horizontal_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StoryFlags/ColorRect/Flags" unique_id=999108449]
+custom_minimum_size = Vector2(305, 20)
+layout_mode = 2
+mouse_filter = 2
 
 [node name="Rooms" type="Button" parent="." unique_id=47084836]
 offset_left = 178.0
@@ -214,12 +463,16 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Encounters" type="Button" parent="." unique_id=61483097]
-offset_left = 224.0
+offset_left = 242.0
 offset_top = -31.0
-offset_right = 289.0
+offset_right = 307.0
 offset_bottom = -7.0
 theme_override_fonts/font = ExtResource("2_3od6b")
 text = "Encounters"
+
+[node name="Encounter" type="Node2D" parent="." unique_id=136517447]
+visible = false
+position = Vector2(224, -31)
 
 [node name="EncounterMockup" type="Button" parent="." unique_id=9005112]
 offset_left = 225.0
@@ -304,7 +557,14 @@ value = 1.0
 [connection signal="button_down" from="Stats/LoadStats" to="." method="_on_load_stats_button_down"]
 [connection signal="pressed" from="Stats/EmotionUnlock" to="." method="_on_emotion_unlock_pressed"]
 [connection signal="pressed" from="Inventory" to="." method="_on_inventory_pressed"]
+[connection signal="pressed" from="Inv/ColorRect/Cat_Weapon" to="." method="_on_browser_button_pressed" binds= [NodePath("Inv/ColorRect/Weapon")]]
+[connection signal="pressed" from="Inv/ColorRect/Cat_Charm" to="." method="_on_browser_button_pressed" binds= [NodePath("Inv/ColorRect/Charm")]]
+[connection signal="pressed" from="Inv/ColorRect/Cat_Snack" to="." method="_on_browser_button_pressed" binds= [NodePath("Inv/ColorRect/Snack")]]
+[connection signal="pressed" from="Inv/ColorRect/Cat_Toy" to="." method="_on_browser_button_pressed" binds= [NodePath("Inv/ColorRect/Toy")]]
+[connection signal="pressed" from="Inv/ColorRect/Cat_Important" to="." method="_on_browser_button_pressed" binds= [NodePath("Inv/ColorRect/Important")]]
 [connection signal="pressed" from="Flags" to="." method="_on_flags_pressed"]
+[connection signal="pressed" from="StoryFlags/NextPage" to="." method="_on_next_page_pressed"]
+[connection signal="pressed" from="StoryFlags/LastPage" to="." method="_on_last_page_pressed"]
 [connection signal="pressed" from="Rooms" to="." method="_on_rooms_pressed"]
 [connection signal="pressed" from="RoomSelect/G_Misc" to="." method="_on_g_misc_pressed"]
 [connection signal="pressed" from="RoomSelect/G_Twilight" to="." method="_on_g_twilight_pressed"]

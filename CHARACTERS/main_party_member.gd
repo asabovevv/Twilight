@@ -57,7 +57,7 @@ func _ready() -> void:
 	
 	# Set Sprites + Emotion
 	new_sprites()
-	set_emotion_by_name(TWILIGHT.Party_Order[0].Emotion.name)
+	set_emotion_by_name(TWILIGHT.Party.current_party[0].current_emotion.name)
 	
 	# Set + Snap position
 	global_position = _grid_snap(global_position)
@@ -114,7 +114,7 @@ func set_emotion_by_name(_mood_name : String) -> void:
 		"Happy":
 			mood = 3
 	
-	if TWILIGHT.Party_Order[0].Name == "AUBREY":
+	if TWILIGHT.Party.current_party[0].data.key == "aubrey":
 		for i in character_sprites:
 			i.material.set_shader_parameter("emotion", mood_colors[mood])
 			i.material.set_shader_parameter("bow_emotion_highlight", bow_mood_colors[mood*2])
@@ -124,10 +124,21 @@ func set_emotion_by_name(_mood_name : String) -> void:
 			i.material.set_shader_parameter("emotion", mood_colors[mood])
 	
 	# Adjust stats
-	speed = base_speed * TWILIGHT.emotion( _mood_name ).walkspeed[0]
+	speed = base_speed * _emotion_walk_mult(_mood_name)
 	running = (speed > base_speed)
-	
+
 	mood_changed.emit()
+
+## Walk speed multiplier for the named emotion (from the Registry). Defaults to 1.0 when the
+## emotion carries no WALK_SPEED modifier.
+# TODO: this is most likely temporary and can be improved
+func _emotion_walk_mult(_mood_name : String) -> float:
+	var emo := Registry.get_emotion(_mood_name.to_lower())
+	if emo:
+		for m in emo.modifiers:
+			if m.type == StatType.WALK_SPEED:
+				return m.multiplier
+	return 1.0
 
 func _move_and_animate(delta) -> void:
 # MOVEMENT
@@ -264,7 +275,7 @@ func new_sprites() -> void:
 	for i in sprites.get_children():
 		i.queue_free()
 	
-	var sprite_set = load(TWILIGHT.Party_Order[0].Path + "OW_sprites.tscn")
+	var sprite_set = load(TWILIGHT.Party.current_party[0].data.asset_path + "OW_sprites.tscn")
 	
 	sprite_set = sprite_set.instantiate()
 	sprites.add_child(sprite_set)
