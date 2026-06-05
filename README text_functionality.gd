@@ -22,12 +22,11 @@
 #	- Sets the name that displays in the dialogue box.
 #	- An empty string makes the name-box disappear.
 
-## |face : (str) Character Name : (int) ~Portrait# |
-#	- Sets the dialogue portrait. (May be reworked to change multiple dialogue portraits.)
-#	- Portrait is 0 by default.
-#	- If Character Name isn't "Sunny", "Aubrey", etc, the portrait-box disappears.
-#	- Character portraits are found at: res://CHARACTERS/(character name)/Portraits
-#	- "Misc" is also an option, located at: res://CHARACTERS/z_Misc_Portraits/
+## |face : (str) ~Portrait Name, Portrait ID |
+#	- Sets the dialogue portrait.
+#	- Portrait Name is null by default. If Portrait Name points to null the portrait-box disappears.
+#	- Portrait ID is to support multiple speaker's faces at once
+#	- Character portraits are found at: res://UI/Portraits/
 
 ## |p : (MC) Marker Char : (int) ~Amount = 1 |
 #	- Text pauses at all marker chars. Requires a Z press to continue text crawl.
