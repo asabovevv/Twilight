@@ -69,13 +69,13 @@ func _physics_process(delta: float) -> void:
 						ow.menu_equip_wc.visible = true
 						for i in ow.menu_equip_wc.get_children():
 							if i.name == "Option1":
-								var weapon = Twilight.Party_Order[ow.place[1]-1].Weapon
+								var weapon = Twilight.Party.current_party[ow.place[1]-1].Weapon
 								if weapon != null:
 									ow._set_text(weapon.name, Color.WHITE, i)
 								else:
 									ow._set_text("------------", Color.WHITE, i)
 							if i.name == "Option2":
-								var charm = Twilight.Party_Order[ow.place[1]-1].Charm
+								var charm = Twilight.Party.current_party[ow.place[1]-1].Charm
 								if charm != null:
 									ow._set_text(charm.name, Color.WHITE, i)
 								else:
@@ -205,7 +205,7 @@ func _physics_process(delta: float) -> void:
 					
 					# update character order here
 					ow.player.new_sprites()
-					ow.player.set_emotion_string(Twilight.Party_Order[0].Emotion.name)
+					ow.player.set_emotion_string(Twilight.Party.current_party[0].Emotion.name)
 			
 			if stage == 3:
 				t_anim += delta

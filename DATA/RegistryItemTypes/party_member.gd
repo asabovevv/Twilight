@@ -81,3 +81,7 @@ func swap_item(_replacing_item_name : String, _inventory) -> void:
 	_inventory.contents[weapon] = 1
 	_inventory.contents[_replacing_item_name] = 0
 	weapon = _replacing_item_name
+
+## Gets next level's exp requirement
+func get_levelup_exp() -> int:
+	return data.get_required_exp(level+1) - data.get_required_exp(level)

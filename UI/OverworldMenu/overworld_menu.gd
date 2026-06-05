@@ -75,34 +75,19 @@ enum i_sound { Move1, Select, Selectbad, Cancel, Equip, Tag, Wah }
 #endregion
 
 func _ready() -> void:
-	lists = [Twilight.Inventory.Weapons, Twilight.Inventory.Charms, Twilight.Inventory.Snacks,
-			Twilight.Inventory.Toys, Twilight.Inventory.Important,
-			5, 6, 7, 8, #Skills
-			9, 10, 11, #WCA
-			12, 13, 14, #WCA
-			15, 16, 17, #WCA
-			18, 19, 20] #WCA
-	var j = 0
-	for i in Twilight.Party_Order:
-		lists[5+j] = Twilight.Party_Order[j].Skills
-		lists[9+j*3] = Twilight.Party_Order[j].Weapon
-		lists[10+j*3] = Twilight.Party_Order[j].Charm
-		lists[11+j*3] = Twilight.Party_Order[j].Skills_Active
-		j+=1
-	
-	for i in range(4-Twilight.Party_Size):
+	for i in range(4-Twilight.Party.current_party.size()):
 		ow_status.get_child(3-i).visible = false
-	for i in range(Twilight.Party_Size):
+	for i in range(Twilight.Party.current_party.size()):
 		var stat = ow_status.get_child(i)
-		stat.get_child(1).text = Twilight.Party_Order[i].Name
-		stat.get_child(2).scale.y = (1/ float(Twilight.get_required_exp(Twilight.Party_Order[i].Level))) * Twilight.Party_Order[i].Exp
-		stat.get_child(3).text = "LVL. %d" % [Twilight.Party_Order[i].Level]
-		stat.get_child(4).region_rect = Rect2(0, 0, (116/ float(Twilight.Party_Order[i].Heart_Max)) * Twilight.Party_Order[i].Heart, 70)
-		stat.get_child(5).text = "%d/%d" % [Twilight.Party_Order[i].Heart, Twilight.Party_Order[i].Heart_Max]
-		stat.get_child(6).region_rect = Rect2(0, 0, (116/ float(Twilight.Party_Order[i].Juice_Max)) * Twilight.Party_Order[i].Juice, 70)
-		stat.get_child(7).text = "%d/%d" % [Twilight.Party_Order[i].Juice, Twilight.Party_Order[i].Juice_Max]
+		stat.get_child(1).text = Twilight.Party.current_party[i].name
+		stat.get_child(2).scale.y = ( 1/Twilight.Party.current_party[i].get_levelup_exp() ) * Twilight.Party.current_party[i].experience
+		stat.get_child(3).text = "LVL. %d" % [Twilight.Party.current_party[i].level]
+		stat.get_child(4).region_rect = Rect2(0, 0, (116/ float(Twilight.Party.current_party[i].current_stats[StatType.HEART] )) * Twilight.Party.current_party[i].get_current_stats()[StatType.HEART], 70)
+		stat.get_child(5).text = "%d/%d" % [Twilight.Party.current_party[i].Heart, Twilight.Party.current_party[i].Heart_Max]
+		stat.get_child(6).region_rect = Rect2(0, 0, (116/ float(Twilight.Party.current_party[i].Juice_Max)) * Twilight.Party.current_party[i].Juice, 70)
+		stat.get_child(7).text = "%d/%d" % [Twilight.Party.current_party[i].Juice, Twilight.Party.current_party[i].Juice_Max]
 		var portrait = stat.get_child(8)
-		portrait.texture = load(Twilight.Party_Order[i].Path + "Portraits/Portrait0.png")
+		portrait.texture = load(Twilight.Party.current_party[i].Path + "Portraits/Portrait0.png")
 		portrait.position.y = -109 - portrait.texture.get_height()*0.5
 	
 	if !Twilight.Inventory.has_item(Twilight.Inventory.Key_Items, "TAG"):
@@ -235,7 +220,7 @@ func _menu_logic(delta: float) -> void:
 				who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[1]]).global_position + who_off
 			
 			if Input.is_action_just_pressed("Right") || Input.is_action_just_pressed("Left"):
-				place[1] = _wrap(place[1]+hinput, 1, Twilight.Party_Size)
+				place[1] = _wrap(place[1]+hinput, 1, Twilight.Party.current_party.size())
 				var who : Node = _child_by_name(category_parent, "SelectWho")
 				who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[1]]).global_position + who_off
 			
@@ -260,11 +245,11 @@ func _menu_logic(delta: float) -> void:
 				animator.start("Tag", [0, 1, 0]) # variants = leader, tagged, background
 				sounds_list[i_sound.Tag].play()
 				
-				var new_order : Array = [ Twilight.Party_Order[place[1]-1] ]
-				for i in range(Twilight.Party_Order.size()):
-					if Twilight.Party_Order[i] != new_order[0]:
-						new_order.append(Twilight.Party_Order[i])
-				Twilight.Party_Order = new_order
+				var new_order : Array = [ Twilight.Party.current_party[place[1]-1] ]
+				for i in range(Twilight.Party.current_party.size()):
+					if Twilight.Party.current_party[i] != new_order[0]:
+						new_order.append(Twilight.Party.current_party[i])
+				Twilight.Party.current_party = new_order
 				
 				stage = 3
 			
@@ -372,9 +357,9 @@ func _menu_logic(delta: float) -> void:
 					
 					var equip
 					if place[3] == 1:
-						equip = Twilight.Party_Order[ place[1]-1 ].Weapon
+						equip = Twilight.Party.current_party[ place[1]-1 ].Weapon
 					else:
-						equip = Twilight.Party_Order[ place[1]-1 ].Charm
+						equip = Twilight.Party.current_party[ place[1]-1 ].Charm
 					if equip != null:
 						_set_text(equip.name, Color.WHITE, text_equip_disp_name)
 						_set_text(equip.description, Color.WHITE, text_equip_disp_desc)
@@ -407,8 +392,8 @@ func _menu_logic(delta: float) -> void:
 					return
 				if Input.is_action_just_pressed("Confirm"):
 					var b1 : bool = lists[place[3]-1].size() > 1
-					var b2 : bool = (Twilight.Party_Order[place[1]-1].Weapon != null) && (place[3] == 1)
-					var b3 : bool = (Twilight.Party_Order[place[1]-1].Charm != null) && (place[3] == 2)
+					var b2 : bool = (Twilight.Party.current_party[place[1]-1].Weapon != null) && (place[3] == 1)
+					var b3 : bool = (Twilight.Party.current_party[place[1]-1].Charm != null) && (place[3] == 2)
 					
 					if b1 || b2 || b3:
 						_advance()
@@ -517,7 +502,7 @@ func _menu_logic(delta: float) -> void:
 					sounds_list[i_sound.Cancel].play()
 					return
 				if Input.is_action_just_pressed("Confirm"):
-					if (lists[place[1]+4].size() > 1) || (Twilight.Party_Order[place[1]-1].Skills_Active.size() > 0):
+					if (lists[place[1]+4].size() > 1) || (Twilight.Party.current_party[place[1]-1].Skills_Active.size() > 0):
 						_advance()
 						p_skill_s.frame = 1
 						p_skill_s.position = Vector2(-option.size.x*0.5, option.position.y) + p_base_off
@@ -610,15 +595,15 @@ func _menu_logic(delta: float) -> void:
 					return
 				if Input.is_action_just_pressed("Confirm"):
 					if place[3] == 1:
-						Twilight.Party_Order[ place[1]-1 ].swap_weapon(place[4]-1, Twilight.Inventory)
-						var weapon = Twilight.Party_Order[ place[1]-1 ].Weapon
+						Twilight.Party.current_party[ place[1]-1 ].swap_weapon(place[4]-1, Twilight.Inventory)
+						var weapon = Twilight.Party.current_party[ place[1]-1 ].Weapon
 						if weapon != null:
 							_set_text(weapon.name, Color.WHITE, _child_by_name(menu_equip_wc, "Option1"))
 						else:
 							_set_text("------------", Color.WHITE, _child_by_name(menu_equip_wc, "Option1"))
 					else:
-						Twilight.Party_Order[ place[1]-1 ].swap_charm(place[4]-1, Twilight.Inventory)
-						var charm = Twilight.Party_Order[ place[1]-1 ].Charm
+						Twilight.Party.current_party[ place[1]-1 ].swap_charm(place[4]-1, Twilight.Inventory)
+						var charm = Twilight.Party.current_party[ place[1]-1 ].Charm
 						if charm != null:
 							_set_text(charm.name, Color.WHITE, _child_by_name(menu_equip_wc, "Option2"))
 						else:
@@ -644,7 +629,7 @@ func _menu_logic(delta: float) -> void:
 					who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[4]]).global_position + who_off
 				
 				if Input.is_action_just_pressed("Right") || Input.is_action_just_pressed("Left"):
-					place[4] = _wrap(place[4]+hinput, 1, Twilight.Party_Size)
+					place[4] = _wrap(place[4]+hinput, 1, Twilight.Party.current_party.size())
 					who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[4]]).global_position + who_off
 				
 				if (place[4] != last_place):
@@ -725,8 +710,8 @@ func _menu_logic(delta: float) -> void:
 					_back()
 					return
 				if Input.is_action_just_pressed("Confirm"):
-					Twilight.Party_Order[ place[1]-1 ].swap_skill(place[3]-1, place[4]-1)
-					_update_options_res(menu_skill_s, Twilight.Party_Order[place[1]-1].Skills_Active)
+					Twilight.Party.current_party[ place[1]-1 ].swap_skill(place[3]-1, place[4]-1)
+					_update_options_res(menu_skill_s, Twilight.Party.current_party[place[1]-1].Skills_Active)
 					
 					animator.start("Skill Menu Replace", [0, 3, -1])
 					await_animation = true
@@ -837,7 +822,7 @@ func _menu_logic(delta: float) -> void:
 					return
 				
 				if Input.is_action_just_pressed("Right") || Input.is_action_just_pressed("Left"):
-					place[6] = _wrap(place[6]+hinput, 1, Twilight.Party_Size)
+					place[6] = _wrap(place[6]+hinput, 1, Twilight.Party.current_party.size())
 					var who : Node = _child_by_name(category_parent, "SelectWho")
 					who.global_position = _child_by_name(ow_status, "OverworldStatus%d"%[place[6]]).global_position + who_off
 				
@@ -927,9 +912,9 @@ func _color_compare(item_stat : int, now_item_stat : int) -> Color:
 func _update_stat_menu(item) -> void:
 	var now_item
 	if place[3] == 1:
-		now_item = Twilight.Party_Order[ place[1]-1 ].Weapon
+		now_item = Twilight.Party.current_party[ place[1]-1 ].Weapon
 	else:
-		now_item = Twilight.Party_Order[ place[1]-1 ].Charm
+		now_item = Twilight.Party.current_party[ place[1]-1 ].Charm
 	if now_item == null:
 		now_item = load("res://RESOURCES/Equippable/ZERO.tres")
 	
