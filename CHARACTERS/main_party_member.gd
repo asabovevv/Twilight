@@ -244,6 +244,7 @@ func _get_inputs(delta):
 		if Input.is_action_just_pressed("Confirm"):
 			
 			# Check tile infront of where player is facing, then current tile
+			var ic_pos : Vector2 = interactcast.position
 			for i in range(2):
 				interactcast.force_raycast_update()
 				if interactcast.is_colliding():
@@ -264,6 +265,8 @@ func _get_inputs(delta):
 						return
 				
 				interactcast.global_position = global_position
+			
+			interactcast.position = ic_pos
 		
 		# tag menu
 		if Input.is_action_just_pressed("Tag"):
