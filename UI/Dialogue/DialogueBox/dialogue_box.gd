@@ -60,6 +60,8 @@ func _do_option_select() -> void:
 		if Input.is_action_just_pressed("Up"):
 			current_choice += 1
 		
+		# z
+		
 		if current_choice > d_choice.get_child_count()-2:
 			current_choice = 0
 		if current_choice < 0:
