@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5i4cn63t0alx"
-path="res://.godot/imported/Portrait2.png-10968c9ed973785bb453bf5b3fa79117.ctex"
+uid="uid://cy2p82f7rk4gy"
+path="res://.godot/imported/Mar_Neutral.png-c60ca20b73752140bbc2c13484505cf3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CHARACTERS/Sunny/Portraits/Portrait2.png"
-dest_files=["res://.godot/imported/Portrait2.png-10968c9ed973785bb453bf5b3fa79117.ctex"]
+source_file="res://UI/Portraits/Battle_Portraits/Mar_Neutral.png"
+dest_files=["res://.godot/imported/Mar_Neutral.png-c60ca20b73752140bbc2c13484505cf3.ctex"]
 
 [params]
 

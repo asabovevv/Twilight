@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5xx7qprs1fh5"
-path="res://.godot/imported/Portrait0.png-0835b7cc52b76bae049180cfb05c6a31.ctex"
+uid="uid://b67eglokluvsf"
+path="res://.godot/imported/Sun2.png-62bad0718f473ce44ed50a2c70a0f7e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CHARACTERS/Basil/Portraits/Portrait0.png"
-dest_files=["res://.godot/imported/Portrait0.png-0835b7cc52b76bae049180cfb05c6a31.ctex"]
+source_file="res://UI/Portraits/Sun2.png"
+dest_files=["res://.godot/imported/Sun2.png-62bad0718f473ce44ed50a2c70a0f7e4.ctex"]
 
 [params]
 

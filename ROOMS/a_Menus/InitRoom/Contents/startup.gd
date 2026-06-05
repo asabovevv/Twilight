@@ -8,7 +8,7 @@ extends Node2D
 @onready var sfx_slider : HSlider = $VolumeControl/VBoxContainer/SFX/SFXSlider
 
 var rooms_misc : Array
-var rooms_twilight : Array
+var rooms_Twilight : Array
 
 func _ready() -> void:
 	DisplayServer.window_set_size(Vector2i(640*2, 480*2))
@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func _debug_start() -> void:
 	# Debug
-	TWILIGHT.load_from_slot(-1)
+	Twilight.load_from_slot(-1)
 	display_stats()
 	_load_all_rooms()
 	
@@ -34,55 +34,55 @@ func _debug_start() -> void:
 	#get_tree().change_scene_to_file("res://ROOMS/Twilight/displayroom.tscn")
 
 func _on_save_stats_button_down() -> void:
-	TWILIGHT.save_to_slot( int($Stats/SaveStats/SaveStatInt.text) )
+	Twilight.save_to_slot( int($Stats/SaveStats/SaveStatInt.text) )
 
 func _on_load_stats_button_down() -> void:
-	TWILIGHT.load_from_slot( int($Stats/LoadStats/LoadStatInt.text) )
+	Twilight.load_from_slot( int($Stats/LoadStats/LoadStatInt.text) )
 	display_stats()
 
 func _on_default_stats_pressed() -> void:
-	TWILIGHT.load_from_slot( -1 )
+	Twilight.load_from_slot( -1 )
 	display_stats()
 
 func _on_emotion_unlock_pressed() -> void:
-	TWILIGHT.Party.fast_emotion = ["neutral", "happy", "angry", "sad"]
+	Twilight.Party.fast_emotion = ["neutral", "happy", "angry", "sad"]
 
 func display_stats() -> void:
 	for i in party_cont.get_child_count():
 		party_cont.get_child(i).queue_free()
 	
-	for member in TWILIGHT.Party.all_members:
+	for member in Twilight.Party.all_members:
 		var pmc = partymember_cont.instantiate()
 		var v : Array = pmc.get_children()
 		pmc.mychar = member
 		pmc.myparent = self
 		
 		# Name
-		v[0].text = TWILIGHT.Party.all_members[member].name
+		v[0].text = Twilight.Party.all_members[member].name
 		
 		# In party? + Pos
 		pmc.modulate.a = 0.7
-		if TWILIGHT.Party.current_party.has(TWILIGHT.Party.all_members[member]):
-			v[1].text = "In Party (%d)" % [ float(TWILIGHT.Party.all_members[member].round_priority) / 2.0 ]
+		if Twilight.Party.current_party.has(Twilight.Party.all_members[member]):
+			v[1].text = "In Party (%d)" % [ float(Twilight.Party.all_members[member].round_priority) / 2.0 ]
 			pmc.modulate.a = 1
 		
 		# Leveling
-		v[2].get_child(0).text = str( TWILIGHT.Party.all_members[member].level )
+		v[2].get_child(0).text = str( Twilight.Party.all_members[member].level )
 		pmc.update_lvstats()
 		
 		# Weapon
-		if TWILIGHT.Party.all_members[member].weapon == Equippable.NONE:
+		if Twilight.Party.all_members[member].weapon == Equippable.NONE:
 			v[3].get_child(0).text = "None"
 		else:
-			v[3].get_child(0).text = Registry.get_equipment( TWILIGHT.Party.all_members[member].weapon ).name
-			pmc.update_weaponstats( TWILIGHT.Party.all_members[member].weapon )
+			v[3].get_child(0).text = Registry.get_equipment( Twilight.Party.all_members[member].weapon ).name
+			pmc.update_weaponstats( Twilight.Party.all_members[member].weapon )
 		
 		# Charm
-		if TWILIGHT.Party.all_members[member].charm == Equippable.NONE:
+		if Twilight.Party.all_members[member].charm == Equippable.NONE:
 			v[4].get_child(0).text = "None"
 		else:
-			v[4].get_child(0).text = Registry.get_equipment( TWILIGHT.Party.all_members[member].charm ).name
-			pmc.update_charmstats( TWILIGHT.Party.all_members[member].charm )
+			v[4].get_child(0).text = Registry.get_equipment( Twilight.Party.all_members[member].charm ).name
+			pmc.update_charmstats( Twilight.Party.all_members[member].charm )
 		
 		# Skills
 		pmc.update_skills()
@@ -122,10 +122,10 @@ func _on_encounter_mockup_pressed() -> void:
 func _load_all_rooms() -> void:
 	get_groups_rooms("res://ROOMS/a_Menus/", rooms_misc)
 	get_groups_rooms("res://ROOMS/c_Interludes/", rooms_misc)
-	get_groups_rooms("res://ROOMS/Twilight/", rooms_twilight)
+	get_groups_rooms("res://ROOMS/Twilight/", rooms_Twilight)
 	
 	add_rooms_to_list(rooms_misc, $RoomSelect/MISC/VBoxContainer)
-	add_rooms_to_list(rooms_twilight, $RoomSelect/TWILIGHT/VBoxContainer)
+	add_rooms_to_list(rooms_Twilight, $RoomSelect/TWILIGHT/VBoxContainer)
 	
 	$RoomSelect/HBoxContainer0.queue_free()
 	$RoomSelect/room0.queue_free()
@@ -140,30 +140,30 @@ func get_groups_rooms(group_path : String, array : Array) -> void:
 				array.append(j)
 				array.append(group_path+i+"/"+j)
 
-func add_rooms_to_list(array : Array, vbox_container : VBoxContainer) -> void:
+func add_rooms_to_list(array : Array, _vbox_container : VBoxContainer) -> void:
 	var hbox_row : int = 0
 	var j : int = 0
-	vbox_container.add_child($RoomSelect/HBoxContainer0.duplicate())
+	_vbox_container.add_child( $RoomSelect/HBoxContainer0.duplicate() )
 	
 	for i in range(array.size()*0.5):
 		var button = $RoomSelect/room0.duplicate()
 		button.text = array[i*2]
 		button.dir = array[i*2+1]
 		
-		vbox_container.get_child(hbox_row).add_child(button)
+		_vbox_container.get_child(hbox_row).add_child(button)
 		
 		j+=1
 		if j == 5:
 			hbox_row+=1
-			vbox_container.add_child($RoomSelect/HBoxContainer0.duplicate())
+			_vbox_container.add_child($RoomSelect/HBoxContainer0.duplicate())
 
 func _on_g_misc_pressed() -> void:
 	$RoomSelect/MISC.position.x = 0
-	$RoomSelect/TWILIGHT.position.x = 9999
+	$RoomSelect/Twilight.position.x = 9999
 
-func _on_g_twilight_pressed() -> void:
+func _on_g_Twilight_pressed() -> void:
 	$RoomSelect/MISC.position.x = 9999
-	$RoomSelect/TWILIGHT.position.x = 0
+	$RoomSelect/Twilight.position.x = 0
 
 func set_bus_volume(bus: String, volume: float) -> void:
 	var index = AudioServer.get_bus_index(bus)

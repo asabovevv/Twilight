@@ -4,7 +4,7 @@ var key : String
 var name : String
 var asset_path : String
 var battle_portrait : SpriteFrames
-var level_up_stats : Dictionary[String, Array] # Stat curves
+var level_up_stats : Dictionary[String, Array] # Stat "curves" used for setting base stats on level-up
 var round_priority : int
 var all_skills : Array[String] # All skills the party member can/will have
 

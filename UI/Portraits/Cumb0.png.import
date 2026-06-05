@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cbhjcahkrlf8w"
-path="res://.godot/imported/Portrait0.png-86a17ef118fe86e041d95c82ec93d45b.ctex"
+uid="uid://dgfuiax5nsqds"
+path="res://.godot/imported/Cumb0.png-a1c452a70f6c7496fcbface79aafcad1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CHARACTERS/Sunny/Portraits/Portrait0.png"
-dest_files=["res://.godot/imported/Portrait0.png-86a17ef118fe86e041d95c82ec93d45b.ctex"]
+source_file="res://UI/Portraits/Cumb0.png"
+dest_files=["res://.godot/imported/Cumb0.png-a1c452a70f6c7496fcbface79aafcad1.ctex"]
 
 [params]
 

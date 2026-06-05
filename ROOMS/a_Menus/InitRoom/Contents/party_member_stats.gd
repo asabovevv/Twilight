@@ -4,17 +4,17 @@ var mychar
 var myparent
 
 func _on_add_remove_party_member_button_down() -> void:
-	var member : PartyMember = TWILIGHT.Party.all_members[mychar]
+	var member : PartyMember = Twilight.Party.all_members[mychar]
 	
 	# If in party already
-	if TWILIGHT.Party.current_party.has(member):
-		TWILIGHT.Party.current_party.erase(member)
+	if Twilight.Party.current_party.has(member):
+		Twilight.Party.current_party.erase(member)
 		$IsInParty.text = "Not In Party"
 		modulate.a = 0.7
 		return
 	
 	# Else
-	TWILIGHT.Party.current_party.append(member)
+	Twilight.Party.current_party.append(member)
 	$IsInParty.text = "In Party (%d)" % [ float(member.round_priority) / 2.0 ]
 	modulate.a = 1
 
@@ -22,12 +22,12 @@ func _on_level_edit_text_changed(new_text: String) -> void:
 	if int($Level/LevelEdit.text) > 50 || int($Level/LevelEdit.text) < 0:
 		return
 		
-	TWILIGHT.Party.all_members[ mychar ].set_level(int(new_text), 0)
+	Twilight.Party.all_members[ mychar ].set_level(int(new_text), 0)
 	update_lvstats()
 	update_skills()
 
 func update_lvstats() -> void:
-	var member : PartyMember = TWILIGHT.Party.all_members[mychar]
+	var member : PartyMember = Twilight.Party.all_members[mychar]
 	
 	$Level/Hptxt.text = str( member.base_stats[StatType.HEART] )
 	$Level/Juicetxt.text = str( member.base_stats[StatType.JUICE] )
@@ -51,7 +51,7 @@ func _on_weapon_edit_text_changed(new_text: String) -> void:
 		$Weapon/LcktxtW.text = "0"
 		$Weapon/HittxtW.text = "0"
 		$Weapon/WeaponDesc.text = "No Description."
-		TWILIGHT.Party.all_members[ mychar ].weapon = ""
+		Twilight.Party.all_members[ mychar ].weapon = ""
 
 func update_weaponstats(_name : String) -> void:
 	var _weapon = Registry.get_equipment(_name)
@@ -66,7 +66,7 @@ func update_weaponstats(_name : String) -> void:
 		$Weapon/HittxtW.text = str( _weapon.get_stat(StatType.HIT) )
 		$Weapon/WeaponDesc.text = _weapon.description
 		
-		TWILIGHT.Party.all_members[ mychar ].weapon = _name
+		Twilight.Party.all_members[ mychar ].weapon = _name
 	else:
 		$Weapon/WeaponDesc.text = "Resource isn't a Weapon."
 
@@ -86,7 +86,7 @@ func _on_charm_edit_text_changed(new_text: String) -> void:
 		$Charm/LcktxtC.text = "0"
 		$Charm/HittxtC.text = "0"
 		$Charm/CharmDesc.text = "No Description."
-		TWILIGHT.Party.all_members[ mychar ].charm = ""
+		Twilight.Party.all_members[ mychar ].charm = ""
 
 func update_charmstats(_name : String) -> void:
 	var _weapon = Registry.get_equipment(_name)
@@ -101,8 +101,8 @@ func update_charmstats(_name : String) -> void:
 		$Charm/HittxtC.text = str( _weapon.get_stat(StatType.HIT) )
 		$Charm/CharmDesc.text = _weapon.description
 		
-		#TWILIGHT.equippable(TWILIGHT.Inventory.Charms[0])
-		TWILIGHT.Party.all_members[ mychar ].charm = _name
+		#Twilight.equippable(Twilight.Inventory.Charms[0])
+		Twilight.Party.all_members[ mychar ].charm = _name
 	else:
 		$Charm/CharmDesc.text = "Resource isn't a Charm."
 
@@ -111,7 +111,7 @@ func update_skills() -> void:
 		if i != 0:
 			$Skills.get_child(i).queue_free()
 	
-	var skillsArray : Array = TWILIGHT.Party.all_members[ mychar ].unlocked_skills
+	var skillsArray : Array = Twilight.Party.all_members[ mychar ].unlocked_skills
 	for i in range(skillsArray.size()):
 		var sLabel : Label = $Skills/Skill0.duplicate()
 		sLabel.text = skillsArray[i]

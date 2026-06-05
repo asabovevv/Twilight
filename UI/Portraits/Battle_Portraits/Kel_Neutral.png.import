@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnxxp10hceu64"
-path="res://.godot/imported/Portrait0.png-1e5fd4a8e35f4e7cf8c22e5ad4fd6b4d.ctex"
+path="res://.godot/imported/Kel_Neutral.png-bcc0b3396c8059895cd471a018d53df3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CHARACTERS/Kel/Portraits/Portrait0.png"
-dest_files=["res://.godot/imported/Portrait0.png-1e5fd4a8e35f4e7cf8c22e5ad4fd6b4d.ctex"]
+source_file="res://UI/Portraits/Battle_Portraits/Kel_Neutral.png"
+dest_files=["res://.godot/imported/Kel_Neutral.png-bcc0b3396c8059895cd471a018d53df3.ctex"]
 
 [params]
 

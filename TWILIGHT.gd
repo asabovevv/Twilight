@@ -112,7 +112,7 @@ func save_to_slot(slot : int) -> void:
 	for id in Party.all_members:
 		var member : PartyMember = Party.all_members[id]
 		file.store_16(member.level)
-		file.store_16(member.exp)
+		file.store_16(member.experience)
 		file.store_pascal_string(member.weapon)
 		file.store_pascal_string(member.charm)
 		file.store_8(member.line_position)
@@ -129,10 +129,10 @@ func save_to_slot(slot : int) -> void:
 	file.close()
 
 func load_from_slot(slot : int) -> void:
-
+	
 	## TEMP!!!!
 	load_dialogue_file(language, "Dream1.txt")
-
+	
 	# SAVE FILE EXISTS
 	if FileAccess.file_exists("user://Save%d_%f.dat" % [slot, Version]) && (slot != -1):
 		var file = FileAccess.open("user://Save%d_%f.dat" % [slot, Version], FileAccess.READ)
@@ -158,7 +158,7 @@ func load_from_slot(slot : int) -> void:
 			var member := PartyMember.new(data)
 			member.load_stats(
 				file.get_16(), 					# level
-				file.get_16(), 					# exp
+				file.get_16(), 					# experience
 				file.get_pascal_string(), 		# weapon
 				file.get_pascal_string(), 		# charm
 				file.get_8(), 					# line_position
@@ -212,29 +212,29 @@ func load_from_slot(slot : int) -> void:
 func load_dialogue_file(_language : String, file_name : String) -> void:
 	if FileAccess.file_exists("res://LANGUAGE/" + _language + "/" + file_name):
 		var langfile = FileAccess.open( "res://LANGUAGE/" + _language + "/" + file_name, FileAccess.READ)
-
+	
 		var read_line : String = langfile.get_line()
 		while read_line != "EOF":
-
+	
 			# Store first string as branch name
 			var branch_name : String = read_line
 			# If branch name has an indent, remove it
 			branch_name = branch_name.remove_chars("\t")
-
+	
 			# Get the rest of the chunk for branch dialogue (Stop at empty line)
 			var branch_dialogue : Array[String]
 			var branch_line : String = langfile.get_line()
 			while branch_line != "":
 				branch_dialogue.append(branch_line)
 				branch_line = langfile.get_line()
-
+	
 			# Append branch to main dialogue
 			d[branch_name] = branch_dialogue
-
+	
 			# Advance, next we will check if the below line is EOF or another header
 			read_line = langfile.get_line()
-
+	
 		langfile.close()
-
+	
 	else:
 		print("Lang file: " + "res://LANGUAGE/" + language + "/" + file_name + " doesn't exist.")

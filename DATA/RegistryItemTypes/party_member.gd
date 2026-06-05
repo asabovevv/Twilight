@@ -53,7 +53,7 @@ func _refresh_unlocked_skills() -> void:
 		var skill := Registry.get_skill(id)
 		if !skill: continue
 		var level_ok : bool = skill.level_requirement < level
-		var flag_ok : bool = skill.required_flag == -1 or TWILIGHT.Flags.get_flag(skill.required_flag)
+		var flag_ok : bool = skill.required_flag == -1 or Twilight.Flags.get_flag(skill.required_flag)
 		if level_ok and flag_ok:
 			unlocked_skills.append(id)
 
