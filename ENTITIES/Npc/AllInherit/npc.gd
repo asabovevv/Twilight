@@ -35,12 +35,25 @@ var rand : RandomNumberGenerator
 			sprite.vframes = sprite_hvframes.y
 
 # Dialogue
-@export_category("Dialogue")
+@export_category("Interaction")
 @export var interactable : bool = false
+@export var interact_script_path : String
+
+enum InteractionType { Dialogue, Runs_Script }
+@export var interaction_type : InteractionType = InteractionType.Dialogue
+
 @export var has_talkframes : bool = false
+@export var max_unique_interactions : int = 1
 var interacted_count : int = 0
-var interacted : bool = false
+var interacting : bool = false
+
+## Array of DialogueSequences. DialogueSequences should contain at least 1 branch of dialogue.
+## Branches of dialogue are grabbed via their header name from the Twilight.d dictionary.
 @export var dialogue : Array[DialogueSequence] = [DialogueSequence.new()]
+
+## When dialogue is initiated, the game checks for flags listed here.
+## If the flag is TRUE, it runs the specified DialogueSequence in dialogue[]
+@export var dialogue_flag_triggers : Array[DialogueFlagTrigger]
 
 # Movement
 @export_category("Movement")
@@ -60,7 +73,7 @@ var act_moving : bool = false
 @export var anim_speed : float = 2.0
 @export var talk_anim_speed : float = 15.0
 var frame : float = 0.0
-var time : float = 0.0
+var local_time : float = 0.0
 
 func _ready() -> void:
 	rand = RandomNumberGenerator.new()
@@ -108,7 +121,7 @@ func _process(delta: float) -> void:
 	
 	else:
 		
-		if moves && !interacted:
+		if moves && !interacting:
 			_move(delta)
 			
 			if has_collision:
@@ -116,7 +129,7 @@ func _process(delta: float) -> void:
 				movingcollider.global_position = target
 		
 		_custom_animate() # Remember to handle both colliders
-		time += delta
+		local_time += delta
 		
 		_animate(delta)
 
@@ -172,10 +185,10 @@ func _move(delta: float) -> void:
 func _animate(delta : float) -> void:
 	
 	# Talk anim
-	if interacted && has_talkframes: # Talking
+	if interacting && has_talkframes: # Talking
 		
 		# moves sprite down 1 vframe at talk_anim_speed
-		sprite.frame = floor(frame) + (floor( sin(time*talk_anim_speed) * 0.5) + 1) * (sprite.vframes+1)
+		sprite.frame = floor(frame) + (floor( sin(local_time*talk_anim_speed) * 0.5) + 1) * (sprite.vframes+1)
 	
 	# Normal anim
 	if anim_default:
@@ -188,7 +201,27 @@ func _grid_snap(_position : Vector2) -> Vector2:
 	return (_position + Vector2(16, 16)).snapped(Vector2(32, 32)) - Vector2(16, 16)
 
 func set_dialogue_tree_new_interaction():
-	interacted_count = min(interacted_count, dialogue.size()-1)
+	
+	# Check flags for special interactions
+	if dialogue_flag_triggers.size() > 0:
+		
+		for special_branch in dialogue_flag_triggers:
+			
+			# Check all flags for each special dialogue branch
+			var flags_required : int = special_branch.flags.size()
+			var flags_true : int = 0
+			for flag in special_branch.flags:
+				if Twilight.Flags.get_flag( special_branch.flags[flag] ):
+					flags_true += 1
+			
+			# If all flags for special branch are true
+			if flags_true == flags_required:
+				
+				dialogue[ special_branch.sequence ].set_tree( dialogue[ special_branch.sequence ].branch_headers )
+				return dialogue[ special_branch.sequence ]
+	
+	# Do basic dialogue if no flag checks succeed
+	interacted_count = min(interacted_count, max_unique_interactions-1)
 	
 	dialogue[interacted_count].set_tree( dialogue[interacted_count].branch_headers )
 	return dialogue[interacted_count]

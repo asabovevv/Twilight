@@ -69,6 +69,15 @@ func play_sfx(_name : String, volume : float = 1, pitch : float = 1) -> void:
 		
 	push_warning("SFX overloaded!")
 
+## Stops a currently playing SFX by name.
+func stop_sfx() -> void:
+	var stream = loaded_sfx.get(name)
+	if stream:
+		stream.resource_path
+		
+		if active_sounds.has(stream.resource_path):
+			active_sounds[stream.resource_path].stop()
+
 ## Plays the given BGM [param name].
 ##
 ## Also accepts optional [param volume] and [param pitch] values, both of which default to 1.

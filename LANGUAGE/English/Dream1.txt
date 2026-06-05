@@ -3,6 +3,16 @@
 
 	Test_Branch_2
 |wait:_:1||wait:/:1:4||wave:^:10||dbox||face:Cumb0||size_gradual:!:d:45:3||size_gradual:*:d:45:3|^Help me..../ help me..../ be_ cum.../ something !GREATER[font_size=28].../ something *BIGGER[font_size=28]....
-|wave:^:10||choice:Yes:No|      please
+|wave:^:10||choice:Yes:1:No:2|      please
+
+	Test_Branch_2_Choice_Yes
+|wave:^:10||face:Cumb0|thank you. children.
+|wave:^:10||face:Cumb0|I want chicken.... AUBREY.     Bring it to me.
+
+	Test_Branch_2_Choice_No
+|face:Cumb0|fucky ou
+
+	Test_Branch_3
+|dbox||wave:^:10||face:Cumb0|give methe Chicken.... please.........
 
 EOF

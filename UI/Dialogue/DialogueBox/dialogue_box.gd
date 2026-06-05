@@ -36,6 +36,7 @@ var event_names : Array[String]
 const p_base_off = Vector2(-16, 12)
 var p_choice_base_pos = Vector2.ZERO
 var current_choice : int = 0
+var choice_branch_locations : Array[int]
 
 var tsound : String = "SE_text_basic"
 const portrait_location = "res://UI/Portraits/"
@@ -59,8 +60,18 @@ func _do_option_select() -> void:
 			Audio.play_sfx("SE_move1", 0.9)
 		if Input.is_action_just_pressed("Up"):
 			current_choice += 1
+			Audio.play_sfx("SE_move1", 0.9)
 		
-		# z
+		if Input.is_action_just_pressed("Confirm"):
+			dialogue_stage = 0
+			dialogue_place = 0
+			dialogue_branch = choice_branch_locations[current_choice]
+			
+			d_choice_cont.visible = false
+			choice_branch_locations.clear()
+			for i in d_choice.get_children():
+				if i is not Sprite2D:
+					i.queue_free()
 		
 		if current_choice > d_choice.get_child_count()-2:
 			current_choice = 0
@@ -214,7 +225,7 @@ func _text_escape() -> void:
 				
 				d_choice_cont.visible = true
 				var choice_amount = escape_var.size()-1
-				d_choice.custom_minimum_size.y = 24 + 28 * choice_amount
+				d_choice.custom_minimum_size.y = 24 + 28 * (choice_amount/2)
 				d_choice.size.y = 0
 				d_choice.position.y = -(d_choice.custom_minimum_size.y-55)
 				_make_choice_options(escape_var)
@@ -358,16 +369,24 @@ func _make_choice_options(_array : Array) -> void:
 	for i in d_choice.get_children():
 		if i.name != "Pointer":
 			i.queue_free()
+		
+	choice_branch_locations.clear()
 	
 	# Add labels
 	var longest : float = 0
 	
-	for i in range(1, _array.size()):
+	for i in range(0, floor((_array.size()-1)/2 ) ):
+		
+		var _name = _array[  i *2+1]
+		var _branch = _array[i *2+2]
+		
 		var _option = option.duplicate()
-		_option.position = Vector2(70, -19 + 28 * i)
-		_option.get_child(0).text = str( i )
+		_option.position = Vector2(70, -19 + 28 * (i+1) )
+		_option.get_child(0).text = _name
 		_option.visible = true
 		d_choice.add_child(_option)
+		
+		choice_branch_locations.append( int( _branch ) )
 		
 		longest = 100
 	
@@ -407,4 +426,5 @@ func _end_dialogue() -> void:
 		player.dialogue_active = false
 		
 		if npc != null:
-			npc.interacted = false
+			npc.interacting = false
+			npc.sprite.frame = floor(npc.frame)

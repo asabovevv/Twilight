@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cyaxdi2xdevbg"]
 
-[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://DATA/Resources/Dialogue/dialogue_sequence.gd" id="2_r1uv1"]
+[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://DATA/Resources/Npc/dialogue_sequence.gd" id="2_r1uv1"]
 [ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://DATA/Resources/Npc/npcaction.gd" id="2_vf6d8"]
 [ext_resource type="Script" uid="uid://dw5of7ejmdcb5" path="res://ENTITIES/Npc/AllInherit/npc.gd" id="2_xxcha"]
 
@@ -16,9 +16,6 @@ position = Vector2(16, 16)
 script = ExtResource("2_xxcha")
 dialogue = Array[ExtResource("2_r1uv1")]([])
 action_loop = Array[ExtResource("2_vf6d8")]([SubResource("Resource_vf6d8")])
-anim_default = false
-anim_speed = 0.0
-talk_anim_speed = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=761226622]
 y_sort_enabled = true

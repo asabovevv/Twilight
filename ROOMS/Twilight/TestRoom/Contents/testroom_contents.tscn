@@ -16,7 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://dukfkk45sqmhx" path="res://ENTITIES/Npc/Mobile/Twilight/NPC_Bunny_Idle.png" id="12_ynx7i"]
 [ext_resource type="Texture2D" uid="uid://dxm3u6wd73a0t" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_PinkDoor.png" id="13_1l2ua"]
 [ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://DATA/Resources/Npc/npcaction.gd" id="13_d17ug"]
-[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://DATA/Resources/Dialogue/dialogue_sequence.gd" id="15_1l2ua"]
+[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://DATA/Resources/Npc/dialogue_sequence.gd" id="15_1l2ua"]
+[ext_resource type="Script" uid="uid://c7jcsw7kiq5mi" path="res://DATA/Resources/Npc/dialogue_flag_trigger.gd" id="16_awnop"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dq3mf"]
 texture = ExtResource("2_u4srh")
@@ -665,8 +666,18 @@ branch_headers = Array[String](["Test_Branch_1"])
 
 [sub_resource type="Resource" id="Resource_8r2v7"]
 script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_2"])
+branch_headers = Array[String](["Test_Branch_2", "Test_Branch_2_Choice_Yes", "Test_Branch_2_Choice_No"])
 metadata/_custom_type_script = "uid://dopbn3w65cjm3"
+
+[sub_resource type="Resource" id="Resource_v5pv0"]
+script = ExtResource("15_1l2ua")
+branch_headers = Array[String](["Test_Branch_3"])
+metadata/_custom_type_script = "uid://dopbn3w65cjm3"
+
+[sub_resource type="Resource" id="Resource_x0ham"]
+script = ExtResource("16_awnop")
+sequence = 2
+metadata/_custom_type_script = "uid://c7jcsw7kiq5mi"
 
 [node name="RoomContents" type="Node2D" unique_id=1819179948]
 
@@ -750,8 +761,11 @@ sprite_img = ExtResource("12_v2jh2")
 sprite_hvframes = Vector2i(3, 2)
 interactable = true
 has_talkframes = true
-dialogue = Array[ExtResource("15_1l2ua")]([SubResource("Resource_ihekr"), SubResource("Resource_8r2v7")])
+max_unique_interactions = 2
+dialogue = Array[ExtResource("15_1l2ua")]([SubResource("Resource_ihekr"), SubResource("Resource_8r2v7"), SubResource("Resource_v5pv0")])
+dialogue_flag_triggers = Array[ExtResource("16_awnop")]([SubResource("Resource_x0ham")])
 action_loop = Array[ExtResource("13_d17ug")]([])
+anim_default = false
 
 [node name="NPC_door" parent="." unique_id=270951796 instance=ExtResource("11_d17ug")]
 position = Vector2(400, 272)
@@ -760,7 +774,6 @@ sprite_offset = Vector2(0, -24)
 sprite_img = ExtResource("13_1l2ua")
 sprite_hvframes = Vector2i(4, 1)
 action_loop = Array[ExtResource("13_d17ug")]([])
-anim_default = true
 anim_speed = 15.0
 
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember" method="_on_main_party_member_mood_changed"]

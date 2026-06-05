@@ -4,7 +4,6 @@
 [ext_resource type="Shader" uid="uid://t1sl6paxlj7o" path="res://MISC/screen_viginette.gdshader" id="2_14knk"]
 [ext_resource type="Script" uid="uid://b2ba16w8ot6y5" path="res://UI/overworld_ui.gd" id="3_14knk"]
 
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_6qsma"]
 viewport_path = NodePath("ViewportRender/SubViewport")
 
@@ -23,6 +22,8 @@ y_sort_enabled = true
 [node name="UI" type="Node2D" parent="." unique_id=658786465]
 z_index = 10
 script = ExtResource("3_14knk")
+
+[node name="Cutscenes" type="Node2D" parent="." unique_id=856448543]
 
 [node name="ViewportRender" type="Sprite2D" parent="." unique_id=1816761070]
 texture = SubResource("ViewportTexture_6qsma")

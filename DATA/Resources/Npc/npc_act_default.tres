@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="NpcAction" format=3 uid="uid://dlj547iq4kaf"]
-
-[ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://DATA/Resources/Npc/npcaction.gd" id="1_rtkc2"]
-
-
-[resource]
-script = ExtResource("1_rtkc2")
-metadata/_custom_type_script = "uid://dpi62ybd3sa1l"

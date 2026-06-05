@@ -240,7 +240,7 @@ func _get_inputs(delta):
 			Twilight.ui.activate_ui(0, self)
 			return
 		
-		# dialogue box
+		# interact with npc
 		if Input.is_action_just_pressed("Confirm"):
 			
 			# Check tile infront of where player is facing, then current tile
@@ -250,19 +250,29 @@ func _get_inputs(delta):
 				if interactcast.is_colliding():
 					interactable_node = interactcast.get_collider().get_parent()
 					
-					# If interactable node has dialogue
+					# If interactable node can be interacted with
 					if interactable_node.interactable == true && !in_cutscene_last:
-						interactable_node.interacted = true
 						
-						# Set npc's dialogue tree to their current interaction and make ui
-						Twilight.ui.activate_ui_textbox(1, self, interactable_node.set_dialogue_tree_new_interaction())
-						interactable_node.interacted_count += 1
-						
-						dialogue_active = true
-						in_cutscene = true
-						
-						frame = 0.9
-						return
+						# If interaction type is dialogue
+						if interactable_node.interaction_type == NPCBasic.InteractionType.Dialogue:
+							
+							interactable_node.interacting = true
+							
+							# Set npc's dialogue tree to their current interaction and make ui
+							Twilight.ui.activate_ui_textbox(1, self, interactable_node.set_dialogue_tree_new_interaction())
+							interactable_node.interacted_count += 1
+							
+							dialogue_active = true
+							in_cutscene = true
+							
+							frame = 0.9
+							return
+							
+						else: # If interaction type is Runs_Script
+							
+							## TODO: alongside cutscene rework
+							interactable_node.interacting = true
+							load( interactable_node.interact_script_path )
 				
 				interactcast.global_position = global_position
 			

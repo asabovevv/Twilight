@@ -42,8 +42,8 @@
 #	- Causes text to scroll at X characters a second after marker char.
 #	- Speed is 60 by default. (Speed can be set to "d" or "default" as well.)
 
-## |choice : (str) ~Option 1 : (str) ~Option 2 : ~... |
-#	- (Incomplete)
+## |choice : (str) ~Option 1 Name : (int) Option 1 Jumps To Branch : ~... |
+#	- Brings up a choice menu during dialogue. Making a choice jumps to another branch in dialogue tree.
 
 ## |end : (MC) Marker Char |
 #	- Instantly ends text when crawl reaches marker char.

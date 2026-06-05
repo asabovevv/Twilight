@@ -71,7 +71,7 @@ var Inventory : Inv
 class FlagData:
 	var story_flags : Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	enum Flag_Name {
-		Tag_Enabled, Happy_Swap_Unlocked, Sad_Swap_Unlocked, Angry_Swap_Unlocked
+		Carrying_Chicken
 	}
 	
 	func set_flag(flag_number : int, value : bool) -> void:
@@ -212,26 +212,31 @@ func load_dialogue_file(_language : String, file_name : String) -> void:
 		var langfile = FileAccess.open( "res://LANGUAGE/" + _language + "/" + file_name, FileAccess.READ)
 	
 		var read_line : String = langfile.get_line()
+		var error_catch : int = 0
 		while read_line != "EOF":
-	
+			error_catch += 1
+			if error_catch > 20000:
+				push_error("Branch(es) in res://LANGUAGE/" + _language + "/" + file_name + " are incorrectly formatted. File load failed.")
+				return
+			
 			# Store first string as branch name
 			var branch_name : String = read_line
 			# If branch name has an indent, remove it
 			branch_name = branch_name.remove_chars("\t")
-	
+			
 			# Get the rest of the chunk for branch dialogue (Stop at empty line)
 			var branch_dialogue : Array[String]
 			var branch_line : String = langfile.get_line()
 			while branch_line != "":
 				branch_dialogue.append(branch_line)
 				branch_line = langfile.get_line()
-	
+			
 			# Append branch to main dialogue
 			d[branch_name] = branch_dialogue
-	
+			
 			# Advance, next we will check if the below line is EOF or another header
 			read_line = langfile.get_line()
-	
+			
 		langfile.close()
 	
 	else:
