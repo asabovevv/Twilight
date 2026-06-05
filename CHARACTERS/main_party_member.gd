@@ -57,7 +57,7 @@ func _ready() -> void:
 	
 	# Set Sprites + Emotion
 	new_sprites()
-	set_emotion_by_name(TWILIGHT.Party.current_party[0].current_emotion.name)
+	set_emotion_by_name(Twilight.Party.current_party[0].current_emotion.name)
 	
 	# Set + Snap position
 	global_position = _grid_snap(global_position)
@@ -70,20 +70,20 @@ func _ready() -> void:
 	
 	# Set camera on top of player within camera bounds
 	_set_camera_bounds()
-	TWILIGHT.camera.global_position = Vector2(clamp(global_position.x, camera_bounds.x, camera_bounds.y),
+	Twilight.camera.global_position = Vector2(clamp(global_position.x, camera_bounds.x, camera_bounds.y),
 											  clamp(global_position.y, camera_bounds.z, camera_bounds.w))
 	
 	# Tell GUI to load neccessary menus
-	TWILIGHT.ui.add_ui("res://UI/OverworldMenu/overworld_menu.tscn")
-	TWILIGHT.ui.add_ui("res://UI/Dialogue/DialogueBox/dialogue_box.tscn")
-	TWILIGHT.ui.add_ui("res://UI/Tag/tag_menu.tscn")
+	Twilight.ui.add_ui("res://UI/OverworldMenu/overworld_menu.tscn")
+	Twilight.ui.add_ui("res://UI/Dialogue/DialogueBox/dialogue_box.tscn")
+	Twilight.ui.add_ui("res://UI/Tag/tag_menu.tscn")
 	
 	# Test for function collision at spawn tile
 	_check_special_collision(functioncast, Vector2.ZERO, true)
 	
 	# Set Viginette
-	TWILIGHT.camera.vignette.material.set_shader_parameter("vignette_color", vignette_color)
-	TWILIGHT.camera.vignette.material.set_shader_parameter("intensity", vignette_intensity)
+	Twilight.camera.vignette.material.set_shader_parameter("vignette_color", vignette_color)
+	Twilight.camera.vignette.material.set_shader_parameter("intensity", vignette_intensity)
 
 func _process(delta: float) -> void:
 	if !in_cutscene:
@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 	_move_and_animate(delta)
 	
 	if Input.is_action_just_pressed("Fullscreen"):
-		TWILIGHT.toggle_fullscreen()
+		Twilight.toggle_fullscreen()
 	
 	in_cutscene_last = in_cutscene
 
@@ -114,7 +114,7 @@ func set_emotion_by_name(_mood_name : String) -> void:
 		"Happy":
 			mood = 3
 	
-	if TWILIGHT.Party.current_party[0].data.key == "aubrey":
+	if Twilight.Party.current_party[0].data.key == "aubrey":
 		for i in character_sprites:
 			i.material.set_shader_parameter("emotion", mood_colors[mood])
 			i.material.set_shader_parameter("bow_emotion_highlight", bow_mood_colors[mood*2])
@@ -148,7 +148,7 @@ func _move_and_animate(delta) -> void:
 	collider.global_position = target_position
 	
 	# Update cam pos
-	TWILIGHT.camera.global_position = Vector2(clamp(global_position.x, camera_bounds.x, camera_bounds.y),
+	Twilight.camera.global_position = Vector2(clamp(global_position.x, camera_bounds.x, camera_bounds.y),
 										clamp(global_position.y, camera_bounds.z, camera_bounds.w))
 	
 # ANIMATION
@@ -237,7 +237,7 @@ func _get_inputs(delta):
 		# overworld menu
 		if Input.is_action_just_pressed("Cancel"):
 			in_cutscene = true
-			TWILIGHT.ui.activate_ui(0, self)
+			Twilight.ui.activate_ui(0, self)
 			return
 		
 		# dialogue box
@@ -254,7 +254,7 @@ func _get_inputs(delta):
 						interactable_node.interacted = true
 						
 						# Set npc's dialogue tree to their current interaction and make ui
-						TWILIGHT.ui.activate_ui_textbox(1, self, interactable_node.set_dialogue_tree_new_interaction())
+						Twilight.ui.activate_ui_textbox(1, self, interactable_node.set_dialogue_tree_new_interaction())
 						interactable_node.interacted_count += 1
 						
 						dialogue_active = true
@@ -268,14 +268,14 @@ func _get_inputs(delta):
 		# tag menu
 		if Input.is_action_just_pressed("Tag"):
 			in_cutscene = true
-			TWILIGHT.ui.activate_ui(2, self)
+			Twilight.ui.activate_ui(2, self)
 			return
 
 func new_sprites() -> void:
 	for i in sprites.get_children():
 		i.queue_free()
 	
-	var sprite_set = load(TWILIGHT.Party.current_party[0].data.asset_path + "OW_sprites.tscn")
+	var sprite_set = load(Twilight.Party.current_party[0].data.asset_path + "OW_sprites.tscn")
 	
 	sprite_set = sprite_set.instantiate()
 	sprites.add_child(sprite_set)
@@ -287,7 +287,7 @@ func _grid_snap(_position : Vector2) -> Vector2:
 func _enter_room() -> void:
 	if entrances_node != null:
 		for i in entrances_node.get_children():
-			if i.ID == TWILIGHT.entrance:
+			if i.ID == Twilight.entrance:
 				global_position = i.global_position
 				if i.fader != null:
 					i.fader.target_fade = i.set_fader

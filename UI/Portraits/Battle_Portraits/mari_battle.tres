@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bjc7fc44676cp"]
+
+[ext_resource type="Texture2D" uid="uid://cy2p82f7rk4gy" path="res://UI/Portraits/Battle_Portraits/Mar_Neutral.png" id="1_5t8wo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0yy3"]
+atlas = ExtResource("1_5t8wo")
+region = Rect2(0, 0, 121, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulthm"]
+atlas = ExtResource("1_5t8wo")
+region = Rect2(121, 0, 121, 121)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_px18p"]
+atlas = ExtResource("1_5t8wo")
+region = Rect2(242, 0, 121, 121)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0yy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulthm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_px18p")
+}],
+"loop": true,
+"name": &"Neutral",
+"speed": 5.0
+}]

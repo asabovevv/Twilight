@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://bdniamv5ykuvn"]
 
 [ext_resource type="Texture2D" uid="uid://bao1a2odje1fu" path="res://ENCOUNTER/Sprites/UI/BattleStatus.png" id="1_ds5ew"]
-[ext_resource type="Texture2D" uid="uid://dad1k2xobyhg" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Neutral.png" id="2_663ic"]
-[ext_resource type="Texture2D" uid="uid://dwwsrbi73fi6g" path="res://ENCOUNTER/Sprites/EmotionSprites/T_Neutral.png" id="4_42fwj"]
+[ext_resource type="Script" uid="uid://c6ful7jbuk6hk" path="res://ENCOUNTER/battle_status.gd" id="2_ue53f"]
+[ext_resource type="Texture2D" uid="uid://bn1rqm0bnck7s" path="res://ENCOUNTER/Sprites/EmotionSprites/G_Emotion-sheet.png" id="3_ue53f"]
+[ext_resource type="Texture2D" uid="uid://dlm5i63q2x1cy" path="res://ENCOUNTER/Sprites/EmotionSprites/statelist.png" id="4_ue53f"]
 [ext_resource type="Texture2D" uid="uid://d0s1k6bmwegs2" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Bar.png" id="5_acudk"]
 [ext_resource type="Texture2D" uid="uid://cmy5nck1bxewq" path="res://ENCOUNTER/Sprites/UI/Bar_Health.png" id="5_ndcia"]
 [ext_resource type="Texture2D" uid="uid://vvltirxprbe6" path="res://ENCOUNTER/Sprites/UI/Bar_Juice.png" id="6_4aai6"]
@@ -11,7 +12,7 @@
 [ext_resource type="Script" uid="uid://l0mnvwmx7sp7" path="res://ENCOUNTER/battlestatus_select_pulse.gd" id="9_4aai6"]
 [ext_resource type="Texture2D" uid="uid://4vqrv5ap6u4f" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Select.png" id="9_ar1dj"]
 
-[node name="BattleStatus" type="NinePatchRect" unique_id=525477418]
+[node name="BattleStatus" type="NinePatchRect" unique_id=525477418 node_paths=PackedStringArray("profile", "battle_status_frost", "emotion", "emotion_label", "health_bar", "juice_bar", "health_label", "juice_label")]
 offset_left = 11.0
 offset_top = 5.0
 offset_right = 131.0
@@ -21,11 +22,21 @@ patch_margin_left = 10
 patch_margin_top = 27
 patch_margin_right = 10
 patch_margin_bottom = 8
+script = ExtResource("2_ue53f")
+profile = NodePath("Profile")
+battle_status_frost = NodePath("BattleStatusFrost")
+emotion = NodePath("Emotion")
+emotion_label = NodePath("EmotionLabel")
+health_bar = NodePath("BattleStatusBars/Health_StatusBar")
+juice_bar = NodePath("BattleStatusBars/Juice_StatusBar")
+health_label = NodePath("BattleStatusBars/Health")
+juice_label = NodePath("BattleStatusBars/Juice")
 
 [node name="Emotion" type="Sprite2D" parent="." unique_id=757332694]
 z_index = -2
 position = Vector2(60, 66)
-texture = ExtResource("2_663ic")
+texture = ExtResource("3_ue53f")
+hframes = 4
 vframes = 3
 
 [node name="Profile" type="AnimatedSprite2D" parent="." unique_id=2146036308]
@@ -34,8 +45,8 @@ position = Vector2(60, 56.215)
 
 [node name="EmotionLabel" type="Sprite2D" parent="." unique_id=950283208]
 position = Vector2(60, 14)
-texture = ExtResource("4_42fwj")
-vframes = 3
+texture = ExtResource("4_ue53f")
+vframes = 13
 
 [node name="BattleStatusBars" type="Sprite2D" parent="." unique_id=1189025005]
 position = Vector2(60, 143)

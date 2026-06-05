@@ -3,7 +3,7 @@ extends Node2D
 var my_uis : Array
 
 func _ready() -> void:
-	TWILIGHT.ui = self
+	Twilight.ui = self
 
 func add_ui(path : String) -> void:
 	my_uis.append( path )

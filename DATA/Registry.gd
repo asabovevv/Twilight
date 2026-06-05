@@ -29,6 +29,8 @@ func get_emotion(id : String) -> Emotion:
 
 ## Shorthand for [code]Registry.equipment.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.
 func get_equipment(id : String) -> Equippable:
+	if id == Equippable.NONE:
+		return null
 	return equipment.try_get(id) as Equippable
 
 ## Shorthand for [code]Registry.enemies.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.

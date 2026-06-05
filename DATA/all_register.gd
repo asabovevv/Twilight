@@ -1,8 +1,6 @@
 class_name AllRegister
-extends Registry
 
 #region ----- ITEMS REGISTRY -----
-@warning_ignore("shadowed_variable_base_class")
 static func register_items( items : GameDataRegistry ):
 	items.register("apple", Item.new(
 		"APPLE",
@@ -23,7 +21,6 @@ static func register_items( items : GameDataRegistry ):
 #endregion
 
 #region ----- EQUIPMENT REGISTRY -----
-@warning_ignore("shadowed_variable_base_class")
 static func register_equipment( equipment : GameDataRegistry ):
 	equipment.register("zero", Equippable.new(
 		"ZERO",
@@ -54,7 +51,6 @@ static func register_equipment( equipment : GameDataRegistry ):
 #endregion
 
 #region ----- SKILLS REGISTRY -----
-@warning_ignore("shadowed_variable_base_class")
 static func register_skills( skills : GameDataRegistry ):
 	skills.register("knifeguy", Skill.new(
 		"Knife Guy",
@@ -74,24 +70,21 @@ static func register_skills( skills : GameDataRegistry ):
 #endregion
 
 #region ----- ENEMIES REGISTRY -----
-@warning_ignore("shadowed_variable_base_class")
 static func register_enemies( enemies : GameDataRegistry ):
 	pass
 #endregion
 
 #region ----- STATUS EFFECTS REGISTRY -----
-@warning_ignore("shadowed_variable_base_class")
 static func register_status_effects( status_effects : GameDataRegistry ):
 	pass
 #endregion
 
 #region ----- EMOTIONS REGISTRY -----
-@warning_ignore("shadowed_variable_base_class")
 static func register_emotions( emotions : GameDataRegistry):
 	emotions.register("neutral", Emotion.new(
 		"Neutral",
-		load("res://ENCOUNTER/Sprites/EmotionSprites/T_Neutral.png"), 0,
-		load("res://ENCOUNTER/Sprites/EmotionSprites/G_Neutral.png"), 0,
+		0,
+		0,
 		Color.TRANSPARENT,
 		"SE_chirp",
 		[]
@@ -99,8 +92,8 @@ static func register_emotions( emotions : GameDataRegistry):
 	
 	emotions.register("angry", Emotion.new(
 		"Angry",
-		load("res://ENCOUNTER/Sprites/EmotionSprites/T_Angry.png"), 0,
-		load("res://ENCOUNTER/Sprites/EmotionSprites/G_Angry.png"), 0,
+		9,
+		2,
 		Color(1.0, 0.235, 0.22),
 		"SE_angry",
 		[]
@@ -108,8 +101,8 @@ static func register_emotions( emotions : GameDataRegistry):
 	
 	emotions.register("happy", Emotion.new(
 		"Happy",
-		load("res://ENCOUNTER/Sprites/EmotionSprites/T_Happy.png"), 0,
-		load("res://ENCOUNTER/Sprites/EmotionSprites/G_Happy.png"), 0,
+		3,
+		3,
 		Color(0.996, 0.882, 0.22),
 		"SE_happy",
 		[StatModifier.new(StatType.WALK_SPEED, 2.0)]
@@ -117,8 +110,8 @@ static func register_emotions( emotions : GameDataRegistry):
 	
 	emotions.register("sad", Emotion.new(
 		"Sad",
-		load("res://ENCOUNTER/Sprites/EmotionSprites/T_Sad.png"), 0,
-		load("res://ENCOUNTER/Sprites/EmotionSprites/G_Sad.png"), 0,
+		6,
+		1,
 		Color(0.29, 0.38, 0.835),
 		"SE_sad",
 		[]
@@ -126,7 +119,6 @@ static func register_emotions( emotions : GameDataRegistry):
 #endregion
 
 #region ----- PARTY MEMBERS REGISTRY -----
-@warning_ignore("shadowed_variable_base_class")
 static func register_party_members( party_members : GameDataRegistry ):
 	party_members.register("kel", PartyMemberData.new(
 		"kel", # key
@@ -174,7 +166,7 @@ static func register_party_members( party_members : GameDataRegistry ):
 		"hero", # key
 		"Hero", # name
 		"res://CHARACTERS/Hero/", # asset_path
-		null, # battle portrait
+		load("res://UI/Portraits/Battle_Portraits/hero_battle.tres"), # battle portrait
 		{	# Levels 0, 10, 20, 30, 40, 50. Interpolated between during levelup.
 			StatType.HEART : [36, 93, 164, 226, 300, 444],  # Heart
 			StatType.JUICE : [9, 31, 56, 78, 109, 150],     # Juice
@@ -195,7 +187,7 @@ static func register_party_members( party_members : GameDataRegistry ):
 		"sunny", # key
 		"Sunny", # name
 		"res://CHARACTERS/Sunny/", # asset_path
-		null, # battle portrait
+		load("res://UI/Portraits/Battle_Portraits/sunny_battle.tres"), # battle portrait
 		{	# Levels 0, 10, 20, 30, 40, 50. Interpolated between during levelup.
 			StatType.HEART : [36, 93, 164, 226, 300, 444],  # Heart
 			StatType.JUICE : [9, 31, 56, 78, 109, 150],     # Juice
@@ -216,7 +208,7 @@ static func register_party_members( party_members : GameDataRegistry ):
 		"basil", # key
 		"Basil", # name
 		"res://CHARACTERS/Basil/", # asset_path
-		null, # battle portrait
+		load("res://UI/Portraits/Battle_Portraits/basil_battle.tres"), # battle portrait
 		{	# Levels 0, 10, 20, 30, 40, 50. Interpolated between during levelup.
 			StatType.HEART : [36, 93, 164, 226, 300, 444],  # Heart
 			StatType.JUICE : [9, 31, 56, 78, 109, 150],     # Juice
@@ -237,7 +229,7 @@ static func register_party_members( party_members : GameDataRegistry ):
 		"mari", # key
 		"Mari", # name
 		"res://CHARACTERS/Mari/", # asset_path
-		null, # battle portrait
+		load("res://UI/Portraits/Battle_Portraits/mari_battle.tres"), # battle portrait
 		{	# Levels 0, 10, 20, 30, 40, 50. Interpolated between during levelup.
 			StatType.HEART : [36, 93, 164, 226, 300, 444],  # Heart
 			StatType.JUICE : [9, 31, 56, 78, 109, 150],     # Juice

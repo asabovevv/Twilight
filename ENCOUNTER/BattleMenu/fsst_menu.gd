@@ -30,4 +30,8 @@ func move_cursor(direction : Vector2i):
 
 func on_select():
 	Audio.play_sfx("SE_select", 0.9)
+	cursor_sprite.stop_bounce()
 	context.turn.on_select_action(cursor_index)
+
+func should_close_visually(new_state : MenuState.State) -> bool:
+	return new_state == MenuState.State.FSST or new_state == MenuState.State.NONE or new_state == MenuState.State.FIGHT_RUN

@@ -2,7 +2,7 @@ class_name PartyView extends Node
 
 @export var battle_status : PackedScene
 
-var statuses : Array[Control]
+var statuses : Array[BattleStatus]
 var context : EncounterContext
 
 func _initialize(ctx : EncounterContext):
@@ -15,7 +15,7 @@ func _exit_tree() -> void:
 
 func _spawn(party : PartyState):
 	for i in range(party.members.size()):
-		var status : Control = battle_status.instantiate()
+		var status : BattleStatus = battle_status.instantiate()
 		add_child(status)
 		match i:
 			0:
@@ -28,9 +28,7 @@ func _spawn(party : PartyState):
 				status.position = Vector2(512, 5)
 			_:
 				status.position = Vector2.ZERO
-		# TODO: expose this better instead of by child 
-		var animation : AnimatedSprite2D = status.get_child(1)
-		animation.sprite_frames = party.members[i].battle_portrait
+		status.bind(party.members[i])
 		statuses.append(status)
 
 func _on_selection_changed(old_index : int, new_index : int):
@@ -40,11 +38,7 @@ func _on_selection_changed(old_index : int, new_index : int):
 		_start_pulse(new_index)
 	
 func _start_pulse(i : int):
-	# temporary child selection
-	var pulse : BattleStatusSelectPulse = statuses[i].get_child(4)
-	pulse.start_pulse()
+	statuses[i].battle_status_frost.start_pulse()
 
 func _stop_pulse(i : int):
-	# temporary child selection
-	var pulse : BattleStatusSelectPulse = statuses[i].get_child(4)
-	pulse.stop_pulse()
+	statuses[i].battle_status_frost.stop_pulse()
