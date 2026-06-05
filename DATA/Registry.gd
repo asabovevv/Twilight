@@ -14,8 +14,8 @@ func _init() -> void:
 	AllRegister.register_items(items)
 	AllRegister.register_equipment(equipment)
 	AllRegister.register_skills(skills)
-	#AllRegister.register_enemies()
-	#AllRegister.register_status_effects()
+	AllRegister.register_enemies(enemies)
+	AllRegister.register_status_effects(status_effects)
 	AllRegister.register_emotions(emotions)
 	AllRegister.register_party_members(party_members)
 

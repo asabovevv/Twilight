@@ -6,17 +6,20 @@ extends Registry
 static func register_items( items : GameDataRegistry ):
 	items.register("apple", Item.new(
 		"APPLE",
+		Item.ItemType.Snacks,
 		"Yum yum",
-		load("res://UI/ItemIcons/Hector.png"),
+		null,
 		true,
 		true
 	))
 	
 	items.register("hector", Item.new(
 		"HECTOR",
+		Item.ItemType.Important,
 		"I fucking LOVE Hector",
 		load("res://UI/ItemIcons/Hector.png")
 	))
+	
 #endregion
 
 #region ----- EQUIPMENT REGISTRY -----
@@ -150,7 +153,7 @@ static func register_party_members( party_members : GameDataRegistry ):
 		"aubrey", # key
 		"Aubrey", # name
 		"res://CHARACTERS/Aubrey/", # asset_path
-		load("res://UI/Portraits/AubreyBattle/aubrey_battle.tres"), # battle portrait
+		load("res://UI/Portraits/Battle_Portraits/aubrey_battle.tres"), # battle portrait
 		{	# Levels 0, 10, 20, 30, 40, 50. Interpolated between during levelup.
 			StatType.HEART : [33, 93, 164, 226, 300, 444],  # Heart
 			StatType.JUICE : [7, 31, 56, 78, 109, 150],     # Juice

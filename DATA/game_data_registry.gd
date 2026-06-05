@@ -24,6 +24,10 @@ func has(id : String) -> bool:
 func all() -> Array:
 	return _items.values()
 
+## Retrieves all item keys from the registry as an Array[String].
+func all_keys() -> Array[String]:
+	return _items.keys()
+
 ## The number of items in the registry.
 func count() -> int:
 	return _items.size()

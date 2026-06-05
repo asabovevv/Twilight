@@ -9,7 +9,7 @@ class_name EncounterManager extends Node
 
 func _ready() -> void:
 	var state = EncounterState.new(starting_power)
-	var party = PartyState.new(TWILIGHT.Party.current_party)
+	var party = PartyState.new(Twilight.Party.current_party)
 	var turn_manager = TurnManager.new();
 	var ctx = EncounterContext.new(menu_manager, battlelog_manager, turn_manager, party, state)
 

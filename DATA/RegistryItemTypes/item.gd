@@ -11,12 +11,14 @@ var item_type
 
 func _init(
 	_name : String,
+	_item_type : ItemType,
 	_description : String,
 	_icon : Texture2D,
 	_can_overworld_use : bool = false,
 	_can_trash : bool = false
 ):
 	self.name = _name
+	self.item_type = _item_type
 	self.description = _description
 	self.icon = _icon
 	self.can_overworld_use = _can_overworld_use

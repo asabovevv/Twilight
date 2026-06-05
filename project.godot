@@ -32,7 +32,7 @@ buses/default_bus_layout="uid://bb1v1ob13tx53"
 
 Registry="*uid://cgc17kiced2td"
 Audio="*uid://dxkbh3et5d33j"
-Twilight="*res://TWILIGHT.gd"
+Twilight="*res://Twilight.gd"
 
 [display]
 

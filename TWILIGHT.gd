@@ -71,7 +71,7 @@ var Inventory : Inv
 class FlagData:
 	var story_flags : Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	enum Flag_Name {
-		Tag_Enabled
+		Tag_Enabled, Happy_Swap_Unlocked, Sad_Swap_Unlocked, Angry_Swap_Unlocked
 	}
 	
 	func set_flag(flag_number : int, value : bool) -> void:
@@ -139,12 +139,12 @@ func load_from_slot(slot : int) -> void:
 		
 		# Settings
 		Settings = Set.new()
-		for i in Settings.volume_levels:
+		for i in range(Settings.volume_levels.size()):
 			Settings.volume_levels[i] = file.get_float()
 		
 		# Flags
 		Flags = FlagData.new()
-		for i in Flags.story_flags:
+		for i in range(Flags.story_flags.size()):
 			Flags.story_flags[i] = file.get_64()
 		
 		# Inventory
@@ -205,8 +205,6 @@ func load_from_slot(slot : int) -> void:
 		
 		# Party Quick Emotions
 		Party.fast_emotion = ["neutral"]
-
-## --- --- --- --- --- --- --- --- Dialogue --- --- --- --- --- --- --- --- --- --- --- --- ---
 
 # Iterates through a text file, breaking lines into dialogue branch headers and dialogue branch contents
 func load_dialogue_file(_language : String, file_name : String) -> void:
