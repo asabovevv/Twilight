@@ -6,4 +6,4 @@ var dialogue_tree : Dictionary[int, Array]
 
 func set_tree( _branch_headers : Array[String] ):
 	for i in range( _branch_headers.size() ):
-		dialogue_tree[i] = TWILIGHT.d[_branch_headers[i]].duplicate()
+		dialogue_tree[i] = Twilight.d[_branch_headers[i]].duplicate()
