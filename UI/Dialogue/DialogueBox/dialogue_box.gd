@@ -5,12 +5,12 @@ extends Node2D
 @onready var text_main = $DialogueMain/Dialogue
 @onready var p_main = $DialogueMain/Pointer
 @onready var d_name = $DialogueName
-@onready var d_portrait_cont = $HBoxContainer/Dialogue_PCont
-@onready var d_portrait = $HBoxContainer/Dialogue_PCont/DialoguePortrait
-@onready var ico_portrait = $HBoxContainer/Dialogue_PCont/Portrait
-@onready var d_choice_cont = $HBoxContainer/Dialogue_CCont
-@onready var d_choice = $HBoxContainer/Dialogue_CCont/DialogueChoice
-@onready var p_choice = $HBoxContainer/Dialogue_CCont/DialogueChoice/Pointer
+@onready var d_portrait_cont = $PortraitsAndChoices/HBoxPortraits
+@onready var d_portrait_targets : Array = [$PortraitsAndChoices/HBoxPortraits/DialoguePortraitTarget]
+@onready var d_choice_cont = $PortraitsAndChoices/DialogueChoiceTarget
+@onready var d_choice = $PortraitsAndChoices/DialogueChoiceTarget/DialogueChoice
+@onready var p_choice = $PortraitsAndChoices/DialogueChoiceTarget/DialogueChoice/Pointer
+@onready var option = $PortraitsAndChoices/DialogueChoiceTarget/Option
 var rand = RandomNumberGenerator.new()
 
 var end_cutscene : bool = true
@@ -34,27 +34,42 @@ var event_locations : Array[int]
 var event_names : Array[String]
 
 const p_base_off = Vector2(-16, 12)
-var p_choice_base_off = Vector2.ZERO
+var p_choice_base_pos = Vector2.ZERO
+var current_choice : int = 0
 
-var tsound : AudioStreamPlayer
-const portrait_shorthand = ["Misc", "Aubrey", "Sunny"]
-const portrait_locations = ["res://CHARACTERS/z_Misc_Portraits/Portrait",
-							"res://CHARACTERS/Minty/Portraits/Portrait",
-							"res://CHARACTERS/Sunny/Portraits/Portrait"]
+var tsound : String = "SE_text_basic"
+const portrait_location = "res://UI/Portraits/"
 const font_path : String = "res://UI/Dialogue/"
 
 var sounds : Array
 
-func _ready() -> void:
-	ico_portrait.position.y = 109 - ico_portrait.texture.get_height()*0.5
-	
-	tsound = Twilight.Settings.load_sound("res://SOUNDS/SoundEffect/SE_text_basic.ogg", Twilight.Settings.Volumes.SoundEffect, self)
-
 func _process(delta: float) -> void:
 	time += delta
 	p_main.position = Vector2(544, 86) + Vector2(sin(time*5)*3, 0)
-	p_choice.position = p_choice_base_off + Vector2(sin(time*5)*3, 0) # change y value to menu pos
+	p_choice.global_position = p_choice_base_pos + Vector2(sin(time*5)*3, 0) # change y value to menu pos
 	
+	_do_option_select()
+	_do_text_crawl(delta)
+
+func _do_option_select() -> void:
+	if d_choice.get_child_count() > 1:
+		
+		if Input.is_action_just_pressed("Down"):
+			current_choice -= 1
+			Audio.play_sfx("SE_move1", 0.9)
+		if Input.is_action_just_pressed("Up"):
+			current_choice += 1
+		
+		# z
+		
+		if current_choice > d_choice.get_child_count()-2:
+			current_choice = 0
+		if current_choice < 0:
+			current_choice = d_choice.get_child_count()-2
+		
+		p_choice_base_pos = d_choice.get_child( current_choice+1 ).global_position + Vector2(-24, 15)
+
+func _do_text_crawl(delta: float) -> void:
 	if await_animation:
 		return
 	if wait_time > 0:
@@ -76,8 +91,7 @@ func _process(delta: float) -> void:
 				# Make noise
 				dialogue_sound_cooldown -= delta
 				if dialogue_sound_cooldown <= 0:
-					tsound.pitch_scale = rand.randf_range(0.8, 1.1)
-					tsound.play()
+					Audio.play_sfx(tsound, 0.9, rand.randf_range(0.8, 1.1))
 					dialogue_sound_cooldown = 0.04
 				
 				# On new letter
@@ -148,19 +162,25 @@ func _text_escape() -> void:
 				d_name.get_child(0).text = escape_var[1]
 				d_name.visible = (escape_var[1] == "")
 			
-			"face": # Character Name, Portrait #
+			"face": # Portrait Name, Portrait ID
+				if escape_var.size() < 2:
+					escape_var.append(0)
 				if escape_var.size() < 3:
 					escape_var.append(0)
-				var tex = load( _get_portrait(escape_var[1]) + escape_var[2] + ".png")
+				
+				var tex = load( portrait_location + escape_var[1] + ".png")
 				if tex != null:
-					ico_portrait.texture = tex
-					ico_portrait.position.y = 109 - tex.get_height()*0.5
-					ico_portrait.hframes = int(tex.get_width() > 120)*2+1
 					
-					if !d_portrait_cont.visible:
-						d_portrait_cont.visible = true
+					var myportrait = d_portrait_targets[ int(escape_var[2]) ].get_child(0).get_child(0)
+					
+					myportrait.texture = tex
+					myportrait.hframes = ceil( tex.get_width() / 121.0 )
+					#myportrait.position = # offset
+					
+					if !d_portrait_targets[ int(escape_var[2]) ].visible:
+						d_portrait_targets[ int(escape_var[2]) ].visible = true
 				else:
-					d_portrait_cont.visible = false
+					d_portrait_targets[ int(escape_var[2]) ].visible = false
 			
 			"p": # Marker Char, Amount = 1
 				var amt = 1
@@ -187,14 +207,19 @@ func _text_escape() -> void:
 				var amt = "default"
 				if escape_var.size() > 2:
 					amt = int(escape_var[2])
-				event_names.append( "speed:" + escape_var[2] )
+				event_names.append( "speed:" + amt )
 			
 			"choice": # Option 1, Option 2, etc.
 				#await_animation = true
+				
 				d_choice_cont.visible = true
 				var choice_amount = escape_var.size()-1
 				d_choice.custom_minimum_size.y = 24 + 28 * choice_amount
+				d_choice.size.y = 0
+				d_choice.position.y = -(d_choice.custom_minimum_size.y-55)
 				_make_choice_options(escape_var)
+				
+				current_choice = 0
 			
 			"end": # Marker Char
 				event_locations.append( _find_position_marker(escape_var[1], substring_end) )
@@ -328,41 +353,33 @@ func _parse_substring(_string : String) -> Array:
 	
 	return []
 
-func _get_portrait(_shorthand) -> String:
-	for i in range(portrait_shorthand.size()):
-		if _shorthand == portrait_shorthand[i]:
-			return portrait_locations[i]
-	
-	print("Portrait shorthand " + _shorthand + " doesn't exist.")
-	return ""
-
 func _make_choice_options(_array : Array) -> void:
+	# Remove old labels
 	for i in d_choice.get_children():
 		if i.name != "Pointer":
 			i.queue_free()
 	
+	# Add labels
 	var longest : float = 0
 	
 	for i in range(1, _array.size()):
-		var l : Label = Label.new()
-		l.text = _array[i]
-		l.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
-		l.position = Vector2(70, -19 + 28 * i)
-		l.scale.x = -1
-		l.add_theme_font_override("font", load("res://UI/Dialogue/Default.ttf") )
-		l.add_theme_font_size_override("font_size", 28)
-		l.name = "Option%d" % [i]
-		d_choice.add_child(l)
+		var _option = option.duplicate()
+		_option.position = Vector2(70, -19 + 28 * i)
+		_option.get_child(0).text = str( i )
+		_option.visible = true
+		d_choice.add_child(_option)
 		
-		if l.size.x > longest:
-			longest = l.size.x
+		longest = 100
 	
+	# Rescale to longest word
 	d_choice.custom_minimum_size.x = max(60 + longest, 117)
+	d_choice.position.x = (d_choice.custom_minimum_size.x - 117)/2
 	for i in d_choice.get_children():
 		if i.name != "Pointer":
 			i.position.x += max(longest - 60, 0)
 	
-	p_choice_base_off = Vector2(longest + 37, 24)
+	# Position pointer
+	p_choice_base_pos = Vector2(394.0, 285.0) + Vector2(-24, 15)
 
 func _find_position_marker(_char : String, _start_index : int) -> int:
 	for i in range(_start_index, dialogue.dialogue_tree[dialogue_branch][dialogue_place].length()):

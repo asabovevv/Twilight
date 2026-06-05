@@ -1,8 +1,8 @@
 	Test_Branch_1
-|wave:^:10||dbox||face:Misc:0||wait:@:0.3:4|^Be..@ cum.......@ Be...@ cum.....@
+|wave:^:10||dbox||face:Cumb0||wait:@:0.3:4|^Be..@ cum.......@ Be...@ cum.....@
 
 	Test_Branch_2
-|wait:_:1||wait:/:1:4||wave:^:10||dbox||face:Misc:0||size_gradual:!:d:45:3||size_gradual:*:d:45:3|^Help me..../ help me..../ be_ cum.../ something !GREATER[font_size=28].../ something *BIGGER[font_size=28]....
+|wait:_:1||wait:/:1:4||wave:^:10||dbox||face:Cumb0||size_gradual:!:d:45:3||size_gradual:*:d:45:3|^Help me..../ help me..../ be_ cum.../ something !GREATER[font_size=28].../ something *BIGGER[font_size=28]....
 |wave:^:10||choice:Yes:No|      please
 
 EOF

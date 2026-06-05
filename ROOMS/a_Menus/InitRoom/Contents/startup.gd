@@ -375,6 +375,7 @@ func _on_flag_0_pressed(i : int, button) -> void:
 func _on_next_page_pressed() -> void:
 	_clear_flags()
 	
+	@warning_ignore("integer_division")
 	flag_page = clamp(flag_page+1, 0, Twilight.Flags.Flag_Name.size()/64)
 	load_flag_page(flag_page)
 	$StoryFlags/Range.text = str(flag_page*64) + " - " + str(flag_page*64+63)
@@ -382,6 +383,7 @@ func _on_next_page_pressed() -> void:
 func _on_last_page_pressed() -> void:
 	_clear_flags()
 	
+	@warning_ignore("integer_division")
 	flag_page = clamp(flag_page-1, 0, Twilight.Flags.Flag_Name.size()/64)
 	load_flag_page(flag_page)
 	$StoryFlags/Range.text = str(flag_page*64) + " - " + str(flag_page*64+63)

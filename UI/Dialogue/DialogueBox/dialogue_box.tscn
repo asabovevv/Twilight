@@ -4,7 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="1_if77y"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_351bv"]
 [ext_resource type="Texture2D" uid="uid://coaqxylbxsmxi" path="res://UI/Bunny_Point.png" id="3_85jfh"]
-[ext_resource type="Texture2D" uid="uid://cy2p82f7rk4gy" path="res://UI/Portraits/Battle_Portraits/Mar_Neutral.png" id="5_ydy5r"]
+[ext_resource type="Texture2D" uid="uid://dgfuiax5nsqds" path="res://UI/Portraits/Cumb0.png" id="5_ydy5r"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ydy5r"]
+load_path = "res://.godot/imported/Dialogue_Box.png-a70075f3dd923aa429238a50b224460c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2mfj4"]
+load_path = "res://.godot/imported/Dialogue_Box.png-a70075f3dd923aa429238a50b224460c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tbtct"]
+load_path = "res://.godot/imported/Dialogue_Box.png-a70075f3dd923aa429238a50b224460c.ctex"
 
 [node name="DialogueBox" type="Node2D" unique_id=265251790]
 z_index = 800
@@ -15,11 +24,11 @@ offset_left = 16.0
 offset_top = 360.0
 offset_right = 625.0
 offset_bottom = 472.0
-texture = ExtResource("1_if77y")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
+texture = SubResource("CompressedTexture2D_ydy5r")
+region_rect = Rect2(0, 0, 9, 9)
+patch_margin_left = 4
 patch_margin_top = 4
-patch_margin_right = 3
+patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="Dialogue" type="RichTextLabel" parent="DialogueMain" unique_id=1238990893]
@@ -54,10 +63,10 @@ offset_top = 312.0
 offset_right = 121.0
 offset_bottom = 356.0
 texture = ExtResource("1_if77y")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
+region_rect = Rect2(0, 0, 9, 9)
+patch_margin_left = 4
 patch_margin_top = 4
-patch_margin_right = 3
+patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="Name" type="Label" parent="DialogueName" unique_id=1600821533]
@@ -71,7 +80,7 @@ theme_override_fonts/font = ExtResource("2_351bv")
 theme_override_font_sizes/font_size = 28
 text = "MAILBOX"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1291148463]
+[node name="PortraitsAndChoices" type="HBoxContainer" parent="." unique_id=1291148463]
 custom_minimum_size = Vector2(400, 400)
 anchors_preset = 6
 anchor_left = 1.0
@@ -88,7 +97,11 @@ scale = Vector2(-1, 1)
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Dialogue_PCont" type="NinePatchRect" parent="HBoxContainer" unique_id=1434815710]
+[node name="HBoxPortraits" type="HBoxContainer" parent="PortraitsAndChoices" unique_id=176418999]
+layout_mode = 2
+
+[node name="DialoguePortraitTarget" type="NinePatchRect" parent="PortraitsAndChoices/HBoxPortraits" unique_id=1128535155]
+visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(114, 114)
 layout_direction = 2
@@ -96,86 +109,106 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture = ExtResource("1_if77y")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
-patch_margin_top = 4
-patch_margin_right = 3
-patch_margin_bottom = 4
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+metadata/_edit_use_anchors_ = true
 
-[node name="DialoguePortrait" type="NinePatchRect" parent="HBoxContainer/Dialogue_PCont" unique_id=135904284]
+[node name="DialoguePortrait" type="NinePatchRect" parent="PortraitsAndChoices/HBoxPortraits/DialoguePortraitTarget" unique_id=135904284]
+clip_contents = true
+custom_minimum_size = Vector2(114, 114)
 layout_direction = 2
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -57.0
-offset_right = 57.0
-offset_bottom = 57.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 114.0
+offset_bottom = 114.0
 pivot_offset = Vector2(0, 57)
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture = ExtResource("1_if77y")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
-patch_margin_top = 4
-patch_margin_right = 3
-patch_margin_bottom = 4
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Portrait" type="Sprite2D" parent="HBoxContainer/Dialogue_PCont" unique_id=721416705]
-position = Vector2(58, 109)
-rotation = -3.1415927
+[node name="Portrait" type="Sprite2D" parent="PortraitsAndChoices/HBoxPortraits/DialoguePortraitTarget/DialoguePortrait" unique_id=721416705]
+position = Vector2(57, 51)
+rotation = 3.1415925
 scale = Vector2(1, -1)
 texture = ExtResource("5_ydy5r")
-hframes = 3
-region_enabled = true
 region_rect = Rect2(0, 0, 363, 121)
 
-[node name="Dialogue_CCont" type="NinePatchRect" parent="HBoxContainer" unique_id=4074438]
+[node name="Borders" type="NinePatchRect" parent="PortraitsAndChoices/HBoxPortraits/DialoguePortraitTarget/DialoguePortrait" unique_id=1553493339]
+clip_contents = true
+custom_minimum_size = Vector2(114, 114)
+layout_direction = 2
+layout_mode = 0
+offset_right = 114.0
+offset_bottom = 114.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_if77y")
+draw_center = false
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="DialogueChoiceTarget" type="NinePatchRect" parent="PortraitsAndChoices" unique_id=4074438]
 visible = false
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(117, 55)
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("1_if77y")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
-patch_margin_top = 4
-patch_margin_right = 3
-patch_margin_bottom = 4
+texture = SubResource("CompressedTexture2D_2mfj4")
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
 
-[node name="DialogueChoice" type="NinePatchRect" parent="HBoxContainer/Dialogue_CCont" unique_id=424605472]
+[node name="Option" type="Node2D" parent="PortraitsAndChoices/DialogueChoiceTarget" unique_id=1812357756]
+visible = false
+position = Vector2(0, 27)
+rotation = -3.1415925
+scale = Vector2(1, -1)
+
+[node name="Text" type="Label" parent="PortraitsAndChoices/DialogueChoiceTarget/Option" unique_id=883889808]
+offset_right = 193.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("2_351bv")
+theme_override_font_sizes/font_size = 28
+text = "VERY LONG OPTION 1"
+
+[node name="DialogueChoice" type="NinePatchRect" parent="PortraitsAndChoices/DialogueChoiceTarget" unique_id=424605472]
 custom_minimum_size = Vector2(117, 55)
 layout_direction = 2
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -58.5
-offset_top = -27.5
 offset_right = 58.5
-offset_bottom = 27.5
+offset_bottom = 55.0
 grow_horizontal = 2
-grow_vertical = 2
 pivot_offset = Vector2(0, 27)
 size_flags_horizontal = 8
 size_flags_vertical = 8
-texture = ExtResource("1_if77y")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
-patch_margin_top = 4
-patch_margin_right = 3
-patch_margin_bottom = 4
+texture = SubResource("CompressedTexture2D_tbtct")
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
 
-[node name="Pointer" type="Sprite2D" parent="HBoxContainer/Dialogue_CCont/DialogueChoice" unique_id=898610920]
+[node name="Pointer" type="Sprite2D" parent="PortraitsAndChoices/DialogueChoiceTarget/DialogueChoice" unique_id=898610920]
 position = Vector2(94, 25)
 scale = Vector2(-1, 1)
 texture = ExtResource("3_85jfh")
