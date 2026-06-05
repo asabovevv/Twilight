@@ -36,7 +36,7 @@ var rand : RandomNumberGenerator
 
 # Dialogue
 @export_category("Dialogue")
-@export var interactable : bool = true
+@export var interactable : bool = false
 @export var has_talkframes : bool = false
 var interacted_count : int = 0
 var interacted : bool = false

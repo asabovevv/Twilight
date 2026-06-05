@@ -7,6 +7,8 @@ extends Node2D
 @onready var bgm_slider : HSlider = $VolumeControl/VBoxContainer/BGM/BGMSlider
 @onready var sfx_slider : HSlider = $VolumeControl/VBoxContainer/SFX/SFXSlider
 
+var shift : bool = false
+
 var inventory_loaded : bool = false
 
 var flag_page : int = 0
@@ -24,7 +26,19 @@ func _ready() -> void:
 	bgm_slider.value = get_bus_volume("BGM")
 	sfx_slider.value = get_bus_volume("SFX")
 	
+	$Version.text = "v. " + str( Twilight.Version )
+	
 	_debug_start()
+
+func _process(_delta):
+	shift = Input.is_key_pressed(KEY_SHIFT)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey && event.pressed && !event.is_echo():
+		if event.keycode >= KEY_0 && event.keycode <= KEY_9 && shift:
+			var number: int = event.keycode - KEY_0
+			$Stats/LoadStats/LoadStatInt.text = str( number )
+			_on_load_stats_button_down()
 
 func _debug_start() -> void:
 	# Debug

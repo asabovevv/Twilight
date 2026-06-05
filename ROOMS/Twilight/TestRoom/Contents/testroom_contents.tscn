@@ -740,23 +740,18 @@ position = Vector2(560, 368)
 sprite_offset = Vector2(0, -4)
 sprite_img = ExtResource("12_ynx7i")
 sprite_hvframes = Vector2i(2, 1)
-interactable = false
-dialogue = Array[ExtResource("15_1l2ua")]([])
 moves = true
 action_loop = Array[ExtResource("13_d17ug")]([SubResource("Resource_1l2ua"), SubResource("Resource_awnop"), SubResource("Resource_evjyx"), SubResource("Resource_2l6tf"), SubResource("Resource_ynx7i")])
-anim_default = false
-talk_anim_speed = 15.0
 
 [node name="NPC_cumber" parent="." unique_id=761226622 instance=ExtResource("11_d17ug")]
 position = Vector2(1168, 432)
 sprite_offset = Vector2(0, -24)
 sprite_img = ExtResource("12_v2jh2")
 sprite_hvframes = Vector2i(3, 2)
+interactable = true
 has_talkframes = true
 dialogue = Array[ExtResource("15_1l2ua")]([SubResource("Resource_ihekr"), SubResource("Resource_8r2v7")])
-action_loop = Array[ExtResource("15_1l2ua")]([])
-anim_default = false
-talk_anim_speed = 15.0
+action_loop = Array[ExtResource("13_d17ug")]([])
 
 [node name="NPC_door" parent="." unique_id=270951796 instance=ExtResource("11_d17ug")]
 position = Vector2(400, 272)
@@ -764,10 +759,9 @@ script = ExtResource("12_8vm70")
 sprite_offset = Vector2(0, -24)
 sprite_img = ExtResource("13_1l2ua")
 sprite_hvframes = Vector2i(4, 1)
-dialogue = Array[ExtResource("15_1l2ua")]([])
-action_loop = Array[ExtResource("15_1l2ua")]([])
+action_loop = Array[ExtResource("13_d17ug")]([])
+anim_default = true
 anim_speed = 15.0
-talk_anim_speed = 15.0
 
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember" method="_on_main_party_member_mood_changed"]
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember2" method="_on_main_party_member_mood_changed"]

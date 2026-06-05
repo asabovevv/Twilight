@@ -18,7 +18,7 @@ var shake_vertical : bool = true
 var shake_time : float = 0
 
 func _ready() -> void:
-	TWILIGHT.camera = self
+	Twilight.camera = self
 	
 	vignette = my_camera.get_child(0)
 	
@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 	
 	# Screen Fade
 	screen_fade.self_modulate.a = move_toward(screen_fade.self_modulate.a,
-											  TWILIGHT.camera.screen_fade_target,
+											  Twilight.camera.screen_fade_target,
 											  delta*5)
 	screen_fade.modulate = screen_fade_color
 

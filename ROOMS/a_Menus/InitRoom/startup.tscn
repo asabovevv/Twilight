@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://c2nggl1ra22mt" path="res://ROOMS/a_Menus/InitRoom/Contents/startup.gd" id="1_3tds7"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_3od6b"]
-[ext_resource type="Texture2D" uid="uid://dgfuiax5nsqds" path="res://UI/Portraits/Cumb0.png" id="2_vyoso"]
 [ext_resource type="Texture2D" uid="uid://bvcl1qv7wmwhf" path="res://ROOMS/a_Menus/MainMenu/Contents/Title.png" id="3_1825l"]
 [ext_resource type="Script" uid="uid://ncbof14tnp68" path="res://ROOMS/a_Menus/InitRoom/Contents/room_0.gd" id="4_hqidj"]
 [ext_resource type="Texture2D" uid="uid://ckyo3qcgp3t04" path="res://ROOMS/a_Menus/InitRoom/Contents/icon_Arrow.png" id="5_tj1xd"]
@@ -10,22 +9,27 @@
 [node name="startup" type="Node2D" unique_id=795438040]
 script = ExtResource("1_3tds7")
 
-[node name="Cumb0" type="Sprite2D" parent="." unique_id=260088244]
-position = Vector2(431.1974, 26.387726)
-scale = Vector2(0.3782292, 0.36807624)
-texture = ExtResource("2_vyoso")
+[node name="Quickload" type="Label" parent="." unique_id=54899070]
+offset_left = 3.0
+offset_top = 29.0
+offset_right = 288.0
+offset_bottom = 52.0
+scale = Vector2(0.7, 0.7)
+text = "Press Shift + Number to quick-load file"
 
-[node name="Title" type="Label" parent="." unique_id=1665335143]
-offset_left = 259.0
-offset_top = 33.0
-offset_right = 368.0
-offset_bottom = 56.0
-scale = Vector2(0.6499347, 0.6499347)
-text = "Helo welcome"
-
-[node name="Title2" type="Sprite2D" parent="Title" unique_id=365490785]
-position = Vector2(188, 38)
+[node name="Title2" type="Sprite2D" parent="." unique_id=365490785]
+position = Vector2(401.00003, 34.999996)
+scale = Vector2(0.5453523, 0.675364)
 texture = ExtResource("3_1825l")
+
+[node name="Version" type="Label" parent="." unique_id=423982516]
+offset_left = 352.0
+offset_top = 61.0
+offset_right = 461.0
+offset_bottom = 84.0
+scale = Vector2(0.7, 0.7)
+text = "v 0.0001"
+horizontal_alignment = 1
 
 [node name="PartyStats" type="Button" parent="." unique_id=461864966]
 offset_left = 3.0

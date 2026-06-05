@@ -16,6 +16,9 @@ position = Vector2(16, 16)
 script = ExtResource("2_xxcha")
 dialogue = Array[ExtResource("2_r1uv1")]([])
 action_loop = Array[ExtResource("2_vf6d8")]([SubResource("Resource_vf6d8")])
+anim_default = false
+anim_speed = 0.0
+talk_anim_speed = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=761226622]
 y_sort_enabled = true
