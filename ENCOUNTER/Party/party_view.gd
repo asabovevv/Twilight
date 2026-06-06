@@ -29,6 +29,10 @@ func _spawn(party : PartyState):
 			_:
 				status.position = Vector2.ZERO
 		status.bind(party.members[i])
+		# flip state icon box to above the status on bottom left/right party members
+		if i % 2 == 0:
+			status.state_icons.position.y = -115
+			status.state_icons.reverse_fill = true
 		statuses.append(status)
 
 func _on_selection_changed(old_index : int, new_index : int):
@@ -37,8 +41,8 @@ func _on_selection_changed(old_index : int, new_index : int):
 	if new_index >= 0:
 		_start_pulse(new_index)
 	
-func _start_pulse(i : int):
-	statuses[i].battle_status_frost.start_pulse()
+func _start_pulse(index : int):
+	statuses[index].battle_status_frost.start_pulse()
 
-func _stop_pulse(i : int):
-	statuses[i].battle_status_frost.stop_pulse()
+func _stop_pulse(index : int):
+	statuses[index].battle_status_frost.stop_pulse()

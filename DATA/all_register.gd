@@ -71,7 +71,22 @@ static func register_skills( skills : GameDataRegistry ):
 
 #region ----- ENEMIES REGISTRY -----
 static func register_enemies( enemies : GameDataRegistry ):
-	pass
+	enemies.register("forest_bunny", EnemyData.new(
+		"forest_bunny",
+		"Forest Bunny",
+		"",
+		load("res://UI/Portraits/Enemy_Battle_Portraits/forest_bunny.tres"),
+		{
+			StatType.HEART: 85,
+			StatType.JUICE: 42,
+			StatType.ATTACK: 10,
+			StatType.DEFENSE: 2,
+			StatType.SPEED: 10,
+			StatType.LUCK: 10,
+			StatType.HIT: 95
+		},
+		0
+	))
 #endregion
 
 #region ----- STATUS EFFECTS REGISTRY -----
@@ -124,7 +139,7 @@ static func register_party_members( party_members : GameDataRegistry ):
 		"kel", # key
 		"Kel", # name
 		"res://CHARACTERS/Kel/", # asset_path
-		null, # battle portrait
+		load("res://UI/Portraits/Battle_Portraits/kel_battle.tres"), # battle portrait
 		{	# Levels 0, 10, 20, 30, 40, 50. Interpolated between during levelup.
 			StatType.HEART : [36, 93, 164, 226, 300, 444],  # Heart
 			StatType.JUICE : [9, 31, 56, 78, 109, 150],     # Juice

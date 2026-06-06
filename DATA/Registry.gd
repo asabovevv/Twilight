@@ -23,28 +23,28 @@ func _init() -> void:
 func get_item(id : String) -> Item:
 	return items.try_get(id) as Item
 
-## Shorthand for [code]Registry.emotions.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.
+## Shorthand for [code]Registry.emotions.try_get(id) as Emotion[/code].  Will return [code]null[/code] if the entry does not exist.
 func get_emotion(id : String) -> Emotion:
 	return emotions.try_get(id) as Emotion
 
-## Shorthand for [code]Registry.equipment.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.
+## Shorthand for [code]Registry.equipment.try_get(id) as Equippable[/code].  Will return [code]null[/code] if the entry does not exist.
 func get_equipment(id : String) -> Equippable:
 	if id == Equippable.NONE:
 		return null
 	return equipment.try_get(id) as Equippable
 
-## Shorthand for [code]Registry.enemies.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.
-func get_enemy(id : String) -> Enemy:
-	return enemies.try_get(id) as Enemy
+## Shorthand for [code]Registry.enemies.try_get(id) as EnemyData[/code].  Will return [code]null[/code] if the entry does not exist.
+func get_enemy(id : String) -> EnemyData:
+	return enemies.try_get(id) as EnemyData
 
-## Shorthand for [code]Registry.skills.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.
+## Shorthand for [code]Registry.skills.try_get(id) as Skill[/code].  Will return [code]null[/code] if the entry does not exist.
 func get_skill(id : String) -> Skill:
 	return skills.try_get(id) as Skill
 
-## Shorthand for [code]Registry.status_effects.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.
+## Shorthand for [code]Registry.status_effects.try_get(id) as StatusEffect[/code].  Will return [code]null[/code] if the entry does not exist.
 func get_status_effect(id : String) -> StatusEffect:
 	return status_effects.try_get(id) as StatusEffect
 
-## Shorthand for [code]Registry.party_members.try_get(id) as Item[/code].  Will return [code]null[/code] if the entry does not exist.
+## Shorthand for [code]Registry.party_members.try_get(id) as PartyMemberData[/code].  Will return [code]null[/code] if the entry does not exist.
 func get_party_member(id : String) -> PartyMemberData:
 	return party_members.try_get(id) as PartyMemberData

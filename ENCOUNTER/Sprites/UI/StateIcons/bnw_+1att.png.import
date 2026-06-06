@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://roo21jh6gmux"
-path="res://.godot/imported/BossHealth.png-b3530ecd5f117631c7611f4660a69920.ctex"
+uid="uid://bca2myjc816fb"
+path="res://.godot/imported/bnw_+1att.png-60d02a04d96f86f75a2f8b6b1b4f5938.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ENCOUNTER/Sprites/UI/BossHealth.png"
-dest_files=["res://.godot/imported/BossHealth.png-b3530ecd5f117631c7611f4660a69920.ctex"]
+source_file="res://ENCOUNTER/Sprites/UI/StateIcons/bnw_+1att.png"
+dest_files=["res://.godot/imported/bnw_+1att.png-60d02a04d96f86f75a2f8b6b1b4f5938.ctex"]
 
 [params]
 

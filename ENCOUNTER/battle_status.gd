@@ -8,6 +8,7 @@ class_name BattleStatus extends Control
 @export var juice_bar : TextureProgressBar
 @export var health_label : Label
 @export var juice_label : Label
+@export var state_icons : HFlowContainer
 
 # the party member this BattleStatus is bound to
 var member : PartyMember
