@@ -12,7 +12,9 @@
 [ext_resource type="Script" uid="uid://l0mnvwmx7sp7" path="res://ENCOUNTER/battlestatus_select_pulse.gd" id="9_4aai6"]
 [ext_resource type="Texture2D" uid="uid://4vqrv5ap6u4f" path="res://ENCOUNTER/Sprites/UI/BattleStatus_Select.png" id="9_ar1dj"]
 
-[node name="BattleStatus" type="NinePatchRect" unique_id=525477418 node_paths=PackedStringArray("profile", "battle_status_frost", "emotion", "emotion_label", "health_bar", "juice_bar", "health_label", "juice_label")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ue53f"]
+
+[node name="BattleStatus" type="NinePatchRect" unique_id=525477418 node_paths=PackedStringArray("profile", "battle_status_frost", "emotion", "emotion_label", "health_bar", "juice_bar", "health_label", "juice_label", "state_icons")]
 offset_left = 11.0
 offset_top = 5.0
 offset_right = 131.0
@@ -23,7 +25,7 @@ patch_margin_top = 27
 patch_margin_right = 10
 patch_margin_bottom = 8
 script = ExtResource("2_ue53f")
-profile = NodePath("Profile")
+profile = NodePath("Emotion/Profile")
 battle_status_frost = NodePath("BattleStatusFrost")
 emotion = NodePath("Emotion")
 emotion_label = NodePath("EmotionLabel")
@@ -31,17 +33,19 @@ health_bar = NodePath("BattleStatusBars/Health_StatusBar")
 juice_bar = NodePath("BattleStatusBars/Juice_StatusBar")
 health_label = NodePath("BattleStatusBars/Health")
 juice_label = NodePath("BattleStatusBars/Juice")
+state_icons = NodePath("StateIcons")
 
 [node name="Emotion" type="Sprite2D" parent="." unique_id=757332694]
+clip_children = 2
 z_index = -2
 position = Vector2(60, 66)
 texture = ExtResource("3_ue53f")
 hframes = 4
 vframes = 3
 
-[node name="Profile" type="AnimatedSprite2D" parent="." unique_id=2146036308]
-z_index = -1
-position = Vector2(60, 56.215)
+[node name="Profile" type="AnimatedSprite2D" parent="Emotion" unique_id=2146036308]
+position = Vector2(0, -9.785)
+sprite_frames = SubResource("SpriteFrames_ue53f")
 
 [node name="EmotionLabel" type="Sprite2D" parent="." unique_id=950283208]
 position = Vector2(60, 14)
@@ -109,3 +113,18 @@ script = ExtResource("9_4aai6")
 [node name="BattleStatusSelect" type="Sprite2D" parent="BattleStatusFrost" unique_id=984351021]
 position = Vector2(0, 15)
 texture = ExtResource("9_ar1dj")
+
+[node name="StateIcons" type="HFlowContainer" parent="." unique_id=2003523490]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.0
+offset_top = 165.0
+offset_right = 58.0
+offset_bottom = 281.0
+grow_horizontal = 2
+pivot_offset_ratio = Vector2(0.5, 0)
+theme_override_constants/h_separation = -4
+theme_override_constants/v_separation = -4
+alignment = 1

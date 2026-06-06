@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://b8h56lv8gqxow"]
+
+[ext_resource type="Texture2D" uid="uid://glf8fskje0k2" path="res://ENCOUNTER/Sprites/UI/Enemy_Box.png" id="1_io8ji"]
+[ext_resource type="Script" uid="uid://celbpsjyefmm7" path="res://ENCOUNTER/enemy_infobox.gd" id="1_u32sf"]
+[ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="2_emef7"]
+[ext_resource type="Texture2D" uid="uid://coaqxylbxsmxi" path="res://UI/Bunny_Point.png" id="3_3ik2p"]
+[ext_resource type="Texture2D" uid="uid://ctbs2c3175kwp" path="res://ENCOUNTER/Sprites/UI/Bar_Health_Enemy_Back.png" id="3_h3k3v"]
+[ext_resource type="Texture2D" uid="uid://c2exvo2ixhk2y" path="res://ENCOUNTER/Sprites/UI/Bar_Health_Enemy.png" id="4_vx22n"]
+[ext_resource type="Texture2D" uid="uid://b8bmry02lndot" path="res://ENCOUNTER/Sprites/UI/Hp_Icon.png" id="5_vx22n"]
+
+[node name="EnemyInfobox" type="Control" unique_id=1107577028 node_paths=PackedStringArray("infobox", "enemy_name", "hp_bar", "state_icons")]
+z_index = 100
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_u32sf")
+infobox = NodePath("Infobox")
+enemy_name = NodePath("Infobox/Name")
+hp_bar = NodePath("Infobox/Health")
+state_icons = NodePath("StateIcons")
+
+[node name="Infobox" type="NinePatchRect" parent="." unique_id=1016995618]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = -58.0
+offset_right = 80.0
+offset_bottom = -5.0
+grow_horizontal = 2
+texture = ExtResource("1_io8ji")
+region_rect = Rect2(0, 0, 15, 57)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 26
+
+[node name="Name" type="Label" parent="Infobox" unique_id=1146252900]
+custom_minimum_size = Vector2(145, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_top = 5.75
+offset_right = 73.0
+offset_bottom = 25.75
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_emef7")
+theme_override_font_sizes/font_size = 20
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Health" type="TextureProgressBar" parent="Infobox" unique_id=1600067630]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 6.5
+offset_right = 53.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+texture_under = ExtResource("3_h3k3v")
+texture_progress = ExtResource("4_vx22n")
+
+[node name="Heart" type="Sprite2D" parent="Infobox/Health" unique_id=1670160810]
+position = Vector2(-10, 6)
+texture = ExtResource("5_vx22n")
+
+[node name="Cursor" type="Sprite2D" parent="." unique_id=1655839351]
+rotation = 1.5707964
+texture = ExtResource("3_3ik2p")
+hframes = 2
+
+[node name="StateIcons" type="HFlowContainer" parent="." unique_id=820794715]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -122.0
+offset_right = 58.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0)
+alignment = 1
+reverse_fill = true

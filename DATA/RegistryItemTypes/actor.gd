@@ -3,12 +3,24 @@
 var name : String
 var asset_path : String
 var battle_portrait : SpriteFrames
+var _hurt_timer : Timer
 
 # Stats
 var base_stats : Dictionary[String, int]
 # store these separate, the ones in current_stats are current max health and max juice
-var current_health : int
-var current_juice : int
+var current_health : int :
+	get:
+		return current_health
+	set(value):
+		current_health = value
+		health_changed.emit()
+
+var current_juice : int :
+	get:
+		return current_juice
+	set(value):
+		current_juice = value
+		juice_changed.emit()
 
 @abstract func get_current_stats() -> Dictionary[String, int]
 

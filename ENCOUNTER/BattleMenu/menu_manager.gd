@@ -6,6 +6,8 @@ class_name MenuManager extends Node
 @export var snack_menu : ItemMenu
 @export var toy_menu : ItemMenu
 
+signal menu_changed(new_menu, immediate)
+
 var current_state : MenuState.State = MenuState.State.NONE
 
 var _current_menu : Menu
@@ -29,22 +31,10 @@ func _initialize(ctx : EncounterContext):
 		menu.context = ctx
 
 
-func _process(delta: float) -> void:
+func on_input(direction : Vector2i):
 	if current_state == MenuState.State.NONE:
 		return
-	if Input.is_action_just_pressed("Cancel"):
-		context.turn.on_cancel()
-		return
-	if Input.is_action_just_pressed("Confirm"):
-		_current_menu.on_input(Vector2i.ZERO)
-	elif Input.is_action_just_pressed("Up"):
-		_current_menu.on_input(Vector2i.UP)
-	elif Input.is_action_just_pressed("Down"):
-		_current_menu.on_input(Vector2i.DOWN)
-	elif Input.is_action_just_pressed("Left"):
-		_current_menu.on_input(Vector2i.LEFT)
-	elif Input.is_action_just_pressed("Right"):
-		_current_menu.on_input(Vector2i.RIGHT)
+	_current_menu.on_input(direction)
 
 func show_menu(state : MenuState.State, immediate : bool = false, ignore_memory : bool = false):
 	current_state = state
@@ -52,6 +42,7 @@ func show_menu(state : MenuState.State, immediate : bool = false, ignore_memory 
 		for open in _menus.values().filter(func(x): return x.visible):
 			open.move_down(state, immediate)
 		_current_menu = null
+		menu_changed.emit(current_state, immediate)
 		return
 	
 	if _current_menu:
@@ -67,6 +58,7 @@ func show_menu(state : MenuState.State, immediate : bool = false, ignore_memory 
 	else:
 		_current_menu.on_open(SelectionMemory.new(current_state, 0))
 	_current_menu.move_up(immediate)
+	menu_changed.emit(current_state, immediate)
 
 ## Adds a party member's menu selection to the memory
 func save_last_selected(member_id : String) -> void:

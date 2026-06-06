@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://dnv68vbuvf13k" path="res://ENCOUNTER/encounter_manager.gd" id="1_7mqee"]
 [ext_resource type="Script" uid="uid://njnw7vy4fac5" path="res://ENCOUNTER/BattleLog/battlelog_manager.gd" id="2_0ylf6"]
 [ext_resource type="Texture2D" uid="uid://cfui0nosp4wut" path="res://ENCOUNTER/Sprites/Backgrounds/Afterglow_Church.png" id="2_7ltex"]
+[ext_resource type="Script" uid="uid://ceoe8wwtypl6f" path="res://ENCOUNTER/battle_input.gd" id="2_vtcnl"]
 [ext_resource type="PackedScene" uid="uid://df2mrwxipvp04" path="res://ENCOUNTER/BattleLog/log_line.tscn" id="3_0ylf6"]
-[ext_resource type="Texture2D" uid="uid://roo21jh6gmux" path="res://ENCOUNTER/Sprites/UI/BossHealth.png" id="3_vxuot"]
-[ext_resource type="Texture2D" uid="uid://brk0etqpnmvwh" path="res://UI/StatusBar.png" id="4_wutpw"]
+[ext_resource type="Script" uid="uid://hbw2famrt57x" path="res://ENCOUNTER/Enemies/enemy_view.gd" id="3_28wf1"]
+[ext_resource type="PackedScene" uid="uid://dgdwicp4e6lik" path="res://ENCOUNTER/enemy.tscn" id="4_28wf1"]
 [ext_resource type="FontFile" uid="uid://cup0q2a4ihuu8" path="res://UI/Dialogue/Default.ttf" id="5_ntido"]
 [ext_resource type="Texture2D" uid="uid://w0vkdlqjhtxv" path="res://UI/Dialogue/DialogueBox/Dialogue_Box.png" id="6_u8jav"]
 [ext_resource type="PackedScene" uid="uid://b7pmk3rtv2yr6" path="res://ENCOUNTER/battle_status_small.tscn" id="7_y2hrj"]
@@ -29,60 +30,46 @@
 shader = ExtResource("13_2jno8")
 shader_parameter/off = 0.245
 
-[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("menu_manager", "battlelog_manager", "party_view", "power_bar")]
+[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("menu_manager", "battlelog_manager", "party_view", "enemy_view", "power_bar", "input")]
 script = ExtResource("1_7mqee")
 menu_manager = NodePath("Bars")
-battlelog_manager = NodePath("BattleLogManager")
+battlelog_manager = NodePath("UpdateBox")
 party_view = NodePath("BattleStatus_Root")
+enemy_view = NodePath("Enemies")
 power_bar = NodePath("PowerBar_Root")
+input = NodePath("Input")
 
-[node name="BattleLogManager" type="Node" parent="." unique_id=1689532942 node_paths=PackedStringArray("immediate_label")]
-script = ExtResource("2_0ylf6")
-log_line = ExtResource("3_0ylf6")
-immediate_label = NodePath("../UpdateBox/Immediate")
+[node name="Input" type="Node" parent="." unique_id=1268018874]
+script = ExtResource("2_vtcnl")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1581445242]
 z_index = -8
 texture = ExtResource("2_7ltex")
 
 [node name="Enemies" type="Node2D" parent="." unique_id=53288487]
+script = ExtResource("3_28wf1")
+enemy_scene = ExtResource("4_28wf1")
 
-[node name="EnemyHealth" type="Sprite2D" parent="." unique_id=1359900625]
-visible = false
-position = Vector2(320, 126)
-texture = ExtResource("3_vxuot")
-
-[node name="StatusBar" type="Sprite2D" parent="EnemyHealth" unique_id=296910474]
-position = Vector2(-38, 1)
-texture = ExtResource("4_wutpw")
-centered = false
-vframes = 5
-frame = 4
-region_enabled = true
-region_rect = Rect2(0, 0, 91, 70)
-
-[node name="Name" type="Label" parent="EnemyHealth" unique_id=888106916]
-offset_left = -90.0
-offset_top = -31.0
-offset_right = 90.0
-offset_bottom = -4.0
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("5_ntido")
-theme_override_font_sizes/font_size = 26
-text = "Test"
-horizontal_alignment = 1
-
-[node name="UpdateBox" type="NinePatchRect" parent="." unique_id=2136328949]
-offset_left = 140.0
+[node name="UpdateBox" type="NinePatchRect" parent="." unique_id=2136328949 node_paths=PackedStringArray("immediate_label", "icon")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 142.0
 offset_top = -5.0
-offset_right = 500.0
+offset_right = 502.0
 offset_bottom = 89.0
+grow_horizontal = 2
 texture = ExtResource("6_u8jav")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 4
 patch_margin_top = 4
-patch_margin_right = 3
+patch_margin_right = 4
 patch_margin_bottom = 4
+script = ExtResource("2_0ylf6")
+log_line = ExtResource("3_0ylf6")
+immediate_label = NodePath("Immediate")
+icon = NodePath("Icon")
+font = ExtResource("5_ntido")
 
 [node name="Immediate" type="RichTextLabel" parent="UpdateBox" unique_id=1992009763]
 layout_mode = 0
@@ -93,7 +80,9 @@ offset_bottom = 87.0
 theme_override_fonts/normal_font = ExtResource("5_ntido")
 theme_override_font_sizes/normal_font_size = 24
 
-[node name="Updates" type="Node2D" parent="UpdateBox" unique_id=422148679]
+[node name="Icon" type="Sprite2D" parent="UpdateBox" unique_id=309221356]
+visible = false
+position = Vector2(308.5, 41)
 
 [node name="BattleStatusSmall_Root" type="Node2D" parent="." unique_id=1186153215]
 visible = false
@@ -210,10 +199,10 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0)
 texture = ExtResource("6_u8jav")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 4
 patch_margin_top = 4
-patch_margin_right = 3
+patch_margin_right = 4
 patch_margin_bottom = 4
 script = ExtResource("17_vtcnl")
 cursor_sprite = NodePath("Pointer")
@@ -248,10 +237,10 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0)
 texture = ExtResource("6_u8jav")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 4
 patch_margin_top = 4
-patch_margin_right = 3
+patch_margin_right = 4
 patch_margin_bottom = 4
 script = ExtResource("18_2jno8")
 cursor_sprite = NodePath("Pointer")
@@ -286,10 +275,10 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset_ratio = Vector2(0.5, 0)
 texture = ExtResource("6_u8jav")
-region_rect = Rect2(0, 0, 7, 9)
-patch_margin_left = 3
+region_rect = Rect2(0, 0, 11, 11)
+patch_margin_left = 4
 patch_margin_top = 4
-patch_margin_right = 3
+patch_margin_right = 4
 patch_margin_bottom = 4
 script = ExtResource("18_2jno8")
 cursor_sprite = NodePath("Pointer")
