@@ -1,8 +1,8 @@
-extends FunctionCollider
+## TODO FIX
+extends ScriptedObject
 
 @export var cutscene_path : String 
 @export var cutscene_variant : int = 0
-@export var cutscene_nodes : Array[Node]
 @export var check_flag : int = -1
 
 func _ready() -> void:
@@ -23,7 +23,7 @@ func execute() -> void:
 
 func check_valid() -> bool:
 	if check_flag != -1:
-		if Global.get_flag(check_flag):
+		if Twilight.Flags.get_flag(check_flag):
 			queue_free()
 			return false
 	

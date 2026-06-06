@@ -1,4 +1,4 @@
-extends FunctionCollider
+extends ScriptedObject
 
 @export var parent_node : Node
 @export var set_fade : float

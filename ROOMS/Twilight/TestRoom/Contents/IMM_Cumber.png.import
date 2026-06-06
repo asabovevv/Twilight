@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnhwrma6hjcjd"
-path="res://.godot/imported/IMM_Cumber.png-43306708d8d10bdef8753b9fbf078a60.ctex"
+path="res://.godot/imported/IMM_Cumber.png-091f504101fd86a734dc1714170b3a9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ENTITIES/Npc/Immobile/Twilight/IMM_Cumber.png"
-dest_files=["res://.godot/imported/IMM_Cumber.png-43306708d8d10bdef8753b9fbf078a60.ctex"]
+source_file="res://ROOMS/Twilight/TestRoom/Contents/IMM_Cumber.png"
+dest_files=["res://.godot/imported/IMM_Cumber.png-091f504101fd86a734dc1714170b3a9e.ctex"]
 
 [params]
 

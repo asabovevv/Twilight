@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://iyo8wdli5xm"]
+
+[ext_resource type="Script" uid="uid://bynwnrk5vt6bq" path="res://ROOMS/Twilight/TestRoom/Contents/cut_chicken_fall.gd" id="1_jhant"]
+[ext_resource type="Texture2D" uid="uid://bu6b3w0gj3g8p" path="res://ROOMS/Twilight/TestRoom/Contents/Turkey.png" id="2_m2wb4"]
+[ext_resource type="PackedScene" uid="uid://cyaxdi2xdevbg" path="res://ENTITIES/npc.tscn" id="2_tdj5s"]
+[ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://DATA/Resources/Npc/dialogue_sequence.gd" id="4_6dpf0"]
+[ext_resource type="Script" uid="uid://c7jcsw7kiq5mi" path="res://DATA/Resources/Npc/dialogue_flag_trigger.gd" id="5_q2lxn"]
+
+[sub_resource type="Resource" id="Resource_q2lxn"]
+script = ExtResource("4_6dpf0")
+branch_headers = Array[String](["Test_Branch_4"])
+metadata/_custom_type_script = "uid://dopbn3w65cjm3"
+
+[sub_resource type="Resource" id="Resource_nwr4m"]
+script = ExtResource("4_6dpf0")
+branch_headers = Array[String](["Test_Branch_5"])
+metadata/_custom_type_script = "uid://dopbn3w65cjm3"
+
+[sub_resource type="Resource" id="Resource_6l0ag"]
+script = ExtResource("5_q2lxn")
+metadata/_custom_type_script = "uid://c7jcsw7kiq5mi"
+
+[node name="Cutscene" type="Node2D" unique_id=1026101719]
+script = ExtResource("1_jhant")
+
+[node name="Turkey" parent="." unique_id=279611580 instance=ExtResource("2_tdj5s")]
+position = Vector2(0, 0)
+editor_grid_snap = false
+sprite_img = ExtResource("2_m2wb4")
+interactable = true
+dialogue = Array[ExtResource("4_6dpf0")]([SubResource("Resource_q2lxn"), SubResource("Resource_nwr4m")])
+dialogue_flag_triggers = Array[ExtResource("5_q2lxn")]([SubResource("Resource_6l0ag")])
+anim_default = false

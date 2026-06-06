@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://f1j5xqntral5"
-path="res://.godot/imported/Save_Bun.png-1f122577b7759593982abbdeac4d0ccb.ctex"
+path="res://.godot/imported/Save_Bun.png-be3c01918fdf257341f4e5307ee8cf26.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ENTITIES/Npc/Save_Bun.png"
-dest_files=["res://.godot/imported/Save_Bun.png-1f122577b7759593982abbdeac4d0ccb.ctex"]
+source_file="res://ENTITIES/Npc/Immobile/Save_Bun.png"
+dest_files=["res://.godot/imported/Save_Bun.png-be3c01918fdf257341f4e5307ee8cf26.ctex"]
 
 [params]
 

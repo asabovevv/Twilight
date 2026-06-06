@@ -1,9 +1,9 @@
-class_name FunctionCollider
-extends StaticBody2D
+class_name ScriptedObject
+extends Node2D
 
 @export var player : CharacterBody2D
 @export var snap : bool = true
-@export var collidable : bool = true
+@export var has_collision : bool = true
 
 func _ready() -> void:
 	if snap:

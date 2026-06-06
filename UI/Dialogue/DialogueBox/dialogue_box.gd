@@ -102,7 +102,8 @@ func _do_text_crawl(delta: float) -> void:
 				# Make noise
 				dialogue_sound_cooldown -= delta
 				if dialogue_sound_cooldown <= 0:
-					Audio.play_sfx(tsound, 0.9, rand.randf_range(0.8, 1.1))
+					if visible:
+						Audio.play_sfx(tsound, 0.9, rand.randf_range(0.8, 1.1))
 					dialogue_sound_cooldown = 0.04
 				
 				# On new letter
@@ -179,9 +180,10 @@ func _text_escape() -> void:
 				if escape_var.size() < 3:
 					escape_var.append(0)
 				
-				var tex = load( portrait_location + escape_var[1] + ".png")
-				if tex != null:
+				
+				if FileAccess.file_exists(portrait_location + escape_var[1] + ".png"):
 					
+					var tex = load( portrait_location + escape_var[1] + ".png")
 					var myportrait = d_portrait_targets[ int(escape_var[2]) ].get_child(0).get_child(0)
 					
 					myportrait.texture = tex
@@ -236,21 +238,9 @@ func _text_escape() -> void:
 				event_locations.append( _find_position_marker(escape_var[1], substring_end) )
 				event_names.append( "end" )
 			
-			"sound": # Marker Char, # Sound Path, #Volume Type (SE, ME, AS, AM)
-				var volume
-				match escape_var[3]:
-					"ME":
-						volume = Twilight.Settings.Volumes.MusicEffect
-					"AS":
-						volume = Twilight.Settings.Volumes.AmbientSound
-					"AM":
-						volume = Twilight.Settings.Volumes.AmbientMusic
-					_:
-						volume = Twilight.Settings.Volumes.SoundEffect
-				
-				sounds.append(Twilight.Settings.load_sound(escape_var[2], volume, self)) 
+			"sound": # Marker Char, # Sound Name
 				event_locations.append( _find_position_marker(escape_var[1], substring_end) )
-				event_names.append( "sound:%d" % [sounds.size()-1] )
+				event_names.append( "sound:" + escape_var[2] )
 			
 			"func": # Marker Char, Dialogue Function Name, ~Int=0
 				var myInt : String = "0"
@@ -281,6 +271,23 @@ func _text_escape() -> void:
 				else:
 					var _s : String = "[wave amp=%f freq=%f connected=1]" % [float(escape_var[2]), freq]
 					dialogue.dialogue_tree[dialogue_branch][dialogue_place] = dialogue.dialogue_tree[dialogue_branch][dialogue_place].insert(_find_position_marker(escape_var[1], substring_end), _s )
+			
+			"flag": # Flag Number, TrueFalse (true, t, 1)
+				var is_true : bool = true
+				if escape_var.size() == 3:
+					match escape_var[2]:
+						"t":
+							is_true = true
+						"true":
+							is_true = true
+						"1":
+							is_true = true
+						_:
+							is_true = false
+				
+				print("(", escape_var[1], ") ", Twilight.Flags.Flag_Name.keys()[ int( escape_var[1] ) ], " - ", is_true)
+				
+				Twilight.Flags.set_flag( int( escape_var[1] ), is_true )
 		
 		# Look for start of next escape sequence
 		i = _get_char_next_position(dialogue.dialogue_tree[dialogue_branch][dialogue_place], "|", substring_end)
@@ -325,7 +332,7 @@ func _text_event(_event) -> void:
 		"end":
 			_end_dialogue()
 		"sound":
-			sounds[ int(event_var[1]) ].play()
+			Audio.play_sfx(event_var[1], 0.9)
 		"func":
 			var _script = load("res://UI/Dialogue/Dialogue Functions/" + event_var[1])
 			if _script != null:

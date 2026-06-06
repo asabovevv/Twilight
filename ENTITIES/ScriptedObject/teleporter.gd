@@ -1,4 +1,4 @@
-extends FunctionCollider
+extends ScriptedObject
 
 @export var target : Node2D
 @export var horizontal : bool = false

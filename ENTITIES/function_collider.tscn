@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbijxs6omu604"]
+[gd_scene format=3 uid="uid://bbijxs6omu604"]
 
-[ext_resource type="Script" uid="uid://cysi01rswn8j2" path="res://ENTITIES/FunctionCollider/teleporter.gd" id="1_es141"]
+[ext_resource type="Script" uid="uid://cysi01rswn8j2" path="res://ENTITIES/ScriptedObject/teleporter.gd" id="1_es141"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3o4c2"]
 size = Vector2(32, 32)

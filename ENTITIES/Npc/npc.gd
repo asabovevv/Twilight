@@ -211,7 +211,7 @@ func set_dialogue_tree_new_interaction():
 			var flags_required : int = special_branch.flags.size()
 			var flags_true : int = 0
 			for flag in special_branch.flags:
-				if Twilight.Flags.get_flag( special_branch.flags[flag] ):
+				if Twilight.Flags.get_flag( flag ):
 					flags_true += 1
 			
 			# If all flags for special branch are true

@@ -1,3 +1,4 @@
+class_name OmoriCamera
 extends Node2D
 
 @export var my_camera : Camera2D
@@ -28,15 +29,16 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Shake
 	if shake_time < 0:
-		pass
 		my_camera.position = Vector2.ZERO
 	
 	else:
 		shake_time -= delta
-		var _w : float = sin(shake_time * shake_speed) * shake_power
-		var _s : Vector2
 		
-		my_camera.position = Vector2((1-float(shake_vertical))*_w, float(shake_vertical)*_w)
+		var _w : float = sin(shake_time * shake_speed) * shake_power
+		if shake_vertical:
+			my_camera.position.y = _w
+		else:
+			my_camera.position.x = _w
 	
 	RenderingServer.global_shader_parameter_set("position", my_camera.global_position)
 	
@@ -46,7 +48,7 @@ func _process(delta: float) -> void:
 											  delta*5)
 	screen_fade.modulate = screen_fade_color
 
-func cam_shake(_duration : float, _power : float, _vertical : bool = true, _speed : float = 45) -> void:
+func shake(_duration : float, _power : float, _vertical : bool = true, _speed : float = 45) -> void:
 	shake_time = _duration
 	shake_power = _power
 	shake_speed = _speed

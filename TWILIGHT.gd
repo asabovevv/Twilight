@@ -1,18 +1,27 @@
-# I recommend you close up all the functions and only open them as you need them.
 extends Node
 
 ## --- --- --- --- --- --- --- --- General Global Variables --- --- --- --- --- --- --- ---
 
 var Version : float = 0.002 # Useful for save-files
 
-var ui : Node2D # Whatever node is the current UI root.
-var camera : Node2D # Whatever node is the currently used cameras root.
+var ui : OmoriUi # Whatever node is the current UI root.
+var cutscene : OmoriCutscene # Whatever node is the current CUTSCENE root.
+var camera : OmoriCamera # Whatever node is the currently used cameras root.
 var entrance : int = 0 # Stores which way a room was entered from a previous room.
 var room : String # Stores last loaded overworld room's path.
 
 var d : Dictionary[String, Array] # Contains all loaded branches of dialogue, accessed via name
 var Languages = { English = "English" }
 var language : String = Languages.English
+
+func get_room_contents_node(_name : String) -> Node:
+	# Get to room contents
+	var children : Array = get_tree().current_scene.get_child(2).get_child(0).get_child(1).get_children()
+	for child in children:
+		if child.name == _name:
+			return child
+	
+	return null
 
 ## --- --- --- --- --- --- --- --- Options --- --- --- --- --- --- --- ---
 
@@ -71,7 +80,7 @@ var Inventory : Inv
 class FlagData:
 	var story_flags : Array[int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	enum Flag_Name {
-		Carrying_Chicken
+		Carrying_Chicken, Chicken_Appears, Fed_Cumber_Once
 	}
 	
 	func set_flag(flag_number : int, value : bool) -> void:

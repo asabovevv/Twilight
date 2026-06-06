@@ -1,18 +1,44 @@
 	Test_Branch_1
-|wave:^:10||dbox||face:Cumb0||wait:@:0.3:4|^Be..@ cum.......@ Be...@ cum.....@
+|wave:^:10||dbox||name:cumber||face:Cumb0||wait:@:0.3:4|^Be..@ cum.......@ Be...@ cum.....@
 
 	Test_Branch_2
 |wait:_:1||wait:/:1:4||wave:^:10||dbox||face:Cumb0||size_gradual:!:d:45:3||size_gradual:*:d:45:3|^Help me..../ help me..../ be_ cum.../ something !GREATER[font_size=28].../ something *BIGGER[font_size=28]....
 |wave:^:10||choice:Yes:1:No:2|      please
 
 	Test_Branch_2_Choice_Yes
-|wave:^:10||face:Cumb0|thank you. children.
-|wave:^:10||face:Cumb0|I want chicken.... AUBREY.     Bring it to me.
+|wave:^:10||name:cumber||face:Cumb0|^thank you.
+|wave:^:10|^I want chicken....  AUBREY.     Bring it to me.
+|flag:1||end:@|@
 
 	Test_Branch_2_Choice_No
-|face:Cumb0|fucky ou
+|face:Cumb0||name:cumber|fucky ou
 
 	Test_Branch_3
-|dbox||wave:^:10||face:Cumb0|give methe Chicken.... please.........
+|dbox||name:cumber||wave:^:10||face:Cumb0||choice:Give:1:Do Not:2|^give methe Chicken.... please.........
+
+	Test_Branch_3_Choice_Yes
+|dbox:0||name:||face:0||func:@:cumber_grow:1||end:%||sound:!:SE_plantgrow|@!^                       %
+|dbox||name:cumber||face:Cumb0||flag:0:false||flag:2||wave:^:10|^mmMore
+
+	Test_Branch_3_Choice_No
+|end:@|@
+
+	Test_Branch_4
+|dbox||flag:0|You got CHICKEN.
+
+	Test_Branch_5
+|dbox|You can't hold more CHICKEN...
+
+	Test_Branch_6
+|dbox||name:cumber||face:Cumb0||wave:^:10||choice:Yes:1:No:2|^p lease...
+
+	Test_Branch_7
+|dbox||face:Cumb0||name:cumber||wave:^:10|^please chicken
+
+	Test_Branch_8
+|dbox||face:Cumb0||name:cumber||wave:^:10|^mmMore please
+
+	Test_Branch_9
+|dbox||face:Cumb0||name:cumber||wave:^:10|^be... cum... er... be..... cum er...
 
 EOF

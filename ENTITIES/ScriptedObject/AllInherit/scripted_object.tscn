@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://0uc6iv106klr"]
+
+[ext_resource type="Script" uid="uid://4i0bovvsxdjy" path="res://ENTITIES/ScriptedObject/AllInherit/scripted_object.gd" id="1_kmfr6"]
+
+[node name="cut_chicken_fall" type="Node2D" unique_id=55962588]
+script = ExtResource("1_kmfr6")

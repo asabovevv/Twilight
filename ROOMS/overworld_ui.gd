@@ -1,3 +1,4 @@
+class_name OmoriUi
 extends Node2D
 
 var my_uis : Array

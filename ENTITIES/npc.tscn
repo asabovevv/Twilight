@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dopbn3w65cjm3" path="res://DATA/Resources/Npc/dialogue_sequence.gd" id="2_r1uv1"]
 [ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://DATA/Resources/Npc/npcaction.gd" id="2_vf6d8"]
-[ext_resource type="Script" uid="uid://dw5of7ejmdcb5" path="res://ENTITIES/Npc/AllInherit/npc.gd" id="2_xxcha"]
+[ext_resource type="Script" uid="uid://dw5of7ejmdcb5" path="res://ENTITIES/Npc/npc.gd" id="2_xxcha"]
 
 [sub_resource type="Resource" id="Resource_vf6d8"]
 script = ExtResource("2_vf6d8")
@@ -12,6 +12,7 @@ metadata/_custom_type_script = "uid://dpi62ybd3sa1l"
 size = Vector2(31.5, 31.5)
 
 [node name="NPC" type="Node2D" unique_id=279611580]
+y_sort_enabled = true
 position = Vector2(16, 16)
 script = ExtResource("2_xxcha")
 dialogue = Array[ExtResource("2_r1uv1")]([])

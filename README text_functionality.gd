@@ -22,7 +22,7 @@
 #	- Sets the name that displays in the dialogue box.
 #	- An empty string makes the name-box disappear.
 
-## |face : (str) ~Portrait Name, Portrait ID |
+## |face : (str) ~Portrait Name, (int) ~Portrait ID = 0 |
 #	- Sets the dialogue portrait.
 #	- Portrait Name is null by default. If Portrait Name points to null the portrait-box disappears.
 #	- Portrait ID is to support multiple speaker's faces at once
@@ -48,10 +48,9 @@
 ## |end : (MC) Marker Char |
 #	- Instantly ends text when crawl reaches marker char.
 
-## |sound : (MC) Marker Char : (path) Sound Path : (str) ~Volume Type = "SE" |
+## |sound : (MC) Marker Char : (path) Sound Path : |
 #	- Plays a sound when marker char is reached, assigning the volume to one of four channels (like in Omori).
 #	- Sounds are found at res://SOUNDS/
-# 	- Volume Types: SE, ME, AS, AM (Sound Effect, Music Effect, Ambient Sound, Ambient Music)
 
 ## |func : (MC) Marker Char : (str) Dialogue Function Name : (int) ~Integer = 0 |
 #	- Runs a "Dialogue Function" with one parameter. (Cannot run ANY function - this is to future proof.)
@@ -69,6 +68,10 @@
 #	- Amplitude is how far characters offset. An Amplitude of 0 causes the wave to stop.
 #			Note: Amplitude works best between 10 and 50
 #	- Frequency is how fast the waves move. Doesn't ever really require messing with.
+
+## |flag : (int) Flag Number : (bool) ~TrueFalse = t |
+#	- Sets a flag. Defaults to true.
+#	- Takes "true", "t", and "1" as true. All other values are false.
 
 ## ------------------- Rich Text Stuff (built into Godot, doesn't require custom syntax.) ------------------
 

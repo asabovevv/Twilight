@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bbijxs6omu604" path="res://ENTITIES/function_collider.tscn" id="10_qoy4i"]
 [ext_resource type="PackedScene" uid="uid://cyaxdi2xdevbg" path="res://ENTITIES/npc.tscn" id="11_d17ug"]
 [ext_resource type="Script" uid="uid://bfbviasbg7nnh" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_PinkDoor.gd" id="12_8vm70"]
-[ext_resource type="Texture2D" uid="uid://bnhwrma6hjcjd" path="res://ROOMS/Twilight/TestRoom/Contents/IMM_Cumber.png" id="12_v2jh2"]
+[ext_resource type="Texture2D" uid="uid://bnhwrma6hjcjd" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_Cumber.png" id="12_v2jh2"]
 [ext_resource type="Texture2D" uid="uid://dukfkk45sqmhx" path="res://ENTITIES/Npc/Mobile/Twilight/NPC_Bunny_Idle.png" id="12_ynx7i"]
 [ext_resource type="Texture2D" uid="uid://dxm3u6wd73a0t" path="res://ENTITIES/Npc/Immobile/Twilight/IMM_PinkDoor.png" id="13_1l2ua"]
 [ext_resource type="Script" uid="uid://dpi62ybd3sa1l" path="res://DATA/Resources/Npc/npcaction.gd" id="13_d17ug"]
@@ -20,7 +20,6 @@
 [ext_resource type="Script" uid="uid://c7jcsw7kiq5mi" path="res://DATA/Resources/Npc/dialogue_flag_trigger.gd" id="16_awnop"]
 [ext_resource type="PackedScene" uid="uid://0uc6iv106klr" path="res://ENTITIES/ScriptedObject/AllInherit/scripted_object.tscn" id="19_evjyx"]
 [ext_resource type="Script" uid="uid://c5fvl2qf32hjt" path="res://ENTITIES/ScriptedObject/await_flags.gd" id="20_2l6tf"]
-[ext_resource type="PackedScene" uid="uid://iyo8wdli5xm" path="res://ROOMS/Twilight/TestRoom/Contents/cut_chicken_fall.tscn" id="21_ihekr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dq3mf"]
 texture = ExtResource("2_u4srh")
@@ -672,53 +671,19 @@ script = ExtResource("15_1l2ua")
 branch_headers = Array[String](["Test_Branch_2", "Test_Branch_2_Choice_Yes", "Test_Branch_2_Choice_No"])
 metadata/_custom_type_script = "uid://dopbn3w65cjm3"
 
-[sub_resource type="Resource" id="Resource_m7gid"]
-script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_6", "Test_Branch_2_Choice_Yes", "Test_Branch_2_Choice_No"])
-metadata/_custom_type_script = "uid://dopbn3w65cjm3"
-
 [sub_resource type="Resource" id="Resource_v5pv0"]
 script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_3", "Test_Branch_3_Choice_Yes", "Test_Branch_3_Choice_No"])
+branch_headers = Array[String](["Test_Branch_3"])
 metadata/_custom_type_script = "uid://dopbn3w65cjm3"
-
-[sub_resource type="Resource" id="Resource_cvpat"]
-script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_7"])
-metadata/_custom_type_script = "uid://dopbn3w65cjm3"
-
-[sub_resource type="Resource" id="Resource_mbsw0"]
-script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_9"])
-metadata/_custom_type_script = "uid://dopbn3w65cjm3"
-
-[sub_resource type="Resource" id="Resource_xsocd"]
-script = ExtResource("15_1l2ua")
-branch_headers = Array[String](["Test_Branch_8"])
-metadata/_custom_type_script = "uid://dopbn3w65cjm3"
-
-[sub_resource type="Resource" id="Resource_x07ci"]
-script = ExtResource("16_awnop")
-flags = Array[int]([0, 2])
-sequence = 5
-metadata/_custom_type_script = "uid://c7jcsw7kiq5mi"
-
-[sub_resource type="Resource" id="Resource_xs4j6"]
-script = ExtResource("16_awnop")
-flags = Array[int]([2])
-sequence = 6
-metadata/_custom_type_script = "uid://c7jcsw7kiq5mi"
 
 [sub_resource type="Resource" id="Resource_x0ham"]
 script = ExtResource("16_awnop")
-flags = Array[int]([0, 1])
-sequence = 3
+sequence = 2
 metadata/_custom_type_script = "uid://c7jcsw7kiq5mi"
 
-[sub_resource type="Resource" id="Resource_07ayn"]
+[sub_resource type="Resource" id="Resource_m7gid"]
 script = ExtResource("16_awnop")
 flags = Array[int]([1])
-sequence = 4
 metadata/_custom_type_script = "uid://c7jcsw7kiq5mi"
 
 [node name="RoomContents" type="Node2D" unique_id=1819179948]
@@ -784,8 +749,6 @@ position = Vector2(272, 433)
 target = NodePath("TELEPORT_1b")
 vertical = true
 player = NodePath("../Party/Main_Party_Member")
-snap = null
-has_collision = null
 
 [node name="TELEPORT_1b" type="Node2D" parent="TELEPORT_1a" unique_id=692720818]
 position = Vector2(-63, 132)
@@ -805,9 +768,9 @@ sprite_img = ExtResource("12_v2jh2")
 sprite_hvframes = Vector2i(3, 2)
 interactable = true
 has_talkframes = true
-max_unique_interactions = 3
-dialogue = Array[ExtResource("15_1l2ua")]([SubResource("Resource_ihekr"), SubResource("Resource_8r2v7"), SubResource("Resource_m7gid"), SubResource("Resource_v5pv0"), SubResource("Resource_cvpat"), SubResource("Resource_mbsw0"), SubResource("Resource_xsocd")])
-dialogue_flag_triggers = Array[ExtResource("16_awnop")]([SubResource("Resource_x07ci"), SubResource("Resource_xs4j6"), SubResource("Resource_x0ham"), SubResource("Resource_07ayn")])
+max_unique_interactions = 2
+dialogue = Array[ExtResource("15_1l2ua")]([SubResource("Resource_ihekr"), SubResource("Resource_8r2v7"), SubResource("Resource_v5pv0")])
+dialogue_flag_triggers = Array[ExtResource("16_awnop")]([SubResource("Resource_x0ham")])
 action_loop = Array[ExtResource("13_d17ug")]([])
 anim_default = false
 
@@ -820,17 +783,13 @@ sprite_hvframes = Vector2i(4, 1)
 action_loop = Array[ExtResource("13_d17ug")]([])
 anim_speed = 15.0
 
-[node name="AWAIT_Chicken" parent="." unique_id=55962588 node_paths=PackedStringArray("my_scene_parent") instance=ExtResource("19_evjyx")]
-position = Vector2(1194, 405)
+[node name="ScriptedObject" parent="." unique_id=55962588 instance=ExtResource("19_evjyx")]
+position = Vector2(1187, 351)
 script = ExtResource("20_2l6tf")
-my_scene = ExtResource("21_ihekr")
-my_scene_parent = NodePath("../ChickenSpawner")
-flag_triggers = Array[int]([1])
+myScene = null
+flag_triggers = Array[ExtResource("16_awnop")]([SubResource("Resource_m7gid")])
 cutscene_variant = 0
 cutscene_path = "res://ROOMS/Twilight/TestRoom/Contents/cut_chicken_fall.gd"
-
-[node name="ChickenSpawner" type="Node2D" parent="." unique_id=1217066140]
-position = Vector2(1335, 153)
 
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember" method="_on_main_party_member_mood_changed"]
 [connection signal="mood_changed" from="Party/Main_Party_Member" to="Party/PartyMembers/PartyMember2" method="_on_main_party_member_mood_changed"]

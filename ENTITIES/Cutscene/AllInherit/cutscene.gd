@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 func _act(delta : float) -> void:
 	pass
 
+## TODO: redo
 func _dialogue(player_node : CharacterBody2D, dialogue : Array[String]) -> void:
 	for i in player_node.ui.get_children():
 		i.queue_free()
@@ -49,7 +50,6 @@ func _dialogue_place(target_place : int) -> bool:
 
 func _hop(_node, _height, _duration) -> void:
 	var hop = Node.new()
-	hop.script = load("res://ENTITIES/Cutscene/Helpers/hop.gd")
 	hop.node = _node
 	hop.height = _height
 	hop.duration = _duration

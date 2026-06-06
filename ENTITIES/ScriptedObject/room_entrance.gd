@@ -1,4 +1,4 @@
-extends FunctionCollider
+extends ScriptedObject
 
 @export var ID : int = 0
 

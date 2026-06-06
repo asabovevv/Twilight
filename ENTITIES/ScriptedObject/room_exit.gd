@@ -1,4 +1,4 @@
-extends FunctionCollider
+extends ScriptedObject
 
 @export var new_scene_path : String
 @export var ID : int
@@ -11,5 +11,6 @@ func execute() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	
 	await get_tree().create_timer(0.4).timeout
-	Global.entrance = ID
+	Twilight.entrance = ID
+	Twilight.room = new_scene_path
 	get_tree().change_scene_to_file(new_scene_path)
