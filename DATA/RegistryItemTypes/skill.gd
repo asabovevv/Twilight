@@ -1,9 +1,6 @@
-class_name Skill
+class_name Skill extends Action
 
-var name : String
-var description : String
-var cost : int
-var can_overworld_use : bool 
+var cost : int 
 
 var level_requirement : int
 var required_flag : int = -1 # Story flag required to unlock skill
@@ -14,14 +11,15 @@ var required_flag : int = -1 # Story flag required to unlock skill
 func _init(
 	_name : String,
 	_description : String,
+	_target_type : Target,
 	_cost : int,
 	_level_requirement : int,
 	_required_flag : int = -1,
-	_can_overworld_use : bool = false
+	_can_overworld_use : bool = false,
+	_overworld_use : Callable = func(): pass,
+	_battle_use : Callable = func(): pass
 ):
-	self.name = _name
-	self.description = _description
-	self.cost = _cost
-	self.can_overworld_use = _can_overworld_use
-	self.level_requirement = _level_requirement
-	self.required_flag = _required_flag
+	super(_name, _description, _target_type, _can_overworld_use, _overworld_use, _battle_use)
+	cost = _cost
+	level_requirement = _level_requirement
+	required_flag = _required_flag

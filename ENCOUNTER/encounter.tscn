@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dnv68vbuvf13k" path="res://ENCOUNTER/encounter_manager.gd" id="1_7mqee"]
 [ext_resource type="Script" uid="uid://njnw7vy4fac5" path="res://ENCOUNTER/BattleLog/battlelog_manager.gd" id="2_0ylf6"]
+[ext_resource type="Script" uid="uid://ch47ynq2gr3ks" path="res://ENCOUNTER/encounter_core.gd" id="2_2jno8"]
 [ext_resource type="Texture2D" uid="uid://cfui0nosp4wut" path="res://ENCOUNTER/Sprites/Backgrounds/Afterglow_Church.png" id="2_7ltex"]
 [ext_resource type="Script" uid="uid://ceoe8wwtypl6f" path="res://ENCOUNTER/battle_input.gd" id="2_vtcnl"]
 [ext_resource type="PackedScene" uid="uid://df2mrwxipvp04" path="res://ENCOUNTER/BattleLog/log_line.tscn" id="3_0ylf6"]
@@ -30,7 +31,7 @@
 shader = ExtResource("13_2jno8")
 shader_parameter/off = 0.245
 
-[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("menu_manager", "battlelog_manager", "party_view", "enemy_view", "power_bar", "input")]
+[node name="Encounter" type="Node2D" unique_id=132915289 node_paths=PackedStringArray("menu_manager", "battlelog_manager", "party_view", "enemy_view", "power_bar", "input", "core")]
 script = ExtResource("1_7mqee")
 menu_manager = NodePath("Bars")
 battlelog_manager = NodePath("UpdateBox")
@@ -38,9 +39,13 @@ party_view = NodePath("BattleStatus_Root")
 enemy_view = NodePath("Enemies")
 power_bar = NodePath("PowerBar_Root")
 input = NodePath("Input")
+core = NodePath("Core")
 
 [node name="Input" type="Node" parent="." unique_id=1268018874]
 script = ExtResource("2_vtcnl")
+
+[node name="Core" type="Node" parent="." unique_id=1097570369]
+script = ExtResource("2_2jno8")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1581445242]
 z_index = -8

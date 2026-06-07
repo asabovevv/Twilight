@@ -9,6 +9,7 @@ class_name BattleStatus extends Control
 @export var health_label : Label
 @export var juice_label : Label
 @export var state_icons : HFlowContainer
+@export var hurt_timer : Timer
 
 # the party member this BattleStatus is bound to
 var member : PartyMember
@@ -18,16 +19,22 @@ var _displayed_juice : float
 
 func bind(_member : PartyMember) -> void:
 	member = _member
+	member.center_point = profile.global_position
 	member.emotion_changed.connect(_on_emotion_changed)
 	profile.sprite_frames = member.battle_portrait
+	profile.play()
 	var current : Dictionary[String, int] = member.get_current_stats()
 	health_bar.max_value = current[StatType.HEART]
 	health_bar.value = member.current_health
 	juice_bar.max_value = current[StatType.JUICE]
 	juice_bar.value = member.current_juice
+	member.damaged.connect(_on_damaged)
+	hurt_timer.timeout.connect(_on_hurt_timer_timeout)
 
 func _exit_tree() -> void:
 	member.emotion_changed.disconnect(_on_emotion_changed)
+	member.damaged.disconnect(_on_damaged)
+	hurt_timer.timeout.disconnect(_on_hurt_timer_timeout)
 
 func _process(delta : float) -> void:
 	_displayed_heart = move_toward(_displayed_heart, member.current_health, delta * (health_bar.max_value / 0.5))
@@ -38,6 +45,20 @@ func _process(delta : float) -> void:
 	
 	health_label.text = "%d/%d" % [_displayed_heart, health_bar.max_value]
 	juice_label.text = "%d/%d" % [_displayed_juice, juice_bar.max_value]
+
+func _on_damaged() -> void:
+	profile.animation = "Hurt"
+	hurt_timer.start()
+
+func _on_hurt_timer_timeout() -> void:
+	if member.current_health == 0:
+		if profile.animation != "Toast":
+			Audio.play_sfx("SYS_you_died", 0.9)
+			profile.animation = "Toast"
+			emotion.frame = 8
+			emotion_label.frame = 1
+	else:
+		profile.animation = member.current_emotion.name
 
 func _on_emotion_changed() -> void:
 	emotion_label.frame = member.current_emotion.label_index

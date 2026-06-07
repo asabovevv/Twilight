@@ -7,6 +7,7 @@ var turn : TurnManager
 var party : PartyState
 var enemies : EnemyState
 var state : EncounterState
+var core : EncounterCore
 
 func _init(
 	_menu : MenuManager,
@@ -14,7 +15,8 @@ func _init(
 	_turn : TurnManager,
 	_party : PartyState,
 	_enemies : EnemyState,
-	_state : EncounterState
+	_state : EncounterState,
+	_core : EncounterCore
 ):
 	menu = _menu
 	battlelog = _battlelog
@@ -22,3 +24,4 @@ func _init(
 	party = _party
 	enemies = _enemies
 	state = _state
+	core = _core

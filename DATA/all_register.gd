@@ -6,6 +6,7 @@ static func register_items( items : GameDataRegistry ):
 		"APPLE",
 		Item.ItemType.Snacks,
 		"Yum yum",
+		Action.Target.ALLY,
 		null,
 		true,
 		true
@@ -15,6 +16,7 @@ static func register_items( items : GameDataRegistry ):
 		"HECTOR",
 		Item.ItemType.Important,
 		"I fucking LOVE Hector",
+		Action.Target.ALLY,
 		load("res://UI/ItemIcons/Hector.png")
 	))
 	
@@ -55,6 +57,7 @@ static func register_skills( skills : GameDataRegistry ):
 	skills.register("knifeguy", Skill.new(
 		"Knife Guy",
 		"He stabs you a lot and you die.",
+		Action.Target.ENEMY,
 		300,
 		2
 	))
@@ -62,10 +65,28 @@ static func register_skills( skills : GameDataRegistry ):
 	skills.register("another_skill", Skill.new(
 		"Another Skill",
 		"I ran out of ideas.",
+		Action.Target.ENEMY,
 		3,
 		5,
 		-1,
 		true
+	))
+	
+	skills.register("basic_attack", Skill.new(
+		"Basic Attack",
+		"A basic attack.",
+		Action.Target.ENEMY,
+		0,
+		0,
+		-1,
+		false,
+		func(): pass,
+		func(user : Actor, target : Actor, ctx : EncounterContext):
+			ctx.battlelog.queue_message("%s attacks %s!" % [user.name.to_upper(), target.name.to_upper()])
+			ctx.core.damage(
+				user, 
+				target, 
+				func(): return user.get_current_stats()[StatType.ATTACK] * 2 - target.get_current_stats()[StatType.DEFENSE])
 	))
 #endregion
 

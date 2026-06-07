@@ -27,6 +27,25 @@ animations = [{
 "texture": SubResource("AtlasTexture_w1e4b")
 }],
 "loop": true,
+"name": &"Hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8ce5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kphat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1e4b")
+}],
+"loop": true,
 "name": &"Neutral",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Toast",
 "speed": 5.0
 }]

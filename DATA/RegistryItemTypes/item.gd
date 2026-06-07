@@ -1,8 +1,5 @@
-class_name Item
+class_name Item extends Action
 
-var name : String
-var description : String
-var can_overworld_use : bool = false
 var can_trash : bool = false
 var icon : Texture2D
 
@@ -13,13 +10,14 @@ func _init(
 	_name : String,
 	_item_type : ItemType,
 	_description : String,
+	_target_type: Target,
 	_icon : Texture2D,
 	_can_overworld_use : bool = false,
-	_can_trash : bool = false
+	_can_trash : bool = false,
+	_overworld_use : Callable = func(): pass,
+	_battle_use : Callable = func(): pass
 ):
-	self.name = _name
-	self.item_type = _item_type
-	self.description = _description
-	self.icon = _icon
-	self.can_overworld_use = _can_overworld_use
-	self.can_trash = _can_trash
+	super(_name, _description, _target_type, _can_overworld_use, _overworld_use, _battle_use)
+	item_type = _item_type
+	icon = _icon
+	can_trash = _can_trash

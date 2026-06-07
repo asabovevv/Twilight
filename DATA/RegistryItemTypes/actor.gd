@@ -3,7 +3,7 @@
 var name : String
 var asset_path : String
 var battle_portrait : SpriteFrames
-var _hurt_timer : Timer
+var center_point : Vector2 = Vector2.ZERO
 
 # Stats
 var base_stats : Dictionary[String, int]
@@ -26,6 +26,7 @@ var current_juice : int :
 
 signal health_changed
 signal juice_changed
+signal damaged
 
 # State
 var current_emotion : Emotion
@@ -39,6 +40,17 @@ func _init(_name : String, _asset_path : String, _battle_portrait : SpriteFrames
 	asset_path = _asset_path
 	battle_portrait = _battle_portrait
 	round_priority = _round_priority
+
+## Damages the actor by the given amount. Must be a positive integer.
+func damage(dmg : int) -> void:
+	if dmg <= 0:
+		return
+	
+	current_health -= dmg
+	if current_health <= 0:
+		current_health = 0
+	
+	damaged.emit()
 
 func set_emotion(emotion : Emotion) -> void:
 	# TODO: handle "can/cannot feel" logic

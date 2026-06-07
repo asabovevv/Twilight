@@ -14,7 +14,7 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ue53f"]
 
-[node name="BattleStatus" type="NinePatchRect" unique_id=525477418 node_paths=PackedStringArray("profile", "battle_status_frost", "emotion", "emotion_label", "health_bar", "juice_bar", "health_label", "juice_label", "state_icons")]
+[node name="BattleStatus" type="NinePatchRect" unique_id=525477418 node_paths=PackedStringArray("profile", "battle_status_frost", "emotion", "emotion_label", "health_bar", "juice_bar", "health_label", "juice_label", "state_icons", "hurt_timer")]
 offset_left = 11.0
 offset_top = 5.0
 offset_right = 131.0
@@ -34,6 +34,7 @@ juice_bar = NodePath("BattleStatusBars/Juice_StatusBar")
 health_label = NodePath("BattleStatusBars/Health")
 juice_label = NodePath("BattleStatusBars/Juice")
 state_icons = NodePath("StateIcons")
+hurt_timer = NodePath("HurtTimer")
 
 [node name="Emotion" type="Sprite2D" parent="." unique_id=757332694]
 clip_children = 2
@@ -128,3 +129,7 @@ pivot_offset_ratio = Vector2(0.5, 0)
 theme_override_constants/h_separation = -4
 theme_override_constants/v_separation = -4
 alignment = 1
+
+[node name="HurtTimer" type="Timer" parent="." unique_id=1014045075]
+wait_time = 0.75
+one_shot = true

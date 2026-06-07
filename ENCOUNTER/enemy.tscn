@@ -3,11 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://b8h56lv8gqxow" path="res://ENCOUNTER/enemy_infobox.tscn" id="1_vb0tb"]
 [ext_resource type="Script" uid="uid://bkhatj6gsbo4e" path="res://ENCOUNTER/enemy_status.gd" id="1_y1p23"]
 
-[node name="Enemy" type="Node2D" unique_id=2119221606 node_paths=PackedStringArray("sprite", "infobox")]
+[node name="Enemy" type="Node2D" unique_id=2119221606 node_paths=PackedStringArray("sprite", "infobox", "hurt_timer")]
 script = ExtResource("1_y1p23")
 sprite = NodePath("Sprite")
 infobox = NodePath("EnemyInfobox")
+hurt_timer = NodePath("HurtTimer")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=486414589]
 
 [node name="EnemyInfobox" parent="." unique_id=1107577028 instance=ExtResource("1_vb0tb")]
+
+[node name="HurtTimer" type="Timer" parent="." unique_id=1951444226]
+wait_time = 0.75
+one_shot = true

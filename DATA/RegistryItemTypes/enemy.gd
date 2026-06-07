@@ -19,5 +19,8 @@ func get_current_stats() -> Dictionary[String, int]:
 	# TODO: apply status effects
 	return result
 
-func process_ai():
-	pass
+# placeholder ai for testing
+func process_ai(ctx : EncounterContext) -> QueuedAction:
+	var living : Array[PartyMember] = ctx.party.members.filter(func(x : PartyMember): return x.current_health > 0)
+	var target := living[Twilight.rng.randi_range(0, living.size() - 1)]
+	return QueuedAction.new(self, Registry.get_skill("basic_attack"), target)
