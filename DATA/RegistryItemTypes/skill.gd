@@ -16,10 +16,10 @@ func _init(
 	_level_requirement : int,
 	_required_flag : int = -1,
 	_can_overworld_use : bool = false,
-	_overworld_use : Callable = func(): pass,
-	_battle_use : Callable = func(): pass
+	_battle_effects : Array[Effect] = [],
+	_overworld_effects : Array[Effect] = []
 ):
-	super(_name, _description, _target_type, _can_overworld_use, _overworld_use, _battle_use)
+	super(_name, _description, _target_type, _can_overworld_use, _battle_effects, _overworld_effects)
 	cost = _cost
 	level_requirement = _level_requirement
 	required_flag = _required_flag

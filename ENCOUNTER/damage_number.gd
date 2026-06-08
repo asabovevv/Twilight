@@ -13,6 +13,7 @@ const _WIDTH : int = 30
 const _HEIGHT : int = 42
 const _SPACING : float = 25.0
 const _SCALE : float = 1
+const _SPEED : float = 0.15
 
 func _init(
 	_damage : int,
@@ -40,7 +41,7 @@ func _ready() -> void:
 		sprite.region_enabled = true
 		sprite.region_rect = Rect2(0, 182, 62, _HEIGHT)
 		add_child(sprite)
-		tween.tween_property(sprite, "position:y", 20, 0.1).set_delay(stagger).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(sprite, "position:y", 20, _SPEED).set_delay(stagger).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		return
 	
 	const scaled_spacing : float = _SPACING * _SCALE
@@ -56,8 +57,8 @@ func _ready() -> void:
 		var offset : float = i * scaled_spacing - total_width / 2.0
 		sprite.position = Vector2(offset, -20)
 		var delay : float = i * stagger
-		tween.tween_property(sprite, "position:y", 20, 0.1).set_delay(delay).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(sprite, "modulate:a", 1, 0.1).set_delay(delay)
+		tween.tween_property(sprite, "position:y", 20, _SPEED).set_delay(delay).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(sprite, "modulate:a", 1, _SPEED).set_delay(delay)
 		if _critical:
 			tween.tween_property(sprite, "modulate:g", 1, 0.5).set_delay(delay)
 			tween.tween_property(sprite, "modulate:b", 1, 0.5).set_delay(delay)
@@ -73,7 +74,7 @@ func _shift_up(number : DamageNumber):
 
 func despawn():
 	var tween : Tween = get_tree().create_tween()
-	tween.tween_property(self, "modulate:a", 0, 0.1)
+	tween.tween_property(self, "modulate:a", 0, _SPEED)
 	await tween.finished
 	active_numbers.erase(position)
 	queue_free()

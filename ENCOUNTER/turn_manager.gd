@@ -137,7 +137,8 @@ func _execute_action(queued : QueuedAction) -> void:
 	# TODO: retarget if original target is dead
 	if queued.target != null and queued.target.current_health <= 0:
 		return
-	queued.action.battle_use.call(queued.user, queued.target, context)
+	for effect in queued.action.battle_effects:
+		await effect.execute(queued.user, queued.target, context)
 	phase = Phase.WAIT_FOR_BATTLELOG
 	if context.battlelog.processing_message:
 		await context.battlelog.finished_logging

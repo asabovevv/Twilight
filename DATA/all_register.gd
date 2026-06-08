@@ -80,13 +80,10 @@ static func register_skills( skills : GameDataRegistry ):
 		0,
 		-1,
 		false,
-		func(): pass,
-		func(user : Actor, target : Actor, ctx : EncounterContext):
-			ctx.battlelog.queue_message("%s attacks %s!" % [user.name.to_upper(), target.name.to_upper()])
-			ctx.core.damage(
-				user, 
-				target, 
-				func(): return user.get_current_stats()[StatType.ATTACK] * 2 - target.get_current_stats()[StatType.DEFENSE])
+		[
+			MessageEffect.new("[user] attacks [target]!"), 
+			DamageEffect.physical(2.0)
+		]
 	))
 #endregion
 

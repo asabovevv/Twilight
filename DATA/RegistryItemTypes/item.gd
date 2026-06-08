@@ -14,10 +14,10 @@ func _init(
 	_icon : Texture2D,
 	_can_overworld_use : bool = false,
 	_can_trash : bool = false,
-	_overworld_use : Callable = func(): pass,
-	_battle_use : Callable = func(): pass
+	_battle_effects : Array[Effect] = [],
+	_overworld_effects : Array[Effect] = []
 ):
-	super(_name, _description, _target_type, _can_overworld_use, _overworld_use, _battle_use)
+	super(_name, _description, _target_type, _can_overworld_use, _battle_effects, _overworld_effects)
 	item_type = _item_type
 	icon = _icon
 	can_trash = _can_trash

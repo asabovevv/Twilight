@@ -6,9 +6,8 @@ var name : String
 var description : String
 var target_type : Target
 var can_overworld_use : bool
-## TODO: using lambdas for skills may get out of hand quick...potentially look into alternate solutions
-var overworld_use : Callable
-var battle_use : Callable
+var battle_effects : Array[Effect] = []
+var overworld_effects : Array[Effect] = []
 
 # fuckass language doesn't let you set multiple constructors
 func _init(
@@ -16,12 +15,12 @@ func _init(
 	_description : String,
 	_target_type : Target,
 	_can_overworld_use : bool = false,
-	_overworld_use : Callable = func(): pass,
-	_battle_use : Callable = func(): pass
+	_battle_effects : Array[Effect] = [],
+	_overworld_effects : Array[Effect] = []
 ):
 	name = _name
 	description = _description
 	target_type = _target_type
 	can_overworld_use = _can_overworld_use
-	overworld_use = _overworld_use
-	battle_use = _battle_use
+	battle_effects = _battle_effects
+	overworld_effects = _overworld_effects
