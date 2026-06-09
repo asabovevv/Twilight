@@ -6,8 +6,8 @@ var asset_path : String
 var battle_portrait : SpriteFrames
 var stats : Dictionary[String, int]
 var round_priority : int
-var pointer_offset : Vector2 = Vector2.ZERO
-var position_offset: Vector2i = Vector2i.ZERO
+var pointer_offset : Vector2
+var position_offset: Vector2i
 # TODO: maybe store skills here too?
 # TODO: drop pool, exp given, etc.
 
@@ -18,7 +18,7 @@ func _init(
 		_battle_portrait : SpriteFrames,
 		_stats : Dictionary[String, int],
 		_round_priority : int,
-		_pointer_offset: Vector2 = Vector2.ZERO,
+		_pointer_offset: Vector2 = Vector2(0, -30),
 		_position_offset: Vector2i = Vector2i.ZERO
 ) -> void:
 	key = _key

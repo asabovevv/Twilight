@@ -423,7 +423,7 @@ func _menu_logic(delta: float) -> void:
 						_child_by_name(menu_pocket_confirm, "Option1").self_modulate = Color.WHITE
 					else:
 						_child_by_name(menu_pocket_confirm, "Option1").self_modulate = grey
-					if Twilight.item(item[place[2]-1]).overworld_use:
+					if Twilight.item(item[place[2]-1]).can_overworld_use:
 						_child_by_name(menu_pocket_confirm, "Option2").self_modulate = Color.WHITE
 					else:
 						_child_by_name(menu_pocket_confirm, "Option2").self_modulate = grey
@@ -443,7 +443,7 @@ func _menu_logic(delta: float) -> void:
 					return
 				if Input.is_action_just_pressed("Confirm"):
 					if (place[3] == 1):
-						if Twilight.item(item[place[2]-1]).overworld_use:
+						if Twilight.item(item[place[2]-1]).can_overworld_use:
 							_advance()
 							animator.start("Pocket Confirm", [0])
 							p_pocket_confirm.global_position = _child_by_name(menu_pocket_confirm, "Option%d"%[place[3]]).global_position + p_base_off
@@ -510,7 +510,7 @@ func _menu_logic(delta: float) -> void:
 						if option.text != "------------":
 							var skill = lists[ 8+place[1]*3 ][place[3]-1]
 							if skill != null:
-								if skill.overworld_use:
+								if skill.can_overworld_use:
 									stage = 5
 					else:
 						sounds_list[i_sound.Selectbad].play()

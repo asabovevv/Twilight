@@ -14,6 +14,8 @@ var d : Dictionary[String, Array] # Contains all loaded branches of dialogue, ac
 var Languages = { English = "English" }
 var language : String = Languages.English
 
+var rng : RandomNumberGenerator = RandomNumberGenerator.new() # Global random number generator
+
 ## --- --- --- --- --- --- --- --- Options --- --- --- --- --- --- --- ---
 
 class Set:

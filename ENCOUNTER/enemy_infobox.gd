@@ -14,6 +14,7 @@ func bind(_enemy : Enemy) -> void:
 	hp_bar.max_value = enemy.base_stats[StatType.HEART]
 	hp_bar.value = hp_bar.max_value
 	enemy_name.text = enemy.name.to_upper()
+	position = enemy.data.pointer_offset
 	var width : float = maxf(infobox.custom_minimum_size.x, enemy_name.get_minimum_size().x + 15)
 	infobox.size = Vector2(width, infobox.size.y)
 	infobox.position = Vector2(-width / 2.0, infobox.position.y)
